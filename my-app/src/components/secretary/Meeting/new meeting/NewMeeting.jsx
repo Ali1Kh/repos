@@ -3,16 +3,19 @@ import "./newMeeting.css";
 export default function NewMeeting() {
   return (
     <div className="main">
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">
-          Email address
-        </label>
-        <input
-          type="email"
-          class="form-control"
-          id="exampleFormControlInput1"
-          placeholder="name@example.com"
-        />
+      <div className="container d-flex flex-column align-items-center justify-content-center p-4">
+        <h2 className="mb-3">Create Meeting</h2>
+        <div className="inputsContainer">
+          <div class="inputItem mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="meetDate"
+              placeholder="Meeting Date"
+            />
+          </div>
+          
+        </div>
       </div>
     </div>
   );
