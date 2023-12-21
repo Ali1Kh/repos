@@ -2,23 +2,40 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Login from "./components/login/Login";
 import Signup from "./components/signup/Signup";
+import NewMeeting from "./components/secretary/Meeting/new meeting/NewMeeting";
 
-let router = createBrowserRouter([{
-  path: "/", element: <Layout />, children: [{
-    path: "login", element: <Login />
-  },
+let router = createBrowserRouter([
   {
-    path: "signup", element: <Signup />
-  }
-]
-}]);
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "signup",
+        element: <Signup />,
+      },
+      {
+        path: "/meeting",
+        children: [
+          {
+            path: "addMeeting",
+            element: <NewMeeting />,
+          },
+        ],
+      },
+    ],
+  },
+]);
 
 function App() {
-  return <>
-    <RouterProvider router={router} />
-  </>
-
-
+  return (
+    <>
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;
