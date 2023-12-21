@@ -1,0 +1,19 @@
+.main {
+  background: rgb(37, 50, 57);
+  background: linear-gradient(
+    180deg,
+    rgba(37, 50, 57, 1) 0%,
+    rgba(39, 42, 55, 1) 92%
+  );
+  min-height: 100vh;
+  color: white;
+}
+
+.inputItem input {
+  background-color: #1e1e23;
+  color: #3a3a41;
+}
+.inputItem input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
