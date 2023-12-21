@@ -4,6 +4,9 @@ import Login from "./components/login/Login";
 import Signup from "./components/signup/Signup";
 import NewMeeting from "./components/secretary/Meeting/new meeting/NewMeeting";
 
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
 let router = createBrowserRouter([
   {
     path: "/",
@@ -29,11 +32,12 @@ let router = createBrowserRouter([
     ],
   },
 ]);
-
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <RouterProvider router={router} />
+      </LocalizationProvider>
     </>
   );
 }
