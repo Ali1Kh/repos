@@ -8,8 +8,8 @@ export default function Layout() {
   return (
     <div>
         <Row>
-            <Col sm={3} ><Sidebar/></Col>
-            <Col sm={9} >2 of 2</Col>
+            <Col sm={2}><Sidebar/></Col>
+            <Col sm={10}>loooloooo</Col>
         </Row>
       
       <Outlet />
