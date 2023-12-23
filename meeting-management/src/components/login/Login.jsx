@@ -1,6 +1,6 @@
 import React from 'react'
 import './login.css'
-import logoMed from '../../image/Logomedium.png'
+import logoMed from '../../image/Logo-medium.png'
 
 export default function Login() {
   return <>
