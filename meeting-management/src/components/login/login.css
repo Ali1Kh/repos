@@ -1,0 +1,64 @@
+:root{
+    --main-color: #323644;
+    --sec-color:#7E7EBE;
+    --main-font :Poppins;
+  }
+  
+  .login-main{
+    background: rgb(37, 50, 57);
+    background: linear-gradient(
+      180deg,
+    rgba(37, 50, 57, 1) 0%,
+    rgba(39, 42, 55, 1) 92%
+    );
+    min-height: 100vh;
+  }
+    
+.name input{
+    width: 40%;
+}
+  
+.form input:focus{
+    background: #323644;
+    color: aliceblue;  
+}
+  
+.form input{
+    border-radius: 20px;
+    background:var(--main-color);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.33) !important;
+    border: 0 !important;
+    padding: 1rem;
+}
+  
+.form input::placeholder{
+    color: var(--sec-color);
+    font-family: var(--main-font);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+/*  */
+
+.login-btn button {
+    background: var(--sec-color);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.33);
+    color:white;
+    width: 80px;
+    padding: 15px;
+    border: 0;
+    border-radius:20px ;  
+    font-family: var(--main-font);
+    font-size: 15px ;
+    font-style: normal;
+    font-weight: 600 ;
+    line-height: 20px;
+    transition: all 0.5s;
+}
+
+.login-btn button:hover {
+    background: darkslateblue ;
+}
+
