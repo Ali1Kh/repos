@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Meeting-management/static/css/main.3c5ccfe0.css",
-    "main.js": "/Meeting-management/static/js/main.e0b89783.js",
+    "main.js": "/Meeting-management/static/js/main.f4360391.js",
     "static/media/fa-solid-900.ttf": "/Meeting-management/static/media/fa-solid-900.45a265d0f07b31cde85f.ttf",
     "static/media/404_error_with_a_landscape-rafiki.png": "/Meeting-management/static/media/404_error_with_a_landscape-rafiki.ce754a4f397909995100.png",
     "static/media/fa-brands-400.ttf": "/Meeting-management/static/media/fa-brands-400.6205fd00fb1b573e9f0f.ttf",
@@ -14,10 +14,10 @@
     "static/media/fa-v4compatibility.woff2": "/Meeting-management/static/media/fa-v4compatibility.b3049b13a93f07e026fc.woff2",
     "index.html": "/Meeting-management/index.html",
     "main.3c5ccfe0.css.map": "/Meeting-management/static/css/main.3c5ccfe0.css.map",
-    "main.e0b89783.js.map": "/Meeting-management/static/js/main.e0b89783.js.map"
+    "main.f4360391.js.map": "/Meeting-management/static/js/main.f4360391.js.map"
   },
   "entrypoints": [
     "static/css/main.3c5ccfe0.css",
-    "static/js/main.e0b89783.js"
+    "static/js/main.f4360391.js"
   ]
 }
