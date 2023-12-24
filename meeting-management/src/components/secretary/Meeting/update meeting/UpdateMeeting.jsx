@@ -1,21 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./updateMeeting.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-// import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 import $ from "jquery";
-import dayjs from "dayjs";
-const newTheme = (theme) =>
-  createTheme({
-    palette: {
-      mode: "dark",
-    },
-  });
+import { useParams } from "react-router-dom";
 export default function UpdateMeeting() {
+  const newTheme = (theme) =>
+    createTheme({
+      palette: {
+        mode: "dark",
+      },
+    });
+
   let [date, setDate] = useState(null);
   let [time, setTime] = useState(null);
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    $("#meetNotes").val(id);
+  }, []);
 
   function addMeeting() {
     let dateInput;

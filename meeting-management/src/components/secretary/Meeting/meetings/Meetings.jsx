@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import Box from "@mui/material/Box";
 import "./meetings.css";
 import $ from "jquery";
-import { getRowsStateFromCache } from "@mui/x-data-grid/hooks/features/rows/gridRowsUtils";
-import { getGridRowElement, getRowEl } from "@mui/x-data-grid/utils/domUtils";
-export default function Meetings() {
-  useEffect(() => {
-    $(".tableColumns *").contextmenu((e) => {
-      e.preventDefault();
-    });
-    $(document).click(() => {
-      $("#context-menu").css({ display: "none" });
-    });
-  }, []);
+import toast, { Toaster } from "react-hot-toast";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { useNavigate } from "react-router-dom";
 
+export default function Meetings() {
   let [meetingsRows, setMeetingsRows] = useState([
     {
       id: 3341,
@@ -160,28 +157,104 @@ export default function Meetings() {
       Status: "done",
     },
   ]);
-
+  const [open, setOpen] = useState(false);
   let [selectedId, setSelectId] = useState(null);
+  let meetingNavigate = useNavigate();
+
+  useEffect(() => {
+    $(".tableColumns *").contextmenu((e) => {
+      e.preventDefault();
+    });
+    $(document).click(() => {
+      $("#context-menu").css({ display: "none" });
+      $("#deepContext").css({ display: "none" });
+    });
+
+    $("#status").mouseover(() => {
+      $("#deepContext").css({ display: "block" });
+    });
+
+    $("#context-menu > .item:not(#status , #deepContext *)").mouseover((e) => {
+      $("#deepContext").css({ display: "none" });
+    });
+  }, []);
 
   function rowContextMenu(x, y) {
     $("#context-menu").css({ top: y, left: x, display: "block" });
+  }
+  function showContext(e, targetId) {
+    e.preventDefault();
+    rowContextMenu(e.pageX, e.pageY);
+    setSelectId(targetId);
+  }
+  function statusClicked(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $("#deepContext").css({ display: "block" });
+  }
+  function deleteMeeting() {
+    toast.success(`Meeting Deleted Successfully`, {
+      duration: 4000,
+      position: "top-right",
+      style: {
+        backgroundColor: "#161920",
+        color: "white",
+      },
+    });
+  }
+  function openAlert() {
+    setOpen(true);
+  }
+  function handleClose() {
+    setOpen(false);
+  }
+  function updateMeeting() {
+    meetingNavigate("updateMeeting/" + selectedId);
+  }
+  // Holding Row
+  let holdTimeout;
+  let mouseIsDown = false;
+  async function holdRow(e, targetId) {
+    await new Promise((resolve) => {
+      mouseIsDown = true;
+      setTimeout(() => {
+        if (mouseIsDown) {
+          showContext(e, targetId);
+        }
+        resolve();
+      }, 2000);
+    });
+   
+  }
+  function handleMouseUp(e, targetId) {
+    showContext(e, targetId);
+
+    // mouseIsDown = false;
+    // clearTimeout(holdTimeout);
   }
   return (
     <>
       <div className="main">
         <div className="container  d-flex flex-column align-items-center justify-content-center p-xxl-4">
-          <h2 className="mt-4 mb-5" style={{ userSelect: "none" }}>
+          <h2 className="mt-4 mb-xxl-4 mb-1" style={{ userSelect: "none" }}>
             Meetings
           </h2>
-          <div className="meetingsConatiner p-5" style={{ width: "100%" }}>
-            <div className="meetings" style={{ height: 550, width: "100%" }}>
+          <div className="meetingsConatiner p-4" style={{ width: "100%" }}>
+            <div
+              className="meetings d-flex justify-content-center"
+              style={{ height: 550, width: "100%" }}
+            >
               <DataGrid
                 slotProps={{
                   row: {
                     onContextMenu: (e) => {
-                      e.preventDefault();
-                      rowContextMenu(e.pageX, e.pageY);
-                      setSelectId(e.currentTarget.getAttribute("data-id"));
+                      showContext(e, e.currentTarget.getAttribute("data-id"));
+                    },
+                    onMouseDown: (e) => {
+                      holdRow(e, e.currentTarget.getAttribute("data-id"));
+                    },
+                    onMouseUp: (e) => {
+                      handleMouseUp(e, e.currentTarget.getAttribute("data-id"));
                     },
                     style: { cursor: "context-menu" },
                   },
@@ -192,56 +265,56 @@ export default function Meetings() {
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 140,
+                    width: 125,
                   },
                   {
                     field: "Time",
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 140,
+                    width: 125,
                   },
                   {
                     field: "Person",
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 140,
+                    width: 125,
                   },
                   {
                     field: "Topic",
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 140,
+                    width: 125,
                   },
                   {
                     field: "Address",
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 140,
+                    width: 125,
                   },
                   {
                     field: "Area",
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 140,
+                    width: 125,
                   },
                   {
                     field: "Status",
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 140,
+                    width: 125,
                   },
                   {
                     field: "Notes",
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 140,
+                    width: 125,
                   },
                 ]}
                 rows={meetingsRows}
@@ -249,6 +322,7 @@ export default function Meetings() {
                   overflow: "auto",
                   maxHeight: "550px",
                   padding: "10px",
+                  maxWidth: "fit-content",
 
                   "& .MuiDataGrid-cell": {
                     color: "white",
@@ -272,28 +346,72 @@ export default function Meetings() {
             </div>
           </div>
         </div>
-
         <div id="context-menu">
-          <div className="item" onClick={() => console.log("Done", selectedId)}>
-            Done
+          <div id="status" className="item" onClick={(e) => statusClicked(e)}>
+            <div className="staus d-flex justify-content-between align-align-items-center">
+              <span>Change Status</span>
+              <i className="fa-solid fa-caret-up fa-rotate-90 me-1"></i>
+            </div>
           </div>
-          <div
-            className="item"
-            onClick={() => {
-              console.log("Update", selectedId);
-            }}
-          >
+          <div className="item" onClick={updateMeeting}>
             Update
           </div>
-          <div
-            className="item"
-            onClick={() => {
-              console.log("Delete", selectedId);
-            }}
-          >
+          <div className="item" onClick={openAlert}>
             Delete
           </div>
+          <div id="deepContext">
+            <div
+              className="item"
+              onClick={() => {
+                console.log("Done", selectedId);
+              }}
+            >
+              Done
+            </div>
+            <div
+              className="item"
+              onClick={() => {
+                console.log("Cancelled", selectedId);
+              }}
+            >
+              Change Date
+            </div>
+            <div
+              className="item"
+              onClick={() => {
+                console.log("Cancelled", selectedId);
+              }}
+            >
+              Cancelled
+            </div>
+          </div>
         </div>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"Warning!"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              By Accepting you will delete the meeting with Ali Khaled.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button
+              onClick={() => {
+                handleClose();
+                deleteMeeting();
+              }}
+              autoFocus
+            >
+              Accept
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Toaster />
       </div>
     </>
   );

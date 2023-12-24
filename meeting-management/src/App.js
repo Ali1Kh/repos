@@ -37,7 +37,7 @@ let router = createBrowserRouter([
             element: <NewMeeting />,
           },
           {
-            path: "updateMeeting",
+            path: "updateMeeting/:id",
             element: <UpdateMeeting />,
           },
           {

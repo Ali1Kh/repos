@@ -25,6 +25,7 @@
     "react-bootstrap": "^2.9.1",
     "react-bootstrap-validation": "^0.1.11",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.21.0",
     "react-scripts": "5.0.1",
     "styled-components": "^6.1.2",
