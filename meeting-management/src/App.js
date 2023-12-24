@@ -18,7 +18,7 @@ let router = createHashRouter([
         element: <>Home</>,
       },
       {
-        path: "login",
+        path: "/login",
         element: <Login />,
       },
       {
