@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Login from "./components/login/Login";
 import Signup from "./components/signup/Signup";
@@ -8,7 +8,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import UpdateMeeting from "./components/secretary/Meeting/update meeting/UpdateMeeting";
 import Meetings from "./components/secretary/Meeting/meetings/Meetings";
-let router = createBrowserRouter([
+let router = createHashRouter([
   {
     path: "/",
     element: <Layout />,
