@@ -3,10 +3,9 @@ import Layout from "./components/layout/Layout";
 import Login from "./components/login/Login";
 import Signup from "./components/signup/Signup";
 import NewMeeting from "./components/secretary/Meeting/new meeting/NewMeeting";
-
+import MeetingDetails from "./components/manager/meetingDetails/meetingDetails";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import meetingDetails from './components/manager/meetingDetails/meetingDetails';
 
 let router = createBrowserRouter([
   {
@@ -35,7 +34,7 @@ let router = createBrowserRouter([
         children: [
           {
             path: "meetingDetails",
-            element: <meetingDetails />,
+            element: <MeetingDetails />,
           },
         ],
       }
