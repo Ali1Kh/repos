@@ -6,6 +6,7 @@ import NewMeeting from "./components/secretary/Meeting/new meeting/NewMeeting";
 
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import meetingDetails from './components/manager/meetingDetails/meetingDetails';
 
 let router = createBrowserRouter([
   {
@@ -29,6 +30,15 @@ let router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "/manager",
+        children: [
+          {
+            path: "meetingDetails",
+            element: <meetingDetails />,
+          },
+        ],
+      }
     ],
   },
 ]);
