@@ -1,0 +1,40 @@
+.sidebar {
+    background: #15181D;
+    min-height: 100vh;
+    color: white;
+    position: sticky;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    min-height: 100vh;
+}
+
+img {
+    margin: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.container h6 {
+    font-size: 14px;
+    padding: 0 15px;
+    margin: 10px 0;
+    color: #F6F7F9;
+    overflow: hidden;
+}
+
+.container h6 i{
+    padding: 0 10px;
+    margin-right: 15px;
+    width: 15px;
+    text-align: center;
+}
+
+
+

@@ -1,21 +1,27 @@
-import React, { useState } from "react";
-import "./newMeeting.css";
+import React, { useEffect, useState } from "react";
+import "./updateMeeting.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-// import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 import $ from "jquery";
-import dayjs from "dayjs";
-const newTheme = (theme) =>
-  createTheme({
-    palette: {
-      mode: "dark",
-    },
-  });
-export default function NewMeeting() {
+import { useParams } from "react-router-dom";
+export default function UpdateMeeting() {
+  const newTheme = (theme) =>
+    createTheme({
+      palette: {
+        mode: "dark",
+      },
+    });
+
   let [date, setDate] = useState(null);
   let [time, setTime] = useState(null);
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    $("#meetNotes").val(id);
+  }, []);
 
   function addMeeting() {
     let dateInput;
@@ -42,7 +48,7 @@ export default function NewMeeting() {
     <div className="main">
       <div className="container d-flex flex-column align-items-center justify-content-center p-xxl-4">
         <h2 className="mt-4 mb-xxl-5 mb-3" style={{ userSelect: "none" }}>
-          Create Meeting
+          Update Meeting
         </h2>
         <div className="inputsContainer w-100  p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
           <div className="calenderPicker row p-0 m-0">
@@ -134,7 +140,7 @@ export default function NewMeeting() {
           </div>
         </div>
         <button onClick={addMeeting} className="addButton">
-          Add Meeting
+          Update Meeting
         </button>
       </div>
     </div>

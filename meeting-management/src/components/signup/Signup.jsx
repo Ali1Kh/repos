@@ -1,7 +1,7 @@
 import React from 'react'
 import './Signup.css'
 import Form from 'react-bootstrap/Form';
-import logoMed from '../../image/Logomedium.png'
+import logoMed from '../../image/Logo-medium.png'
 
 export default function Signup() {
   
