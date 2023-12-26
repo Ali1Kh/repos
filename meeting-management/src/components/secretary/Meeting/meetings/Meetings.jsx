@@ -224,7 +224,6 @@ export default function Meetings() {
         resolve();
       }, 2000);
     });
-   
   }
   function handleMouseUp(e, targetId) {
     showContext(e, targetId);
@@ -235,7 +234,7 @@ export default function Meetings() {
   return (
     <>
       <div className="main">
-        <div className="container  d-flex flex-column align-items-center justify-content-center p-xxl-4">
+        <div className="container  d-flex    flex-column align-items-center justify-content-center p-xxl-4">
           <h2 className="mt-4 mb-xxl-4 mb-1" style={{ userSelect: "none" }}>
             Meetings
           </h2>

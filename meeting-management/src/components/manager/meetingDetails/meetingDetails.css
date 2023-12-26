@@ -1,0 +1,19 @@
+:root{
+    --main-color: #323644;
+    --sec-color:#343A46;
+    --main-font :Poppins;
+}
+
+.main{
+    min-height: 100vh;
+    background-color: var(--main-color);
+}
+
+.parent h2{
+    font-family: var(--main-font);
+}
+
+.inner{
+    height: 70vh;
+    background-color: var(--sec-color);
+}
