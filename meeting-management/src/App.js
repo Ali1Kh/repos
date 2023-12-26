@@ -8,6 +8,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import UpdateMeeting from "./components/secretary/Meeting/update meeting/UpdateMeeting";
 import Meetings from "./components/secretary/Meeting/meetings/Meetings";
+import HomePage from "./components/HomePage/HomePage";
+
 const router = createHashRouter([
   {
     path: "",
@@ -15,7 +17,7 @@ const router = createHashRouter([
     children: [
       {
         path: "",
-        element: <>Home</>,
+        element: <HomePage/>,
       },
       {
         path: "/login",

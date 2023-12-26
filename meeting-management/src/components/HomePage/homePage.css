@@ -1,0 +1,15 @@
+
+
+.main {
+    background: rgb(37, 50, 57);
+    background: linear-gradient(180deg,
+            rgba(37, 50, 57, 1) 0%,
+            rgba(39, 42, 55, 1) 92%);
+    height: 100vh;
+}
+
+.inner {
+    background-color: #343A46;
+}
+
+
