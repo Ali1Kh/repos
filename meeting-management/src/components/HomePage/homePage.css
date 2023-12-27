@@ -1,6 +1,4 @@
-
-
-.main {
+.main-cards {
     background: rgb(37, 50, 57);
     background: linear-gradient(180deg,
             rgba(37, 50, 57, 1) 0%,
@@ -8,8 +6,14 @@
     min-height: 100vh;
 }
 
-.inner {
+.inner-card {
     background-color: #343A46;
+    
+}
+
+.inner-card h6 {
+    font-size: 12px;
+    color: #F6F7F9;
 }
 
 
