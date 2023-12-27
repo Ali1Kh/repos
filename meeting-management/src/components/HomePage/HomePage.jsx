@@ -54,50 +54,22 @@ export default function HomePage() {
                     <h2 className="text-white mb-5">Home</h2>
                     <div className="row gy-3">
                         {meetings.map((meeting) => (
-                            <div
-                                className="col-md-6  col-sm-12 col-12 mt-4 "
-                                data-aos="fade-up"
-                                data-aos-delay="500"
-                                data-aos-once="true"
-                                onClick={handleShow}
-                            >
-                                <div
-                                    className="inner-card shadow rounded-4 gap-3 p-3"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#exampleModalCenter"
-                                >
-                                    <h6 className="mb-3">
-                                        Guest Name :
-                                        <span className="fw-normal">{meeting.GuestName}</span>
-                                    </h6>
-                                    <h6 className="mb-3">
-                                        Meeting Topic :
-                                        <span className="fw-normal">{meeting.MeetingTopic}</span>
-                                    </h6>
-                                    <h6 className="mb-3">
-                                        Meeting Time :
-                                        <span className="fw-normal">{meeting.MeetingTime}</span>
-                                    </h6>
-                                    <h6 className="mb-3">
-                                        Meeting Status :
-                                        <span className="fw-normal">{meeting.MeetingStatus}</span>
-                                    </h6>
+                            <div className="col-md-6  col-sm-12 col-12 mt-4 " data-aos="fade-up" data-aos-delay="500" data-aos-once="true" onClick={handleShow}>
+                                <div className="inner-card shadow rounded-4 gap-3 p-3" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                                    <h6 className="mb-3"> Guest Name : <span className="fw-normal">{meeting.GuestName}</span></h6>
+                                    <h6 className="mb-3"> Meeting Topic : <span className="fw-normal">{meeting.MeetingTopic}</span></h6>
+                                    <h6 className="mb-3"> Meeting Time : <span className="fw-normal">{meeting.MeetingTime}</span></h6>
+                                    <h6 className="mb-3"> Meeting Status : <span className="fw-normal">{meeting.MeetingStatus}</span></h6>
                                 </div>
                             </div>
                         ))}
                     </div>
-                    <div
-                        class="modal fade"
-                        id="exampleModalCenter"
-                        tabindex="-1"
-                        role="dialog"
-                        aria-hidden="true"
-                    >
+                    <div class="modal fade" id="exampleModalCenter">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div className="inner-modal shadow rounded-4 p-4">
                                     <div className="icon d-flex justify-content-end" onClick={handleClose}>
-                                        <i class=" shadow fa-solid fa-xmark"></i>
+                                        <i class=" shadow fa-solid fa-xmark" onClick={handleClose}></i>
                                     </div>
                                     <h6 className="mb-3">Guest Name :<span className="fw-normal">{meetingsDetails.GuestName}</span></h6>
                                     <h6 className="mb-3">Meeting Topic :<span className="fw-normal">{meetingsDetails.MeetingTopic}</span></h6>
