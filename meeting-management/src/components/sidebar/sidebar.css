@@ -27,6 +27,7 @@ img {
     margin:  0 20px;
     color: #F6F7F9;
     padding: 8px;
+    cursor: pointer;
 }
 
 .header-side h6 a,

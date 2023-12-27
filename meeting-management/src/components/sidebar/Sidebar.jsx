@@ -35,19 +35,19 @@ const Sidebar = () => {
             </a>
           </h6>
           <h6>
-            <Link to={"/meeting/addMeeting"}>
+            <Link to={"/meeting"}>
               <span className="d-inline-flex text-center justify-content-center">
-                <i className="fa-solid fa-plus"></i>
+                <i class="fa-regular fa-note-sticky"></i>
               </span>
-              <span>create meeting</span>
+              <span>Meetings</span>
             </Link>
           </h6>
           <h6>
-            <Link to={"/meeting"}>
+            <Link to={"/meeting/addMeeting"}>
               <span className="d-inline-flex text-center justify-content-center">
-                <i className="fa-solid fa-handshake"></i>
+                <i className="fa-regular fa-plus"></i>
               </span>
-              <span>meetings</span>
+              <span>Create Meeting</span>
             </Link>
           </h6>
         </div>

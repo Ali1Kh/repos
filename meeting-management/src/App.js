@@ -1,16 +1,18 @@
 import { RouterProvider, createHashRouter } from "react-router-dom";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { ThemeProvider } from "@mui/material/styles";
 import Layout from "./components/layout/Layout";
 import Login from "./components/login/Login";
 import Signup from "./components/signup/Signup";
 import NewMeeting from "./components/secretary/Meeting/new meeting/NewMeeting";
 import MeetingDetails from "./components/manager/meetingDetails/meetingDetails";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import UpdateMeeting from "./components/secretary/Meeting/update meeting/UpdateMeeting";
 import Meetings from "./components/secretary/Meeting/meetings/Meetings";
 import HomePage from "./components/HomePage/HomePage";
 import NotFound from "./components/NotFound/NotFound";
 import Calender from "./components/manager/Calender/Calender";
+
 const router = createHashRouter([
   {
     path: "",
@@ -19,14 +21,6 @@ const router = createHashRouter([
       {
         path: "",
         element: <HomePage />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/signup",
-        element: <Signup />,
       },
       {
         path: "/meeting",
@@ -59,23 +53,32 @@ const router = createHashRouter([
           },
           {
             path: "calender",
-            element: <Calender/>,
+            element: <Calender />,
           },
         ],
       },
     ],
   },
   {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+  },
+  {
     path: "*",
     element: <NotFound />,
   },
 ]);
-
 function App() {
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <RouterProvider router={router} />
+        <ThemeProvider theme={{}}>
+          <RouterProvider router={router} />
+        </ThemeProvider>
       </LocalizationProvider>
     </>
   );

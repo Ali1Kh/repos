@@ -1,10 +1,31 @@
 import React, { useEffect, useState } from "react";
 import "./calender.css";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Badge from "@mui/material/Badge";
+import { PickersDay } from "@mui/x-date-pickers/PickersDay";
+function ServerDay(props) {
+  const { highlightedDays = [], day, outsideCurrentMonth, ...other } = props;
+  const isSelected =
+    !props.outsideCurrentMonth &&
+    highlightedDays.indexOf(props.day.date()) >= 0;
+  return (
+    <Badge
+      key={props.day.toString()}
+      overlap="circular"
+      badgeContent={isSelected ? "🕑" : undefined}
+      style={{ cursor: "pointer", userSelect: "none" }}
+    >
+      <PickersDay
+        {...other}
+        outsideCurrentMonth={outsideCurrentMonth}
+        day={day}
+      />
+    </Badge>
+  );
+}
 export default function Calender() {
+  const [highlightedDays, setHighlightedDays] = useState([1, 2, 30]);
   const newTheme = (theme) =>
     createTheme({
       ...theme,
@@ -40,9 +61,11 @@ export default function Calender() {
     $M: today.getMonth(),
     $y: today.getFullYear(),
   });
-
   let [day, setDay] = useState(weekday[new Date().getDay()]);
-
+  function monthChanged(month) {
+    console.log(month);
+    setHighlightedDays([20, 25, 1]);
+  }
   return (
     <div className="main py-5 px-md-5">
       <div className="container d-flex flex-column justify-content-center align-items-center ">
@@ -58,14 +81,15 @@ export default function Calender() {
                     setDate(val);
                     setDay(weekday[new Date(val).getDay()]);
                   }}
-                  // slots={{
-                  //   day: ServerDay,
-                  // }}
-                  // slotProps={{
-                  //   day: {
-                  //     highlightedDays,
-                  //   } as any,
-                  // }}
+                  onMonthChange={(val) => monthChanged(val.$M + 1)}
+                  slots={{
+                    day: ServerDay,
+                  }}
+                  slotProps={{
+                    day: {
+                      highlightedDays,
+                    },
+                  }}
                 />
               </ThemeProvider>
             </div>
