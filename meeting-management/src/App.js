@@ -9,45 +9,68 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import UpdateMeeting from "./components/secretary/Meeting/update meeting/UpdateMeeting";
 import Meetings from "./components/secretary/Meeting/meetings/Meetings";
 import HomePage from "./components/HomePage/HomePage";
-
+import NotFound from "./components/NotFound/NotFound";
+import Calender from "./components/manager/Calender/Calender";
 const router = createHashRouter([
   {
-    path: "/",
+    path: "",
     element: <Layout />,
     children: [
       {
         path: "",
-        element: <HomePage/>,
+        element: <HomePage />,
       },
       {
         path: "/login",
         element: <Login />,
       },
       {
-        path: "signup",
+        path: "/signup",
         element: <Signup />,
       },
       {
         path: "/meeting",
         children: [
           {
+            path: "",
+            element: <Meetings />,
+          },
+          {
             path: "addMeeting",
             element: <NewMeeting />,
+          },
+          {
+            path: "updateMeeting/:id",
+            element: <UpdateMeeting />,
+          },
+          {
+            path: "*",
+            element: <NotFound />,
           },
         ],
       },
       {
         path: "/manager",
         children: [
+          { path: "", element: <HomePage /> },
           {
             path: "meetingDetails",
             element: <MeetingDetails />,
           },
+          {
+            path: "calender",
+            element: <Calender/>,
+          },
         ],
-      }
+      },
     ],
   },
+  {
+    path: "*",
+    element: <NotFound />,
+  },
 ]);
+
 function App() {
   return (
     <>
