@@ -14,36 +14,36 @@ export default function HomePage() {
             GuestName: "Ali Khaled ElSa3dany",
             MeetingTopic: "blablbaa",
             MeetingTime: "12:00 PM",
-            MeetingStatus: "Undone",
+            MeetingStatus: "Not Done",
         },
         {
-            GuestName: "Ali Khaled ElSa3dany",
+            GuestName: "Mostafa Salem",
             MeetingTopic: "blablbaa",
             MeetingTime: "12:00 PM",
-            MeetingStatus: "Undone",
+            MeetingStatus: "Not Done",
         },
         {
-            GuestName: "Ali Khaled ElSa3dany",
+            GuestName: "Mostafa Salem",
             MeetingTopic: "blablbaa",
             MeetingTime: "12:00 PM",
-            MeetingStatus: "Undone",
+            MeetingStatus: "Not Done",
         },
         {
-            GuestName: "Ali Khaled ElSa3dany",
+            GuestName: "omar Kadry Dahab",
             MeetingTopic: "blablbaa",
             MeetingTime: "12:00 PM",
-            MeetingStatus: "Undone",
+            MeetingStatus: "Not Done",
         },
     ];
 
     let meetingsDetails = {
-        GuestName: "Ali Khaled ElSa3dany",
-        MeetingTopic: "blablbaa",
+        GuestName: "Omar Kadry Dahab",
+        MeetingTopic: "Drdsha",
         MeetingDate: "20/10/2024",
-        MeetingAddress: "fe el4ar3",
+        MeetingAddress: "Bolaq Abo El3ela",
         Area: "Outside",
         MeetingTime: "12:00 PM",
-        MeetingStatus: "Undone",
+        MeetingStatus: "Not Done",
         Comments: "No Comment",
     };
 
@@ -65,21 +65,53 @@ export default function HomePage() {
                         ))}
                     </div>
                     <div class="modal fade" id="exampleModalCenter">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content  transition: `opacity 400ms, backdrop-filter 400ms`" >
+                        <div class="modal-dialog col-md-7 modal-dialog-centered" role="document">
+                            <div class="modal-content transition: `opacity 400ms, backdrop-filter 400ms`" >
                                 <div className="inner-modal shadow rounded-4 p-4">
                                     <div className="icon d-flex justify-content-end" onClick={handleClose}>
                                         <i class="shadow fa-solid fa-xmark"></i>
                                     </div>
-                                    <h6 className="mb-3">Guest Name :<span className="fw-normal">{meetingsDetails.GuestName}</span></h6>
-                                    <h6 className="mb-3">Meeting Topic :<span className="fw-normal">{meetingsDetails.MeetingTopic}</span></h6>
-                                    <h6 className="mb-3">Meeting Date :<span className="fw-normal">{meetingsDetails.MeetingDate}</span></h6>
-                                    <h6 className="mb-3">Meeting Time :<span className="fw-normal">{meetingsDetails.MeetingTime}</span></h6>
-                                    <h6 className="mb-3">Meeting Address :<span className="fw-normal">{meetingsDetails.MeetingAddress}</span></h6>
-                                    <h6 className="mb-3">Inside Or Out side The Facility :<span className="fw-normal">{meetingsDetails.Area}</span></h6>
-                                    <h6 className="mb-3">Meeting Status :<span className="fw-normal">{meetingsDetails.MeetingStatus}</span></h6>
-                                    <h6 className="mb-3">Comments :<span className="fw-normal">{meetingsDetails.Comments}</span></h6>
-                                </div>
+                                    <div className="meeting-topic m-3">
+                                        <h2 className="text-white">Meeting Topic</h2>
+                                    </div>
+                                    <div className="container meeting-container">
+                                    <div className="row g-5">
+                                        <div className="col-md-6">
+                                        <div className="col-ineer">
+                                        <span>Guest Name</span>
+                                        <h5 className="mb-3">{meetingsDetails.GuestName}</h5>
+                                        
+                                        <span className="fw-normal">Meeting Topic</span>
+                                        <h5 className="mb-3">{meetingsDetails.MeetingTopic}</h5>
+
+                                        <span>Meeting Date</span>    
+                                        <h5 className="mb-3">{meetingsDetails.MeetingDate}</h5>
+                                        
+                                        <span>Meeting Time</span>    
+                                        <h5 className="mb-3">{meetingsDetails.MeetingTime}</h5>
+                                        </div>
+                                        </div>
+                                    
+                                        <div className="col-md-6">
+                                        <div className="col-ineer">  
+                                        <span>Meeting Address</span>
+                                        <h5 className="mb-3">{meetingsDetails.MeetingAddress}</h5>
+
+                                        <span>Inside Or Out side The Facility</span>
+                                        <h5 className="mb-3">{meetingsDetails.Area}</h5>
+                                        
+                                        <span>Meeting Status</span>
+                                        <h5 className="mb-3">{meetingsDetails.MeetingStatus}</h5>
+
+                                        <span>Comments</span>
+                                        <h5 className="mb-3">{meetingsDetails.Comments}</h5>
+                                       
+                                        </div>
+                                        </div>
+                                       
+                                    </div>
+                                    </div>
+                                 </div>
                             </div>
                         </div>
                     </div>

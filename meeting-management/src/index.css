@@ -6,6 +6,9 @@
   --background-color-1: linear-gradient(145deg, #1e2024, #23272b);
   --shadow-1: 10px 10px 19px #262a2e, -10px -10px 19px #262a2e;
   --transition: 0.4s;
+  --main-color: #323644;
+  --sec-color:#7E7EBE;
+  --main-font :Poppins;
 }
 
 .main {
