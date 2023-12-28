@@ -10,6 +10,10 @@
     background-color: #343A46;
 }
 
+.meeting-topic h2 {
+    font-family: var(--main-font);
+}
+
 .inner-card h6, 
 .inner-modal h6{
     font-size: 12px;
@@ -20,6 +24,7 @@
 .modal.fade {
     transition: opacity 0.1s linear;
 }
+
 
 .modal {
     z-index: 99999999;
@@ -37,22 +42,12 @@
 }
 
 .modal .modal-dialog {
-    width: 60%;
-    max-width: 1230px;
+    max-width: 900px;
 }
 
 .inner-modal {
     position: relative;
 }
-
-/* .inner-modal h6 {
-    margin: 5px;
-    padding: 10px;
-    background-color: var(--background-color-1);
-    box-shadow: 5px 5px 20px #262a2e;
-    border-radius: 20px;
-    display: inline-block;
-} */
 
 .icon {
     position: absolute;
@@ -69,4 +64,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.meeting-container span{
+    color:#7E7EBE;
+    font-size: 18px;
+    font-family: var(--main-font);
+    
+}
+
+.meeting-container h5{
+    color:#CAC4D0;
+    font-family: var(--main-font);
+
 }
