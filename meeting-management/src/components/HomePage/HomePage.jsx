@@ -83,18 +83,6 @@ export default function HomePage() {
                             </div>
                         </div>
                     </div>
-
-                    {/* <Modal show={show} onHide={handleClose} className='modal' >
-                    <div className='inner-card shadow rounded-4 p-3'>
-                        <div className='icon d-flex justify-content-end' onClick={handleClose} ><i class=" shadow fa-solid fa-xmark"></i></div>
-                        <h6 className='mb-3'>Guest Name : <span className='fw-normal'>{meetings.GuestName}</span> </h6>
-                        <h6 className='mb-3'>Meeting Topic : <span className='fw-normal'>{meetings.MeetingTopic}</span></h6>
-                        <h6 className='mb-3'>Meeting Date : <span className='fw-normal'>{meetings.MeetingDate}</span></h6>
-                        <h6 className='mb-3'>Meeting Address : <span className='fw-normal'>{meetings.MeetingAddress}</span></h6>
-                        <h6 className='mb-3'>Inside Or Out side The Facility : <span className='fw-normal'>{meetings.Area}</span></h6>
-                        <h6 className='mb-3'>Comments : <span className='fw-normal'>{meetings.Comments}</span></h6>
-                    </div>
-                </Modal> */}
                 </div>
             </div>
         </>
