@@ -66,15 +66,15 @@ export default function HomePage() {
                     </div>
                     <div class="modal fade" id="exampleModalCenter">
                         <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
+                            <div class="modal-content  transition: `opacity 400ms, backdrop-filter 400ms`" >
                                 <div className="inner-modal shadow rounded-4 p-4">
                                     <div className="icon d-flex justify-content-end" onClick={handleClose}>
-                                        <i class=" shadow fa-solid fa-xmark" onClick={handleClose}></i>
+                                        <i class="shadow fa-solid fa-xmark"></i>
                                     </div>
                                     <h6 className="mb-3">Guest Name :<span className="fw-normal">{meetingsDetails.GuestName}</span></h6>
                                     <h6 className="mb-3">Meeting Topic :<span className="fw-normal">{meetingsDetails.MeetingTopic}</span></h6>
                                     <h6 className="mb-3">Meeting Date :<span className="fw-normal">{meetingsDetails.MeetingDate}</span></h6>
-                                    <h6 className="mb-3"> Meeting Time :<span className="fw-normal">{meetingsDetails.MeetingTime}</span></h6>
+                                    <h6 className="mb-3">Meeting Time :<span className="fw-normal">{meetingsDetails.MeetingTime}</span></h6>
                                     <h6 className="mb-3">Meeting Address :<span className="fw-normal">{meetingsDetails.MeetingAddress}</span></h6>
                                     <h6 className="mb-3">Inside Or Out side The Facility :<span className="fw-normal">{meetingsDetails.Area}</span></h6>
                                     <h6 className="mb-3">Meeting Status :<span className="fw-normal">{meetingsDetails.MeetingStatus}</span></h6>

@@ -13,7 +13,7 @@
 .inner-card h6, 
 .inner-modal h6{
     font-size: 12px;
-    color: #F6F7F9;
+    color: #CAC4D0;
     
 }
 
@@ -23,36 +23,17 @@
 
 .modal {
     z-index: 99999999;
-    background: #212428;
+    background: rgba(33, 36, 40, 1);
     padding: 60px 15px !important;
 }
 
 .modal .modal-dialog .modal-content {
-    padding: 45px;
-    border-radius: 10px;
+    border-radius: 1rem !important;
     overflow: hidden;
     border: none;
     z-index: 1;
     background: var(--background-color-1);
     box-shadow: var(--shadow-1);
-}
-
-.modal .modal-dialog .modal-content .modal-header .close {
-    padding: 1rem 1rem;
-    margin: -1rem -1rem -1rem auto;
-    display: inline-block;
-    width: 0;
-    right: 44px;
-    position: absolute;
-    opacity: 1;
-    transition: var(--transition);
-}
-
-.modal .modal-dialog .modal-content .modal-header .close span {
-    color: var(--color-white);
-    position: relative;
-    z-index: 1;
-    transition: var(--transition);
 }
 
 .modal .modal-dialog {
@@ -63,6 +44,15 @@
 .inner-modal {
     position: relative;
 }
+
+/* .inner-modal h6 {
+    margin: 5px;
+    padding: 10px;
+    background-color: var(--background-color-1);
+    box-shadow: 5px 5px 20px #262a2e;
+    border-radius: 20px;
+    display: inline-block;
+} */
 
 .icon {
     position: absolute;
@@ -75,7 +65,7 @@
     width: 30px;
     height: 30px;
     background-color: #4c525f;
-    border-radius: 100vh;
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -23,7 +23,7 @@
   background:var(--main-color);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.33) !important;
   border: 0 !important;
-  padding: 1rem;
+  padding: 0.8rem;
 }
 
 .form input::placeholder{
