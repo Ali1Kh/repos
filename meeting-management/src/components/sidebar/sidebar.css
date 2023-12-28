@@ -1,6 +1,4 @@
 .sidebar {
-    display: flex;
-    flex-direction: column;
     background: #15181D;
     min-height: 100vh;
     position: sticky;
@@ -32,7 +30,7 @@ img {
 .header-side h6 a,
 .setting-side h6 a {
     text-decoration: none;
-    color: #F6F7F9;
+    color: #CAC4D0;
     transition: 1s;
 }
 

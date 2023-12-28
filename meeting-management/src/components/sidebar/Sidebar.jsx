@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Sidebar = () => {
   return (
     <>
-      <div className="sidebar shadow">
+      <div className="sidebar d-flex flex-column shadow">
         <div className="side-logo">
           <img src={logo} alt="Logo" />
         </div>
