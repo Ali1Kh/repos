@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./newMeeting.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-// import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 import $ from "jquery";

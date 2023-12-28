@@ -1,0 +1,72 @@
+.main-cards {
+    background: rgb(37, 50, 57);
+    background: linear-gradient(180deg,
+            rgba(37, 50, 57, 1) 0%,
+            rgba(39, 42, 55, 1) 92%);
+    min-height: 100vh;
+}
+
+.inner-card, .inner-modal{
+    background-color: #343A46;
+}
+
+.inner-card h6, 
+.inner-modal h6{
+    font-size: 12px;
+    color: #CAC4D0;
+    
+}
+
+.modal.fade {
+    transition: opacity 0.1s linear;
+}
+
+.modal {
+    z-index: 99999999;
+    background: rgba(33, 36, 40, 1);
+    padding: 60px 15px !important;
+}
+
+.modal .modal-dialog .modal-content {
+    border-radius: 1rem !important;
+    overflow: hidden;
+    border: none;
+    z-index: 1;
+    background: var(--background-color-1);
+    box-shadow: var(--shadow-1);
+}
+
+.modal .modal-dialog {
+    width: 60%;
+    max-width: 1230px;
+}
+
+.inner-modal {
+    position: relative;
+}
+
+/* .inner-modal h6 {
+    margin: 5px;
+    padding: 10px;
+    background-color: var(--background-color-1);
+    box-shadow: 5px 5px 20px #262a2e;
+    border-radius: 20px;
+    display: inline-block;
+} */
+
+.icon {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    cursor: pointer;
+}
+
+.icon i {
+    width: 30px;
+    height: 30px;
+    background-color: #4c525f;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

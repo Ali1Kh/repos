@@ -212,29 +212,29 @@ export default function Meetings() {
     meetingNavigate("updateMeeting/" + selectedId);
   }
   // Holding Row
-  let holdTimeout;
-  let mouseIsDown = false;
-  async function holdRow(e, targetId) {
-    await new Promise((resolve) => {
-      mouseIsDown = true;
-      setTimeout(() => {
-        if (mouseIsDown) {
-          showContext(e, targetId);
-        }
-        resolve();
-      }, 2000);
-    });
-  }
-  function handleMouseUp(e, targetId) {
-    showContext(e, targetId);
+  // let holdTimeout;
+  // let mouseIsDown = false;
+  // async function holdRow(e, targetId) {
+  //   await new Promise((resolve) => {
+  //     mouseIsDown = true;
+  //     setTimeout(() => {
+  //       if (mouseIsDown) {
+  //         showContext(e, targetId);
+  //       }
+  //       resolve();
+  //     }, 2000);
+  //   });
+  // }
+  // function handleMouseUp(e, targetId) {
+  //   showContext(e, targetId);
 
-    // mouseIsDown = false;
-    // clearTimeout(holdTimeout);
-  }
+  //   // mouseIsDown = false;
+  //   // clearTimeout(holdTimeout);
+  // }
   return (
     <>
       <div className="main">
-        <div className="container  d-flex    flex-column align-items-center justify-content-center p-xxl-4">
+        <div className="container d-flex flex-column align-items-center justify-content-center p-xxl-4">
           <h2 className="mt-4 mb-xxl-4 mb-1" style={{ userSelect: "none" }}>
             Meetings
           </h2>
@@ -249,12 +249,15 @@ export default function Meetings() {
                     onContextMenu: (e) => {
                       showContext(e, e.currentTarget.getAttribute("data-id"));
                     },
-                    onMouseDown: (e) => {
-                      holdRow(e, e.currentTarget.getAttribute("data-id"));
+                    onDoubleClick: (e) => {
+                      showContext(e, e.currentTarget.getAttribute("data-id"));
                     },
-                    onMouseUp: (e) => {
-                      handleMouseUp(e, e.currentTarget.getAttribute("data-id"));
-                    },
+                    // onMouseDown: (e) => {
+                    //   holdRow(e, e.currentTarget.getAttribute("data-id"));
+                    // },
+                    // onMouseUp: (e) => {
+                    //   handleMouseUp(e, e.currentTarget.getAttribute("data-id"));
+                    // },
                     style: { cursor: "context-menu" },
                   },
                 }}
