@@ -1,14 +1,14 @@
 import React from "react";
 import "./login.css";
-import logoMed from "../../image/Logo-1.png";
+import logo from "../../image/Logo.png";
 
 export default function Login() {
   return (
     <>
       <div className="main d-flex justify-content-center align-items-center">
         <div className="container">
-          <div className="login-logo m-auto d-flex justify-content-center align-items-center mb-5">
-            <img className="w-100" src={logoMed} alt="" />
+          <div className="login-logo m-auto d-flex justify-content-center align-items-center mb-">
+            <img className="w-100" src={logo} alt="" />
           </div>
           <div className="row">
             <div className="col-md-5 m-auto">
@@ -26,7 +26,7 @@ export default function Login() {
                   />
                 </div>
                 <div className="login-btn d-flex justify-content-center align-items-center mt-3">
-                  <button className="">login</button>
+                  <button className="">Login</button>
                 </div>
               </div>
             </div>
