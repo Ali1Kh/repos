@@ -40,3 +40,18 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.navbar {
+  display: none !important;
+}
+
+@media screen and (576px > width) {
+  .navbar {
+    display: block !important;
+  }
+  .sidebar-col{
+    display: none !important;
+  }
+}
+
+

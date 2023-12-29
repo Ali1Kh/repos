@@ -1,0 +1,34 @@
+.navbar {
+    background-color: #15181D !important;
+
+}
+
+.navbar .navbar-toggler {
+    background-color: #7E7EBE;
+}
+
+.navbar .nav-link.active {
+    color: #7E7EBE !important;
+}
+
+.navbar .nav-link {
+    color: #CAC4D0;
+    padding: 15px;
+}
+
+.navbar .nav-link.active:hover,
+.navbar .nav-link:hover {
+    background-color: rgba(23, 145, 186, 0.3);
+    border-radius: 10px;
+    border: 0;
+    color: #7E7EBE;
+}
+
+.nav-logo {
+    width: 40px;
+
+}
+
+.nav-logo img {
+    width: 15%;
+}

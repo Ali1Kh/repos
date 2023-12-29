@@ -1,7 +1,7 @@
 import React from "react";
 import "./Signup.css";
 import Form from "react-bootstrap/Form";
-import logoMed from "../../image/Logo-medium.png";
+import logoMed from "../../image/Logo-1.png";
 
 export default function Signup() {
   let initial = {
