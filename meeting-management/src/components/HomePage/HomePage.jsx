@@ -75,43 +75,34 @@ export default function HomePage() {
                                         <h2 className="text-white">Meeting Topic</h2>
                                     </div>
                                     <div className="container meeting-container">
-                                    <div className="row g-5">
-                                        <div className="col-md-6">
-                                        <div className="col-ineer">
-                                        <span>Guest Name</span>
-                                        <h5 className="mb-3">{meetingsDetails.GuestName}</h5>
-                                        
-                                        <span className="fw-normal">Meeting Topic</span>
-                                        <h5 className="mb-3">{meetingsDetails.MeetingTopic}</h5>
-
-                                        <span>Meeting Date</span>    
-                                        <h5 className="mb-3">{meetingsDetails.MeetingDate}</h5>
-                                        
-                                        <span>Meeting Time</span>    
-                                        <h5 className="mb-3">{meetingsDetails.MeetingTime}</h5>
+                                        <div className="row g-5">
+                                            <div className="col-md-6">
+                                                <div className="col-ineer">
+                                                    <span>Guest Name</span>
+                                                    <h5 className="mb-3">{meetingsDetails.GuestName}</h5>
+                                                    <span className="fw-normal">Meeting Topic</span>
+                                                    <h5 className="mb-3">{meetingsDetails.MeetingTopic}</h5>
+                                                    <span>Meeting Date</span>
+                                                    <h5 className="mb-3">{meetingsDetails.MeetingDate}</h5>
+                                                    <span>Meeting Time</span>
+                                                    <h5 className="mb-3">{meetingsDetails.MeetingTime}</h5>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="col-ineer">
+                                                    <span>Meeting Address</span>
+                                                    <h5 className="mb-3">{meetingsDetails.MeetingAddress}</h5>
+                                                    <span>Inside Or Out side The Facility</span>
+                                                    <h5 className="mb-3">{meetingsDetails.Area}</h5>
+                                                    <span>Meeting Status</span>
+                                                    <h5 className="mb-3">{meetingsDetails.MeetingStatus}</h5>
+                                                    <span>Comments</span>
+                                                    <h5 className="mb-3">{meetingsDetails.Comments}</h5>
+                                                </div>
+                                            </div>
                                         </div>
-                                        </div>
-                                    
-                                        <div className="col-md-6">
-                                        <div className="col-ineer">  
-                                        <span>Meeting Address</span>
-                                        <h5 className="mb-3">{meetingsDetails.MeetingAddress}</h5>
-
-                                        <span>Inside Or Out side The Facility</span>
-                                        <h5 className="mb-3">{meetingsDetails.Area}</h5>
-                                        
-                                        <span>Meeting Status</span>
-                                        <h5 className="mb-3">{meetingsDetails.MeetingStatus}</h5>
-
-                                        <span>Comments</span>
-                                        <h5 className="mb-3">{meetingsDetails.Comments}</h5>
-                                       
-                                        </div>
-                                        </div>
-                                       
                                     </div>
-                                    </div>
-                                 </div>
+                                </div>
                             </div>
                         </div>
                     </div>
