@@ -1,22 +1,26 @@
 .sidebar {
-  background: #15181d;
   min-height: 100vh;
   position: sticky;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  min-height: 100vh;
-  min-width: 250px;
+  background: #15181d;
 }
 
-.side-logo {
-  width: 65px;
+.sideBarInner .side-logo {
+  width: 45px;
   margin: 20px 30px;
 }
 
-.side-logo img {
-  width: 70%;
+.sideLogoMini {
+  width: 40px;
+  margin: 5px 15px !important;
+}
+
+.side-logo img,
+.sideLogoMini img {
+  width: 100%;
 }
 
 .header-side a,
@@ -38,16 +42,55 @@
   margin-right: 15px;
   width: 15px;
 }
+.header-side a .svgIcon {
+  padding: 0 10px;
+  margin-right: 15px;
+  width: 18px;
+}
 
 .header-side a:hover,
 .setting-side a:hover {
   background-color: rgba(23, 145, 186, 0.3);
 }
 
-.sidebarItem.active{
+.sidebarItem.active {
   background-color: rgba(23, 145, 186, 0.3);
 }
 
+.sideBarMini .header-side a,
+.sideBarMini .setting-side a {
+  margin: 5px 10px !important;
+}
+
+.sideBarMini i {
+  font-size: 18px;
+}
+
+.sideBarMini .sideOpenBtn {
+  top: 55px;
+  left: 100%;
+  border-radius: 0px 10px 10px 0px;
+  border-color: #8f8f91 !important;
+  cursor: pointer;
+}
+
+.sideBarInner .sideCloseBtn {
+  top: 55px !important;
+  left: 90% !important;
+  border-color: #8f8f91 !important;
+  border-radius: 10px 0px 0px 10px;
+  cursor: pointer;
+}
+
+/*  */
+.accImage {
+  width: 35px;
+  height: 35px;
+  border-radius: 100vh !important;
+  user-select: none;
+}
+
+/* Animation  */
 .animate__delay-150ms {
   animation-delay: 150ms !important;
 }
