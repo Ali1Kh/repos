@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import $ from "jquery";
 const Sidebar = () => {
   useEffect(() => {
-    // ?Active 
+    // ?Active
     $(".sidebarItem").click((e) => {
       $(".sidebarItem.active").removeClass("active");
       $(e.target).addClass("active");
@@ -33,7 +33,7 @@ const Sidebar = () => {
         >
           <img src={logo} alt="Logo" />
         </div>
-        <div style={{ userSelect: "none" }} className="header-side pe-5">
+        <div style={{ userSelect: "none" }} className="header-side">
           <Link className="sidebarItem animate__animated active" to={"/home"}>
             <span className="d-inline-flex text-center justify-content-center">
               <i className="fa-solid fa-house"></i>

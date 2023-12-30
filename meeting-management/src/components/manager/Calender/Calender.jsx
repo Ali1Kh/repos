@@ -4,6 +4,7 @@ import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
+import MeetingDetails from "../meetingDetails/MeetingDetails";
 function ServerDay(props) {
   const { highlightedDays = [], day, outsideCurrentMonth, ...other } = props;
   const isSelected =
@@ -67,12 +68,12 @@ export default function Calender() {
     setHighlightedDays([20, 25, 1]);
   }
   return (
-    <div className="main py-5 px-md-5">
-      <div className="container d-flex flex-column justify-content-center align-items-center ">
+    <div className="main py-5  px-md-5">
+      <div className="container  d-flex flex-column justify-content-center align-items-center ">
         <h2 className="mb-5 animate__animated animate__zoomIn">Calender</h2>
-        <div className="calenderCard rounded-4 p-sm-3 p-xl-5 w-75">
+        <div className="calenderCard rounded-4 p-sm-4">
           <div className="row my-3 gy-3">
-            <div className="col-md-6 px-3">
+            <div className="col-lg-6 p-4">
               <ThemeProvider theme={newTheme}>
                 <DateCalendar
                   showDaysOutsideCurrentMonth
@@ -93,8 +94,8 @@ export default function Calender() {
                 />
               </ThemeProvider>
             </div>
-            <div className="col-md-6">
-              <div className="dayMeetings">
+            <div className="col-lg-6">
+              <div className="dayMeetings p-4">
                 <div
                   style={{ color: "#878895" }}
                   className="todayDate d-flex justify-content-between mb-3"
@@ -108,20 +109,29 @@ export default function Calender() {
                   <div className="meetingItem border-bottom py-3">
                     <p>Meeting Topic : blblsbab</p>
                     <p>Meeting Time : 1:00</p>
-                    <a href="#" className="mb-3">
+                    <a
+                      data-bs-toggle="modal"
+                      data-bs-target="#meetingModal"
+                      className="mb-3 cursorPointer"
+                    >
                       Show Details
                     </a>
                   </div>
                   <div className="meetingItem border-bottom py-3">
                     <p>Meeting Topic : blblsbab</p>
                     <p>Meeting Time : 2:00</p>
-                    <a href="#" className="mb-3">
+                    <a
+                      data-bs-toggle="modal"
+                      data-bs-target="#meetingModal"
+                      className="mb-3 cursorPointer"
+                    >
                       Show Details
                     </a>
                   </div>
                 </div>
               </div>
             </div>
+            <MeetingDetails />
           </div>
         </div>
       </div>

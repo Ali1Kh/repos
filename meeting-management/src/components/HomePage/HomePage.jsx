@@ -1,6 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import "./homePage.css";
+import MeetingDetails from "../manager/meetingDetails/MeetingDetails";
 
 export default function HomePage() {
   let meetings = [
@@ -69,10 +70,16 @@ export default function HomePage() {
     <>
       <div className="main-cards p-4">
         <div className="container">
-          <h2 className="text-white mb-5">Home</h2>
+          <h2
+            className="mt-4 mb-xxl-5 mb-3 text-center text-white animate__animated animate__zoomIn"
+            style={{ userSelect: "none" }}
+          >
+            Meetings
+          </h2>
           <div className="row gy-3">
-            {meetings.map((meeting) => (
+            {meetings.map((meeting, idx) => (
               <div
+                key={idx}
                 className="col-md-4 col-sm-12 col-12 mt-4 animate__animated animate__fadeIn animate__slower"
                 data-aos="fade-up"
                 data-aos-delay="500"
@@ -81,7 +88,7 @@ export default function HomePage() {
                 <div
                   className="inner-card shadow rounded-4 gap-3 p-3"
                   data-bs-toggle="modal"
-                  data-bs-target="#exampleModalCenter"
+                  data-bs-target="#meetingModal"
                 >
                   <h6 className="mb-3">
                     Guest Name :
@@ -103,64 +110,7 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-          <div className="modal fade" id="exampleModalCenter">
-            <div
-              className="modal-dialog col-md-7 modal-dialog-centered"
-              role="document"
-            >
-              <div className="modal-content transition: `opacity 400ms, backdrop-filter 400ms`">
-                <div className="inner-modal shadow rounded-4 p-4">
-                  <div
-                    className="icon d-flex justify-content-end"
-                    data-bs-dismiss="modal"
-                  >
-                    <i className="shadow fa-solid fa-xmark"></i>
-                  </div>
-                  <div className="meeting-topic m-3">
-                    <h2 className="text-white">Meeting Topic</h2>
-                  </div>
-                  <div className="container meeting-container">
-                    <div className="row g-md-5">
-                      <div className="col-md-6">
-                        <div className="col-ineer">
-                          <span>Guest Name</span>
-                          <h5 className="mb-3">{meetingsDetails.GuestName}</h5>
-                          <span className="fw-normal">Meeting Topic</span>
-                          <h5 className="mb-3">
-                            {meetingsDetails.MeetingTopic}
-                          </h5>
-                          <span>Meeting Date</span>
-                          <h5 className="mb-3">
-                            {meetingsDetails.MeetingDate}
-                          </h5>
-                          <span>Meeting Time</span>
-                          <h5 className="mb-3">
-                            {meetingsDetails.MeetingTime}
-                          </h5>
-                        </div>
-                      </div>
-                      <div className="col-md-6">
-                        <div className="col-ineer">
-                          <span>Meeting Address</span>
-                          <h5 className="mb-3">
-                            {meetingsDetails.MeetingAddress}
-                          </h5>
-                          <span>Inside Or Out side The Facility</span>
-                          <h5 className="mb-3">{meetingsDetails.Area}</h5>
-                          <span>Meeting Status</span>
-                          <h5 className="mb-3">
-                            {meetingsDetails.MeetingStatus}
-                          </h5>
-                          <span>Comments</span>
-                          <h5 className="mb-3">{meetingsDetails.Comments}</h5>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <MeetingDetails />
         </div>
       </div>
     </>

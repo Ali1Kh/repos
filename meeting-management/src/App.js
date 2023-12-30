@@ -6,13 +6,13 @@ import Layout from "./components/layout/Layout";
 import Login from "./components/login/Login";
 import Signup from "./components/signup/Signup";
 import NewMeeting from "./components/secretary/Meeting/new meeting/NewMeeting";
-import MeetingDetails from "./components/manager/meetingDetails/meetingDetails";
+import MeetingDetails from "./components/manager/meetingDetails/MeetingDetails";
 import UpdateMeeting from "./components/secretary/Meeting/update meeting/UpdateMeeting";
 import Meetings from "./components/secretary/Meeting/meetings/Meetings";
 import HomePage from "./components/HomePage/HomePage";
 import NotFound from "./components/NotFound/NotFound";
 import Calender from "./components/manager/Calender/Calender";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 const router = createHashRouter([
   {

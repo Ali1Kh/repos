@@ -41,9 +41,14 @@ body {
   padding: 0;
 }
 
+.cursorPointer{
+  cursor: pointer;
+}
+
 .navbar {
   display: none !important;
 }
+
 
 @media screen and (576px > width) {
   .navbar {
