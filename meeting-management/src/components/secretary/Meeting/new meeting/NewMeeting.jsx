@@ -5,7 +5,8 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 import $ from "jquery";
-import dayjs from "dayjs";
+import toast, { Toaster } from "react-hot-toast";
+
 const newTheme = (theme) =>
   createTheme({
     palette: {
@@ -17,25 +18,43 @@ export default function NewMeeting() {
   let [time, setTime] = useState(null);
 
   function addMeeting() {
-    let dateInput;
+    let person = $("#meetPerson").val();
+    let topic = $("#meetTopic").val();
+    let address = $("#meetAddress").val();
+    let notes = $("#meetNotes").val();
+    let area = $('input[name="radio-group"]:checked').val();
+
+    console.log(date, time);
+    if (
+      (!date || !time || person == "") ||
+      topic == "" ||
+      address == "" ||
+      notes == "" ||
+      area == ""
+    ) {
+      $(".error").removeClass("d-none");
+      $(".error").addClass("d-block");
+      return;
+    }
+    let dateInput, timeInput;
     if (date) {
       dateInput = new Date(date.$d).toLocaleString("en-GB");
     }
-
-    let timeInput = new Date(time.$d).toLocaleString("en-GB", {
-      hour12: false,
-    });
+    if (time) {
+      timeInput = new Date(time.$d).toLocaleString("en-GB", {
+        hour12: false,
+      });
+    }
 
     let data = {
       date: dateInput.split(",")[0],
       time: timeInput.split(",")[1],
-      person: $("#meetPerson").val(),
-      topic: $("#meetTopic").val(),
-      address: $("#meetAddress").val(),
-      notes: $("#meetNotes").val(),
-      area: $('input[name="radio-group"]:checked').val(),
+      person,
+      topic,
+      address,
+      notes,
+      area,
     };
-    console.log(data);
   }
   return (
     <div className="main">
@@ -55,7 +74,6 @@ export default function NewMeeting() {
             </div>
             <div className="col-md-6  inputItem timePicker mb-3 px-5 ">
               <ThemeProvider theme={newTheme}>
-                {/* <MobileTimePicker /> */}
                 <TimePicker
                   onChange={(val) => setTime(val)}
                   viewRenderers={{
@@ -132,6 +150,9 @@ export default function NewMeeting() {
             </div>
           </div>
         </div>
+        <small style={{ color: "red" }} className="error d-none mb-3">
+          All Inputs Are Required!
+        </small>
         <button onClick={addMeeting} className="addButton">
           Add Meeting
         </button>

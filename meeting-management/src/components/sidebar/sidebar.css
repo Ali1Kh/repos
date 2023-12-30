@@ -1,52 +1,71 @@
 .sidebar {
-    background: #15181D;
-    min-height: 100vh;
-    position: sticky;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    min-height: 100vh;
+  background: #15181d;
+  min-height: 100vh;
+  position: sticky;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 100vh;
 }
 
 .side-logo {
-    width: 65px;
-    margin: 20px 30px;
+  width: 65px;
+  margin: 20px 30px;
 }
 
 .side-logo img {
-    width: 70%;
+  width: 70%;
 }
 
-.header-side h6,
-.setting-side h6  {
-    font-size: 14px;
-    margin:  0 20px;
-    color: #F6F7F9;
-    padding: 8px;
-    cursor: pointer;
+.header-side a,
+.setting-side a {
+  font-size: 15px;
+  margin: 5px 35px;
+  color: #f6f7f9;
+  padding: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #cac4d0;
+  display: block;
+  border-radius: 10px;
+  transition: all 700ms;
 }
 
-.header-side h6 a,
-.setting-side h6 a {
-    text-decoration: none;
-    color: #CAC4D0;
-    transition: 1s;
+.header-side a i,
+.setting-side a i {
+  padding: 0 10px;
+  margin-right: 15px;
+  width: 15px;
 }
 
-.header-side h6 a i,
-.setting-side h6 a i {
-    padding: 0 10px;
-    margin-right: 15px;
-    width: 15px;
+.header-side a:hover,
+.setting-side a:hover {
+  background-color: rgba(23, 145, 186, 0.3);
 }
 
-.header-side h6:hover ,
-.setting-side h6:hover {
-    background-color: rgba(23, 145, 186, 0.3);
-    border-radius: 10px;
-    border: 0;
+.sidebarItem.active{
+  background-color: rgba(23, 145, 186, 0.3);
 }
 
-
-
+.animate__delay-150ms {
+  animation-delay: 150ms !important;
+}
+.animate__delay-200ms {
+  animation-delay: 200ms !important;
+}
+.animate__delay-250ms {
+  animation-delay: 250ms !important;
+}
+.animate__delay-300ms {
+  animation-delay: 300ms !important;
+}
+.animate__delay-350ms {
+  animation-delay: 350ms !important;
+}
+.animate__delay-400ms {
+  animation-delay: 400ms !important;
+}
+.animate__delay-450ms {
+  animation-delay: 450ms !important;
+}

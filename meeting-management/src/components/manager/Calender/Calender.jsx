@@ -69,7 +69,7 @@ export default function Calender() {
   return (
     <div className="main py-5 px-md-5">
       <div className="container d-flex flex-column justify-content-center align-items-center ">
-        <h2 className="mb-5">Calender</h2>
+        <h2 className="mb-5 animate__animated animate__zoomIn">Calender</h2>
         <div className="calenderCard rounded-4 p-sm-3 p-xl-5 w-75">
           <div className="row my-3 gy-3">
             <div className="col-md-6 px-3">

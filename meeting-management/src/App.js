@@ -12,6 +12,7 @@ import Meetings from "./components/secretary/Meeting/meetings/Meetings";
 import HomePage from "./components/HomePage/HomePage";
 import NotFound from "./components/NotFound/NotFound";
 import Calender from "./components/manager/Calender/Calender";
+import toast, { Toaster } from "react-hot-toast";
 
 const router = createHashRouter([
   {
@@ -20,6 +21,10 @@ const router = createHashRouter([
     children: [
       {
         path: "",
+        element: <HomePage />,
+      },
+      {
+        path: "home",
         element: <HomePage />,
       },
       {
@@ -80,6 +85,7 @@ function App() {
           <RouterProvider router={router} />
         </ThemeProvider>
       </LocalizationProvider>
+      <Toaster />
     </>
   );
 }
