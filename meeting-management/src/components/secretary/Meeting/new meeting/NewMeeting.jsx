@@ -5,8 +5,7 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 import $ from "jquery";
-import toast, { Toaster } from "react-hot-toast";
-
+import {Helmet} from "react-helmet";
 const newTheme = (theme) =>
   createTheme({
     palette: {
@@ -157,6 +156,9 @@ export default function NewMeeting() {
           Add Meeting
         </button>
       </div>
+      <Helmet>
+        <title>Add Meeting</title>
+      </Helmet>
     </div>
   );
 }

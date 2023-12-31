@@ -1,6 +1,6 @@
 import React from "react";
 import "./meetingDetails.css";
-
+import { Helmet } from "react-helmet";
 export default function MeetingDetails() {
   let meetingsDetails = {
     GuestName: "Ali Khaled ElSa3dany",

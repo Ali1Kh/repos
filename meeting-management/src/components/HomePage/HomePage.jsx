@@ -2,7 +2,7 @@ import { useState } from "react";
 import React from "react";
 import "./homePage.css";
 import MeetingDetails from "../manager/meetingDetails/MeetingDetails";
-
+import {Helmet} from "react-helmet";
 export default function HomePage() {
   let meetings = [
     {
@@ -68,6 +68,9 @@ export default function HomePage() {
 
   return (
     <>
+     <Helmet>
+        <title>Home</title>
+      </Helmet>
       <div className="main-cards p-4">
         <div className="container">
           <h2
@@ -80,7 +83,7 @@ export default function HomePage() {
             {meetings.map((meeting, idx) => (
               <div
                 key={idx}
-                className="col-md-4 col-sm-12 col-12 mt-4 animate__animated animate__fadeIn animate__slower"
+                className="col-md-4 mt-4 animate__animated animate__fadeIn animate__slower"
                 data-aos="fade-up"
                 data-aos-delay="500"
                 data-aos-once="true"

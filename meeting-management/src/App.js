@@ -16,11 +16,11 @@ import { Toaster } from "react-hot-toast";
 
 const router = createHashRouter([
   {
-    path: "",
+    path: "/",
     element: <Layout />,
     children: [
       {
-        path: "",
+        path: "/",
         element: <HomePage />,
       },
       {
@@ -61,6 +61,10 @@ const router = createHashRouter([
             element: <Calender />,
           },
         ],
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },

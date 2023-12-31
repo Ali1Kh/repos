@@ -10,7 +10,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-
+import {Helmet} from "react-helmet";
 export default function Meetings() {
   let [meetingsRows, setMeetingsRows] = useState([
     {
@@ -413,6 +413,9 @@ export default function Meetings() {
             </Button>
           </DialogActions>
         </Dialog>
+        <Helmet>
+        <title>Meetings</title>
+      </Helmet>
       </div>
     </>
   );
