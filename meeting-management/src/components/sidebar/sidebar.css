@@ -8,6 +8,15 @@
   background: #15181d;
 }
 
+.sideBarInner,
+.sideBarMini {
+  height: inherit !important;
+}
+
+.sideBarMini{
+  display: flex;
+}
+
 .sideBarInner .side-logo {
   width: 45px;
   margin: 20px 30px;
@@ -50,11 +59,14 @@
 
 .header-side a:hover,
 .setting-side a:hover {
-  background-color: rgba(23, 145, 186, 0.3);
+  background-color: var(--hoverColor);
 }
 
+.sideBarInner .setting-side {
+  border-color: var(--mutedColor) !important;
+}
 .sidebarItem.active {
-  background-color: rgba(23, 145, 186, 0.3);
+  background-color: var(--hoverColor);
 }
 
 .sideBarMini .header-side a,
@@ -84,11 +96,50 @@
 
 /*  */
 .accImage {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
   border-radius: 100vh !important;
   user-select: none;
 }
+
+.accInfo .email {
+  font-size: 14px;
+}
+
+.accMore {
+  width: 35px;
+  height: 35px;
+  border-radius: 100vh;
+  transition: all 0ms;
+}
+.accMore:hover {
+  background-color: rgba(23, 145, 186, 0.1);
+}
+
+.moreContext {
+  display: none;
+  position: absolute;
+  bottom: 75%;
+  left: 85%;
+  z-index: 9998;
+  background-color: #15181d;
+  border-radius: 8px 8px 8px 1px;
+  width: 150px;
+  padding: 5px;
+}
+.moreContext .item{
+  padding: 8px 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 8px;
+  user-select: none;
+}
+.moreContext .item:hover {
+  background-color: #2f2f2f;
+}
+
 
 /* Animation  */
 .animate__delay-150ms {

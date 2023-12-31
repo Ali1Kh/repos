@@ -1,6 +1,7 @@
 import React from "react";
 import "./login.css";
 import logo from "../../image/Logo.png";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   return (
@@ -26,7 +27,7 @@ export default function Login() {
                   />
                 </div>
                 <div className="login-btn d-flex justify-content-center align-items-center mt-3">
-                  <button className="">Login</button>
+                  <Link to={"/#"} className="">Login</Link>
                 </div>
               </div>
             </div>

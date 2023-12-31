@@ -97,7 +97,7 @@ export default function Calender() {
             <div className="col-lg-6">
               <div className="dayMeetings p-4">
                 <div
-                  style={{ color: "#878895" }}
+                  style={{ color: "var(--mutedColor)" }}
                   className="todayDate d-flex justify-content-between mb-3"
                 >
                   <span>{day}</span>

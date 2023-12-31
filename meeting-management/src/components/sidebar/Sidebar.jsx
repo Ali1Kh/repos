@@ -1,9 +1,10 @@
 import "./sidebar.css";
 import logo from "../../image/Logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import $ from "jquery";
 const Sidebar = () => {
+  const navigate = useNavigate();
   function openSideBar() {
     $(".sideBarInner").show(1000);
     $(".sideBarMini").hide(1000);
@@ -12,8 +13,8 @@ const Sidebar = () => {
     $(".sideBarInner").hide(1000);
     $(".sideBarMini").show(1000);
   }
-
   useEffect(() => {
+    $(".sideBarMini").hide(0);
     // ?Sidebar open-close
     $(".sideOpenBtn").click(() => {
       openSideBar();
@@ -22,12 +23,14 @@ const Sidebar = () => {
     $(".sideCloseBtn").click(() => {
       closeSideBar();
     });
-
-    // $(".sideBarInner").hide();
     // ?Active
     $(".sidebarItem").click((e) => {
       $(".sidebarItem.active").removeClass("active");
-      $($(e.target).parents(".sidebarItem")).addClass("active");
+      if ($(e.target).hasClass("sidebarItem")) {
+        $(e.target).addClass("active");
+      } else {
+        $(e.target).parents(".sidebarItem").addClass("active");
+      }
     });
     // ? Animate list
     $(".sidebarItem").eq(0).addClass("animate__fadeInUp animate__delay-150ms");
@@ -35,12 +38,25 @@ const Sidebar = () => {
     $(".sidebarItem").eq(2).addClass("animate__fadeInUp animate__delay-250ms");
     $(".sidebarItem").eq(3).addClass("animate__fadeInUp animate__delay-300ms");
     $(".sidebarItem").eq(4).addClass("animate__fadeInUp animate__delay-350ms");
-    $(".sidebarItem")
-      .eq(5)
-      .addClass("animate__slideInLeft animate__delay-400ms");
-    $(".sidebarItem")
-      .eq(6)
-      .addClass("animate__slideInLeft animate__delay-450ms");
+    // $(".sidebarItem")
+    //   .eq(5)
+    //   .addClass("animate__slideInLeft animate__delay-400ms");
+    // $(".sidebarItem")
+    //   .eq(6)
+    //   .addClass("animate__slideInLeft animate__delay-450ms");
+    // ?Context
+    $(".accMore").click((e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      $(".moreContext").css("display", "block");
+    });
+    $(document).click(() => {
+      $(".moreContext").css("display", "none");
+    });
+
+    $(".logout").click((e) => {
+      navigate("/login");
+    });
   });
 
   return (
@@ -88,7 +104,6 @@ const Sidebar = () => {
               </span>
               <span>Home</span>
             </Link>
-
             <Link
               className="sidebarItem animate__animated"
               to={"/manager/calender"}
@@ -114,21 +129,18 @@ const Sidebar = () => {
               </span>
               <span>Calendar</span>
             </Link>
-
             <Link className="sidebarItem animate__animated" href="#">
               <span className="d-inline-flex text-center justify-content-center">
                 <i className="fa-regular fa-bell"></i>
               </span>
               <span>Notification</span>
             </Link>
-
             <Link className="sidebarItem animate__animated" to={"/meeting"}>
               <span className="d-inline-flex text-center justify-content-center">
-                <i class="fa-regular fa-note-sticky"></i>
+                <i className="fa-regular fa-note-sticky"></i>
               </span>
               <span>Meetings</span>
             </Link>
-
             <Link
               className="sidebarItem animate__animated"
               to={"/meeting/addMeeting"}
@@ -139,23 +151,33 @@ const Sidebar = () => {
               <span>Create Meeting</span>
             </Link>
           </div>
-          <div className="setting-side mt-auto mb-3 pe-5">
-            <div className="account p-2">
-              <div
-                className="accImage text-black d-flex justify-content-center align-items-center bg-info"
-              >
-                <span className="fs-4">A</span>
+          <div className="setting-side border-top mx-4 mt-auto mb-3">
+            <div className="account d-flex justify-content-center align-items-center gap-3 p-2">
+              <div className="accImage text-black d-flex justify-content-center align-items-center bg-info">
+                <span className="m-0 p-0">A</span>
               </div>
-              <div className="accInfo">
-                
+              <div className="accInfo text-white">
+                <div className="username">
+                  <span>Ali Elsaadany</span>
+                </div>
+                <div className="email" style={{ color: "var(--mutedColor)" }}>
+                  alielsaadany94@gmail.com
+                </div>
+              </div>
+              <div className="accMore position-relative cursorPointer d-flex justify-content-center align-items-center ms-auto">
+                <i className="fa-solid fa-ellipsis-vertical text-white"></i>
+                <div className="moreContext">
+                  <div className="item">Settings</div>
+                  <div className="item logout">Logout</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         <div
-          className="sideBarMini p-3  flex-column  align-items-center"
-          style={{ display: "flex" }}
+          className="sideBarMini p-3 flex-column  align-items-center"
+          style={{ display: "none" }}
         >
           <div
             style={{ userSelect: "none" }}
@@ -220,7 +242,7 @@ const Sidebar = () => {
             </Link>
 
             <Link className="sidebarItem animate__animated" to={"/meeting"}>
-              <i class="fa-regular fa-note-sticky"></i>
+              <i className="fa-regular fa-note-sticky"></i>
             </Link>
 
             <Link
@@ -231,14 +253,11 @@ const Sidebar = () => {
             </Link>
           </div>
 
-          {/* <div className="setting-side mt-auto mb-3">
-            <Link className="sidebarItem animate__animated" to={"/settings"}>
-              <i className="fa-solid fa-gear"></i>
-            </Link>
-            <Link className="sidebarItem animate__animated">
-              <i className="fa-solid fa-arrow-right-to-bracket"></i>
-            </Link>
-          </div> */}
+          <div className="setting-side mx-4 mt-auto mb-3">
+            <div className="accImage text-black d-flex justify-content-center align-items-center bg-info">
+              <span className="m-0 p-0">A</span>
+            </div>
+          </div>
         </div>
       </div>
     </>

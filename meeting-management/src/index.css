@@ -2,13 +2,15 @@
   /* --main-color: #323644; */
   --sec-color: #343a46;
   --main-font: Poppins;
-  --black-color : #262a2e;
+  --black-color: #262a2e;
   --background-color-1: linear-gradient(145deg, #1e2024, #23272b);
   --shadow-1: 10px 10px 19px #262a2e, -10px -10px 19px #262a2e;
   --transition: 0.4s;
   --main-color: #323644;
-  --sec-color:#7E7EBE;
-  --main-font :Poppins;
+  --sec-color: #7e7ebe;
+  --main-font: Poppins;
+  --mutedColor: rgb(135, 136, 149);
+  --hoverColor: rgba(23, 145, 186, 0.3);
 }
 
 .main {
@@ -41,7 +43,7 @@ body {
   padding: 0;
 }
 
-.cursorPointer{
+.cursorPointer {
   cursor: pointer;
 }
 
@@ -49,14 +51,11 @@ body {
   display: none !important;
 }
 
-
 @media screen and (576px > width) {
   .navbar {
     display: block !important;
   }
-  .sidebar-col{
+  .sidebar-col {
     display: none !important;
   }
 }
-
-
