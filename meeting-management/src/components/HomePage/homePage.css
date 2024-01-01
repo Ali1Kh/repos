@@ -13,12 +13,36 @@
 .meeting-topic h2 {
     font-family: var(--main-font);
 }
-
+/* 
 .inner-card h6, 
 .inner-modal h6{
     font-size: 12px;
     color: #CAC4D0;
     
+} */
+
+.inner-card .guest-name h4{
+    font-size: 20px;
+    color:  var(--sec-color);
+    font-family: var(--main-font);
+}
+
+.inner-card .guest-email h6{
+    font-size: 15px;
+    color: #ffff;
+    font-family: var(--main-font);
+}
+
+.meeting-info  h5{
+    font-size: 17px;
+    color: #7E7EBE;
+    font-family: var(--main-font);
+}
+
+.meeting-info  h6{
+    font-size: 15px;
+    color: #ffff;
+    font-family: var(--main-font);
 }
 
 .modal.fade {

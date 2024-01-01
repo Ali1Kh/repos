@@ -45,6 +45,7 @@ const Sidebar = () => {
     //   .eq(6)
     //   .addClass("animate__slideInLeft animate__delay-450ms");
     // ?Context
+
     $(".accMore").click((e) => {
       e.stopPropagation();
       e.preventDefault();
@@ -151,6 +152,9 @@ const Sidebar = () => {
               <span>Create Meeting</span>
             </Link>
           </div>
+
+         
+
           <div className="setting-side border-top mx-4 mt-auto mb-3">
             <div className="account d-flex justify-content-center align-items-center gap-3 p-2">
               <div className="accImage text-black d-flex justify-content-center align-items-center bg-info">

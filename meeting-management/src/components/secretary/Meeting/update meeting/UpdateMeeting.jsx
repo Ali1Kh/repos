@@ -78,7 +78,7 @@ export default function UpdateMeeting() {
           <div className="inputItem mb-3 px-5 ">
             <input
               type="text"
-              className="form-control py-2"
+              className="form-control py-2 rounded-3"
               id="meetPerson"
               placeholder="Person or Entity"
             />
@@ -86,7 +86,7 @@ export default function UpdateMeeting() {
           <div className="inputItem mb-3 px-5">
             <input
               type="text"
-              className="form-control py-2"
+              className="form-control py-2 rounded-3"
               id="meetTopic"
               placeholder="Meeting Topic"
             />
@@ -94,14 +94,14 @@ export default function UpdateMeeting() {
           <div className="inputItem mb-3 px-5">
             <input
               type="text"
-              className="form-control py-2"
+              className="form-control py-2 rounded-3"
               id="meetAddress"
               placeholder="Meeting Address"
             />
           </div>
           <div className="inputItem mb-3 px-5">
             <textarea
-              className="form-control py-2"
+              className="form-control py-2 rounded-3"
               id="meetNotes"
               rows="4"
               style={{ maxHeight: "150px" }}

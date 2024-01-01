@@ -1,70 +1,92 @@
 import { useState } from "react";
 import React from "react";
 import "./homePage.css";
-import MeetingDetails from "../manager/meetingDetails/MeetingDetails";
+import MeetingDetails from "../manager/meetingDetails/meetingDetails.jsx";
 import {Helmet} from "react-helmet";
+
 export default function HomePage() {
   let meetings = [
     {
       GuestName: "Ali Khaled ElSa3dany",
+      GuestEmail:"Elsa3dany22@gmail.com",
       MeetingTopic: "blablbaa",
       MeetingTime: "12:00 PM",
       MeetingStatus: "Not Done",
     },
     {
       GuestName: "Mostafa Salem",
+      GuestEmail:"msalem1@gmail.com",
       MeetingTopic: "blablbaa",
       MeetingTime: "12:00 PM",
       MeetingStatus: "Not Done",
     },
     {
       GuestName: "Motaaz",
+      GuestEmail:"motaaz33@gmail.com",
       MeetingTopic: "blablbaa",
       MeetingTime: "12:00 PM",
       MeetingStatus: "Not Done",
     },
     {
-      GuestName: "omar Kadry Dahab",
+      GuestName: "Omar Kadry Dahab",
+      GuestEmail:"dahab10@gmail.com",
       MeetingTopic: "blablbaa",
       MeetingTime: "12:00 PM",
       MeetingStatus: "Not Done",
     },
     {
-      GuestName: "salem ramdan",
+      GuestName: "Salem Ramadan",
+      GuestEmail:"salem99@gmail.com",
       MeetingTopic: "blablbaa",
       MeetingTime: "11:00 PM",
       MeetingStatus: "Not Done",
     },
     {
-      GuestName: "omar hefnawyyy",
+      GuestName: "Omar Hefnawy",
+      GuestEmail:"hefnawy7@gmail.com",
       MeetingTopic: "blablbaa",
       MeetingTime: "09:00 PM",
       MeetingStatus: "Not Done",
     },
     {
-      GuestName: "zeyad nader",
+      GuestName: "Zeyad Nader",
+      GuestEmail:"zezo98@gmail.com",
       MeetingTopic: "blablbaa",
       MeetingTime: "12:00 PM",
       MeetingStatus: "Not Done",
     },
     {
-      GuestName: "mohamed nabil",
+      GuestName: "Mohamed Nabil",
+      GuestEmail:"nabil2@gmail.com",
+      MeetingTopic: "blablbaa",
+      MeetingTime: "12:00 PM",
+      MeetingStatus: "Not Done",
+    },
+    {
+      GuestName: "Saged Sameh",
+      GuestEmail:"saged870@gmail.com",
+      MeetingTopic: "blablbaa",
+      MeetingTime: "12:00 PM",
+      MeetingStatus: "Not Done",
+    },{
+      GuestName: "Taha",
+      GuestEmail:"taha66@gmail.com",
       MeetingTopic: "blablbaa",
       MeetingTime: "12:00 PM",
       MeetingStatus: "Not Done",
     },
   ];
 
-  let meetingsDetails = {
-    GuestName: "Omar Kadry Dahab",
-    MeetingTopic: "Drdsha",
-    MeetingDate: "20/10/2024",
-    MeetingAddress: "Bolaq Abo El3ela",
-    Area: "Outside",
-    MeetingTime: "12:00 PM",
-    MeetingStatus: "Not Done",
-    Comments: "No Comment",
-  };
+  // let meetingsDetails = {
+  //   GuestName: "Omar Kadry Dahab",
+  //   MeetingTopic: "Drdsha",
+  //   MeetingDate: "20/10/2024",
+  //   MeetingAddress: "Bolaq Abo El3ela",
+  //   Area: "Outside",
+  //   MeetingTime: "12:00 PM",
+  //   MeetingStatus: "Not Done",
+  //   Comments: "No Comment",
+  // };
 
   return (
     <>
@@ -83,34 +105,60 @@ export default function HomePage() {
             {meetings.map((meeting, idx) => (
               <div
                 key={idx}
-                className="col-md-4 mt-4 animate__animated animate__fadeIn animate__slower"
+                className="col-lg-4 col-md-12 col-sm-12 mt-4 animate__animated animate__fadeIn animate__slower"
                 data-aos="fade-up"
                 data-aos-delay="500"
                 data-aos-once="true"
               >
                 <div
-                  className="inner-card shadow rounded-4 gap-3 p-3"
+                  className="inner-card shadow rounded-4 gap-3 p-4 flex-column"
                   data-bs-toggle="modal"
                   data-bs-target="#meetingModal"
                 >
-                  <h6 className="mb-3">
-                    Guest Name :
-                    <span className="fw-normal">{meeting.GuestName}</span>
-                  </h6>
-                  <h6 className="mb-3">
-                    Meeting Topic :
-                    <span className="fw-normal">{meeting.MeetingTopic}</span>
-                  </h6>
-                  <h6 className="mb-3">
-                    Meeting Time :
-                    <span className="fw-normal">{meeting.MeetingTime}</span>
-                  </h6>
-                  <h6 className="mb-3">
-                    Meeting Status :
-                    <span className="fw-normal">{meeting.MeetingStatus}</span>
-                  </h6>
+                  
+                  <div className="guest-info d-flex justify-content-around">
+                    <div className="guest-icon-profile d-flex justify-content-center align-items-center">
+                      <i class="fa-solid fa-circle-user fs-1 text-white"></i>
+                    </div>
+                    
+                    <div className="guest-account">
+                      <div className="guest-name flex-column">
+                        <h4>{meeting.GuestName}</h4>
+                      </div>
+  
+                      <div className="guest-email">
+                        <h6>{meeting.GuestEmail}</h6>
+                      </div>
+
+                    </div>
+
+                      <div className="menu-icon d-flex justify-content-center align-items-center fs-1">
+                        <i class="fa-solid fa-ellipsis text-white"></i>
+                      </div>
+                  </div>
+
+                  
+                  <div className="meeting-info row mt-4">
+                    <div className="meeting-topic col-lg-4 col-md-4 col-sm-4">
+                      <h5 className="text-center">Topic</h5>
+                      <h6 className="text-center">{meeting.MeetingTopic}</h6>
+                    </div>
+
+                    <div className="meeting-time col-lg-4 col-md-4 col-sm-4">
+                      <h5 className="text-center">Time</h5>
+                      <h6 className="text-center">{meeting.MeetingStatus}</h6>
+                    </div>
+
+                    <div className="meeting-date col-lg-4 col-md-4 col-sm-4">
+                      <h5 className="text-center">Date</h5>
+                      <h6 className="text-center">{meeting.MeetingTime}</h6>
+                    </div>
+                    
+                  </div>
+                    
                 </div>
-              </div>
+                </div>
+              
             ))}
           </div>
           <MeetingDetails />

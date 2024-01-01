@@ -17,9 +17,14 @@
   display: flex;
 }
 
-.side-logo {
-    width: 65px;
-    margin: 20px;
+.sideBarInner .side-logo {
+  width: 45px;
+  margin: 20px 30px;
+}
+
+.sideLogoMini {
+  width: 40px;
+  margin: 5px 15px !important;
 }
 
 .side-logo img,
