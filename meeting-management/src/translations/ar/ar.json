@@ -1,3 +1,52 @@
 {
-    "title": "الاجتماعات"
+  "HomePage": {
+    "header": "الاجتماعات",
+    "guestName": "الشخص/الخص",
+    "meetingTopic": "MeetingTopic",
+    "meetingDate": "MeetingDate",
+    "meetingAddress": "MeetingAddress",
+    "area": "Area",
+    "meetingTime": "MeetingTime",
+    "meetingStatus": "MeetingStatus",
+    "comments": "Comments"
+  },
+  "Login": {
+    "username": "username",
+    "password": "password",
+    "button": "Login"
+  },
+  "signup": {
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "userName": "userName",
+    "password": "password",
+    "confirmPassword": "confirmPassword",
+    "role": "Role",
+    "button": "Create account"
+  },
+  "sidebar": {
+    "Home": "Home",
+    "Calendar": "Calendar",
+    "Notification": "Notification",
+    "Meetings": "Meetings",
+    "Create Meeting": "Create Meeting"
+  },
+  "Calendar": {},
+  "table": {
+    "date": "Date",
+    "time": "Time",
+    "person": "Person",
+    "topic": "Topic",
+    "address": "Address",
+    "area": "Area"
+  },
+  "createMeeting": {
+    "person": "Person or Entity",
+    "topic": "Meeting Topic",
+    "address": "Meeting Address",
+    "notes": "Notes",
+    "inside": "Inside Company",
+    "outside": "Outside Company",
+    "button": "ADD MEETING"
+  }
 }
