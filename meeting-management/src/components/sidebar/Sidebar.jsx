@@ -14,7 +14,6 @@ const Sidebar = () => {
     $(".sideBarMini").show(1000);
   }
   useEffect(() => {
-    $(".sideBarMini").hide(0);
     // ?Sidebar open-close
     $(".sideOpenBtn").click(() => {
       openSideBar();
