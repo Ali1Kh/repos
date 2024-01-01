@@ -116,12 +116,12 @@ export default function HomePage() {
                   data-bs-target="#meetingModal"
                 >
                   
-                  <div className="guest-info d-flex justify-content-around">
-                    <div className="guest-icon-profile d-flex justify-content-center align-items-center">
+                  <div className="guest-info justify-content-start">
+                    <div className="guest-icon-profile d-flex justify-content-center align-items-center me-3 ms-3">
                       <i class="fa-solid fa-circle-user fs-1 text-white"></i>
                     </div>
                     
-                    <div className="guest-account">
+                    <div className="guest-account d-flex flex-column align-items-center mt-3">
                       <div className="guest-name flex-column">
                         <h4>{meeting.GuestName}</h4>
                       </div>
@@ -132,24 +132,20 @@ export default function HomePage() {
 
                     </div>
 
-                      <div className="menu-icon d-flex justify-content-center align-items-center fs-1">
-                        <i class="fa-solid fa-ellipsis text-white"></i>
-                      </div>
+                      
                   </div>
-
-                  
-                  <div className="meeting-info row mt-4">
-                    <div className="meeting-topic col-lg-4 col-md-4 col-sm-4">
+                   <div className="meeting-info row mt-4">
+                    <div className="meeting-topic col-lg-4 col-md-6 col-sm-4">
                       <h5 className="text-center">Topic</h5>
                       <h6 className="text-center">{meeting.MeetingTopic}</h6>
                     </div>
 
-                    <div className="meeting-time col-lg-4 col-md-4 col-sm-4">
+                    <div className="meeting-time col-lg-4 col-md-6 col-sm-4">
                       <h5 className="text-center">Time</h5>
                       <h6 className="text-center">{meeting.MeetingStatus}</h6>
                     </div>
 
-                    <div className="meeting-date col-lg-4 col-md-4 col-sm-4">
+                    <div className="meeting-date col-lg-4 col-md-6 col-sm-4">
                       <h5 className="text-center">Date</h5>
                       <h6 className="text-center">{meeting.MeetingTime}</h6>
                     </div>
