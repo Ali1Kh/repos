@@ -25,11 +25,10 @@
     transition: opacity 0.1s linear;
 }
 
-
 .modal {
     z-index: 99999999;
-    background: rgba(33, 36, 40, 1);
-    padding: 60px 15px !important;
+    background: rgba(33, 36, 40, 0.6);
+    /* padding: 60px 15px !important; */
 }
 
 .modal .modal-dialog .modal-content {
@@ -39,6 +38,7 @@
     z-index: 1;
     background: var(--background-color-1);
     box-shadow: var(--shadow-1);
+    transition: opacity 400ms, backdrop-filter 400ms
 }
 
 .modal .modal-dialog {
@@ -76,5 +76,4 @@
 .meeting-container h5{
     color:#CAC4D0;
     font-family: var(--main-font);
-
 }

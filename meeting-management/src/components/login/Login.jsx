@@ -1,14 +1,15 @@
 import React from "react";
 import "./login.css";
-import logoMed from "../../image/Logo-medium.png";
+import logo from "../../image/Logo.png";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   return (
     <>
       <div className="main d-flex justify-content-center align-items-center">
         <div className="container">
-          <div className="login-logo m-auto d-flex justify-content-center align-items-center mb-5">
-            <img className="w-100" src={logoMed} alt="" />
+          <div className="login-logo m-auto d-flex justify-content-center align-items-center mb-">
+            <img className="w-100" src={logo} alt="" />
           </div>
           <div className="row">
             <div className="col-md-5 m-auto">
@@ -26,7 +27,7 @@ export default function Login() {
                   />
                 </div>
                 <div className="login-btn d-flex justify-content-center align-items-center mt-3">
-                  <button className="">login</button>
+                  <Link to={"/#"} className="">Login</Link>
                 </div>
               </div>
             </div>

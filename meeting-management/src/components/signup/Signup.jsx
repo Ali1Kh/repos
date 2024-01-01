@@ -1,7 +1,7 @@
 import React from "react";
 import "./Signup.css";
 import Form from "react-bootstrap/Form";
-import logoMed from "../../image/Logo-medium.png";
+import logo from "../../image/Logo.png";
 
 export default function Signup() {
   let initial = {
@@ -17,10 +17,10 @@ export default function Signup() {
       <div className="main d-flex justify-content-center align-items-center">
         <div className="container">
           <div
-            style={{ width: "110px" }}
+            style={{ width: "90px" }}
             className="signup-logo m-auto d-flex justify-content-center align-items-center mb-5"
           >
-            <img className="w-100" src={logoMed} alt="" />
+            <img className="w-100" src={logo} alt="" />
           </div>
           <div className="row">
             <div className="col-md-5 m-auto">

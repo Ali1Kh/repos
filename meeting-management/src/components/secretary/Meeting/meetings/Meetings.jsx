@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import "./meetings.css";
 import $ from "jquery";
-import toast, { Toaster } from "react-hot-toast";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -10,7 +9,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useNavigate } from "react-router-dom";
-
+import toast, { Toaster } from "react-hot-toast";
+import {Helmet} from "react-helmet";
 export default function Meetings() {
   let [meetingsRows, setMeetingsRows] = useState([
     {
@@ -235,10 +235,10 @@ export default function Meetings() {
     <>
       <div className="main">
         <div className="container d-flex flex-column align-items-center justify-content-center p-xxl-4">
-          <h2 className="mt-4 mb-xxl-4 mb-1" style={{ userSelect: "none" }}>
+          <h2 className="mt-4 mb-xxl-4 mb-1 animate__animated animate__zoomIn" style={{ userSelect: "none" }}>
             Meetings
           </h2>
-          <div className="meetingsConatiner p-4" style={{ width: "100%" }}>
+          <div className="meetingsConatiner  p-4" style={{ width: "100%" }}>
             <div
               className="meetings d-flex justify-content-center"
               style={{ height: 550, width: "100%" }}
@@ -292,7 +292,7 @@ export default function Meetings() {
                   },
                   {
                     field: "Address",
-                    headerClassName: "tableColumns",
+                    headerClassName: "tableColumns ",
                     align: "center",
                     headerAlign: "center",
                     width: 125,
@@ -413,7 +413,9 @@ export default function Meetings() {
             </Button>
           </DialogActions>
         </Dialog>
-        <Toaster />
+        <Helmet>
+        <title>Meetings</title>
+      </Helmet>
       </div>
     </>
   );
