@@ -1,12 +1,12 @@
 {
   "HomePage": {
     "header": "الاجتماعات",
-    "guestName": "الشخص/الخص",
-    "meetingTopic": "MeetingTopic",
-    "meetingDate": "MeetingDate",
-    "meetingAddress": "MeetingAddress",
-    "area": "Area",
-    "meetingTime": "MeetingTime",
+    "guestName": "الشخص/الجهة",
+    "meetingTopic": "الموضوع",
+    "meetingDate": "تاريخ الاجتماع",
+    "meetingAddress": "عنوان الاجتماع",
+    "area": "المنطقة",
+    "meetingTime": "وقت الاجتماع",
     "meetingStatus": "MeetingStatus",
     "comments": "Comments"
   },
