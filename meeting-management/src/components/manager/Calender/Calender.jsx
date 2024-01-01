@@ -4,8 +4,9 @@ import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
-import MeetingDetails from "../meetingDetails/MeetingDetails";
+import MeetingDetails from "../meetingDetails/meetingDetails.jsx";
 import {Helmet} from "react-helmet";
+
 function ServerDay(props) {
   const { highlightedDays = [], day, outsideCurrentMonth, ...other } = props;
   const isSelected =
