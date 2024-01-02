@@ -77,16 +77,16 @@ export default function HomePage() {
     },
   ];
 
-  // let meetingsDetails = {
-  //   GuestName: "Omar Kadry Dahab",
-  //   MeetingTopic: "Drdsha",
-  //   MeetingDate: "20/10/2024",
-  //   MeetingAddress: "Bolaq Abo El3ela",
-  //   Area: "Outside",
-  //   MeetingTime: "12:00 PM",
-  //   MeetingStatus: "Not Done",
-  //   Comments: "No Comment",
-  // };
+  let meetingsDetails = {
+    GuestName: "Omar Kadry Dahab",
+    MeetingTopic: "Drdsha",
+    MeetingDate: "20/10/2024",
+    MeetingAddress: "Bolaq Abo El3ela",
+    Area: "Outside",
+    MeetingTime: "12:00 PM",
+    MeetingStatus: "Not Done",
+    Comments: "No Comment",
+  };
 
   return (
     <>
