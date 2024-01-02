@@ -1,5 +1,7 @@
 import "./sidebar.css";
 import logo from "../../image/Logo.png";
+import eg from "../../image/egypt.png"
+import en from "../../image/united-states.png"
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import $ from "jquery";
@@ -153,9 +155,18 @@ const Sidebar = () => {
           </div>
 
          
-
-          <div className="setting-side border-top mx-4 mt-auto mb-3">
-            <div className="account d-flex justify-content-center align-items-center gap-3 p-2">
+            
+          <div className="setting-side mx-4 mt-auto mb-3">
+          <div className="lan-btn mb-3">
+              <div class="tabs">
+		            <input type="radio" id="radio-1" name="tabs" checked=""/>
+		            <label class="tab" for="radio-1"><img src={eg} alt="" className="eg-icon" /></label>
+		            <input type="radio" id="radio-2" name="tabs"/>
+		            <label class="tab" for="radio-2"><img src={en} alt="" className="eg-icon" /></label>
+		            <span class="glider"></span>
+	            </div>
+              </div>
+            <div className="account border-top d-flex justify-content-center align-items-center gap-3 p-2">
               <div className="accImage text-black d-flex justify-content-center align-items-center bg-info">
                 <span className="m-0 p-0">A</span>
               </div>
@@ -176,8 +187,9 @@ const Sidebar = () => {
               </div>
             </div>
           </div>
-        </div>
 
+        </div>
+        
         <div
           className="sideBarMini p-3 flex-column  align-items-center"
           style={{ display: "none" }}
@@ -255,7 +267,7 @@ const Sidebar = () => {
               <i className="fa-regular fa-plus"></i>
             </Link>
           </div>
-
+              
           <div className="setting-side mx-4 mt-auto mb-3">
             <div className="accImage text-black d-flex justify-content-center align-items-center bg-info">
               <span className="m-0 p-0">A</span>

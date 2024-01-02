@@ -51,7 +51,7 @@ body {
   display: none !important;
 }
 
-@media screen and (576px > width) {
+@media screen and (710px > width) {
   .navbar {
     display: block !important;
   }
