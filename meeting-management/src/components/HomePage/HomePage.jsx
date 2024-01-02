@@ -105,7 +105,7 @@ export default function HomePage() {
             {meetings.map((meeting, idx) => (
               <div
                 key={idx}
-                className="col-lg-4 col-md-12 col-sm-12 mt-4 animate__animated animate__fadeIn animate__slower"
+                className="inner-parent col-lg-4 col-md-12 col-sm-12 mt-4 animate__animated animate__fadeIn animate__slower"
                 data-aos="fade-up"
                 data-aos-delay="500"
                 data-aos-once="true"
@@ -135,17 +135,17 @@ export default function HomePage() {
                       
                   </div>
                    <div className="meeting-info row mt-4">
-                    <div className="meeting-topic col-lg-4 col-md-6 col-sm-4">
+                    <div className="meeting-topic col-lg-4 col-md-4">
                       <h5 className="text-center">Topic</h5>
                       <h6 className="text-center">{meeting.MeetingTopic}</h6>
                     </div>
 
-                    <div className="meeting-time col-lg-4 col-md-6 col-sm-4">
+                    <div className="meeting-time col-lg-4 col-md-4">
                       <h5 className="text-center">Time</h5>
                       <h6 className="text-center">{meeting.MeetingStatus}</h6>
                     </div>
 
-                    <div className="meeting-date col-lg-4 col-md-6 col-sm-4">
+                    <div className="meeting-date col-lg-4 col-md-4">
                       <h5 className="text-center">Date</h5>
                       <h6 className="text-center">{meeting.MeetingTime}</h6>
                     </div>

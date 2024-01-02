@@ -7,7 +7,9 @@ export default function MeetingDetails() {
     MeetingTopic: "Eating",
     MeetingDate: "10-2-99",
     MeetingAddress: "bolq abo el 3ela",
-    Area: "msh 3aref",
+    MeetingTime: "12:00 PM",
+    MeetingStatus:"Not Done",
+    Area: "inside",
     Comments: "3mk",
   };
   // aaaa
