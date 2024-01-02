@@ -1,52 +1,51 @@
 {
   "HomePage": {
     "header": "الاجتماعات",
-    "guestName": "الشخص/الخص",
-    "meetingTopic": "MeetingTopic",
-    "meetingDate": "MeetingDate",
-    "meetingAddress": "MeetingAddress",
-    "area": "Area",
-    "meetingTime": "MeetingTime",
-    "meetingStatus": "MeetingStatus",
-    "comments": "Comments"
+    "guestName": "الشخص/الجهة",
+    "meetingTopic": "الموضوع",
+    "meetingDate": "تاريخ الاجتماع",
+    "meetingAddress": "عنوان الاجتماع",
+    "area": "المنطقة",
+    "meetingTime": "وقت الاجتماع",
+    "meetingStatus": "حالة الاجتماع",
+    "comments": "ملاحظات"
   },
   "Login": {
-    "username": "username",
-    "password": "password",
-    "button": "Login"
+    "username": "اسم المستخدم",
+    "password": "كلمة المرور",
+    "button": "تسجيل الدخول"
   },
   "signup": {
-    "firstName": "firstName",
-    "lastName": "lastName",
-    "userName": "userName",
-    "password": "password",
-    "confirmPassword": "confirmPassword",
-    "role": "Role",
-    "button": "Create account"
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "userName": "اسم المستخدم",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "role": "المسمى الوظيفي",
+    "button": "إنشاء حساب"
   },
   "sidebar": {
-    "Home": "Home",
-    "Calendar": "Calendar",
-    "Notification": "Notification",
-    "Meetings": "Meetings",
-    "Create Meeting": "Create Meeting"
+    "Home": "الاجتماعات",
+    "Calendar": "تقويم",
+    "Meetings": "الاجتماعات",
+    "Create Meeting": "إنشاء حساب"
   },
   "Calendar": {},
   "table": {
-    "date": "Date",
-    "time": "Time",
-    "person": "Person",
-    "topic": "Topic",
-    "address": "Address",
-    "area": "Area"
+    "date": "تاريخ",
+    "time": "الوقت",
+    "person": "الشخص",
+    "topic": "عنوان",
+    "address": "العنوان",
+    "area": "المنطقة"
   },
   "createMeeting": {
-    "person": "Person or Entity",
-    "topic": "Meeting Topic",
-    "address": "Meeting Address",
-    "notes": "Notes",
-    "inside": "Inside Company",
-    "outside": "Outside Company",
-    "button": "ADD MEETING"
+    "person": "الشخص أو الجهة",
+    "topic": "موضوع الاجتماع",
+    "address": "عنوان الاجتماع",
+    "notes": "ملحوظات",
+    "inside": "داخل الهيئة",
+    "outside": "خارج الهيئة",
+    "button": "أضف اجتماع"
   }
 }
