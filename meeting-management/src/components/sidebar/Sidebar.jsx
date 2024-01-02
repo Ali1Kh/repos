@@ -131,12 +131,12 @@ const Sidebar = () => {
               </span>
               <span>Calendar</span>
             </Link>
-            {/* <Link className="sidebarItem animate__animated" href="#">
+            <Link className="sidebarItem animate__animated" href="#">
               <span className="d-inline-flex text-center justify-content-center">
                 <i className="fa-regular fa-bell"></i>
               </span>
               <span>Notification</span>
-            </Link> */}
+            </Link>
             <Link className="sidebarItem animate__animated" to={"/meeting"}>
               <span className="d-inline-flex text-center justify-content-center">
                 <i className="fa-regular fa-note-sticky"></i>
