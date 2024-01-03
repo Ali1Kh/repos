@@ -5,6 +5,7 @@ import en from "../../image/united-states.png"
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import $ from "jquery";
+import { useTranslation } from "react-i18next";
 const Sidebar = () => {
   const navigate = useNavigate();
   function openSideBar() {
@@ -61,6 +62,8 @@ const Sidebar = () => {
     });
   });
 
+  const [t, il8n] = useTranslation();
+
   return (
     <>
       <div className="sidebar d-flex shadow">
@@ -104,7 +107,7 @@ const Sidebar = () => {
                   </svg>
                 </div>
               </span>
-              <span>Home</span>
+              <span>{t("Home")}</span>
             </Link>
             <Link
               className="sidebarItem animate__animated"
@@ -153,19 +156,20 @@ const Sidebar = () => {
               <span>Create Meeting</span>
             </Link>
           </div>
-
-         
-            
           <div className="setting-side mx-4 mt-auto mb-3">
-          <div className="lan-btn mb-3">
+            <div className="lan-btn mb-3">
               <div class="tabs">
-		            <input type="radio" id="radio-1" name="tabs" checked=""/>
-		            <label class="tab" for="radio-1"><img src={eg} alt="" className="eg-icon" /></label>
-		            <input type="radio" id="radio-2" name="tabs"/>
-		            <label class="tab" for="radio-2"><img src={en} alt="" className="eg-icon" /></label>
-		            <span class="glider"></span>
-	            </div>
+                <input type="radio" id="radio-1" name="tabs" checked="" />
+                <label class="tab" for="radio-1"><img src={en} alt="" className="eg-icon" onClick={()=>{
+                  il8n.changeLanguage('en')
+                }} /></label>
+                <input type="radio" id="radio-2" name="tabs" />
+                <label class="tab" for="radio-2"><img src={eg} alt="" className="eg-icon" onClick={()=>{
+                  il8n.changeLanguage('ar')
+                }}/></label>
+                <span class="glider"></span>
               </div>
+            </div>
             <div className="account border-top d-flex justify-content-center align-items-center gap-3 p-2">
               <div className="accImage text-black d-flex justify-content-center align-items-center bg-info">
                 <span className="m-0 p-0">A</span>
@@ -189,7 +193,7 @@ const Sidebar = () => {
           </div>
 
         </div>
-        
+
         <div
           className="sideBarMini p-3 flex-column  align-items-center"
           style={{ display: "none" }}
@@ -267,7 +271,7 @@ const Sidebar = () => {
               <i className="fa-regular fa-plus"></i>
             </Link>
           </div>
-              
+
           <div className="setting-side mx-4 mt-auto mb-3">
             <div className="accImage text-black d-flex justify-content-center align-items-center bg-info">
               <span className="m-0 p-0">A</span>
