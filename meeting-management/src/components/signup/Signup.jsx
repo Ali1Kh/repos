@@ -2,6 +2,7 @@ import React from "react";
 import "./Signup.css";
 import Form from "react-bootstrap/Form";
 import logo from "../../image/Logo.png";
+import { useTranslation } from "react-i18next";
 
 export default function Signup() {
   let initial = {
@@ -11,6 +12,8 @@ export default function Signup() {
     password: "",
     confirmPassword: "",
   };
+
+  const [t] = useTranslation();
 
   return (
     <>
@@ -31,7 +34,7 @@ export default function Signup() {
                       type="text"
                       className="first-name form-control"
                       value={initial.firstName}
-                      placeholder="First Name"
+                      placeholder={t('signup.firstName')}
                     />
                     {/* {initial.firstName.length < 4 || initial.firstName.length > 10 ? <div className='alert alert-danger'>Name must be from 4 to 10 charachters.</div> :"" }
                      */}
@@ -39,7 +42,7 @@ export default function Signup() {
                       type="text"
                       className="last-name form-control"
                       value={initial.lastName}
-                      placeholder="Last Name"
+                      placeholder={t('signup.lastName')}
                     />
                     {/* {initial.lastName.length < 4 || initial.lastName.length > 10 ? <div className='alert alert-danger'>Name must be from 4 to 10 charachters.</div> :"" }
                      */}

@@ -26,11 +26,11 @@
     "button": "Create account"
   },
   "sidebar": {
-    "Home": "Home",
-    "Calendar": "Calendar",
-    "Notification":"Notification",
-    "Meetings":"Meetings",
-    "Create Meeting":"Create Meeting"
+    "home": "Home",
+    "calendar": "Calendar",
+    "notification":"Notification",
+    "meetings":"Meetings",
+    "createMeeting":"Create Meeting"
   },
   "Calendar":{
 

@@ -107,7 +107,7 @@ const Sidebar = () => {
                   </svg>
                 </div>
               </span>
-              <span>{t("Home")}</span>
+              <span>{t('sidebar.home')}</span>
             </Link>
             <Link
               className="sidebarItem animate__animated"
@@ -132,7 +132,7 @@ const Sidebar = () => {
                   </svg>
                 </div>
               </span>
-              <span>Calendar</span>
+              <span>{t('sidebar.calendar')}</span>
             </Link>
             {/* <Link className="sidebarItem animate__animated" href="#">
               <span className="d-inline-flex text-center justify-content-center">
@@ -144,7 +144,7 @@ const Sidebar = () => {
               <span className="d-inline-flex text-center justify-content-center">
                 <i className="fa-regular fa-note-sticky"></i>
               </span>
-              <span>Meetings</span>
+              <span>{t('sidebar.meetings')}</span>
             </Link>
             <Link
               className="sidebarItem animate__animated"
@@ -153,7 +153,7 @@ const Sidebar = () => {
               <span className="d-inline-flex  text-center justify-content-center">
                 <i className="fa-regular fa-plus "></i>
               </span>
-              <span>Create Meeting</span>
+              <span>{t('sidebar.createMeeting')}</span>
             </Link>
           </div>
           <div className="setting-side mx-4 mt-auto mb-3">
