@@ -145,7 +145,7 @@
   display: flex;
   position: relative;
   background-color: #15181d;
-  box-shadow: var(--shadow-2);
+  box-shadow: var(--shadow-3);
   padding: 0.5rem;
   border-radius: 99px;
   width: fit-content;

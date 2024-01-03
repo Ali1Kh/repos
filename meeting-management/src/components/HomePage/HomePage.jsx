@@ -136,12 +136,12 @@ export default function HomePage() {
                     </div>
 
                     <div className="meeting-time col-lg-4 col-md-4">
-                      <h5 className="text-center">Time</h5>
+                      <h5 className="text-center">{t('HomePage.meetingTime')}</h5>
                       <h6 className="text-center">{meeting.MeetingStatus}</h6>
                     </div>
 
                     <div className="meeting-date col-lg-4 col-md-4">
-                      <h5 className="text-center">Date</h5>
+                      <h5 className="text-center">{t('HomePage.meetingDate')}</h5>
                       <h6 className="text-center">{meeting.MeetingTime}</h6>
                     </div>
                   </div>
