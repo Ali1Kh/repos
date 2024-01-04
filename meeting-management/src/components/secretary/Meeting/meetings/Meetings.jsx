@@ -11,6 +11,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import {Helmet} from "react-helmet";
+import { useTranslation } from "react-i18next";
 export default function Meetings() {
   let [meetingsRows, setMeetingsRows] = useState([
     {
@@ -231,12 +232,15 @@ export default function Meetings() {
   //   // mouseIsDown = false;
   //   // clearTimeout(holdTimeout);
   // }
+
+  const [t, il8n] = useTranslation();
+
   return (
     <>
       <div className="main">
         <div className="container d-flex flex-column align-items-center justify-content-center p-xxl-4">
           <h2 className="mt-4 mb-xxl-4 mb-1 animate__animated animate__zoomIn" style={{ userSelect: "none" }}>
-            Meetings
+            {t('Meetings.meetings')}
           </h2>
           <div className="meetingsConatiner  p-4" style={{ width: "100%" }}>
             <div
@@ -263,56 +267,56 @@ export default function Meetings() {
                 }}
                 columns={[
                   {
-                    field: "Date",
+                    field: t('Meetings.table.date'),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
                     width: 125,
                   },
                   {
-                    field: "Time",
+                    field: t('Meetings.table.time'),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
                     width: 125,
                   },
                   {
-                    field: "Person",
+                    field: t('Meetings.table.person'),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
                     width: 125,
                   },
                   {
-                    field: "Topic",
+                    field: t('Meetings.table.topic'),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
                     width: 125,
                   },
                   {
-                    field: "Address",
+                    field: t('Meetings.table.address'),
                     headerClassName: "tableColumns ",
                     align: "center",
                     headerAlign: "center",
                     width: 125,
                   },
                   {
-                    field: "Area",
+                    field: t('Meetings.table.area'),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
                     width: 125,
                   },
                   {
-                    field: "Status",
+                    field: t('Meetings.table.status'),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
                     width: 125,
                   },
                   {
-                    field: "Notes",
+                    field:  t('Meetings.table.notes'),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",

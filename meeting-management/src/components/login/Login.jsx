@@ -10,13 +10,13 @@ export default function Login() {
     <>
       <div className="main d-flex justify-content-center align-items-center">
         <div className="container">
-          <div className="login-logo m-auto d-flex justify-content-center align-items-center mb-">
+          <div className="login-logo m-auto d-flex justify-content-center align-items-center mb-4">
             <img className="w-100" src={logo} alt="" />
           </div>
           <div className="row">
             <div className="col-md-5 m-auto">
               <div className="ineer">
-                <div className="form">
+                <div className="form mb-4">
                   <input
                     type="text"
                     className="user-name mt-3 d-flex justify-content-center form-control"

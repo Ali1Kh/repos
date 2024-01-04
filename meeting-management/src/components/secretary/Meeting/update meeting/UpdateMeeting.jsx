@@ -6,6 +6,7 @@ import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 import $ from "jquery";
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 export default function UpdateMeeting() {
   const newTheme = (theme) =>
     createTheme({
@@ -44,11 +45,14 @@ export default function UpdateMeeting() {
     };
     console.log(data);
   }
+
+  const [t, il8n] = useTranslation();
+
   return (
     <div className="main">
       <div className="container d-flex flex-column align-items-center justify-content-center p-xxl-4">
         <h2 className="mt-4 mb-xxl-5 mb-3" style={{ userSelect: "none" }}>
-          Update Meeting
+        {t('CreateOrUpdateMeeting.updateMeeting')}
         </h2>
         <div className="inputsContainer w-100  p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
           <div className="calenderPicker row p-0 m-0">
@@ -80,7 +84,7 @@ export default function UpdateMeeting() {
               type="text"
               className="form-control py-2 rounded-3"
               id="meetPerson"
-              placeholder="Person or Entity"
+              placeholder={t('CreateOrUpdateMeeting.person')}
             />
           </div>
           <div className="inputItem mb-3 px-5">
@@ -88,7 +92,7 @@ export default function UpdateMeeting() {
               type="text"
               className="form-control py-2 rounded-3"
               id="meetTopic"
-              placeholder="Meeting Topic"
+              placeholder={t('CreateOrUpdateMeeting.topic')}
             />
           </div>
           <div className="inputItem mb-3 px-5">
@@ -96,7 +100,7 @@ export default function UpdateMeeting() {
               type="text"
               className="form-control py-2 rounded-3"
               id="meetAddress"
-              placeholder="Meeting Address"
+              placeholder={t('CreateOrUpdateMeeting.address')}
             />
           </div>
           <div className="inputItem mb-3 px-5">
@@ -105,7 +109,7 @@ export default function UpdateMeeting() {
               id="meetNotes"
               rows="4"
               style={{ maxHeight: "150px" }}
-              placeholder="Meeting Notes"
+              placeholder={t('CreateOrUpdateMeeting.notes')}
             ></textarea>
           </div>
           <div className="radios inputItem mb-3 px-5 d-flex gap-3 align-items-center">
@@ -120,7 +124,7 @@ export default function UpdateMeeting() {
                 />
                 <label htmlFor="radio2" className="radio-button__label">
                   <span className="radio-button__custom"></span>
-                  Inside Company
+                  {t('CreateOrUpdateMeeting.inside')}
                 </label>
               </div>
               <div className="radio-button d-flex align-items-center">
@@ -133,14 +137,14 @@ export default function UpdateMeeting() {
                 />
                 <label htmlFor="radio1" className="radio-button__label">
                   <span className="radio-button__custom"></span>
-                  Outside Company
+                  {t('CreateOrUpdateMeeting.outside')}
                 </label>
               </div>
             </div>
           </div>
         </div>
         <button onClick={addMeeting} className="addButton">
-          Update Meeting
+        {t('CreateOrUpdateMeeting.buttonUpdate')}
         </button>
       </div>
     </div>

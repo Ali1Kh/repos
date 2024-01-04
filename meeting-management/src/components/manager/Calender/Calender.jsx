@@ -6,6 +6,7 @@ import Badge from "@mui/material/Badge";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
 import MeetingDetails from "../meetingDetails/meetingDetails.jsx";
 import {Helmet} from "react-helmet";
+import { useTranslation } from "react-i18next";
 
 function ServerDay(props) {
   const { highlightedDays = [], day, outsideCurrentMonth, ...other } = props;
@@ -69,10 +70,12 @@ export default function Calender() {
     console.log(month);
     setHighlightedDays([20, 25, 1]);
   }
+  const [t, il8n] = useTranslation();
+
   return (
     <div className="main py-5  px-md-5">
       <div className="container  d-flex flex-column justify-content-center align-items-center ">
-        <h2 className="mb-5 animate__animated animate__zoomIn">Calender</h2>
+        <h2 className="mb-5 animate__animated animate__zoomIn">{t('Calendar.calendar')}</h2>
         <div className="calenderCard rounded-4 p-sm-4">
           <div className="row my-3 gy-3">
             <div className="col-lg-6 p-4">
@@ -109,25 +112,25 @@ export default function Calender() {
                 </div>
                 <div className="dayMeetingsCards">
                   <div className="meetingItem border-bottom py-3">
-                    <p>Meeting Topic : blblsbab</p>
-                    <p>Meeting Time : 1:00</p>
+                    <p>{t('Calendar.meetingTopic')} : blblsbab</p>
+                    <p>{t('Calendar.meetingTime')} : 1:00</p>
                     <a
                       data-bs-toggle="modal"
                       data-bs-target="#meetingModal"
                       className="mb-3 cursorPointer"
                     >
-                      Show Details
+                      {t('Calendar.showDetails')}
                     </a>
                   </div>
                   <div className="meetingItem border-bottom py-3">
-                    <p>Meeting Topic : blblsbab</p>
-                    <p>Meeting Time : 2:00</p>
+                    <p>{t('Calendar.meetingTopic')} : blblsbab</p>
+                    <p>{t('Calendar.meetingTime')} : 2:00</p>
                     <a
                       data-bs-toggle="modal"
                       data-bs-target="#meetingModal"
                       className="mb-3 cursorPointer"
                     >
-                      Show Details
+                      {t('Calendar.showDetails')}
                     </a>
                   </div>
                 </div>

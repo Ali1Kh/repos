@@ -28,29 +28,39 @@
   "sidebar": {
     "home": "Home",
     "calendar": "Calendar",
-    "notification":"Notification",
     "meetings":"Meetings",
     "createMeeting":"Create Meeting"
   },
   "Calendar":{
-
+    "calendar":"Calendar",
+    "meetingTopic":"MeetingTopic",
+    "meetingTime":"MeetingTime",
+    "showDetails":"Show Details"
   },
-  "table":{
-    "date":"Date",
-    "time":"Time",
-    "person":"Person",
-    "topic":"Topic",
-    "address":"Address",
-    "area":"Area"
-  },
-  "createMeeting":{
+  "CreateOrUpdateMeeting":{
+    "createMeeting":"Create Meeting",
+    "updateMeeting":"Update Meeting",
     "person":"Person or Entity",
     "topic":"Meeting Topic",
     "address":"Meeting Address",
     "notes":"Notes",
     "inside":"Inside Company",
     "outside":"Outside Company",
-    "button":"ADD MEETING"
+    "buttonAdd":"ADD MEETING",
+    "buttonUpdate":"Update Meeting"
+  },
+  "Meetings":{
+    "meetings":"Meetings",
+    "table":{
+      "date":"Date",
+      "time":"Time",
+      "person":"Person",
+      "topic":"Topic",
+      "address":"Address",
+      "area":"Area",
+      "status":"Status",
+      "notes":"Notes"
+    }
   }
 
 }

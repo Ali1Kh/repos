@@ -28,24 +28,37 @@
     "home": "الاجتماعات",
     "calendar": "تقويم",
     "meetings": "الاجتماعات",
-    "createMeeting": "إنشاء حساب"
+    "createMeeting": "إنشاء اجتماع"
   },
-  "Calendar": {},
-  "table": {
-    "date": "تاريخ",
-    "time": "الوقت",
-    "person": "الشخص",
-    "topic": "عنوان",
-    "address": "العنوان",
-    "area": "المنطقة"
+  "Calendar": {
+    "calendar":"التقويم",
+    "meetingTopic":"موضوع الاجتماع",
+    "meetingTime":"موعد الاجتماع",
+    "showDetails":"عرض المزيد"
   },
-  "createMeeting": {
+  "CreateOrUpdateMeeting": {
+    "createMeeting":"انشاء اجتماع",
+    "updateMeeting":"تعديل الاجتماع",
     "person": "الشخص أو الجهة",
     "topic": "موضوع الاجتماع",
     "address": "عنوان الاجتماع",
     "notes": "ملحوظات",
     "inside": "داخل الهيئة",
     "outside": "خارج الهيئة",
-    "button": "أضف اجتماع"
+    "buttonAdd": "أضف الاجتماع",
+    "buttonUpdate":"تعديل الاجتماع"
+  },
+  "Meetings":{
+    "meetings":"الاجتماعات",
+    "table": {
+      "date": "تاريخ",
+      "time": "الوقت",
+      "person": "الشخص",
+      "topic": "عنوان",
+      "address": "العنوان",
+      "area": "المنطقة",
+      "status":"الحالة",
+      "notes":"ملاحظات"
+    }
   }
 }
