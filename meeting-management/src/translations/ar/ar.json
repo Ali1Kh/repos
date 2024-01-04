@@ -60,5 +60,11 @@
       "status":"الحالة",
       "notes":"ملاحظات"
     }
+  },
+   "MeetingContextMenu":{
+    "status":"تعديل الحالة",
+    "statusContext":{"done":"تم","changedate":"تغيير الميعاد","cancel":"إلغاء"},
+    "update":"تعديل",
+    "delete":"مسح"
   }
 }

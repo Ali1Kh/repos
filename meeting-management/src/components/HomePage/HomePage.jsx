@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 export default function HomePage() {
   let meetings = [
     {
-      GuestName: "Ali Khaled ElSa3dany",
+      GuestName: "Ali Khaled mohamed farouk ElSa3dany",
       GuestEmail: "Elsa3dany22@gmail.com",
       MeetingTopic: "blablbaa",
       MeetingTime: "12:00 PM",
@@ -97,7 +97,7 @@ export default function HomePage() {
       <div className="main-cards p-4">
         <div className="container">
           <h2
-            className="mt-4 mb-xxl-5 mb-3 text-center text-white animate__animated animate__zoomIn"
+            className="mt-4 mb-xxl-5 mb-4 text-center text-white animate__animated animate__zoomIn"
             style={{ userSelect: "none" }}
           >
             {t('HomePage.header')}
@@ -106,13 +106,13 @@ export default function HomePage() {
             {meetings.map((meeting, idx) => (
               <div
                 key={idx}
-                className="inner-parent col-lg-4 col-md-12 col-sm-12 mt-4 animate__animated animate__fadeIn animate__slower"
+                className="inner-parent  col-lg-6 px-lg-4 col-md-12 col-sm-12 mt-4 animate__animated animate__fadeIn animate__slower"
                 data-aos="fade-up"
                 data-aos-delay="500"
                 data-aos-once="true"
               >
                 <div
-                  className="inner-card shadow rounded-4 gap-3 p-4 flex-column"
+                  className="inner-card h-100 shadow rounded-4 gap-3 p-4 flex-column"
                   data-bs-toggle="modal"
                   data-bs-target="#meetingModal"
                 >
@@ -120,7 +120,7 @@ export default function HomePage() {
                     <div className="guest-icon-profile d-flex justify-content-center align-items-center me-3 ms-3">
                       <i class="fa-solid fa-circle-user fs-1 text-white"></i>
                     </div>
-                    <div className="guest-account d-flex flex-column align-items-center mt-3">
+                    <div className="guest-account text-center d-flex flex-column align-items-center mt-3">
                       <div className="guest-name flex-column">
                         <h4>{meeting.GuestName}</h4>
                       </div>

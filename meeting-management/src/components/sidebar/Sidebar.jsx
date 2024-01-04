@@ -1,7 +1,7 @@
 import "./sidebar.css";
 import logo from "../../image/Logo.png";
-import eg from "../../image/egypt.png"
-import en from "../../image/united-states.png"
+import eg from "../../image/egypt.png";
+import en from "../../image/united-states.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import $ from "jquery";
@@ -82,7 +82,7 @@ const Sidebar = () => {
           </div>
           <div
             className="header-side"
-            style={{ minWidth: "280px", userSelect: "none" }}
+            style={{userSelect: "none" }}
           >
             <Link
               className="sidebarItem  animate__animated active"
@@ -107,7 +107,7 @@ const Sidebar = () => {
                   </svg>
                 </div>
               </span>
-              <span>{t('sidebar.home')}</span>
+              <span>{t("sidebar.home")}</span>
             </Link>
             <Link
               className="sidebarItem animate__animated"
@@ -132,7 +132,7 @@ const Sidebar = () => {
                   </svg>
                 </div>
               </span>
-              <span>{t('sidebar.calendar')}</span>
+              <span>{t("sidebar.calendar")}</span>
             </Link>
             {/* <Link className="sidebarItem animate__animated" href="#">
               <span className="d-inline-flex text-center justify-content-center">
@@ -144,7 +144,7 @@ const Sidebar = () => {
               <span className="d-inline-flex text-center justify-content-center">
                 <i className="fa-regular fa-note-sticky"></i>
               </span>
-              <span>{t('sidebar.meetings')}</span>
+              <span>{t("sidebar.meetings")}</span>
             </Link>
             <Link
               className="sidebarItem animate__animated"
@@ -153,24 +153,41 @@ const Sidebar = () => {
               <span className="d-inline-flex  text-center justify-content-center">
                 <i className="fa-regular fa-plus "></i>
               </span>
-              <span>{t('sidebar.createMeeting')}</span>
+              <span>{t("sidebar.createMeeting")}</span>
             </Link>
           </div>
-          <div className="setting-side mx-4 mt-auto mb-3">
-            <div className="lan-btn mb-3">
+          <div className="setting-side mt-auto mb-3">
+            <div className="lan-btn px-3 mb-3">
               <div class="tabs">
                 <input type="radio" id="radio-1" name="tabs" checked="" />
-                <label class="tab" for="radio-1"><img src={en} alt="" className="eg-icon" onClick={()=>{
-                  il8n.changeLanguage('en')
-                }} /></label>
+                <label class="tab" for="radio-1">
+                  <img
+                    src={en}
+                    alt=""
+                    className="eg-icon"
+                    onClick={() => {
+                      il8n.changeLanguage("en");
+                      // $("body").css("direction", "ltr");
+
+                    }}
+                  />
+                </label>
                 <input type="radio" id="radio-2" name="tabs" />
-                <label class="tab" for="radio-2"><img src={eg} alt="" className="eg-icon" onClick={()=>{
-                  il8n.changeLanguage('ar')
-                }}/></label>
+                <label class="tab" for="radio-2">
+                  <img
+                    src={eg}
+                    alt=""
+                    className="eg-icon"
+                    onClick={() => {
+                      il8n.changeLanguage("ar");
+                      // $("body").css("direction", "rtl");
+                    }}
+                  />
+                </label>
                 <span class="glider"></span>
               </div>
             </div>
-            <div className="account border-top d-flex justify-content-center align-items-center gap-3 p-2">
+            <div className="account border-top d-flex justify-content-center align-items-center gap-3 px-3 py-2">
               <div className="accImage text-black d-flex justify-content-center align-items-center bg-info">
                 <span className="m-0 p-0">A</span>
               </div>
@@ -191,7 +208,6 @@ const Sidebar = () => {
               </div>
             </div>
           </div>
-
         </div>
 
         <div

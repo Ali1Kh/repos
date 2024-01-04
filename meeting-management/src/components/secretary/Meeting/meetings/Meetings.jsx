@@ -10,7 +10,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 export default function Meetings() {
   let [meetingsRows, setMeetingsRows] = useState([
@@ -239,10 +239,13 @@ export default function Meetings() {
     <>
       <div className="main">
         <div className="container d-flex flex-column align-items-center justify-content-center p-xxl-4">
-          <h2 className="mt-4 mb-xxl-4 mb-1 animate__animated animate__zoomIn" style={{ userSelect: "none" }}>
-            {t('Meetings.meetings')}
+          <h2
+            className="mt-4 mb-xxl-4 mb-4 animate__animated animate__zoomIn"
+            style={{ userSelect: "none" }}
+          >
+            {t("Meetings.meetings")}
           </h2>
-          <div className="meetingsConatiner  p-4" style={{ width: "100%" }}>
+          <div className="meetingsConatiner  p-xxl-4" style={{ width: "100%" }}>
             <div
               className="meetings d-flex justify-content-center"
               style={{ height: 550, width: "100%" }}
@@ -267,56 +270,64 @@ export default function Meetings() {
                 }}
                 columns={[
                   {
-                    field: t('Meetings.table.date'),
+                    field: "Date",
+                    headerName: t("Meetings.table.date"),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
                     width: 125,
                   },
                   {
-                    field: t('Meetings.table.time'),
+                    field: "Time",
+                    headerName: t("Meetings.table.time"),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
                     width: 125,
                   },
                   {
-                    field: t('Meetings.table.person'),
+                    field: "Person",
+                    headerName: t("Meetings.table.person"),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
                     width: 125,
                   },
                   {
-                    field: t('Meetings.table.topic'),
+                    field: "Topic",
+                    headerName: t("Meetings.table.topic"),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
                     width: 125,
                   },
                   {
-                    field: t('Meetings.table.address'),
+                    field: "Address",
+                    headerName: t("Meetings.table.address"),
                     headerClassName: "tableColumns ",
                     align: "center",
                     headerAlign: "center",
                     width: 125,
                   },
                   {
-                    field: t('Meetings.table.area'),
+                    field: "Area",
+                    headerName: t("Meetings.table.area"),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
                     width: 125,
                   },
                   {
-                    field: t('Meetings.table.status'),
+                    field: "Status",
+                    headerName: t("Meetings.table.status"),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
                     width: 125,
                   },
                   {
-                    field:  t('Meetings.table.notes'),
+                    field: "Notes",
+                    headerName: t("Meetings.table.notes"),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
@@ -355,15 +366,15 @@ export default function Meetings() {
         <div id="context-menu">
           <div id="status" className="item" onClick={(e) => statusClicked(e)}>
             <div className="staus d-flex justify-content-between align-align-items-center">
-              <span>Change Status</span>
+              <span>{t("MeetingContextMenu.status")}</span>
               <i className="fa-solid fa-caret-up fa-rotate-90 me-1"></i>
             </div>
           </div>
           <div className="item" onClick={updateMeeting}>
-            Update
+          {t("MeetingContextMenu.update")}
           </div>
           <div className="item" onClick={openAlert}>
-            Delete
+          {t("MeetingContextMenu.delete")}
           </div>
           <div id="deepContext">
             <div
@@ -372,7 +383,7 @@ export default function Meetings() {
                 console.log("Done", selectedId);
               }}
             >
-              Done
+              {t("MeetingContextMenu.statusContext.done")}
             </div>
             <div
               className="item"
@@ -380,7 +391,7 @@ export default function Meetings() {
                 console.log("Cancelled", selectedId);
               }}
             >
-              Change Date
+              {t("MeetingContextMenu.statusContext.changedate")}
             </div>
             <div
               className="item"
@@ -388,7 +399,7 @@ export default function Meetings() {
                 console.log("Cancelled", selectedId);
               }}
             >
-              Cancelled
+               {t("MeetingContextMenu.statusContext.cancel")}
             </div>
           </div>
         </div>
@@ -418,8 +429,8 @@ export default function Meetings() {
           </DialogActions>
         </Dialog>
         <Helmet>
-        <title>Meetings</title>
-      </Helmet>
+          <title>Meetings</title>
+        </Helmet>
       </div>
     </>
   );
