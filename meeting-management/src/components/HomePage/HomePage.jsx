@@ -3,6 +3,7 @@ import React from "react";
 import "./homePage.css";
 import MeetingDetails from "../manager/meetingDetails/meetingDetails.jsx";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 
 export default function HomePage() {
   let meetings = [
@@ -87,7 +88,7 @@ export default function HomePage() {
   //   MeetingStatus: "Not Done",
   //   Comments: "No Comment",
   // };
-
+  const [t] = useTranslation();
   return (
     <>
       <Helmet>
@@ -99,7 +100,7 @@ export default function HomePage() {
             className="mt-4 mb-xxl-5 mb-3 text-center text-white animate__animated animate__zoomIn"
             style={{ userSelect: "none" }}
           >
-            Meetings
+            {t('HomePage.header')}
           </h2>
           <div className="row gy-3">
             {meetings.map((meeting, idx) => (
@@ -128,19 +129,19 @@ export default function HomePage() {
                       </div>
                     </div>
                   </div>
-                   <div className="meeting-info row mt-4">
+                  <div className="meeting-info row mt-4">
                     <div className="meeting-topic col-lg-4 col-md-4">
-                      <h5 className="text-center">Topic</h5>
+                      <h5 className="text-center">{t('HomePage.meetingTopic')}</h5>
                       <h6 className="text-center">{meeting.MeetingTopic}</h6>
                     </div>
 
                     <div className="meeting-time col-lg-4 col-md-4">
-                      <h5 className="text-center">Time</h5>
+                      <h5 className="text-center">{t('HomePage.meetingTime')}</h5>
                       <h6 className="text-center">{meeting.MeetingStatus}</h6>
                     </div>
 
                     <div className="meeting-date col-lg-4 col-md-4">
-                      <h5 className="text-center">Date</h5>
+                      <h5 className="text-center">{t('HomePage.meetingDate')}</h5>
                       <h6 className="text-center">{meeting.MeetingTime}</h6>
                     </div>
                   </div>

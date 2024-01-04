@@ -6,7 +6,7 @@
     "meetingDate": "تاريخ الاجتماع",
     "meetingAddress": "عنوان الاجتماع",
     "area": "المنطقة",
-    "meetingTime": "وقت الاجتماع",
+    "meetingTime": "وقت",
     "meetingStatus": "حالة الاجتماع",
     "comments": "ملاحظات"
   },
@@ -25,10 +25,10 @@
     "button": "إنشاء حساب"
   },
   "sidebar": {
-    "Home": "الاجتماعات",
-    "Calendar": "تقويم",
-    "Meetings": "الاجتماعات",
-    "Create Meeting": "إنشاء حساب"
+    "home": "الاجتماعات",
+    "calendar": "تقويم",
+    "meetings": "الاجتماعات",
+    "createMeeting": "إنشاء حساب"
   },
   "Calendar": {},
   "table": {

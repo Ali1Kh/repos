@@ -3,12 +3,12 @@
     "title": "Home",
     "header": "Meetings",
     "guestName": "GuestName",
-    "meetingTopic":"MeetingTopic",
-    "meetingDate":"MeetingDate",
-    "meetingAddress":"MeetingAddress",
+    "meetingTopic":"Topic",
+    "meetingDate":"Date",
+    "meetingAddress":"Address",
     "area":"Area",
-    "meetingTime":"MeetingTime",
-    "meetingStatus":"MeetingStatus",
+    "meetingTime":"Time",
+    "meetingStatus":"Status",
     "comments":"Comments"
   },
   "Login": {
@@ -26,11 +26,11 @@
     "button": "Create account"
   },
   "sidebar": {
-    "Home": "Home",
-    "Calendar": "Calendar",
-    "Notification":"Notification",
-    "Meetings":"Meetings",
-    "Create Meeting":"Create Meeting"
+    "home": "Home",
+    "calendar": "Calendar",
+    "notification":"Notification",
+    "meetings":"Meetings",
+    "createMeeting":"Create Meeting"
   },
   "Calendar":{
 
