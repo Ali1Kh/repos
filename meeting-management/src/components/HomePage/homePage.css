@@ -9,7 +9,7 @@
 .meeting-topic h2 {
     font-family: var(--main-font);
 }
- 
+ /* inner card  */
 .inner-card{
     background-color: #343A46;
     cursor: pointer;
