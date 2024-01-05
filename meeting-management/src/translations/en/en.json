@@ -61,6 +61,12 @@
       "status":"Status",
       "notes":"Notes"
     }
+  },
+  "MeetingContextMenu":{
+    "status":"Change Status",
+    "statusContext":{"done":"Done","changedate":"Change Date","cancel":"Cancel"},
+    "update":"Update",
+    "delete":"Delete"
   }
 
 }
