@@ -2,6 +2,8 @@ import "./sidebar.css";
 import logo from "../../image/Logo.png";
 import eg from "../../image/egypt.png";
 import en from "../../image/united-states.png";
+import moon from "../../image/moon.png"
+import sun from "../../image/sun.png"
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import $ from "jquery";
@@ -157,6 +159,29 @@ const Sidebar = () => {
             </Link>
           </div>
           <div className="setting-side mt-auto mb-3">
+            {/*  */}
+          <div className="lan-btn px-3 mb-3">
+              <div class="tabs">
+                <input type="radio" id="radio-1" name="tabs" checked="" />
+                <label class="tab" for="radio-1">
+                  <img
+                    src={sun}
+                    alt=""
+                    className="eg-icon"
+                  />
+                </label>
+                <input type="radio" id="radio-2" name="tabs" />
+                <label class="tab" for="radio-2">
+                  <img
+                    src={moon}
+                    alt=""
+                    className="eg-icon"
+                  />
+                </label>
+                <span class="glider"></span>
+              </div>
+            </div>
+            {/*  */}
             <div className="lan-btn px-3 mb-3">
               <div class="tabs">
                 <input type="radio" id="radio-1" name="tabs" checked="" />
