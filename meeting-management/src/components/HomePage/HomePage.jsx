@@ -91,6 +91,7 @@ export default function HomePage() {
   const [t] = useTranslation();
   return (
     <>
+    <div className="glow"></div>
       <Helmet>
         <title>Home</title>
       </Helmet>
