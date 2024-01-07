@@ -90,20 +90,46 @@ export default function HomePage() {
   //   Comments: "No Comment",
   // };
   const [t] = useTranslation();
-  let colors = [ '#FFB399', '#FFFF99', '#00B3E6', 
-  '#E6B333', '#3366E6', '#999966', '#B34D4D',
-  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
-   '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC', 
-  '#66664D', '#4DB3FF', '#1AB399', '#33991A', '#CC9999', '#B3B31A', '#00E680', 
-  '#4D8066', '#809980', '#E6FF80',
-  '#CCCC00',  '#4D80CC', 
-   '#4DB380', '#99E6E6', '#6666FF']
+  let colors = [
+    "#FFB399",
+    "#FFFF99",
+    "#00B3E6",
+    "#E6B333",
+    "#3366E6",
+    "#999966",
+    "#B34D4D",
+    "#80B300",
+    "#809900",
+    "#E6B3B3",
+    "#6680B3",
+    "#66991A",
+    "#66994D",
+    "#B366CC",
+    "#4D8000",
+    "#B33300",
+    "#CC80CC",
+    "#66664D",
+    "#4DB3FF",
+    "#1AB399",
+    "#33991A",
+    "#CC9999",
+    "#B3B31A",
+    "#00E680",
+    "#4D8066",
+    "#809980",
+    "#E6FF80",
+    "#CCCC00",
+    "#4D80CC",
+    "#4DB380",
+    "#99E6E6",
+    "#6666FF",
+  ];
   return (
     <>
       <Helmet>
         <title>Home</title>
       </Helmet>
-      <div className="main p-4">
+      <div className="main p-4 mt-5">
         <div className="container">
           <h2
             className="pageHeading mt-4 mb-xxl-5 mb-4 text-center text-white animate__animated animate__zoomIn"

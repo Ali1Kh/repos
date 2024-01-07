@@ -5,7 +5,7 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 import $ from "jquery";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 const newTheme = (theme) =>
   createTheme({
@@ -24,9 +24,10 @@ export default function NewMeeting() {
     let notes = $("#meetNotes").val();
     let area = $('input[name="radio-group"]:checked').val();
 
-    console.log(date, time);
     if (
-      (!date || !time || person == "") ||
+      !date ||
+      !time ||
+      person == "" ||
       topic == "" ||
       address == "" ||
       notes == "" ||
@@ -61,11 +62,15 @@ export default function NewMeeting() {
 
   return (
     <div className="main">
-      <div className="container d-flex flex-column align-items-center justify-content-center p-xxl-4">
-        <h2 className="mt-4 mb-xxl-5 mb-3" style={{ userSelect: "none" }}>
-          {t('CreateOrUpdateMeeting.createMeeting')}
+      <div className="container p-3 d-flex flex-column align-items-center justify-content-center p-xxl-4">
+        <h2
+          className="mt-4 mb-xxl-5 mb-3 BlackToWhite"
+          style={{ userSelect: "none" }}
+        >
+          {t("CreateOrUpdateMeeting.createMeeting")}
         </h2>
-        <div className="inputsContainer w-100  p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
+        <div className="newMeetingContainer"></div>
+        <div className="inputsContainer  w-100  p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
           <div className="calenderPicker row p-0 m-0">
             <div className="col-md-6  inputItem mb-3 px-5">
               <ThemeProvider theme={newTheme}>
@@ -94,7 +99,7 @@ export default function NewMeeting() {
               type="text"
               className="form-control py-2"
               id="meetPerson"
-              placeholder={t('CreateOrUpdateMeeting.person')}
+              placeholder={t("CreateOrUpdateMeeting.person")}
             />
           </div>
           <div className="inputItem mb-3 px-5">
@@ -102,7 +107,7 @@ export default function NewMeeting() {
               type="text"
               className="form-control py-2"
               id="meetTopic"
-              placeholder={t('CreateOrUpdateMeeting.topic')}
+              placeholder={t("CreateOrUpdateMeeting.topic")}
             />
           </div>
           <div className="inputItem mb-3 px-5">
@@ -110,7 +115,7 @@ export default function NewMeeting() {
               type="text"
               className="form-control py-2"
               id="meetAddress"
-              placeholder={t('CreateOrUpdateMeeting.address')}
+              placeholder={t("CreateOrUpdateMeeting.address")}
             />
           </div>
           <div className="inputItem mb-3 px-5">
@@ -119,7 +124,7 @@ export default function NewMeeting() {
               id="meetNotes"
               rows="4"
               style={{ maxHeight: "150px" }}
-              placeholder={t('CreateOrUpdateMeeting.notes')}
+              placeholder={t("CreateOrUpdateMeeting.notes")}
             ></textarea>
           </div>
           <div className="radios inputItem mb-3 px-5 d-flex gap-3 align-items-center">
@@ -132,9 +137,9 @@ export default function NewMeeting() {
                   type="radio"
                   value={"inside"}
                 />
-                <label htmlFor="radio2" className="radio-button__label">
+                <label htmlFor="radio2" className="radio-button__label BlackToWhite">
                   <span className="radio-button__custom"></span>
-                  {t('CreateOrUpdateMeeting.inside')}
+                  {t("CreateOrUpdateMeeting.inside")}
                 </label>
               </div>
               <div className="radio-button d-flex align-items-center">
@@ -145,20 +150,22 @@ export default function NewMeeting() {
                   type="radio"
                   value={"outside"}
                 />
-                <label htmlFor="radio1" className="radio-button__label">
+                <label htmlFor="radio1" className="radio-button__label BlackToWhite">
                   <span className="radio-button__custom"></span>
-                  {t('CreateOrUpdateMeeting.outside')}
+                  {t("CreateOrUpdateMeeting.outside")}
                 </label>
               </div>
             </div>
           </div>
+          <div className="d-flex flex-column w-100 justify-content-center align-items-center ">
+            <small style={{ color: "red" }} className="error d-none mb-3">
+              All Inputs Are Required!
+            </small>
+            <button onClick={addMeeting} className="addButton">
+              {t("CreateOrUpdateMeeting.buttonAdd")}
+            </button>
+          </div>
         </div>
-        <small style={{ color: "red" }} className="error d-none mb-3">
-          All Inputs Are Required!
-        </small>
-        <button onClick={addMeeting} className="addButton">
-        {t('CreateOrUpdateMeeting.buttonAdd')}
-        </button>
       </div>
       <Helmet>
         <title>Add Meeting</title>

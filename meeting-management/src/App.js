@@ -13,6 +13,7 @@ import HomePage from "./components/HomePage/HomePage";
 import NotFound from "./components/NotFound/NotFound";
 import Calender from "./components/manager/Calender/Calender";
 import { Toaster } from "react-hot-toast";
+import Navbar from "./components/Navbar/Navbar.jsx";
 
 const router = createHashRouter([
   {
@@ -70,11 +71,20 @@ const router = createHashRouter([
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <>
+        <Navbar />
+        <Login />
+      </>
+    ),
   },
   {
     path: "/signup",
-    element: <Signup />,
+    element: (
+      <>
+        <Navbar /> <Signup />
+      </>
+    ),
   },
   {
     path: "*",

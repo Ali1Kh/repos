@@ -9,7 +9,7 @@ export default function Login() {
   return (
     <>
       <div className="main d-flex justify-content-center align-items-center">
-        <div className="container">
+        <div className="container ">
           <div className="login-logo m-auto d-flex justify-content-center align-items-center mb-4">
             <img className="w-100" src={logo} alt="" />
           </div>
@@ -20,16 +20,21 @@ export default function Login() {
                   <input
                     type="text"
                     className="user-name mt-3 d-flex justify-content-center form-control"
-                    placeholder={t('Login.username')}
+                    placeholder={t("Login.username")}
                   />
                   <input
                     type="text"
                     className="user-name mt-3 d-flex justify-content-center form-control"
-                    placeholder={t('Login.password')}
+                    placeholder={t("Login.password")}
                   />
                 </div>
+                <p className="mt-2 px-3">
+                  Don't Have An Acount ? <Link to={"/signup"}>Sign Up</Link>
+                </p>
                 <div className="login-btn d-flex justify-content-center align-items-center mt-3">
-                  <Link to={"/#"} className="">{t('Login.button')}</Link>
+                  <Link to={"/#"} className="">
+                    {t("Login.button")}
+                  </Link>
                 </div>
               </div>
             </div>

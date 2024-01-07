@@ -1,13 +1,9 @@
 import "./sidebar.css";
 import logo from "../../image/Logo.png";
-import eg from "../../image/egypt.png";
-import en from "../../image/united-states.png";
-import moon from "../../image/moon.png";
-import sun from "../../image/sun.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import $ from "jquery";
 import { useTranslation } from "react-i18next";
+import $ from "jquery";
 const Sidebar = () => {
   const navigate = useNavigate();
   function openSideBar() {
@@ -63,8 +59,7 @@ const Sidebar = () => {
       navigate("/login");
     });
   });
-
-  const [t, il8n] = useTranslation();
+  const [t] = useTranslation();
 
   return (
     <>
@@ -156,71 +151,6 @@ const Sidebar = () => {
             </Link>
           </div>
           <div className="setting-side mt-auto mb-3">
-          
-            <div className="darkmodeContainer px-3 mb-3">
-              <label class="toggle" for="switch">
-                <input id="switch" class="input" type="checkbox" />
-                <div class="switchIcon icon--moon">
-                  <svg
-                    height="25"
-                    width="25"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      clip-rule="evenodd"
-                      d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"
-                      fill-rule="evenodd"
-                    ></path>
-                  </svg>
-                </div>
-
-                <div class="switchIcon icon--sun">
-                  <svg
-                    height="25"
-                    width="25"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"></path>
-                  </svg>
-                </div>
-              </label>
-            </div>
-
-            <div className="lan-btn px-3 mb-3">
-              <div class="tabs">
-                <input type="radio" id="radio-1" name="tabs" checked="" />
-                <label class="tab" for="radio-1">
-                  <img
-                    src={en}
-                    alt=""
-                    className="eg-icon"
-                    onClick={() => {
-                      il8n.changeLanguage("en");
-                      // $("body").css("direction", "ltr");
-
-                    }}
-                  />
-                </label>
-                <input type="radio" id="radio-2" name="tabs" />
-                <label class="tab" for="radio-2">
-                  <img
-                    src={eg}
-                    alt=""
-                    className="eg-icon"
-                    onClick={() => {
-                      il8n.changeLanguage("ar");
-                      // $("body").css("direction", "rtl");
-                    }}
-                  />
-                </label>
-                <span class="glider"></span>
-              </div>
-            </div>
-            
             <div className="account border-top d-flex justify-content-center align-items-center gap-3 px-3 py-2">
               <div className="accImage text-black d-flex justify-content-center align-items-center bg-info">
                 <span className="m-0 p-0">A</span>

@@ -5,7 +5,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
 import MeetingDetails from "../meetingDetails/meetingDetails.jsx";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 
 function ServerDay(props) {
@@ -41,10 +41,11 @@ export default function Calender() {
               borderRadius: 20,
               borderWidth: 1,
               borderColor: "#343A46",
-              border: "1px solid",
+              border: "0px solid",
               backgroundColor: "#99A1B3",
               minHeight: 350,
               width: "100%",
+              boxShadow:"0 0.5rem 1rem rgba(0, 0, 0, 0.15);"
             },
           },
         },
@@ -73,10 +74,12 @@ export default function Calender() {
   const [t, il8n] = useTranslation();
 
   return (
-    <div className="main py-5  px-md-5">
-      <div className="container  d-flex flex-column justify-content-center align-items-center ">
-        <h2 className="mb-5 animate__animated animate__zoomIn">{t('Calendar.calendar')}</h2>
-        <div className="calenderCard rounded-4 p-sm-4">
+    <div className="main  px-md-5">
+      <div className="container p-5 d-flex flex-column justify-content-center align-items-center ">
+        <h2 className="mb-5 animate__animated animate__zoomIn BlackToWhite">
+          {t("Calendar.calendar")}
+        </h2>
+        <div className="calenderCard shadow rounded-4 p-sm-4">
           <div className="row my-3 gy-3">
             <div className="col-lg-6 p-4">
               <ThemeProvider theme={newTheme}>
@@ -110,27 +113,27 @@ export default function Calender() {
                     {date.$D}/{date.$M + 1}/{date.$y}
                   </span>
                 </div>
-                <div className="dayMeetingsCards">
+                <div className="dayMeetingsCards BlackToWhite">
                   <div className="meetingItem border-bottom py-3">
-                    <p>{t('Calendar.meetingTopic')} : blblsbab</p>
-                    <p>{t('Calendar.meetingTime')} : 1:00</p>
+                    <p>{t("Calendar.meetingTopic")} : blblsbab</p>
+                    <p>{t("Calendar.meetingTime")} : 1:00</p>
                     <a
                       data-bs-toggle="modal"
                       data-bs-target="#meetingModal"
                       className="mb-3 cursorPointer"
                     >
-                      {t('Calendar.showDetails')}
+                      {t("Calendar.showDetails")}
                     </a>
                   </div>
                   <div className="meetingItem border-bottom py-3">
-                    <p>{t('Calendar.meetingTopic')} : blblsbab</p>
-                    <p>{t('Calendar.meetingTime')} : 2:00</p>
+                    <p>{t("Calendar.meetingTopic")} : blblsbab</p>
+                    <p>{t("Calendar.meetingTime")} : 2:00</p>
                     <a
                       data-bs-toggle="modal"
                       data-bs-target="#meetingModal"
                       className="mb-3 cursorPointer"
                     >
-                      {t('Calendar.showDetails')}
+                      {t("Calendar.showDetails")}
                     </a>
                   </div>
                 </div>

@@ -340,6 +340,7 @@ export default function Meetings() {
                   maxHeight: "550px",
                   padding: "10px",
                   maxWidth: "fit-content",
+                  borderRadius: "15px",
 
                   "& .MuiDataGrid-cell": {
                     color: "var(--BlackToWhite)",
@@ -371,10 +372,10 @@ export default function Meetings() {
             </div>
           </div>
           <div className="item" onClick={updateMeeting}>
-          {t("MeetingContextMenu.update")}
+            {t("MeetingContextMenu.update")}
           </div>
           <div className="item" onClick={openAlert}>
-          {t("MeetingContextMenu.delete")}
+            {t("MeetingContextMenu.delete")}
           </div>
           <div id="deepContext">
             <div
@@ -399,7 +400,7 @@ export default function Meetings() {
                 console.log("Cancelled", selectedId);
               }}
             >
-               {t("MeetingContextMenu.statusContext.cancel")}
+              {t("MeetingContextMenu.statusContext.cancel")}
             </div>
           </div>
         </div>

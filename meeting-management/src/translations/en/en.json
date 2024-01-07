@@ -12,19 +12,20 @@
     "comments":"Comments"
   },
   "Login": {
-    "username": "username",
-    "password": "password",
+    "username": "Username",
+    "password": "Password",
     "button": "Login"
   },
   "signup": {
-    "firstName": "firstName",
-    "lastName": "lastName",
-    "userName": "userName",
-    "password": "password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "userName": "Username",
+    "password": "Password",
     "confirmPassword": "Confirm Password",
     "role": "Role",
     "button": "Create account"
   },
+  "search":"Search",
   "sidebar": {
     "home": "Home",
     "calendar": "Calendar",

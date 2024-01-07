@@ -9,25 +9,25 @@
 
 .inner-card .guest-name h4{
     font-size: 19px;
-    color:  var(--sec-color);
+    color: var(--cardHeadingColor);
     font-family: var(--main-font);
 }
 
 .inner-card .guest-email p{
     font-size: 15px;
-    color: #ffff;
+    color: var(--BlackToWhite);
     font-family: var(--main-font);
 }
 
 .meeting-info p.heading{
     font-size: 17px;
-    color: #7E7EBE;
+    color: var(--cardHeadingColor);
     font-family: var(--main-font);
 }
 
 .meeting-info  p{
     font-size: 15px;
-    color: #ffff;
+    color: var(--BlackToWhite);
     font-family: var(--main-font);
 }
 
@@ -76,14 +76,14 @@
 }
 
 .meeting-container span{
-    color:#7E7EBE;
-    font-size: 18px;
+    color:var(--cardHeadingColor);
+    font-size: 22px;
     font-family: var(--main-font);
     
 }
 
 .meeting-container h5{
-    color:#CAC4D0;
+    color:rgb(135, 136, 149);
     font-family: var(--main-font);
 }
 

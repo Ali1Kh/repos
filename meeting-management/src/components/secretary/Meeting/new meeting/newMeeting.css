@@ -1,16 +1,46 @@
+.inputsContainer {
+  background-color: var(--cardBgColor);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 55px 10px !important;
+}
 
 .inputItem input,
-.inputItem textarea {
-  background-color: #1e1e23;
+.inputItem textarea,
+.MuiFormControl-root.MuiTextField-root.css-z3c6am-MuiFormControl-root-MuiTextField-root {
+  background-color: var(--inputsBgColor) !important;
   color: white !important;
-  border: 0;
   width: 100%;
+  border-radius: 8px;
 }
+.inputItem input:not(.MuiInputBase-root input),
+.MuiFormControl-root.MuiTextField-root.css-z3c6am-MuiFormControl-root-MuiTextField-root {
+  border: 2px solid var(--sec-color);
+}
+.inputItem textarea {
+  border: 2px solid var(--sec-color) !important ;
+}
+
+.MuiInputBase-root * {
+  outline: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-adornedEnd.css-q2lp9a-MuiInputBase-root-MuiOutlinedInput-root:hover,
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-adornedEnd.css-q2lp9a-MuiInputBase-root-MuiOutlinedInput-root:focus-visible {
+  scale: 1 !important;
+  outline: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
 .calenderPicker .inputItem > div {
   width: 100% !important;
 }
-.calenderPicker .inputItem input{
- padding-block: 10px !important;
+.calenderPicker .inputItem input {
+  padding-block: 10px !important;
 }
 .inputItem input::placeholder,
 .inputItem textarea::placeholder {
@@ -18,7 +48,7 @@
 }
 .inputItem input:focus,
 .inputItem textarea:focus {
-  background-color: #1e1e23 !important;
+  background-color: none !important;
   outline: none !important;
   box-shadow: none !important;
 }
@@ -68,23 +98,23 @@
 
 .radio-button__input:checked + .radio-button__label .radio-button__custom {
   transform: translateY(-50%) scale(0.9);
-  border: 5px solid #1791ba;
-  color: #1791ba;
+  border: 5px solid var(--sec-color);
+  color: var(--sec-color);
 }
 
 .radio-button__input:checked + .radio-button__label {
-  color: #1791ba;
+  color: var(--sec-color);
 }
 
 .radio-button__label:hover .radio-button__custom {
   transform: translateY(-50%) scale(1.01);
-  border-color: #1791ba;
-  box-shadow: 0 0 10px #1791ba80;
+  border-color: var(--sec-color);
+  box-shadow: 0 0 5px #7e7ebeb6;
 }
 
 /* !Button */
 .addButton {
-  --color: #00a97f;
+  --color: var(--sec-color);
   padding: 8px 12px;
   background-color: transparent;
   border-radius: 0.3em;
@@ -112,7 +142,7 @@
   border-radius: 50%;
   z-index: -1;
   background-color: var(--color);
-  transition: 1s ease;
+  transition: 1100ms ease;
 }
 
 .addButton::before {
@@ -132,7 +162,7 @@
 }
 
 .addButton:hover {
-  color: rgb(10, 25, 30);
+  color: white;
 }
 
 .addButton:active {

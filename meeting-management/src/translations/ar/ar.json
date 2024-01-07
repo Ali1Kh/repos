@@ -48,6 +48,7 @@
     "buttonAdd": "أضف الاجتماع",
     "buttonUpdate":"تعديل الاجتماع"
   },
+  "search":"بحث",
   "Meetings":{
     "meetings":"الاجتماعات",
     "table": {
