@@ -62,7 +62,7 @@ export default function NewMeeting() {
 
   return (
     <div className="main">
-      <div className="container p-3 d-flex flex-column align-items-center justify-content-center p-xxl-4">
+      <div className="container p-4 d-flex flex-column align-items-center justify-content-center p-xxl-4">
         <h2
           className="mt-4 mb-xxl-5 mb-3 BlackToWhite"
           style={{ userSelect: "none" }}

@@ -2,46 +2,49 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik+Maps&family=Work+Sans:wght@200;300;400;500;600;700;800&display=swap");
 
 .signupHead h2 {
-  font-size: 25px !important;
+  font-size: 30px !important;
   font-family: "Work Sans", sans-serif;
 }
 
+.ineer {
+  background-color: var(--cardBgColor);
+  border-radius: 10px !important;
+}
+
 .name input {
-  width: 45%;
+  width: 49%;
 }
 
 .form input:focus {
-  background: #323644;
+  background: none;
   color: #cac4d0;
-  box-shadow: 0 !important;
-  border: 0px !important;
+  box-shadow: none !important;
 }
 
 .form input {
   border-radius: 10px !important;
-  color: #ffffff;
-  background: var(--main-color);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.33) !important;
-  border: 0 !important;
-  padding: 0.8rem;
+  color: var(--BlackToWhite) !important;
+  background-color: var(--inputsBgColor) !important;
+  border: 2px solid var(--sec-color) !important;
+  padding: 0.5rem;
 }
 
 .form input::placeholder {
-  color: var(--sec-color);
-  font-family: var(--main-font);
-  font-size: 15px;
-  font-style: normal;
+  color: #8f8f91;
+  /* font-family: var(--main-font); */
+  /* font-size: 15px; */
+  /* font-style: normal; */
   /* font-weight: 600; */
-  line-height: 20px;
+  /* line-height: 20px; */
 }
 /*  */
 .form .role {
   border-radius: 10px !important;
-  background: var(--main-color);
+  background: #555b69;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.33) !important;
   border: 0 !important;
   padding: 1rem !important;
-  color: var(--sec-color);
+  color: var(--BlackToWhite);
   font-family: var(--main-font) !important;
   font-size: 15px !important;
   font-style: normal !important;
@@ -70,7 +73,6 @@
 .form .role:focus {
   color: var(--sec-color);
 }
-
 
 .Signup-btn button {
   background: var(--sec-color);

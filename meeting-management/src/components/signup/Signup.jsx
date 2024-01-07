@@ -18,13 +18,12 @@ export default function Signup() {
 
   return (
     <>
-      <div className="main d-flex justify-content-center align-items-center">
-        <div className="container p-5">
-          <div className="signupHead m-auto d-flex justify-content-center align-items-center mb-1">
-            <h2>Sign Up</h2>
-            {/* <img className="w-100" src={logo} alt="" /> */}
-          </div>
-          <form className="ineer p-5">
+      <div className="main">
+        <div className="container text-center p-5">
+          <h2 className="mb-5 animate__animated animate__zoomIn BlackToWhite">
+            {t("signup.signupheader")}
+          </h2>
+          <form className="ineer shadow p-5">
             <div className="form">
               <div className="name d-flex justify-content-between">
                 <input
@@ -46,35 +45,34 @@ export default function Signup() {
               <input
                 type="text"
                 className="user-name mt-3 d-flex justify-content-center form-control"
-                placeholder="User Name"
+                placeholder={t("signup.userName")}
               />
               <input
                 type="text"
                 className="password mt-3 d-flex justify-content-center form-control"
-                placeholder="Password"
+                placeholder={t("signup.password")}
               />
               <input
                 type="text"
                 className="confirm-password mt-3 d-flex justify-content-center form-control"
-                placeholder="Confirm Password"
+                placeholder={t("signup.confirmPassword")}
               />
 
-              <Form.Select
-                aria-label="Role"
-                className="role mt-3"
-                arial
-              >
-                <option selected  disabled>Role</option>
-                <option value="Manager">Manager</option>
-                <option value="Secretary">Secretary</option>
+              <Form.Select aria-label="Role" className="role mt-3" arial>
+                <option selected disabled>
+                  {t("signup.role")}
+                </option>
+                <option value="Manager">{t("signup.manager")}</option>
+                <option value="Secretary">{t("signup.sec")}</option>
               </Form.Select>
             </div>
-            <p className="mt-2 px-3">
-              Already Have An Acount ? <Link to={"/login"}>Login</Link>
+            <p className="mt-2 text-start BlackToWhite px-3">
+              {t("signup.loginHint")}{" "}
+              <Link to={"/login"}>{t("signup.login")}</Link>
             </p>
             <div className="Signup-btn d-flex justify-content-center align-items-center mt-3">
               <button type="button" className="">
-                Sign Up
+                {t("signup.signupheader")}
               </button>
             </div>
           </form>

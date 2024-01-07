@@ -238,7 +238,7 @@ export default function Meetings() {
   return (
     <>
       <div className="main">
-        <div className="container d-flex flex-column align-items-center justify-content-center p-xxl-4">
+        <div className="container p-5 d-flex flex-column align-items-center justify-content-center p-xxl-4">
           <h2
             className="pageHeading mt-4 mb-xxl-4 mb-4 animate__animated animate__zoomIn"
             style={{ userSelect: "none" }}

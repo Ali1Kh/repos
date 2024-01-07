@@ -12,10 +12,13 @@
     "comments":"Comments"
   },
   "Login": {
+    "loginheader":"Login",
     "username": "Username",
     "password": "Password",
-    "button": "Login"
-  },
+    "button": "Login",
+    "signuphint":"Don't Have An Acount ? ",
+    "signup":"Sign Up"
+},
   "signup": {
     "firstName": "First Name",
     "lastName": "Last Name",
@@ -23,7 +26,12 @@
     "password": "Password",
     "confirmPassword": "Confirm Password",
     "role": "Role",
-    "button": "Create account"
+    "manager": "Manager",
+    "sec": "Secretary",
+    "button": "Create account",
+    "signupheader":"Sign Up",
+    "loginHint":"Already Have An Acount ?",
+    "login":"Login"
   },
   "search":"Search",
   "sidebar": {

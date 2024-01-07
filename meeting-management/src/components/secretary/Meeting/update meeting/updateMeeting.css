@@ -1,7 +1,7 @@
 .inputItem input,
 .inputItem textarea {
   background-color: #1e1e23;
-  color: white !important;
+  color: var(--BlackToWhite) !important;
   border: 0;
   width: 100%;
 }

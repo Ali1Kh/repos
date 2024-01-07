@@ -6,26 +6,21 @@
   width: 40%;
 }
 
-.form input:focus {
-  background: #323644;
-  color: #CAC4D0;
-}
 
 .form input {
   border-radius: 20px;
+  color: var(--BlackToWhite) !important;
   background: var(--main-color);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.33) !important;
   border: 0 !important;
-  padding: 1rem;
 }
 
 .form input::placeholder {
-  color: var(--sec-color);
+  /* color: var(--sec-color);
   font-family: var(--main-font);
   font-size: 15px;
   font-style: normal;
   font-weight: 600;
-  line-height: 20px;
+  line-height: 20px; */
 }
 
 /*  */
