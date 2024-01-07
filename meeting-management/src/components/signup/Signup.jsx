@@ -17,7 +17,6 @@ export default function Signup() {
 
   return (
     <>
-    <div className="glow"></div>
       <div className="main d-flex justify-content-center align-items-center">
         <div className="container">
           <div
