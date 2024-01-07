@@ -26,6 +26,7 @@
     "install": "^0.13.0",
     "jquery": "^3.7.1",
     "npm": "^10.2.5",
+    "random-color": "^1.0.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
     "react-bootstrap-validation": "^0.1.11",

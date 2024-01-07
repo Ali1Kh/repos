@@ -1,32 +1,58 @@
 :root {
-  /* --main-color: #323644; */
   --sec-color: #343a46;
-  --main-font: Poppins;
   --black-color: #262a2e;
   --background-color-1: linear-gradient(145deg, #1e2024, #23272b);
-  --shadow-1: 10px 10px 19px #1c1e22, -10px -10px 19px #262a2e;
+  --shadow-1: 0px 0px 20px #0f1114;
   --shadow-2: inset 21px 21px 19px #181a1d, inset -21px -21px 19px #202225;
-  --shadow-3: 0 0 1px 0 rgba(24, 94, 224, 0.15), 0 2px 12px 0 rgba(24, 94, 224, 0.15);
+  --shadow-3: 0 0 1px 0 rgba(24, 94, 224, 0.15),
+    0 2px 12px 0 rgba(24, 94, 224, 0.15);
   --transition: 0.4s;
   --main-color: #323644;
   --sec-color: #7e7ebe;
   --main-font: Poppins;
   --mutedColor: rgb(135, 136, 149);
   --hoverColor: rgba(23, 145, 186, 0.3);
-  /* direction: rtl; */
-}
-
-
-.main {
-  background: rgb(37, 50, 57);
-  background: linear-gradient(
+--bgMainColor: linear-gradient(
     180deg,
     rgba(37, 50, 57, 1) 0%,
     rgba(39, 42, 55, 1) 92%
   );
+  --sideBarColor:#15181d;
+   --pageHeading: black;
+}
+
+/* :root {
+  --sec-color: #343a46;
+  --black-color: #262a2e;
+  --background-color-1: linear-gradient(145deg, #1e2024, #23272b);
+  --shadow-1: 0px 0px 20px #0f1114;
+  --shadow-2: inset 21px 21px 19px #181a1d, inset -21px -21px 19px #202225;
+  --shadow-3: 0 0 1px 0 rgba(24, 94, 224, 0.15),
+    0 2px 12px 0 rgba(24, 94, 224, 0.15);
+  --transition: 0.4s;
+  --main-color: #323644;
+  --sec-color: #7e7ebe;
+  --main-font: Poppins;
+  --mutedColor: rgb(135, 136, 149);
+  --hoverColor: rgba(23, 145, 186, 0.3);
+  --bgMainColor: #f0f3f2;
+  --sideBarColor: #111926;
+  --BlackToWhite:black;
+  --cardBgColor:#264259;
+} */
+
+
+.main {
+  background: var(--bgMainColor);
   min-height: 100vh;
   color: white;
 }
+
+h2.pageHeading , .BlackToWhite {
+  color: var(--BlackToWhite) !important;
+}
+
+
 
 body {
   margin: 0;
@@ -63,3 +89,12 @@ body {
     display: none !important;
   }
 }
+
+/* [ '#FFB399', '#FFFF99', '#00B3E6', 
+'#E6B333', '#3366E6', '#999966', '#B34D4D',
+'#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
+ '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC', 
+'#66664D', '#4DB3FF', '#1AB399', '#33991A', '#CC9999', '#B3B31A', '#00E680', 
+'#4D8066', '#809980', '#E6FF80',
+'#CCCC00',  '#4D80CC', 
+ '#4DB380', '#99E6E6', '#6666FF'] */

@@ -240,7 +240,7 @@ export default function Meetings() {
       <div className="main">
         <div className="container d-flex flex-column align-items-center justify-content-center p-xxl-4">
           <h2
-            className="mt-4 mb-xxl-4 mb-4 animate__animated animate__zoomIn"
+            className="pageHeading mt-4 mb-xxl-4 mb-4 animate__animated animate__zoomIn"
             style={{ userSelect: "none" }}
           >
             {t("Meetings.meetings")}
@@ -342,14 +342,14 @@ export default function Meetings() {
                   maxWidth: "fit-content",
 
                   "& .MuiDataGrid-cell": {
-                    color: "white",
+                    color: "var(--BlackToWhite)",
                     cursor: "pointer",
                   },
                   "& .MuiDataGrid-cell:focus": {
                     outline: "none",
                   },
                   "& .MuiDataGrid-cell:hover": {
-                    color: "white",
+                    color: "var(--BlackToWhite)",
                   },
                   "& .MuiDataGrid-footerContainer": {
                     display: "none",
