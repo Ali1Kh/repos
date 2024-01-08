@@ -69,7 +69,7 @@ export default function NewMeeting() {
         >
           {t("CreateOrUpdateMeeting.createMeeting")}
         </h2>
-        <div className="newMeetingContainer"></div>
+      
         <div className="inputsContainer  w-100  p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
           <div className="calenderPicker row p-0 m-0">
             <div className="col-md-6  inputItem mb-3 px-5">

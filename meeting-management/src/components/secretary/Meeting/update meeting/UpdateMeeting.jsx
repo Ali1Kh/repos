@@ -72,8 +72,10 @@ export default function UpdateMeeting() {
         <h2 className="mt-4 mb-xxl-5 mb-3" style={{ userSelect: "none" }}>
           {t("CreateOrUpdateMeeting.updateMeeting")}
         </h2>
+
         <div className="inputsContainer w-100  p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
-          <div className="calenderPicker row p-0 m-0">
+          
+        <div className="calenderPicker row p-0 m-0">
             <div className="col-md-6  inputItem mb-3 px-5">
               <ThemeProvider theme={newTheme}>
                 <DesktopDatePicker
@@ -84,7 +86,6 @@ export default function UpdateMeeting() {
             </div>
             <div className="col-md-6  inputItem timePicker mb-3 px-5 ">
               <ThemeProvider theme={newTheme}>
-                {/* <MobileTimePicker /> */}
                 <TimePicker
                   onChange={(val) => setTime(val)}
                   viewRenderers={{

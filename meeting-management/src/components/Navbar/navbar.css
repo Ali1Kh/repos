@@ -109,4 +109,16 @@
 }
 .searchInput {
   border-width: 2px 2px 2px 0px !important;
+  border-color: var(--sec-color);
+  background-color: transparent;
+  color: white;
+}
+.searchInput::placeholder {
+  color: #8f8f91;
+}
+.searchInput:focus {
+  border-width: 2px 2px 2px 0px !important;
+  border-color: var(--sec-color);
+  background-color: transparent;
+  box-shadow: none !important;
 }

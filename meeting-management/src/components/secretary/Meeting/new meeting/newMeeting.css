@@ -13,6 +13,11 @@
   width: 100%;
   border-radius: 8px;
 }
+
+.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-vubbuv{
+  color: var(--BlackToWhite) !important;
+}
+
 .inputItem input:not(.MuiInputBase-root input),
 .MuiFormControl-root.MuiTextField-root.css-z3c6am-MuiFormControl-root-MuiTextField-root {
   border: 2px solid var(--sec-color);

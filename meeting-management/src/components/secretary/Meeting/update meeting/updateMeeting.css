@@ -8,20 +8,21 @@
 .calenderPicker .inputItem > div {
   width: 100% !important;
 }
-.calenderPicker .inputItem input{
- padding-block: 10px !important;
+.calenderPicker .inputItem input {
+  padding-block: 10px !important;
 }
 .inputItem input::placeholder,
 .inputItem textarea::placeholder {
   color: #8f8f91;
 }
-/* .inputItem input:focus,
+/* 
+.inputItem input:focus,
 .inputItem textarea:focus {
   background-color: none !important;
   outline: none !important;
   box-shadow: none !important;
-} */
-
+} 
+*/
 
 /* timePicker */
 .timePicker > div {

@@ -106,18 +106,16 @@ export default function Navbar() {
                 </Link>
               </li>
               <li className="nav-item search ms-auto d-flex justify-content-center align-items-center me-3">
-                <div className="inputItem ">
-                  <div class="input-group w-100 ps-0 pe-5">
-                    <span class="input-group-text" id="basic-addon1">
+                <div class="input-group w-100 ps-0 pe-5">
+                  <span class="input-group-text" id="basic-addon1">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    </span>
-                    <input
-                      type="text"
-                      className="form-control ps-0 pe-5 searchInput py-2"
-                      id="search"
-                      placeholder={t("search")}
-                    />
-                  </div>
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control text-white ps-0 pe-5 searchInput py-2"
+                    id="search"
+                    placeholder={t("search")}
+                  />
                 </div>
               </li>
               <li className="nav-item all ms-md-auto d-flex justify-content-center align-items-center me-3">
