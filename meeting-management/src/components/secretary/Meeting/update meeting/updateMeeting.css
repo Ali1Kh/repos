@@ -15,14 +15,6 @@
 .inputItem textarea::placeholder {
   color: #8f8f91;
 }
-/* 
-.inputItem input:focus,
-.inputItem textarea:focus {
-  background-color: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-} 
-*/
 
 /* timePicker */
 .timePicker > div {

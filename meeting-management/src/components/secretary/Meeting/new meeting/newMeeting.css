@@ -20,7 +20,7 @@
 
 .inputItem input:not(.MuiInputBase-root input),
 .MuiFormControl-root.MuiTextField-root.css-z3c6am-MuiFormControl-root-MuiTextField-root {
-  border: 2px solid var(--sec-color);
+  border: 2px solid var(--sec-color) !important;
 }
 .inputItem textarea {
   border: 2px solid var(--sec-color) !important ;
