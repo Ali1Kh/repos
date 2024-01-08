@@ -7,7 +7,7 @@
 
 .inputItem input,
 .inputItem textarea,
-.MuiFormControl-root.MuiTextField-root.css-z3c6am-MuiFormControl-root-MuiTextField-root {
+.MuiFormControl-root.MuiTextField-root.css-z3c6am-MuiFormControl-root-MuiTextField-root , .css-3ea4o3 {
   background-color: var(--inputsBgColor) !important;
   color: var(--BlackToWhite) !important;
   width: 100%;
