@@ -31,11 +31,6 @@
 
 .form input::placeholder {
   color: #8f8f91;
-  /* font-family: var(--main-font); */
-  /* font-size: 15px; */
-  /* font-style: normal; */
-  /* font-weight: 600; */
-  /* line-height: 20px; */
 }
 /*  */
 .form .role {
