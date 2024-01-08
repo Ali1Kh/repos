@@ -86,7 +86,7 @@ body {
   display: none !important;
 }
 
-@media screen and (710px > width) {
+@media screen and (950px > width) {
   .navbar
     .collapse.navbar-collapse
     .nav-item:not(.nav-item.all, .nav-item.search) {

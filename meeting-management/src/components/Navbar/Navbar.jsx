@@ -10,7 +10,10 @@ export default function Navbar() {
   useEffect(() => {
     // ?Active
     $(".navbarItem").click((e) => {
-      console.log($(e.target).parents(".navbarItem"));
+      $("#navbarSupportedContent").addClass("collapsing", () => {
+        $(".navbar-toggler").addClass("collapsed");
+        $("#navbarSupportedContent").removeClass("show");
+      });
       $(".navbarItem.active").removeClass("active");
       $(e.target).parents(".navbarItem").addClass("active");
     });
@@ -45,7 +48,7 @@ export default function Navbar() {
             <i className="fa fa-bars text-white fs-1"></i>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav w-100 d-flex justify-content-between align-items-center mt-2 mb-2 mb-lg-0">
+            <ul className="navbar-nav w-100 d-flex  align-items-center mt-2 mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link
                   className="navbarItem  animate__animated active"
