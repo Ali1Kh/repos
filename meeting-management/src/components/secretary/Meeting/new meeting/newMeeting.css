@@ -19,7 +19,7 @@
 }
 
 .inputItem input:not(.MuiInputBase-root input),
-.MuiFormControl-root.MuiTextField-root.css-z3c6am-MuiFormControl-root-MuiTextField-root {
+.MuiFormControl-root.MuiTextField-root.css-z3c6am-MuiFormControl-root-MuiTextField-root , .css-3ea4o3 {
   border: 2px solid var(--sec-color) !important;
 }
 .inputItem textarea {
