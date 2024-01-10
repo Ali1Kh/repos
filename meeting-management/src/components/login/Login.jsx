@@ -8,28 +8,37 @@ export default function Login() {
   const [t] = useTranslation();
   return (
     <>
-      <div className="main d-flex justify-content-center align-items-center">
-        <div className="container">
-          <div className="login-logo m-auto d-flex justify-content-center align-items-center mb-4">
-            <img className="w-100" src={logo} alt="" />
-          </div>
-          <div className="row">
-            <div className="col-md-5 m-auto">
-              <div className="ineer">
+      <div className="main">
+        <div className="container p-5 text-center ">
+          <h2 className="mb-5 animate__animated animate__zoomIn BlackToWhite">
+            {t("Login.loginheader")}
+          </h2>
+          <div className="row justify-content-center">
+            <div className="col-md-7">
+              <div className="ineer p-5 shadow">
                 <div className="form mb-4">
                   <input
                     type="text"
                     className="user-name mt-3 d-flex justify-content-center form-control"
-                    placeholder={t('Login.username')}
+                    placeholder={t("Login.username")}
                   />
                   <input
                     type="text"
                     className="user-name mt-3 d-flex justify-content-center form-control"
-                    placeholder={t('Login.password')}
+                    placeholder={t("Login.password")}
                   />
                 </div>
+                <p
+                  style={{ fontSize: "14px" }}
+                  className="mt-2 px-3 text-start BlackToWhite"
+                >
+                  {t("Login.signuphint")}
+                  <Link to={"/signup"}>{t("Login.signup")}</Link>
+                </p>
                 <div className="login-btn d-flex justify-content-center align-items-center mt-3">
-                  <Link to={"/#"} className="">{t('Login.button')}</Link>
+                  <Link to={"/#"} className="">
+                    {t("Login.button")}
+                  </Link>
                 </div>
               </div>
             </div>

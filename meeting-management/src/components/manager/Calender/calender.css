@@ -1,5 +1,5 @@
 .calenderCard {
-  background-color: #343a46;
+  background-color: var(--cardBgColor);
 }
 
 /* Large devices (laptops/desktops, 992px and up) */

@@ -5,7 +5,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: #15181d;
+  background: var(--sideBarColor);
+  z-index: 2000;
 }
 
 .sideBarInner,
@@ -13,7 +14,7 @@
   height: inherit !important;
 }
 
-.sideBarMini{
+.sideBarMini {
   display: flex;
 }
 
@@ -39,7 +40,7 @@
   font-size: 15px;
   cursor: pointer;
   text-decoration: none;
-  color: #cac4d0;
+  color: white;
   display: block;
   border-radius: 10px;
   transition: all 700ms;
@@ -128,7 +129,7 @@
   width: 150px;
   padding: 5px;
 }
-.moreContext .item{
+.moreContext .item {
   padding: 8px 10px;
   color: white;
   cursor: pointer;
@@ -169,7 +170,7 @@
   justify-content: center;
   height: 35px;
   width: 50px;
-  font-size: .8rem;
+  font-size: 0.8rem;
   color: black;
   font-weight: 500;
   border-radius: 99px;
@@ -181,8 +182,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: .8rem;
-  height: .8rem;
+  width: 0.8rem;
+  height: 0.8rem;
   position: absolute;
   top: 10px;
   left: 30%;
@@ -227,14 +228,45 @@
   border-radius: 99px;
   transition: 0.25s ease-out;
 }
+/* !dark switch */
 
-@media (max-width: 700px) {
-  .tabs {
-    transform: scale(0.6);
-  }
+.toggle {
+  background-color: #fff;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  line-height: 1;
+  position: relative;
 }
 
-/* end Button language */
+.input {
+  display: none;
+}
+.switchIcon {
+  grid-column: 1 / 1;
+  grid-row: 1 / 1;
+  transition: transform 500ms;
+}
+
+.icon--moon {
+  transition-delay: 200ms;
+}
+
+.icon--sun {
+  transform: scale(0);
+}
+
+#switch:checked + .icon--moon {
+  transform: rotate(360deg) scale(0);
+}
+
+#switch:checked ~ .icon--sun {
+  transition-delay: 200ms;
+  transform: scale(1) rotate(360deg);
+}
 
 /* Animation */
 .animate__delay-150ms {

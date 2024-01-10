@@ -1,13 +1,9 @@
 import "./sidebar.css";
 import logo from "../../image/Logo.png";
-import eg from "../../image/egypt.png";
-import en from "../../image/united-states.png";
-import moon from "../../image/moon.png"
-import sun from "../../image/sun.png"
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import $ from "jquery";
 import { useTranslation } from "react-i18next";
+import $ from "jquery";
 const Sidebar = () => {
   const navigate = useNavigate();
   function openSideBar() {
@@ -63,8 +59,7 @@ const Sidebar = () => {
       navigate("/login");
     });
   });
-
-  const [t, il8n] = useTranslation();
+  const [t] = useTranslation();
 
   return (
     <>
@@ -82,10 +77,7 @@ const Sidebar = () => {
               style={{ color: "#8f8f91" }}
             ></i>
           </div>
-          <div
-            className="header-side"
-            style={{userSelect: "none" }}
-          >
+          <div className="header-side" style={{ userSelect: "none" }}>
             <Link
               className="sidebarItem  animate__animated active"
               to={"/home"}
@@ -159,59 +151,6 @@ const Sidebar = () => {
             </Link>
           </div>
           <div className="setting-side mt-auto mb-3">
-            {/*  */}
-          <div className="lan-btn px-3 mb-3">
-              <div class="tabs">
-                <input type="radio" id="radio-1" name="tabs" checked="" />
-                <label class="tab" for="radio-1">
-                  <img
-                    src={sun}
-                    alt=""
-                    className="eg-icon"
-                  />
-                </label>
-                <input type="radio" id="radio-2" name="tabs" />
-                <label class="tab" for="radio-2">
-                  <img
-                    src={moon}
-                    alt=""
-                    className="eg-icon"
-                  />
-                </label>
-                <span class="glider"></span>
-              </div>
-            </div>
-            {/*  */}
-            <div className="lan-btn px-3 mb-3">
-              <div class="tabs">
-                <input type="radio" id="radio-1" name="tabs" checked="" />
-                <label class="tab" for="radio-1">
-                  <img
-                    src={en}
-                    alt=""
-                    className="eg-icon"
-                    onClick={() => {
-                      il8n.changeLanguage("en");
-                      // $("body").css("direction", "ltr");
-
-                    }}
-                  />
-                </label>
-                <input type="radio" id="radio-2" name="tabs" />
-                <label class="tab" for="radio-2">
-                  <img
-                    src={eg}
-                    alt=""
-                    className="eg-icon"
-                    onClick={() => {
-                      il8n.changeLanguage("ar");
-                      // $("body").css("direction", "rtl");
-                    }}
-                  />
-                </label>
-                <span class="glider"></span>
-              </div>
-            </div>
             <div className="account border-top d-flex justify-content-center align-items-center gap-3 px-3 py-2">
               <div className="accImage text-black d-flex justify-content-center align-items-center bg-info">
                 <span className="m-0 p-0">A</span>

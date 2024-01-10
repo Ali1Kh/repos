@@ -238,9 +238,9 @@ export default function Meetings() {
   return (
     <>
       <div className="main">
-        <div className="container d-flex flex-column align-items-center justify-content-center p-xxl-4">
+        <div className="container p-5 d-flex flex-column align-items-center justify-content-center p-xxl-4">
           <h2
-            className="mt-4 mb-xxl-4 mb-4 animate__animated animate__zoomIn"
+            className="pageHeading mt-4 mb-xxl-4 mb-4 animate__animated animate__zoomIn"
             style={{ userSelect: "none" }}
           >
             {t("Meetings.meetings")}
@@ -340,16 +340,17 @@ export default function Meetings() {
                   maxHeight: "550px",
                   padding: "10px",
                   maxWidth: "fit-content",
+                  borderRadius: "15px",
 
                   "& .MuiDataGrid-cell": {
-                    color: "white",
+                    color: "var(--BlackToWhite)",
                     cursor: "pointer",
                   },
                   "& .MuiDataGrid-cell:focus": {
                     outline: "none",
                   },
                   "& .MuiDataGrid-cell:hover": {
-                    color: "white",
+                    color: "var(--BlackToWhite)",
                   },
                   "& .MuiDataGrid-footerContainer": {
                     display: "none",
@@ -371,10 +372,10 @@ export default function Meetings() {
             </div>
           </div>
           <div className="item" onClick={updateMeeting}>
-          {t("MeetingContextMenu.update")}
+            {t("MeetingContextMenu.update")}
           </div>
           <div className="item" onClick={openAlert}>
-          {t("MeetingContextMenu.delete")}
+            {t("MeetingContextMenu.delete")}
           </div>
           <div id="deepContext">
             <div
@@ -399,7 +400,7 @@ export default function Meetings() {
                 console.log("Cancelled", selectedId);
               }}
             >
-               {t("MeetingContextMenu.statusContext.cancel")}
+              {t("MeetingContextMenu.statusContext.cancel")}
             </div>
           </div>
         </div>

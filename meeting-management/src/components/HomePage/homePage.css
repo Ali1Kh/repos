@@ -1,41 +1,33 @@
-.main-cards {
-    background: rgb(37, 50, 57);
-    background: linear-gradient(180deg,
-            rgba(37, 50, 57, 1) 0%,
-            rgba(39, 42, 55, 1) 92%);
-    min-height: 100vh;
-}
-
 .meeting-topic h2 {
     font-family: var(--main-font);
 }
  /* inner card  */
 .inner-card{
-    background-color: #343A46;
+    background-color: var(--cardBgColor);
     cursor: pointer;
 } 
 
 .inner-card .guest-name h4{
-    font-size: 20px;
-    color:  var(--sec-color);
+    font-size: 19px;
+    color: var(--cardHeadingColor);
     font-family: var(--main-font);
 }
 
-.inner-card .guest-email h6{
+.inner-card .guest-email p{
     font-size: 15px;
-    color: #ffff;
+    color: var(--BlackToWhite);
     font-family: var(--main-font);
 }
 
-.meeting-info  h5{
+.meeting-info p.heading{
     font-size: 17px;
-    color: #7E7EBE;
+    color: var(--cardHeadingColor);
     font-family: var(--main-font);
 }
 
-.meeting-info  h6{
+.meeting-info  p{
     font-size: 15px;
-    color: #ffff;
+    color: var(--BlackToWhite);
     font-family: var(--main-font);
 }
 
@@ -45,8 +37,7 @@
 
 .modal {
     z-index: 99999999;
-    background: rgba(33, 36, 40, 0.6);
-    /* padding: 60px 15px !important; */
+    background: rgba(33, 36, 40, 0.4);
 }
 
 .modal .modal-dialog .modal-content {
@@ -85,16 +76,25 @@
 }
 
 .meeting-container span{
-    color:#7E7EBE;
-    font-size: 18px;
+    color:var(--cardHeadingColor);
+    font-size: 22px;
     font-family: var(--main-font);
     
 }
 
 .meeting-container h5{
-    color:#CAC4D0;
+    color:rgb(135, 136, 149);
     font-family: var(--main-font);
 }
+
+.meetingGuestIcon{
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    border-radius: 100vh !important;
+    user-select: none;
+    
+  }
 
 /* media Screen */
 

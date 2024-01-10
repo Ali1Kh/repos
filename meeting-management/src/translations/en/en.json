@@ -12,19 +12,28 @@
     "comments":"Comments"
   },
   "Login": {
-    "username": "username",
-    "password": "password",
-    "button": "Login"
-  },
+    "loginheader":"Login",
+    "username": "Username",
+    "password": "Password",
+    "button": "Login",
+    "signuphint":"Don't Have An Acount ? ",
+    "signup":"Sign Up"
+},
   "signup": {
-    "firstName": "firstName",
-    "lastName": "lastName",
-    "userName": "userName",
-    "password": "password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "userName": "Username",
+    "password": "Password",
     "confirmPassword": "Confirm Password",
     "role": "Role",
-    "button": "Create account"
+    "manager": "Manager",
+    "sec": "Secretary",
+    "button": "Create account",
+    "signupheader":"Sign Up",
+    "loginHint":"Already Have An Acount ?",
+    "login":"Login"
   },
+  "search":"Search",
   "sidebar": {
     "home": "Home",
     "calendar": "Calendar",

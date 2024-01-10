@@ -3,6 +3,7 @@ import "./Signup.css";
 import Form from "react-bootstrap/Form";
 import logo from "../../image/Logo.png";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
   let initial = {
@@ -17,66 +18,66 @@ export default function Signup() {
 
   return (
     <>
-      <div className="main d-flex justify-content-center align-items-center">
-        <div className="container">
-          <div
-            style={{ width: "90px" }}
-            className="signup-logo m-auto d-flex justify-content-center align-items-center mb-5"
-          >
-            <img className="w-100" src={logo} alt="" />
-          </div>
-          <div className="row">
-            <div className="col-md-5 m-auto">
-              <form className="ineer">
+      <div className="main">
+        <div className="container text-center p-5">
+          <h2 className="mb-5 animate__animated animate__zoomIn BlackToWhite">
+            {t("signup.signupheader")}
+          </h2>
+          <div className="row justify-content-center">
+            <div className="col-md-9">
+              <form className="ineer shadow p-5">
                 <div className="form">
-                  <div className="name d-flex justify-content-between">
-                    <input
-                      type="text"
-                      className="first-name form-control"
-                      value={initial.firstName}
-                      placeholder={t('signup.firstName')}
-                    />
-                    {/* {initial.firstName.length < 4 || initial.firstName.length > 10 ? <div className='alert alert-danger'>Name must be from 4 to 10 charachters.</div> :"" }
-                     */}
-                    <input
-                      type="text"
-                      className="last-name form-control"
-                      value={initial.lastName}
-                      placeholder={t('signup.lastName')}
-                    />
-                    {/* {initial.lastName.length < 4 || initial.lastName.length > 10 ? <div className='alert alert-danger'>Name must be from 4 to 10 charachters.</div> :"" }
-                     */}
+                  <div className="name row gy-3">
+                    <div className="col-md-6">
+                      <input
+                        type="text"
+                        className="first-name w-100 form-control"
+                        placeholder={t("signup.firstName")}
+                      />
+                    </div>
+
+                    <div className="col-md-6">
+                      <input
+                        type="text"
+                        className="last-name w-100 form-control"
+                        placeholder={t("signup.lastName")}
+                      />
+                    </div>
+
                   </div>
 
                   <input
                     type="text"
                     className="user-name mt-3 d-flex justify-content-center form-control"
-                    placeholder="User Name"
+                    placeholder={t("signup.userName")}
                   />
                   <input
                     type="text"
                     className="password mt-3 d-flex justify-content-center form-control"
-                    placeholder="Password"
+                    placeholder={t("signup.password")}
                   />
                   <input
                     type="text"
                     className="confirm-password mt-3 d-flex justify-content-center form-control"
-                    placeholder="Confirm Password"
+                    placeholder={t("signup.confirmPassword")}
                   />
 
-                  <Form.Select
-                    aria-label="Default select example"
-                    className="role mt-3"
-                    arial
-                  >
-                    <option>Role</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                  <Form.Select aria-label="Role" className="role mt-3" arial>
+                    <option selected disabled>
+                      {t("signup.role")}
+                    </option>
+                    <option value="Manager">{t("signup.manager")}</option>
+                    <option value="Secretary">{t("signup.sec")}</option>
                   </Form.Select>
                 </div>
+                <p style={{ fontSize: "14px" }} className="mt-2 text-start BlackToWhite px-3">
+                  {t("signup.loginHint")}{" "}
+                  <Link to={"/login"}>{t("signup.login")}</Link>
+                </p>
                 <div className="Signup-btn d-flex justify-content-center align-items-center mt-3">
-                  <button className="">Create account</button>
+                  <button type="button" className="">
+                    {t("signup.signupheader")}
+                  </button>
                 </div>
               </form>
             </div>

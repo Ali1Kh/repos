@@ -11,18 +11,26 @@
     "comments": "ملاحظات"
   },
   "Login": {
+    "loginheader":"تسجيل دخول",
     "username": "اسم المستخدم",
     "password": "كلمة المرور",
-    "button": "تسجيل الدخول"
+    "button": "تسجيل الدخول",
+    "signuphint":"ليس لديك حساب ؟"
+    ,"signup":"اشتراك"
   },
   "signup": {
+    "signupheader":"انشاء حساب",
     "firstName": "الاسم الأول",
     "lastName": "اسم العائلة",
     "userName": "اسم المستخدم",
     "password": "كلمة المرور",
     "confirmPassword": "تأكيد كلمة المرور",
     "role": "المسمى الوظيفي",
-    "button": "إنشاء حساب"
+    "manager":"مدير",
+    "sec":"سكرتير",
+    "button": "إنشاء حساب",
+    "loginHint":"لديك حساب بالفعل",
+    "login":"تسجيل دخول"
   },
   "sidebar": {
     "home": "الاجتماعات",
@@ -48,6 +56,7 @@
     "buttonAdd": "أضف الاجتماع",
     "buttonUpdate":"تعديل الاجتماع"
   },
+  "search":"بحث",
   "Meetings":{
     "meetings":"الاجتماعات",
     "table": {

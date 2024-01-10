@@ -8,7 +8,7 @@ export default function MeetingDetails() {
     MeetingDate: "10-2-99",
     MeetingAddress: "bolq abo el 3ela",
     MeetingTime: "12:00 PM",
-    MeetingStatus:"Not Done",
+    MeetingStatus: "Not Done",
     Area: "inside",
     Comments: "3mk",
   };
@@ -29,7 +29,7 @@ export default function MeetingDetails() {
                 <i className="shadow fa-solid fa-xmark"></i>
               </div>
               <div className="meeting-topic m-3">
-                <h2 className="text-white">Meeting Topic</h2>
+                <h2 className="BlackToWhite">Meeting Details</h2>
               </div>
               <div className="container meeting-container">
                 <div className="row g-md-5">

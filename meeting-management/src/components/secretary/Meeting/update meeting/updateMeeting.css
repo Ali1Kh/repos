@@ -1,141 +1,19 @@
 .inputItem input,
 .inputItem textarea {
   background-color: #1e1e23;
-  color: white !important;
+  color: var(--BlackToWhite) !important;
   border: 0;
   width: 100%;
 }
 .calenderPicker .inputItem > div {
   width: 100% !important;
 }
-.calenderPicker .inputItem input{
- padding-block: 10px !important;
+.calenderPicker .inputItem input {
+  padding-block: 10px !important;
 }
 .inputItem input::placeholder,
 .inputItem textarea::placeholder {
   color: #8f8f91;
-}
-.inputItem input:focus,
-.inputItem textarea:focus {
-  background-color: #1e1e23 !important;
-  outline: none !important;
-  box-shadow: none !important;
-}
-/* !Radio Buttons */
-.radio-buttons-container {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.radio-button {
-  display: inline-block;
-  position: relative;
-  cursor: pointer;
-}
-
-.radio-button__input {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.radio-button__label {
-  display: inline-block;
-  padding-left: 30px;
-  margin-bottom: 10px;
-  position: relative;
-  font-size: 14px;
-  color: #fff;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  user-select: none;
-}
-
-.radio-button__custom {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 2px solid #555;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.radio-button__input:checked + .radio-button__label .radio-button__custom {
-  transform: translateY(-50%) scale(0.9);
-  border: 5px solid #1791ba;
-  color: #1791ba;
-}
-
-.radio-button__input:checked + .radio-button__label {
-  color: #1791ba;
-}
-
-.radio-button__label:hover .radio-button__custom {
-  transform: translateY(-50%) scale(1.01);
-  border-color: #1791ba;
-  box-shadow: 0 0 10px #1791ba80;
-}
-
-/* !Button */
-.addButton {
-  --color: #00a97f;
-  padding: 8px 12px;
-  background-color: transparent;
-  border-radius: 0.3em;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  transition: 0.5s;
-  font-weight: 400;
-  font-size: 15px;
-  border: 1px solid;
-  font-family: inherit;
-  text-transform: uppercase;
-  color: var(--color);
-  z-index: 1;
-}
-
-.addButton::before,
-.addButton::after {
-  content: "";
-  display: block;
-  width: 50px;
-  height: 50px;
-  transform: translate(-50%, -50%);
-  position: absolute;
-  border-radius: 50%;
-  z-index: -1;
-  background-color: var(--color);
-  transition: 1s ease;
-}
-
-.addButton::before {
-  top: -1em;
-  left: -1em;
-}
-
-.addButton::after {
-  left: calc(100% + 1em);
-  top: calc(100% + 1em);
-}
-
-.addButton:hover::before,
-.addButton:hover::after {
-  height: 410px;
-  width: 410px;
-}
-
-.addButton:hover {
-  color: rgb(10, 25, 30);
-}
-
-.addButton:active {
-  filter: brightness(0.8);
 }
 
 /* timePicker */
