@@ -1,0 +1,105 @@
+.meeting-topic h2 {
+    font-family: var(--main-font);
+}
+ /* inner card  */
+.inner-card{
+    background-color: var(--cardBgColor);
+    cursor: pointer;
+} 
+
+.inner-card .guest-name h4{
+    font-size: 19px;
+    color: var(--cardHeadingColor);
+    font-family: var(--main-font);
+}
+
+.inner-card .guest-email p{
+    font-size: 15px;
+    color: var(--BlackToWhite);
+    font-family: var(--main-font);
+}
+
+.meeting-info p.heading{
+    font-size: 17px;
+    color: var(--cardHeadingColor);
+    font-family: var(--main-font);
+}
+
+.meeting-info  p{
+    font-size: 15px;
+    color: var(--BlackToWhite);
+    font-family: var(--main-font);
+}
+
+.modal.fade {
+    transition: opacity 0.1s linear;
+}
+
+.modal {
+    z-index: 99999999;
+    background: rgba(33, 36, 40, 0.4);
+}
+
+.modal .modal-dialog .modal-content {
+    border-radius: 1rem !important;
+    overflow: hidden;
+    border: none;
+    z-index: 1;
+    background: var(--background-color-1);
+    box-shadow: var(--shadow-1);
+    transition: opacity 400ms, backdrop-filter 400ms
+}
+
+.modal .modal-dialog {
+    max-width: 900px;
+}
+
+/* .inner-modal {
+    position: relative;
+} */
+
+.icon {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    cursor: pointer;
+}
+
+.icon i {
+    width: 30px;
+    height: 30px;
+    background-color: #4c525f;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.meeting-container span{
+    color:var(--cardHeadingColor);
+    font-size: 22px;
+    font-family: var(--main-font);
+    
+}
+
+.meeting-container h5{
+    color:rgb(135, 136, 149);
+    font-family: var(--main-font);
+}
+
+.meetingGuestIcon{
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    border-radius: 100vh !important;
+    user-select: none;
+    
+  }
+
+/* media Screen */
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+    .inner-parent  {
+      width: 50% !important
+    }
+}  

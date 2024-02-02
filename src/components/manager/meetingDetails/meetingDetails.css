@@ -1,0 +1,8 @@
+.parent h2{
+    font-family: var(--main-font);
+}
+
+.inner{
+    height: 70vh;
+    background-color: var(--sec-color);
+}

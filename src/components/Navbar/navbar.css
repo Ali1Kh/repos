@@ -1,0 +1,124 @@
+.navbar {
+  background-color: var(--sideBarColor) !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1999;
+}
+.navbar .navbar-toggler:focus {
+  outline: none !important;
+  box-shadow: none;
+}
+.nav-logo {
+  width: 35px;
+}
+
+.nav-logo img {
+  width: 100%;
+}
+
+.navbarItem {
+  margin: 5px 35px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #cac4d0;
+  display: block;
+  border-radius: 10px;
+  transition: all 700ms;
+  width: fit-content;
+}
+
+.navbarItem .navItemInner {
+  width: fit-content;
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+.navbarItem i {
+  margin-right: 8px;
+  width: 15px;
+}
+/* .navbarItem:hover {
+  background-color: rgba(23, 145, 186, 0.3);
+}
+*/
+.navbarItem.active .navItemInner {
+  border-bottom: 1px solid #ffffff;
+}
+
+/*! lang btn */
+.langBtn input:focus {
+  outline: 0 !important;
+  border-color: var(--sec-color) !important;
+  box-shadow: 0 0 0 4px #b5c9fc !important;
+}
+
+.langBtn .mydict div {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+}
+
+.langBtn .mydict input[type="radio"] {
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(100%) !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
+}
+
+.langBtn .mydict input[type="radio"]:checked + span {
+  box-shadow: 0 0 0 0.0625em var(--sec-color) !important;
+  background-color: #dee7ff !important;
+  z-index: 1 !important;
+  color: black !important;
+}
+
+.langBtn label span {
+  display: block !important;
+  cursor: pointer !important;
+  background-color: #fff !important;
+  padding: 0.375em 0.75em !important;
+  position: relative !important;
+  margin-left: 0.0625em !important;
+  box-shadow: 0 0 0 0.0625em #b5bfd9 !important;
+  letter-spacing: 0.05em !important;
+  color: var(--sec-color) !important;
+  text-align: center !important;
+  transition: background-color 0.5s ease !important;
+}
+
+.langBtn label:first-child span {
+  border-radius: 0.375em 0 0 0.375em !important;
+}
+
+.langBtn label:last-child span {
+  border-radius: 0 0.375em 0.375em 0 !important;
+}
+
+.input-group-text {
+  background-color: var(--inputsBgColor) !important;
+  color: #8f8f91;
+  border-width: 2px 0px 2px 2px;
+  border-color: var(--sec-color);
+  border-radius: 8px;
+}
+.searchInput {
+  border-width: 2px 2px 2px 0px !important;
+  border-color: var(--sec-color);
+  background-color: transparent;
+  color: white;
+}
+.searchInput::placeholder {
+  color: #8f8f91;
+}
+.searchInput:focus {
+  border-width: 2px 2px 2px 0px !important;
+  border-color: var(--sec-color);
+  background-color: transparent;
+  box-shadow: none !important;
+}

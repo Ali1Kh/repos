@@ -1,0 +1,86 @@
+.tableColumns {
+  color: #32d583 !important;
+  user-select: none;
+  outline: none !important;
+}
+
+.meetings > div {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.MuiDataGrid-root.MuiDataGrid-root--densityStandard.MuiDataGrid-withBorderColor.css-ptkaw2-MuiDataGrid-root,
+.MuiDataGrid-columnHeaders.MuiDataGrid-withBorderColor.css-1iyq7zh-MuiDataGrid-columnHeaders,
+.MuiDataGrid-footerContainer.MuiDataGrid-withBorderColor.css-wop1k0-MuiDataGrid-footerContainer,
+.MuiDataGrid-cell.MuiDataGrid-cell--textLeft.MuiDataGrid-withBorderColor {
+  border-color: #15181d !important;
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.css-1ps6pg7-MuiPaper-root,
+.css-1xif2b4-MuiPopper-root-MuiDataGrid-menu .MuiDataGrid-menuList {
+  background-color: #2f2f2f;
+  border-radius: 15px !important;
+  color: white;
+}
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root .MuiListItemIcon-root {
+  color: white;
+}
+.css-10hburv-MuiTypography-root {
+  font-size: 14px !important;
+}
+li.MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters.MuiMenuItem-root.MuiMenuItem-gutters.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root {
+  padding-right: 0;
+}
+.MuiSvgIcon-root.MuiSvgIcon-fontSizeSmall.css-ptiqhd-MuiSvgIcon-root {
+  color: white;
+}
+/* Scroll */
+/* !Scroll Design */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #15181d;
+}
+*::-webkit-scrollbar {
+  width: 7px;
+}
+*::-webkit-scrollbar-track {
+  background: #343a41;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #15181d;
+  border-radius: 10px;
+}
+/* Context Menu */
+#context-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  z-index: 9998;
+  background-color: #15181d;
+  border-radius: 8px;
+  width: 150px;
+  padding: 5px;
+}
+#context-menu .item,
+#deepContext .item {
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 8px;
+}
+#context-menu .item:hover,
+#deepContext .item:hover {
+  background-color: #2f2f2f;
+}
+/* Deep Context */
+#deepContext {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  z-index: 9999;
+  background-color: #161920;
+  border-radius: 8px;
+  width: 150px;
+  padding: 5px;
+  margin-block: 5px;
+}

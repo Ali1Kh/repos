@@ -1,0 +1,22 @@
+.inputItem input,
+.inputItem textarea {
+  background-color: #1e1e23;
+  color: var(--BlackToWhite) !important;
+  border: 0;
+  width: 100%;
+}
+.calenderPicker .inputItem > div {
+  width: 100% !important;
+}
+.calenderPicker .inputItem input {
+  padding-block: 10px !important;
+}
+.inputItem input::placeholder,
+.inputItem textarea::placeholder {
+  color: #8f8f91;
+}
+
+/* timePicker */
+.timePicker > div {
+  width: 100% !important;
+}
