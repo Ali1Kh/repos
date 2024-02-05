@@ -5,6 +5,7 @@ import { asyncHandler } from './../../utils/asyncHandler.js';
 import bcryptjs from 'bcryptjs'
 import  jwt  from 'jsonwebtoken';
 
+
 // SignUp
 export const signUp = asyncHandler(async(req,res,next)=>{
     if (req.body.role == "Manager") {
