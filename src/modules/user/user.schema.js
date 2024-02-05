@@ -14,7 +14,7 @@ export const signUpSchema = joi.object({
     secertaryId:joi.number()
 }).required()
 
-// signIn
+//signIn
 export const signInSchema = joi.object({
     E_mail:joi.string().email().required(),
     PassWord:joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
