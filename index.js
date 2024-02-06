@@ -18,7 +18,11 @@ await syncFn();
 
 app.use(express.json());
 app.use("/auth", userRouter);
-
+// uptime req
+app.all("/uptime", (req, res) => {
+    console.log("Up Time Requested");
+    res.status(200).send("success");
+  });
 // all
 app.all("*", (req, res) => {
   return res.json({
@@ -26,11 +30,7 @@ app.all("*", (req, res) => {
     message: "Api Endpoint Not Found",
   });
 });
-// uptime req
-app.all("/uptime", (req, res) => {
-    console.log("Up Time Requested");
-    res.status(200).send("success");
-  });
+
 // global error
 app.use((error, req, res, next) => {
   return res.json({
