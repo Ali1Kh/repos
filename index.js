@@ -1,9 +1,9 @@
 import express from "express";
 import { sequelize, syncFn } from "./DB/connection.js";
 import dotenv from "dotenv";
-import userRouter from './src/modules/user/user.router.js'
+import userRouter from "./src/modules/user/user.router.js";
 
-dotenv.config()
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
@@ -16,24 +16,25 @@ try {
 }
 await syncFn();
 
-app.use(express.json())
-app.use("/users",userRouter)
-
+app.use(express.json());
+app.use("/auth", userRouter);
 
 // all
-app.all("*",(req,res)=>{
+app.all("*", (req, res) => {
   return res.json({
-      success : false , 
-      message : "Page Not Found !"
-  })
-})
+    success: false,
+    message: "Api Endpoint Not Found",
+  });
+});
 
-// global error 
-app.use((error , req , res , next)=>{
-  return res.json({success : false 
-  ,message: error.message
-  ,stack: error.stack })
-})
-app.listen(port,() => console.log("App is running at port :",port))
+// global error
+app.use((error, req, res, next) => {
+  return res.json({
+    success: false,
+    message: error.message,
+    stack: error.stack,
+  });
+});
+app.listen(port, () => console.log("App is running at port :", port));
 
 export default app;
