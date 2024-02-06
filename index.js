@@ -26,7 +26,11 @@ app.all("*", (req, res) => {
     message: "Api Endpoint Not Found",
   });
 });
-
+// uptime req
+app.all("/uptime", (req, res) => {
+    console.log("Up Time Requested");
+    res.status(200).send("success");
+  });
 // global error
 app.use((error, req, res, next) => {
   return res.json({
