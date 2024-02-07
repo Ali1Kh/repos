@@ -22,7 +22,11 @@ await syncFn();
 
 
 app.use("/auth", userRouter);
-
+// uptime req
+app.all("/uptime", (req, res) => {
+    console.log("Up Time Requested");
+    res.status(200).send("success");
+  });
 // all
 app.all("*", (req, res) => {
   return res.json({
