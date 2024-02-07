@@ -2,11 +2,15 @@ import express from "express";
 import { sequelize, syncFn } from "./DB/connection.js";
 import dotenv from "dotenv";
 import userRouter from "./src/modules/user/user.router.js";
-
+import cors from "cors";
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
+
+
+app.use(cors());
+app.use(express.json());
 
 try {
   await sequelize.authenticate();
@@ -16,7 +20,7 @@ try {
 }
 await syncFn();
 
-app.use(express.json());
+
 app.use("/auth", userRouter);
 
 // all
