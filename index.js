@@ -2,12 +2,13 @@ import express from "express";
 import { sequelize, syncFn } from "./DB/connection.js";
 import dotenv from "dotenv";
 import userRouter from "./src/modules/user/user.router.js";
+import secretaryRouter from "./src/modules/secretary/secretary.router.js";
+
 import cors from "cors";
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
-
 
 app.use(cors());
 app.use(express.json());
@@ -20,13 +21,14 @@ try {
 }
 await syncFn();
 
-
 app.use("/auth", userRouter);
+app.use("/secretary", secretaryRouter);
+
 // uptime req
 app.all("/uptime", (req, res) => {
-    console.log("Up Time Requested");
-    res.status(200).send("success");
-  });
+  console.log("Up Time Requested");
+  res.status(200).send("success");
+});
 // all
 app.all("*", (req, res) => {
   return res.json({
@@ -43,6 +45,7 @@ app.use((error, req, res, next) => {
     stack: error.stack,
   });
 });
+
 app.listen(port, () => console.log("App is running at port :", port));
 
 export default app;

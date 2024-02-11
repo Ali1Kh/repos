@@ -34,13 +34,12 @@ export const signUp = asyncHandler(async (req, res, next) => {
 
     // const token = jwt.sign({email:manager.email},process.env.SECRET_KEY)
     return res.json({ success: true, message: "Manager Added Successfully !" });
-    
   } else if (req.body.role == "Secertary") {
     const userExits = await Secertary.findOne({
-        where: { UserName: req.body.UserName },
-      });
-      if (userExits) return next(new Error("Username Already Existed !"));
-  
+      where: { UserName: req.body.UserName },
+    });
+    if (userExits) return next(new Error("Username Already Existed !"));
+
     const isSecertary = await Secertary.findOne({
       where: { E_mail: req.body.E_mail },
     });
@@ -93,7 +92,7 @@ export const signIn = asyncHandler(async (req, res, next) => {
     if (!managerPassMatch) return next(new Error("Invalid Password !"));
 
     const token = jwt.sign(
-      { id: isManager.manager_id, E_mail: isManager.E_mail },
+      { id: isManager.manager_id, E_mail: isManager.E_mail, role: "Manager" },
       process.env.SECRET_KEY
     );
 
@@ -119,7 +118,11 @@ export const signIn = asyncHandler(async (req, res, next) => {
     if (!secertaryPassMatch) return next(new Error("Invalid Password !"));
 
     const token = jwt.sign(
-      { id: isSecertary.secretary_id, E_mail: isSecertary.E_mail },
+      {
+        id: isSecertary.secretary_id,
+        E_mail: isSecertary.E_mail,
+        role: "Secertary",
+      },
       process.env.SECRET_KEY
     );
 

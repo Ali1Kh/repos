@@ -16,7 +16,7 @@ router.post(
 router.post(
   "/login",
   validation(UserSchemas.signInSchema),
-  userController.signIn
+  userController.signIn 
 );
 
 export default router;
