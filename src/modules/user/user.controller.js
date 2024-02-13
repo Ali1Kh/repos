@@ -7,35 +7,7 @@ import jwt from "jsonwebtoken";
 
 // SignUp
 export const signUp = asyncHandler(async (req, res, next) => {
-  if (req.body.role == "Manager") {
-    const isManager = await Manager.findOne({
-      where: { E_mail: req.body.E_mail },
-    });
-    if (isManager) return next(new Error("Email Already Existed !"));
-    const userExits = await Manager.findOne({
-      where: { UserName: req.body.UserName },
-    });
-    if (userExits) return next(new Error("Username Already Existed !"));
-
-    const managerhashPass = bcryptjs.hashSync(
-      req.body.PassWord,
-      parseInt(process.env.SALT_ROUND)
-    );
-
-    if (!req.body.secertaryId)
-      return next(new Error("Secertary Id is required!"));
-
-    //const manager =
-    await Manager.create({
-      ...req.body,
-      PassWord: managerhashPass,
-      secretary_id: req.body.secertaryId,
-    });
-
-    // const token = jwt.sign({email:manager.email},process.env.SECRET_KEY)
-    return res.json({ success: true, message: "Manager Added Successfully !" });
-  } else if (req.body.role == "Secertary") {
-    const userExits = await Secertary.findOne({
+   const userExits = await Secertary.findOne({
       where: { UserName: req.body.UserName },
     });
     if (userExits) return next(new Error("Username Already Existed !"));
@@ -50,32 +22,15 @@ export const signUp = asyncHandler(async (req, res, next) => {
       parseInt(process.env.SALT_ROUND)
     );
 
-    //const secertary =
     await Secertary.create({ ...req.body, PassWord: secertaryhashPass });
 
     return res.json({
       success: true,
       message: "Secertary Added Successfully !",
     });
-  }
-
-  // const messageSent =  await sendEmails({to:req.body.email ,
-  //     subject:"Account Activation" ,
-  //     html:`<a href='http://localhost:3000/users/activateaccount/${token}'>Activate Your Account<a/>`})
-  //   if (!messageSent) return next(new Error("Email is Invalid"))
+  
 });
 
-// Activate Account //TODO
-// export const activateAccount = asyncHandler(async (req , res , next)=>{
-//     const { token } = req.params
-
-//     const payload = jwt.verify(token,process.env.SECRET_KEY)
-
-//     const user = await User.findOneAndUpdate({email:payload.email},{new : true})
-//     if (!user) return next(new Error("User Not Found!"))
-
-//     return res.send("Try to login!")
-// })
 
 // signIn
 export const signIn = asyncHandler(async (req, res, next) => {
@@ -96,14 +51,10 @@ export const signIn = asyncHandler(async (req, res, next) => {
       process.env.SECRET_KEY
     );
 
-    await Token.create({
-      token,
-      role: "Manager",
-      manager_id: isManager.manager_id,
-      agent: req.headers["user-agent"],
+    await Token.create({token,role: "Manager",manager_id: isManager.manager_id,agent: req.headers["user-agent"],
     });
 
-    return res.json({ success: true, message: "Welcome !", token });
+    return res.json({ success: true, message: "Welcome Manager !", token });
   } else if (req.body.role == "Secertary") {
     const isSecertary = await Secertary.findOne({
       where: { E_mail: req.body.E_mail },
@@ -133,8 +84,7 @@ export const signIn = asyncHandler(async (req, res, next) => {
       agent: req.headers["user-agent"],
     });
 
-    return res.json({ success: true, message: "Welcome !", token });
+    return res.json({ success: true, message: "Welcome Secertary !", token });
   }
 });
 
-// now test on post maaaaan

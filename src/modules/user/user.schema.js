@@ -12,8 +12,7 @@ export const signUpSchema = joi
       .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
       .required(),
     confirmPassword: joi.string().valid(joi.ref("PassWord")).required(),
-    role: joi.string().valid("Manager", "Secertary").required(),
-    secertaryId: joi.number(),
+    // secretary_id:joi.number().required()
   })
   .required();
 
