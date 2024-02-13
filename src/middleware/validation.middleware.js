@@ -1,5 +1,3 @@
-import { DataTypes } from "sequelize";
-
 export const validation = (schema) => {
   return (req, res, next) => {
     const data = { ...req.body, ...req.params, ...req.query };
@@ -13,10 +11,4 @@ export const validation = (schema) => {
     }
     return next();
   };
-};
-
-// TODO check 'DataTypes.ObjectId ?'
-export const ObjectIdValidation = (value, helper) => {
-  if (DataTypes.ObjectId.isValid(value)) return true;
-  return helper.message("Inavlid Object Id");
 };
