@@ -12,7 +12,7 @@ router.post(
   userController.signUp
 );
 
-//1 SignIn
+//2 SignIn
 router.post(
   "/login",
   validation(UserSchemas.signInSchema),
