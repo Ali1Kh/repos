@@ -3,7 +3,7 @@ import { sequelize, syncFn } from "./DB/connection.js";
 import dotenv from "dotenv";
 import userRouter from "./src/modules/user/user.router.js";
 import secretaryRouter from "./src/modules/secretary/secretary.router.js";
-
+import meetingsRouter from "./src/modules/meatings/meetings.router.js";
 import cors from "cors";
 dotenv.config();
 
@@ -19,10 +19,12 @@ try {
 } catch (error) {
   console.error("Unable to connect to the database:", error);
 }
+
 await syncFn();
 
 app.use("/auth", userRouter);
 app.use("/secretary", secretaryRouter);
+app.use("/meetings", meetingsRouter);
 
 // uptime req
 app.all("/uptime", (req, res) => {

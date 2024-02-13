@@ -10,10 +10,11 @@ export const sequelize = new Sequelize(
     host: process.env.host,
     dialect: "mysql",
     port: 3306,
-    logging: false
   }
 );
 
 export const syncFn = async () => {
   await sequelize.sync();
 };
+
+

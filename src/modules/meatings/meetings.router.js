@@ -8,6 +8,18 @@ import { asyncHandler } from "../../utils/asyncHandler.js";
 
 const router = Router();
 
+router.get(
+  "/",
+  isAuthenticated,
+  isAuthorized("Manager"),
+  asyncHandler(meetingsController.getManagerMeeting)
+);
 
+router.get(
+  "/:meetingId",
+  isAuthenticated,
+  isAuthorized("Manager"),
+  asyncHandler(meetingsController.getManagerMeetingDetails)
+);
 
 export default router;
