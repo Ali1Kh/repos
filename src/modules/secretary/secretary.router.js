@@ -9,7 +9,7 @@ import { asyncHandler } from "../../utils/asyncHandler.js";
 const router = Router();
 
 router.post(
-  "/create-manager/:secertaryId",
+  "/create-manager/",
   isAuthenticated,
   isAuthorized("Secertary"),
   validation(secretarySchema.createManagerAccountSchema),

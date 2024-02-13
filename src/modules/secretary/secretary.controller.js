@@ -6,7 +6,7 @@ import bcryptjs from "bcryptjs";
 import { meeting_Manager } from "../../../DB/models/meeting_Manager.model.js";
 
 export const createManagerAccount = asyncHandler(async (req, res, next) => {
-  const isSecertary = await Secertary.findByPk(req.params.secertaryId);
+  const isSecertary = await Secertary.findByPk(req.payload.id);
   if (!isSecertary) return next(new Error("Secertary Not Found!"));
 
   const isSecretariesEmail = await Secertary.findOne({
