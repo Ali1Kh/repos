@@ -8,7 +8,7 @@ export const getManagerMeeting = async (req, res, next) => {
     `
   SELECT * FROM Meetings
   JOIN meeting_Manager ON Meetings.meeting_id = meeting_Manager.meeting_id
-  WHERE meeting_Manager.manager_id = 14;
+  WHERE meeting_Manager.manager_id = ${req.payload.id};
   `,
     { model: Meetings }
   );
