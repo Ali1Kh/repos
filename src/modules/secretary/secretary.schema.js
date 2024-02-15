@@ -1,8 +1,8 @@
 import joi from "joi";
-import { ObjectIdValidation } from "../../middleware/validation.middleware.js";
 
 export const createMeetingSchema = joi
   .object({
+    manager_id:joi.number().required(),
     person: joi.string().required(),
     about: joi.string().required(),
     address: joi.string().required(),

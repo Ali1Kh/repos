@@ -47,7 +47,7 @@ export const signIn = asyncHandler(async (req, res, next) => {
     if (!managerPassMatch) return next(new Error("Invalid Password !"));
 
     const token = jwt.sign(
-      { id: isManager.manager_id, E_mail: isManager.E_mail, role: "Manager" },
+      { id: isManager.manager_id, E_mail: isManager.E_mail, username:isManager.UserName, role: "Manager" },
       process.env.SECRET_KEY
     );
 
@@ -65,13 +65,13 @@ export const signIn = asyncHandler(async (req, res, next) => {
       req.body.PassWord,
       isSecertary.PassWord
     );
-    console.log(req.body.PassWord, isSecertary.PassWord);
     if (!secertaryPassMatch) return next(new Error("Invalid Password !"));
 
     const token = jwt.sign(
       {
         id: isSecertary.secretary_id,
         E_mail: isSecertary.E_mail,
+        username:isSecertary.UserName,
         role: "Secertary",
       },
       process.env.SECRET_KEY

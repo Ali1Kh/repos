@@ -1,5 +1,4 @@
 import joi from "joi";
-import { ObjectIdValidation } from "../../middleware/validation.middleware.js";
 
 // signUpSchema
 export const signUpSchema = joi

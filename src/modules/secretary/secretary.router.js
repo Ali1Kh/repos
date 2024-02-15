@@ -8,15 +8,16 @@ import { asyncHandler } from "../../utils/asyncHandler.js";
 
 const router = Router();
 
-//3 createManagerAccount
 router.post(
-  "/create-manager/:secertaryId",
+  "/create-manager/",
+  isAuthenticated,
+  isAuthorized("Secertary"),
   validation(secretarySchema.createManagerAccountSchema),
   secretaryController.createManagerAccount
 );
 
 router.post(
-  "/createMeeting",
+  "/createMeeting/:manager_id",
   isAuthenticated,
   isAuthorized("Secertary"),
   validation(secretarySchema.createMeetingSchema),

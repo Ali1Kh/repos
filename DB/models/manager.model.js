@@ -1,6 +1,8 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "./../connection.js";
 import { Token } from "./token.model.js";
+import { Meetings } from "./meeting.model.js";
+import { meeting_Manager } from "./meeting_Manager.model.js";
 
 export const Manager = sequelize.define(
   "Manager",
@@ -20,5 +22,13 @@ export const Manager = sequelize.define(
   }
 );
 
-Manager.hasMany(Token, { foreignKey: "manager_id" });
-Token.belongsTo(Manager, { foreignKey: "manager_id" });
+Manager.associate = (models) => {
+  Manager.belongsToMany(Meetings, {
+    through: meeting_Manager,
+    foreignKey: "manager_id",
+  });
+
+
+  Manager.hasMany(models.Token, { foreignKey: "manager_id" });
+  Token.belongsTo(Manager, { foreignKey: "manager_id" });
+};
