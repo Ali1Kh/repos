@@ -4,6 +4,7 @@ import { Secertary } from "../../../DB/models/secertary.model.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
 import bcryptjs  from 'bcryptjs';
 
+//createManagerAccount
 export const createManagerAccount = asyncHandler(async (req, res, next) => {
   const isSecertary = await Secertary.findByPk(req.params.secertaryId)
   if (!isSecertary) return next(new Error("Secertary Not Found!"))
