@@ -42,7 +42,7 @@ export const createMeeting = async (req, res, next) => {
   if (!isManager) return next(new Error("Invalid Manager Id"));
 
   if (isManager.secretary_id != req.payload.id)
-    return next(new Error("You Must Be The Secretary For This Manager Id"));
+    return next(new Error("You Must Be The Secretary For This Manager"));
 
   let meeting = await Meetings.create({
     ...req.body,
