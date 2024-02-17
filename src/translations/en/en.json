@@ -13,7 +13,7 @@
   },
   "Login": {
     "loginheader":"Login",
-    "username": "Username",
+    "email": "Email",
     "password": "Password",
     "button": "Login",
     "signuphint":"Don't Have An Acount ? ",
@@ -23,6 +23,7 @@
     "firstName": "First Name",
     "lastName": "Last Name",
     "userName": "Username",
+    "email": "Email",
     "password": "Password",
     "confirmPassword": "Confirm Password",
     "role": "Role",

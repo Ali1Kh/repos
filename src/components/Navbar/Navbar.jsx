@@ -29,8 +29,8 @@ export default function Navbar() {
             href="#"
           >
             <img className="nav-logo" src={logo}></img>
-            {location.pathname.split("/")[1] == "login" ||
-            location.pathname.split("/")[1] == "signup" ? (
+            {location.pathname.split("/")[1] === "login" ||
+            location.pathname.split("/")[1] === "signup" ? (
               <h5 className="text-white mb-0">Meeting Managment</h5>
             ) : (
               ""
@@ -109,9 +109,9 @@ export default function Navbar() {
                 </Link>
               </li>
               <li className="nav-item search ms-auto d-flex justify-content-center align-items-center me-3">
-                <div class="input-group w-100 ps-0 pe-5">
-                  <span class="input-group-text" id="basic-addon1">
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                <div className="input-group w-100 ps-0 pe-5">
+                  <span className="input-group-text" id="basic-addon1">
+                    <i className="fa-solid fa-magnifying-glass"></i>
                   </span>
                   <input
                     type="text"
@@ -123,14 +123,14 @@ export default function Navbar() {
               </li>
               <li className="nav-item all ms-md-auto d-flex justify-content-center align-items-center me-3">
                 <div className="darkmodeContainer h-100 d-flex justify-content-center align-items-center px-3">
-                  <label class="toggle" for="switch">
+                  <label className="toggle" htmlFor="switch">
                     <input
                       id="switch"
-                      class="input"
+                      className="input"
                       type="checkbox"
                       defaultChecked
                     />
-                    <div class="switchIcon icon--moon">
+                    <div className="switchIcon icon--moon">
                       <svg
                         height="25"
                         width="25"
@@ -139,14 +139,14 @@ export default function Navbar() {
                         xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
-                          clip-rule="evenodd"
+                          clipRule="evenodd"
                           d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"
-                          fill-rule="evenodd"
+                          fillRule="evenodd"
                         ></path>
                       </svg>
                     </div>
 
-                    <div class="switchIcon icon--sun">
+                    <div className="switchIcon icon--sun">
                       <svg
                         height="25"
                         width="25"
@@ -160,7 +160,7 @@ export default function Navbar() {
                   </label>
                 </div>
                 <div className="langBtn h-100 d-flex justify-content-center align-items-center">
-                  <div class="mydict">
+                  <div className="mydict">
                     <div>
                       <label>
                         <input

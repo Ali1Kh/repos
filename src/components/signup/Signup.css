@@ -15,58 +15,16 @@
   width: 49%;
 }
 
-.form input:focus {
-  background: none;
-  color: #cac4d0;
-  box-shadow: none !important;
-}
-
 .form input {
-  border-radius: 10px !important;
+  margin-top: 1rem !important;
+  border-radius: 15px;
   color: var(--BlackToWhite) !important;
-  background-color: var(--inputsBgColor) !important;
+  background: var(--main-color) !important;
   border: 2px solid var(--sec-color) !important;
-  padding: 0.5rem;
 }
 
 .form input::placeholder {
   color: #8f8f91;
-}
-/*  */
-.form .role {
-  border-radius: 10px !important;
-  background: #555b69;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.33) !important;
-  border: 0 !important;
-  padding: 1rem !important;
-  color: var(--BlackToWhite);
-  font-family: var(--main-font) !important;
-  font-size: 15px !important;
-  font-style: normal !important;
-  /* font-weight: 600 !important; */
-  line-height: 20px;
-}
-.form .role option {
-  color: var(--sec-color);
-  font-family: var(--main-font) !important;
-  font-size: 15px !important;
-  font-style: normal !important;
-  /* font-weight: 600 !important; */
-  line-height: 20px;
-}
-.form .role option:checked {
-  color: var(--sec-color);
-  font-family: var(--main-font) !important;
-  font-size: 15px !important;
-  font-style: normal !important;
-  font-weight: 500 !important;
-  line-height: 20px;
-}
-.form .role option:disabled {
-  color: var(--mutedColor);
-}
-.form .role:focus {
-  color: var(--sec-color);
 }
 
 .Signup-btn button {
@@ -86,4 +44,10 @@
 
 .Signup-btn button:hover {
   background: darkslateblue;
+}
+
+.error-label {
+  color: #ff0000;
+  font-size: 14px;
+  margin-top: 5px;
 }
