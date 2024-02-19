@@ -173,6 +173,15 @@ const Sidebar = () => {
               </span>
               <span>{t("sidebar.createMeeting")}</span>
             </Link>
+            <Link
+              className="sidebarItem animate__animated"
+              to={"/meeting/createManagerAccount"}
+            >
+              <span className="d-inline-flex  text-center justify-content-center">
+                <i className="fa-regular fa-plus "></i>
+              </span>
+              <span>{t("sidebar.createManagerAccount")}</span>
+            </Link>
           </div>
           <div className="setting-side mt-auto mb-3">
             <div className="account border-top d-flex justify-content-center align-items-center gap-3 px-3 py-2">

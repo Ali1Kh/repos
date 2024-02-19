@@ -50,7 +50,7 @@ function CreateManagerAccount() {
         <>
             <div className="main">
                 <div className="container text-center p-5">
-                    <h2 className="mb-5 animate__animated animate__zoomIn BlackToWhite">{t("signup.signupheader")}</h2>
+                    <h2 className="mb-5 animate__animated animate__zoomIn BlackToWhite">{t("signup.createManagerAccount")}</h2>
                     <div className="row justify-content-center">
                         <div className="col-md-9">
                             <Formik
