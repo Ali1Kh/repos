@@ -49,6 +49,7 @@ export const createMeeting = async (req, res, next) => {
   let meeting = await Meetings.create({
     ...req.body,
     statues: "not done",
+    addedBy: req.payload.id,
   });
   await meeting_Manager.create({
     manager_id: isManager.manager_id,
@@ -57,9 +58,19 @@ export const createMeeting = async (req, res, next) => {
   return res.json({ success: true, message: "Meeting created Successfully" });
 };
 
+
+export const getSecMeetings = async (req, res, next) => {
+  let meetings = await Meetings.findAll({
+    where: { addedBy: req.payload.id },
+  });
+  return res.json({ success: true, meetings });
+};
+
+
+
 export const getSecManagers = async (req, res, next) => {
   let managers = await Manager.findAll({
-    attributes: ["manager_id","first_name","last_name"],
+    attributes: ["manager_id", "first_name", "last_name"],
     where: { secretary_id: req.payload.id },
   });
   return res.json({ success: true, managers });

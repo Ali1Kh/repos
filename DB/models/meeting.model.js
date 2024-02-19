@@ -16,6 +16,7 @@ export const Meetings = sequelize.define("Meetings", {
   time: { type: DataTypes.STRING, allowNull: false },
   date: { type: DataTypes.DATE, allowNull: false },
   notes: { type: DataTypes.STRING, allowNull: true },
+  addedBy: { type: DataTypes.STRING, allowNull: true },
 });
 
 Meetings.associate = (models) => {
