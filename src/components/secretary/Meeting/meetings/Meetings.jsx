@@ -17,23 +17,23 @@ export default function Meetings() {
   let [meetingsRows, setMeetingsRows] = useState([]);
   const getRowId = (row) => row.meeting_id;
 
-  async function getSecMeetings(){
+  async function getSecMeetings() {
     try {
       let { data } = await axios.get(
         `https://meetingss.onrender.com/secretary/getSecMeetings`,
         { headers: { token: localStorage.getItem("token") } }
       );
       if (data.success) {
-        setMeetingsRows(data.meetings)
+        setMeetingsRows(data.meetings);
       }
     } catch (error) {
       console.log(error);
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     getSecMeetings();
-  },[])
+  }, []);
   const [open, setOpen] = useState(false);
   let [selectedId, setSelectId] = useState(null);
   let meetingNavigate = useNavigate();
@@ -69,15 +69,23 @@ export default function Meetings() {
     e.stopPropagation();
     $("#deepContext").css({ display: "block" });
   }
-  function deleteMeeting() {
-    toast.success(`Meeting Deleted Successfully`, {
-      duration: 4000,
-      position: "top-right",
-      style: {
-        backgroundColor: "#161920",
-        color: "white",
-      },
-    });
+  async function deleteMeeting(id) {
+    let { data } = await axios.delete(
+      `https://meetingss.onrender.com/secretary/deleteMeeting/${id}`,
+      { headers: { token: localStorage.getItem("token") } }
+    );
+
+    if (data.success) {
+      toast.success(`Meeting Deleted Successfully`, {
+        duration: 4000,
+        position: "top-right",
+        style: {
+          backgroundColor: "#161920",
+          color: "white",
+        },
+      });
+      getSecMeetings();
+    }
   }
   function openAlert() {
     setOpen(true);
@@ -290,7 +298,7 @@ export default function Meetings() {
           <DialogTitle id="alert-dialog-title">{"Warning!"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              By Accepting you will delete the meeting with Ali Khaled.
+              By Accepting you will delete the Meeting.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -298,7 +306,7 @@ export default function Meetings() {
             <Button
               onClick={() => {
                 handleClose();
-                deleteMeeting();
+                deleteMeeting(selectedId);
               }}
               autoFocus
             >

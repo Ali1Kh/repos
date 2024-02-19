@@ -118,8 +118,8 @@ export default function Calender() {
                     <p>{t("Calendar.meetingTopic")} : blblsbab</p>
                     <p>{t("Calendar.meetingTime")} : 1:00</p>
                     <a
-                      data-bs-toggle="modal"
-                      data-bs-target="#meetingModal"
+                      // data-bs-toggle="modal"
+                      // data-bs-target="#meetingModal"
                       className="mb-3 cursorPointer"
                     >
                       {t("Calendar.showDetails")}
@@ -129,8 +129,8 @@ export default function Calender() {
                     <p>{t("Calendar.meetingTopic")} : blblsbab</p>
                     <p>{t("Calendar.meetingTime")} : 2:00</p>
                     <a
-                      data-bs-toggle="modal"
-                      data-bs-target="#meetingModal"
+                      // data-bs-toggle="modal"
+                      // data-bs-target="#meetingModal"
                       className="mb-3 cursorPointer"
                     >
                       {t("Calendar.showDetails")}
@@ -139,7 +139,7 @@ export default function Calender() {
                 </div>
               </div>
             </div>
-            <MeetingDetails />
+            {/* <MeetingDetails /> */}
           </div>
         </div>
       </div>

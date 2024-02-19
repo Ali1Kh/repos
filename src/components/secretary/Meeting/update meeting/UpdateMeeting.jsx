@@ -24,45 +24,49 @@ export default function UpdateMeeting() {
     $("#meetNotes").val(id);
   }, []);
 
-  function updateMeeting() { 
-  let person = $("#meetPerson").val();
-  let topic = $("#meetTopic").val();
-  let address = $("#meetAddress").val();
-  let notes = $("#meetNotes").val();
-  let area = $('input[name="radio-group"]:checked').val();
+  function updateMeeting() {
 
-  if (
-    !date ||
-    !time ||
-    person == "" ||
-    topic == "" ||
-    address == "" ||
-    notes == "" ||
-    area == ""
-  ) {
-    $(".error").removeClass("d-none");
-    $(".error").addClass("d-block");
-    return;
-  }
-  let dateInput, timeInput;
-  if (date) {
-    dateInput = new Date(date.$d).toLocaleString("en-GB");
-  }
-  if (time) {
-    timeInput = new Date(time.$d).toLocaleString("en-GB", {
-      hour12: false,
-    });
-  }
+    
 
-  let data = {
-    date: dateInput.split(",")[0],
-    time: timeInput.split(",")[1],
-    person,
-    topic,
-    address,
-    notes,
-    area,
-  };}
+    let person = $("#meetPerson").val();
+    let topic = $("#meetTopic").val();
+    let address = $("#meetAddress").val();
+    let notes = $("#meetNotes").val();
+    let area = $('input[name="radio-group"]:checked').val();
+
+    if (
+      !date ||
+      !time ||
+      person == "" ||
+      topic == "" ||
+      address == "" ||
+      notes == "" ||
+      area == ""
+    ) {
+      $(".error").removeClass("d-none");
+      $(".error").addClass("d-block");
+      return;
+    }
+    let dateInput, timeInput;
+    if (date) {
+      dateInput = new Date(date.$d).toLocaleString("en-GB");
+    }
+    if (time) {
+      timeInput = new Date(time.$d).toLocaleString("en-GB", {
+        hour12: false,
+      });
+    }
+
+    let data = {
+      date: dateInput.split(",")[0],
+      time: timeInput.split(",")[1],
+      person,
+      topic,
+      address,
+      notes,
+      area,
+    };
+  }
 
   const [t, il8n] = useTranslation();
 
@@ -74,8 +78,7 @@ export default function UpdateMeeting() {
         </h2>
 
         <div className="inputsContainer w-100  p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
-          
-        <div className="calenderPicker row p-0 m-0">
+          <div className="calenderPicker row p-0 m-0">
             <div className="col-md-6  inputItem mb-3 px-5">
               <ThemeProvider theme={newTheme}>
                 <DesktopDatePicker
@@ -166,11 +169,10 @@ export default function UpdateMeeting() {
               All Inputs Are Required!
             </small>
             <button onClick={updateMeeting} className="addButton">
-          {t("CreateOrUpdateMeeting.buttonUpdate")}
-        </button>
+              {t("CreateOrUpdateMeeting.buttonUpdate")}
+            </button>
           </div>
         </div>
-        
       </div>
     </div>
   );
