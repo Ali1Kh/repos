@@ -1,24 +1,52 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import "./homePage.css";
 import MeetingDetails from "../manager/meetingDetails/meetingDetails.jsx";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 export default function HomePage() {
+  const [meetings, setMeetings] = useState([]);
+  const [t] = useTranslation();
+
+  useEffect(() => {
+    getMeetings();
+  },[]);
+
+  function getMeetings() {
+    const authToken = localStorage.getItem('token');
+
+    if (!authToken) {
+      console.error("Authentication token not found in Local Storage");
+      return;
+    }
+
+    axios
+      .get('https://meetingss.onrender.com/meetings/', {
+        headers: {
+          'token': authToken,
+        },
+      })
+      .then(response => {
+        if (response.data.success === true) {
+          setMeetings(response.data.meetings);
+          console.log(response.data.meetings);
+        }
+      })
+      .catch(err => console.error(err));
+  }
 
 
-  
-
-  let meetings = [
-    {
-      GuestName: "Ali Khaled ElSa3dany",
-      GuestEmail: "Elsa3dany22@gmail.com",
-      MeetingTopic: "blablbaa",
-      MeetingTime: "12:00 PM",
-      MeetingStatus: "Not Done",
-    },
-  ];
+  // let meetings = [
+  //   {
+  //     GuestName: "Ali Khaled ElSa3dany",
+  //     GuestEmail: "Elsa3dany22@gmail.com",
+  //     MeetingTopic: "blablbaa",
+  //     MeetingTime: "12:00 PM",
+  //     MeetingStatus: "Not Done",
+  //   },
+  // ];
 
   // let meetingsDetails = {
   //   GuestName: "Omar Kadry Dahab",
@@ -30,10 +58,11 @@ export default function HomePage() {
   //   MeetingStatus: "Not Done",
   //   Comments: "No Comment",
   // };
-  const [t] = useTranslation();
-  let colors = [
+
+
+  let colors = JSON.parse(localStorage.getItem('colors')) || [
     "#FFB399",
-    "#FFFF99",
+    "#FFFFFF99",
     "#00B3E6",
     "#E6B333",
     "#3366E6",
@@ -49,7 +78,7 @@ export default function HomePage() {
     "#4D8000",
     "#B33300",
     "#CC80CC",
-    "#66664D",
+    "#6666664D",
     "#4DB3FF",
     "#1AB399",
     "#33991A",
@@ -63,8 +92,11 @@ export default function HomePage() {
     "#4D80CC",
     "#4DB380",
     "#99E6E6",
-    "#6666FF",
+    "#666666FF",
   ];
+
+  localStorage.setItem('colors', JSON.stringify(colors));
+
   return (
     <>
       <Helmet>
@@ -79,7 +111,7 @@ export default function HomePage() {
             {t("HomePage.header")}
           </h2>
           <div className="row gy-3">
-            {meetings.map((meeting, idx) => (
+            {meetings ? meetings.map((meeting, idx) => (
               <div
                 key={idx}
                 className="inner-parent  col-lg-4 px-lg-4 col-md-12 col-sm-12 mt-4 animate__animated animate__fadeIn animate__slower"
@@ -100,9 +132,8 @@ export default function HomePage() {
                       <div
                         className="meetingGuestIcon text-black d-flex justify-content-center align-items-center"
                         style={{
-                          backgroundColor: `${
-                            colors[Math.floor(Math.random() * colors.length)]
-                          }`,
+                          backgroundColor: `${colors[Math.floor(Math.random() * colors.length)]
+                            }`,
                         }}
                       >
                         <span className="m-0 p-0 ">
@@ -143,7 +174,7 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
-            ))}
+            )) : ""}
           </div>
           <MeetingDetails />
         </div>
