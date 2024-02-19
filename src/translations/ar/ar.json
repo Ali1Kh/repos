@@ -11,15 +11,15 @@
     "comments": "ملاحظات"
   },
   "Login": {
-    "loginheader":"تسجيل دخول",
+    "loginheader": "تسجيل دخول",
     "email": "بريد إلكتروني",
     "password": "كلمة المرور",
     "button": "تسجيل الدخول",
-    "signuphint":"ليس لديك حساب ؟"
-    ,"signup":"اشتراك"
+    "signuphint": "ليس لديك حساب ؟",
+    "signup": "اشتراك"
   },
   "signup": {
-    "signupheader":"انشاء حساب",
+    "signupheader": "انشاء حساب",
     "firstName": "الاسم الأول",
     "lastName": "اسم العائلة",
     "userName": "اسم المستخدم",
@@ -27,28 +27,29 @@
     "password": "كلمة المرور",
     "confirmPassword": "تأكيد كلمة المرور",
     "role": "المسمى الوظيفي",
-    "manager":"مدير",
-    "sec":"سكرتير",
+    "manager": "مدير",
+    "sec": "سكرتير",
     "button": "إنشاء حساب",
-    "loginHint":"لديك حساب بالفعل",
-    "login":"تسجيل دخول"
+    "loginHint": "لديك حساب بالفعل",
+    "login": "تسجيل دخول",
+    "createManagerAccount": "إنشاء حساب المدير"
   },
   "sidebar": {
     "home": "الاجتماعات",
     "calendar": "تقويم",
     "meetings": "الاجتماعات",
     "createMeeting": "إنشاء اجتماع",
-    "createManagerAccount":"إنشاء حساب المدير"
+    "createManagerAccount": "إنشاء حساب المدير"
   },
   "Calendar": {
-    "calendar":"التقويم",
-    "meetingTopic":"موضوع الاجتماع",
-    "meetingTime":"موعد الاجتماع",
-    "showDetails":"عرض المزيد"
+    "calendar": "التقويم",
+    "meetingTopic": "موضوع الاجتماع",
+    "meetingTime": "موعد الاجتماع",
+    "showDetails": "عرض المزيد"
   },
   "CreateOrUpdateMeeting": {
-    "createMeeting":"انشاء اجتماع",
-    "updateMeeting":"تعديل الاجتماع",
+    "createMeeting": "انشاء اجتماع",
+    "updateMeeting": "تعديل الاجتماع",
     "person": "الشخص أو الجهة",
     "topic": "موضوع الاجتماع",
     "address": "عنوان الاجتماع",
@@ -56,11 +57,11 @@
     "inside": "داخل الهيئة",
     "outside": "خارج الهيئة",
     "buttonAdd": "أضف الاجتماع",
-    "buttonUpdate":"تعديل الاجتماع"
+    "buttonUpdate": "تعديل الاجتماع"
   },
-  "search":"بحث",
-  "Meetings":{
-    "meetings":"الاجتماعات",
+  "search": "بحث",
+  "Meetings": {
+    "meetings": "الاجتماعات",
     "table": {
       "date": "تاريخ",
       "time": "الوقت",
@@ -68,14 +69,18 @@
       "topic": "عنوان",
       "address": "العنوان",
       "area": "المنطقة",
-      "status":"الحالة",
-      "notes":"ملاحظات"
+      "status": "الحالة",
+      "notes": "ملاحظات"
     }
   },
-   "MeetingContextMenu":{
-    "status":"تعديل الحالة",
-    "statusContext":{"done":"تم","changedate":"تغيير الميعاد","cancel":"إلغاء"},
-    "update":"تعديل",
-    "delete":"مسح"
+  "MeetingContextMenu": {
+    "status": "تعديل الحالة",
+    "statusContext": {
+      "done": "تم",
+      "changedate": "تغيير الميعاد",
+      "cancel": "إلغاء"
+    },
+    "update": "تعديل",
+    "delete": "مسح"
   }
 }
