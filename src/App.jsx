@@ -16,38 +16,38 @@ import Calender from "./components/manager/Calender/Calender.jsx";
 import { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import CreateManagerAccount from "./components/secretary/Meeting/create manager account/CreateManagerAccount";
+import ProtectedRoutes from "./components/Protected Routes/ProtectedRoutes.jsx";
 
 const router = createHashRouter([
   {
-    path: "/",
-    element: <Layout />,
+    path: "/", element: <ProtectedRoutes><Layout /></ProtectedRoutes>,
     children: [
       {
         path: "/",
-        element: <HomePage />,
+        element: <ProtectedRoutes><HomePage /></ProtectedRoutes>,
       },
       {
         path: "home",
-        element: <HomePage />,
+        element: <ProtectedRoutes><HomePage /></ProtectedRoutes>,
       },
       {
         path: "/meeting",
         children: [
           {
             path: "",
-            element: <Meetings />,
+            element: <ProtectedRoutes><Meetings /></ProtectedRoutes>,
           },
           {
             path: "addMeeting",
-            element: <NewMeeting />,
+            element: <ProtectedRoutes><NewMeeting /></ProtectedRoutes>,
           },
           {
             path: "updateMeeting/:id",
-            element: <UpdateMeeting />,
+            element: <ProtectedRoutes><UpdateMeeting /></ProtectedRoutes>,
           },
           {
             path: "createManagerAccount",
-            element: <CreateManagerAccount />,
+            element: <ProtectedRoutes><CreateManagerAccount /></ProtectedRoutes>,
           },
           {
             path: "*",
@@ -59,14 +59,14 @@ const router = createHashRouter([
       {
         path: "/manager",
         children: [
-          { path: "", element: <HomePage /> },
+          { path: "", element: <ProtectedRoutes><HomePage /></ProtectedRoutes> },
           {
             path: "meetingDetails",
-            element: <MeetingDetails />,
+            element: <ProtectedRoutes><MeetingDetails /></ProtectedRoutes>,
           },
           {
             path: "calender",
-            element: <Calender />,
+            element: <ProtectedRoutes><Calender /></ProtectedRoutes>,
           },
         ],
       },

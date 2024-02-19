@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
 import "./meetingDetails.css";
-import axios from "axios";
 import { useTranslation } from "react-i18next";
 export default function MeetingDetails({ meetingsDetails }) {
   const [t] = useTranslation();
