@@ -6,7 +6,6 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
-import { useNavigate } from 'react-router-dom';
 
 const SignupSchema = Yup.object().shape({
     userName: Yup.string().required("Username is required").matches(/^[a-zA-Z0-9]+$/, "Invalid username"),
@@ -21,28 +20,29 @@ const SignupSchema = Yup.object().shape({
 
 
 function CreateManagerAccount() {
-    const navigate = useNavigate();
-    const handleSignup = (values) => {
-        const formData = {
-            UserName: values.userName,
-            first_name: values.firstName,
-            last_name: values.lastName,
-            E_mail: values.email,
-            PassWord: values.password,
-            confirmPassword: values.confirmPassword,
-        };
+    const handleManagerAccount = async (values) => {
+        try {
+            const authToken = localStorage.getItem("token");
 
-        axios
-            .post("localhost:6224/secretary/create-manager", formData)
-            .then((response) => {
-                console.log(response.data);
-                if (response.data.message === "Secertary Added Successfully !") {
-                    navigate("/login");
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
+            const formData = {
+                UserName: values.userName,
+                first_name: values.firstName,
+                last_name: values.lastName,
+                E_mail: values.email,
+                PassWord: values.password,
+                confirmPassword: values.confirmPassword,
+            };
+
+            const headers = {
+                token: authToken,
+            };
+
+            const response = await axios.post("https://meetingss.onrender.com/secretary/create-manager", formData, { headers });
+            console.log(response);
+
+        } catch (error) {
+            console.error("Error:", error);
+        }
     };
 
     const [t] = useTranslation();
@@ -50,7 +50,9 @@ function CreateManagerAccount() {
         <>
             <div className="main">
                 <div className="container text-center p-5">
-                    <h2 className="mb-5 animate__animated animate__zoomIn BlackToWhite">{t("signup.createManagerAccount")}</h2>
+                    <h2 className="mb-5 animate__animated animate__zoomIn BlackToWhite">
+                        {t("signup.createManagerAccount")}
+                    </h2>
                     <div className="row justify-content-center">
                         <div className="col-md-9">
                             <Formik
@@ -63,28 +65,36 @@ function CreateManagerAccount() {
                                     confirmPassword: "",
                                 }}
                                 validationSchema={SignupSchema}
-                                onSubmit={handleSignup}
+                                onSubmit={handleManagerAccount}
                             >
                                 <Form className="ineer shadow p-5">
-                                    <div className="form">
+                                    <div className="form text-start">
                                         <div className="name row gy-3">
-                                            <div className="col-md-6">
+                                            <div className="col-md-6 text-start">
                                                 <Field
                                                     type="text"
                                                     name="firstName"
                                                     className="first-name w-100 form-control"
                                                     placeholder={t("signup.firstName")}
                                                 />
-                                                <ErrorMessage name="firstName" component="label" className="error-label" />
+                                                <ErrorMessage
+                                                    name="firstName"
+                                                    component="label"
+                                                    className="error-label"
+                                                />
                                             </div>
-                                            <div className="col-md-6">
+                                            <div className="col-md-6 text-start">
                                                 <Field
                                                     type="text"
                                                     name="lastName"
                                                     className="last-name w-100 form-control"
                                                     placeholder={t("signup.lastName")}
                                                 />
-                                                <ErrorMessage name="lastName" component="label" className="error-label" />
+                                                <ErrorMessage
+                                                    name="lastName"
+                                                    component="label"
+                                                    className="error-label"
+                                                />
                                             </div>
                                         </div>
                                         <Field
@@ -93,32 +103,45 @@ function CreateManagerAccount() {
                                             className="user-name mt-3 d-flex justify-content-center form-control"
                                             placeholder={t("signup.userName")}
                                         />
-                                        <ErrorMessage name="userName" component="label" className="error-label" />
+                                        <ErrorMessage
+                                            name="userName"
+                                            component="label"
+                                            className="error-label"
+                                        />
                                         <Field
                                             type="email"
                                             name="email"
                                             className="user-name mt-3 d-flex justify-content-center form-control"
                                             placeholder={t("signup.email")}
                                         />
-                                        <ErrorMessage name="email" component="label" className="error-label" />
+                                        <ErrorMessage
+                                            name="email"
+                                            component="label"
+                                            className="error-label"
+                                        />
                                         <Field
                                             type="password"
                                             name="password"
                                             className="password mt-3 d-flex justify-content-center form-control"
                                             placeholder={t("signup.password")}
                                         />
-                                        <ErrorMessage name="password" component="label" className="error-label" />
+                                        <ErrorMessage
+                                            name="password"
+                                            component="label"
+                                            className="error-label"
+                                        />
                                         <Field
                                             type="password"
                                             name="confirmPassword"
                                             className="confirm-password mt-3 d-flex justify-content-center form-control"
                                             placeholder={t("signup.confirmPassword")}
                                         />
-                                        <ErrorMessage name="confirmPassword" component="label" className="error-label" />
+                                        <ErrorMessage
+                                            name="confirmPassword"
+                                            component="label"
+                                            className="error-label"
+                                        />
                                     </div>
-                                    <p style={{ fontSize: "14px" }} className="mt-2 text-start BlackToWhite px-3">
-                                        {t("signup.loginHint")} <Link to={"/login"}>{t("signup.login")}</Link>
-                                    </p>
                                     <div
                                         id="btn"
                                         type="submit"
