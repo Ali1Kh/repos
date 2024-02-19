@@ -7,9 +7,6 @@ import { meeting_Manager } from "../../../DB/models/meeting_Manager.model.js";
 
 //createManagerAccount
 export const createManagerAccount = asyncHandler(async (req, res, next) => {
-  const isSecertary = await Secertary.findByPk(req.payload.id);
-  if (!isSecertary) return next(new Error("Secertary Not Found!"));
-
   const isSecretariesEmail = await Secertary.findOne({
     where: { E_mail: req.body.E_mail },
   });
@@ -28,6 +25,11 @@ export const createManagerAccount = asyncHandler(async (req, res, next) => {
     req.body.PassWord,
     parseInt(process.env.SALT_ROUND)
   );
+  console.log({
+    ...req.body,
+    PassWord: managerhashPass,
+    secretary_id: req.payload.id,
+  });
   await Manager.create({
     ...req.body,
     PassWord: managerhashPass,
@@ -53,4 +55,12 @@ export const createMeeting = async (req, res, next) => {
     meeting_id: meeting.dataValues.meeting_id,
   });
   return res.json({ success: true, message: "Meeting created Successfully" });
+};
+
+export const getSecManagers = async (req, res, next) => {
+  let managers = await Manager.findAll({
+    attributes: ["manager_id","first_name","last_name"],
+    where: { secretary_id: req.payload.id },
+  });
+  return res.json({ success: true, managers });
 };

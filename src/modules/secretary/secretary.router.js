@@ -24,4 +24,10 @@ router.post(
   asyncHandler(secretaryController.createMeeting)
 );
 
+router.get(
+  "/getSecManagers",
+  isAuthenticated,
+  isAuthorized("Secertary"),
+  asyncHandler(secretaryController.getSecManagers)
+);
 export default router;

@@ -23,6 +23,5 @@ export const createManagerAccountSchema = joi.object({
     .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
     .required(),
   confirmPassword: joi.string().valid(joi.ref("PassWord")).required(),
-  secertaryId: joi.number().required(),
 })
 .required();  
