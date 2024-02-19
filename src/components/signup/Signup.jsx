@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Signup.css";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-
+import toast from "react-hot-toast";
 const SignupSchema = Yup.object().shape({
   userName: Yup.string()
     .required("Username is required")
@@ -29,6 +29,7 @@ const SignupSchema = Yup.object().shape({
 
 export default function Signup() {
   const navigate = useNavigate();
+  let [errorMessage, setErrorMessage] = useState("");
   const handleSignup = (values) => {
     const formData = {
       UserName: values.userName,
@@ -37,15 +38,17 @@ export default function Signup() {
       E_mail: values.email,
       PassWord: values.password,
       confirmPassword: values.confirmPassword,
-      role: "Secertary",
     };
 
     axios
       .post("https://meetingss.onrender.com/auth/signup", formData)
       .then((response) => {
         console.log(response.data);
-        if (response.data.message === "Secertary Added Successfully !") {
+        if (response.data.success) {
+          toast.success(response.data.message);
           navigate("/login");
+        }else{
+          setErrorMessage(response.data.message)
         }
       })
       .catch((error) => {
@@ -158,6 +161,7 @@ export default function Signup() {
                     {t("signup.loginHint")}{" "}
                     <Link to={"/login"}>{t("signup.login")}</Link>
                   </p>
+                  <small className="text-danger">{errorMessage}</small>
                   <div
                     id="btn"
                     type="submit"
