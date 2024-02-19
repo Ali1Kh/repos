@@ -164,7 +164,7 @@ function CreateManagerAccount() {
                     type="submit"
                     className="Signup-btn d-flex justify-content-center align-items-center mt-3"
                   >
-                    <button type="submit">{t("signup.signupheader")}</button>
+                    <button type="submit">{t("signup.createManagerAccount")}</button>
                   </div>
                 </Form>
               </Formik>
