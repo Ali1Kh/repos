@@ -38,6 +38,14 @@ router.get(
   asyncHandler(secretaryController.getSecMeetings)
 );
 
+router.get(
+  "/getSecMeetings/:meetingId",
+  isAuthenticated,
+  isAuthorized("Secertary"),
+  validation(secretarySchema.meetingDetailsSchema),
+  asyncHandler(secretaryController.getSecMeetingsDetails)
+);
+
 router.patch(
   "/updateMeeting/:meetingId",
   isAuthenticated,

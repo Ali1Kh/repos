@@ -35,6 +35,12 @@ export const updateMeetingSchema = joi
   })
   .required();
 
+export const meetingDetailsSchema = joi
+  .object({
+    meetingId: joi.number().required(),
+  })
+  .required();
+
 export const deleteMeetingSchema = joi
   .object({
     meetingId: joi.number().required(),

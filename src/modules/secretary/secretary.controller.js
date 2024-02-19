@@ -65,6 +65,13 @@ export const getSecMeetings = async (req, res, next) => {
   return res.json({ success: true, meetings });
 };
 
+export const getSecMeetingsDetails = async (req, res, next) => {
+  let meetings = await Meetings.findAll({
+    where: { addedBy: req.payload.id, meeting_id: req.params.meetingId },
+  });
+  return res.json({ success: true, meetings });
+};
+
 export const getSecManagers = async (req, res, next) => {
   let managers = await Manager.findAll({
     attributes: ["manager_id", "first_name", "last_name"],
