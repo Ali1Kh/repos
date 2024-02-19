@@ -2,54 +2,15 @@ import React, { useEffect, useState } from "react";
 import "./meetingDetails.css";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
-export default function MeetingDetails(props) {
-
-  const [meetingsDetails, setDetails] = useState([]);
+export default function MeetingDetails({ meetingsDetails }) {
   const [t] = useTranslation();
 
-  useEffect(() => {
-    getMeetingsDetails();
-    console.log(props)
-  }, []);
-
-  function getMeetingsDetails() {
-    const authToken = localStorage.getItem('token');
-
-    if (!authToken) {
-      console.error("Authentication token not found in Local Storage");
-      return;
-    }
-
-    axios
-      .get('https://meetingss.onrender.com/meetings/', {
-        headers: {
-          'token': authToken,
-        },
-      })
-      .then(response => {
-        
-        if (response.data.success === true) {
-          setDetails(response.data.meetings);
-          console.log(response.data.meetings);
-        }
-      })
-      .catch(err => console.error(err));
-  }
-
-  // let meetingsDetails = {
-  //   GuestName: "Ali Khaled ElSa3dany",
-  //   MeetingTopic: "Eating",
-  //   MeetingDate: "10-2-99",
-  //   MeetingAddress: "bolq abo el 3ela",
-  //   MeetingTime: "12:00 PM",
-  //   MeetingStatus: "Not Done",
-  //   Area: "inside",
-  //   Comments: "3mk",
-  // };
-  // aaaa
   return (
-    <>
-      <div className="modal fade" id="meetingModal">
+    <div>
+      <div
+        className="modal fade"
+        id={`meetingModal${meetingsDetails.meeting_id}`}
+      >
         <div
           className="modal-dialog col-md-7 modal-dialog-centered"
           role="document"
@@ -97,6 +58,6 @@ export default function MeetingDetails(props) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
