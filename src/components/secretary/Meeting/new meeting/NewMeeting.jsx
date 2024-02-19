@@ -9,7 +9,7 @@ import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { useEffect } from "react";
-import toast from "react-hot-toast"
+import toast from "react-hot-toast";
 const newTheme = (theme) =>
   createTheme({
     palette: {

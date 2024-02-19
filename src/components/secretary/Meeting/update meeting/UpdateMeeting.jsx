@@ -7,6 +7,8 @@ import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 import $ from "jquery";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
+import toast from "react-hot-toast";
 export default function UpdateMeeting() {
   const newTheme = (theme) =>
     createTheme({
@@ -21,13 +23,10 @@ export default function UpdateMeeting() {
   const { id } = useParams();
 
   useEffect(() => {
-    $("#meetNotes").val(id);
+    $("#meetPerson").val();
   }, []);
 
-  function updateMeeting() {
-
-    
-
+  async function updateMeeting() {
     let person = $("#meetPerson").val();
     let topic = $("#meetTopic").val();
     let address = $("#meetAddress").val();
@@ -57,15 +56,29 @@ export default function UpdateMeeting() {
       });
     }
 
-    let data = {
+    let initData = {
       date: dateInput.split(",")[0],
       time: timeInput.split(",")[1],
       person,
-      topic,
+      about: topic,
       address,
       notes,
-      area,
+      in_or_out: area,
     };
+
+    try {
+      let { data } = await axios.patch(
+        `https://meetingss.onrender.com/secretary/updateMeeting/${id}`,
+        initData,
+        { headers: { token: localStorage.getItem("token") } }
+      );
+      console.log(data);
+      if (data.success) {
+        toast.success(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const [t, il8n] = useTranslation();
@@ -142,7 +155,7 @@ export default function UpdateMeeting() {
                   id="radio2"
                   className="radio-button__input"
                   type="radio"
-                  value={"inside"}
+                  value={"Inside"}
                 />
                 <label htmlFor="radio2" className="radio-button__label">
                   <span className="radio-button__custom"></span>
@@ -155,7 +168,7 @@ export default function UpdateMeeting() {
                   id="radio1"
                   className="radio-button__input"
                   type="radio"
-                  value={"outside"}
+                  value={"Outside"}
                 />
                 <label htmlFor="radio1" className="radio-button__label">
                   <span className="radio-button__custom"></span>
