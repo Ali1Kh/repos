@@ -58,7 +58,6 @@ export const createMeeting = async (req, res, next) => {
   return res.json({ success: true, message: "Meeting created Successfully" });
 };
 
-
 export const getSecMeetings = async (req, res, next) => {
   let meetings = await Meetings.findAll({
     where: { addedBy: req.payload.id },
@@ -66,12 +65,32 @@ export const getSecMeetings = async (req, res, next) => {
   return res.json({ success: true, meetings });
 };
 
-
-
 export const getSecManagers = async (req, res, next) => {
   let managers = await Manager.findAll({
     attributes: ["manager_id", "first_name", "last_name"],
     where: { secretary_id: req.payload.id },
   });
   return res.json({ success: true, managers });
+};
+
+export const updateMeeting = async (req, res, next) => {
+  let isMeeting = await Meetings.findOne({
+    where: { meeting_id: req.params.meetingId },
+  });
+  if (!isMeeting) return next(new Error("Meeting Not Found"));
+  if (isMeeting.dataValues.addedBy != req.payload.id)
+    return next(new Error("You Don't have permissions"));
+  isMeeting.update({ ...req.body });
+  return res.json({ success: true, meesage: "Meeting Updated Successfully" });
+};
+
+export const deleteMeeting = async (req, res, next) => {
+  let isMeeting = await Meetings.findOne({
+    where: { meeting_id: req.params.meetingId },
+  });
+  if (!isMeeting) return next(new Error("Meeting Not Found"));
+  if (isMeeting.dataValues.addedBy != req.payload.id)
+    return next(new Error("You Don't have permissions"));
+  isMeeting.destroy();
+  return res.json({ success: true, meesage: "Meeting Deleted Successfully" });
 };

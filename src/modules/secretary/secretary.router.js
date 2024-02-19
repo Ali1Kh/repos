@@ -37,4 +37,20 @@ router.get(
   isAuthorized("Secertary"),
   asyncHandler(secretaryController.getSecMeetings)
 );
+
+router.patch(
+  "/updateMeeting/:meetingId",
+  isAuthenticated,
+  isAuthorized("Secertary"),
+  validation(secretarySchema.updateMeetingSchema),
+  asyncHandler(secretaryController.updateMeeting)
+);
+
+router.delete(
+  "/deleteMeeting/:meetingId",
+  isAuthenticated,
+  isAuthorized("Secertary"),
+  validation(secretarySchema.deleteMeetingSchema),
+  asyncHandler(secretaryController.deleteMeeting)
+);
 export default router;
