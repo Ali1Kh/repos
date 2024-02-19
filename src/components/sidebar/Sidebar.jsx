@@ -177,6 +177,15 @@ const Sidebar = () => {
                     </span>
                     <span>{t("sidebar.createMeeting")}</span>
                   </Link>
+                  <Link
+                    className="sidebarItem animate__animated"
+                    to={"/meeting/createManagerAccount"}
+                  >
+                    <span className="d-inline-flex  text-center justify-content-center">
+                      <i className="fa fa-user-plus "></i>
+                    </span>
+                    <span>{t("sidebar.createManagerAccount")}</span>
+                  </Link>
                 </>
               ) : (
                 ""

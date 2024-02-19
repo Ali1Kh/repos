@@ -6,6 +6,8 @@
 }
 
 .inputItem input,
+.inputItem select,
+.inputItem option,
 .inputItem textarea,
 .MuiFormControl-root.MuiTextField-root.css-z3c6am-MuiFormControl-root-MuiTextField-root , .css-3ea4o3 {
   background-color: var(--inputsBgColor) !important;
@@ -19,6 +21,7 @@
 }
 
 .inputItem input:not(.MuiInputBase-root input),
+.inputItem select,
 .MuiFormControl-root.MuiTextField-root.css-z3c6am-MuiFormControl-root-MuiTextField-root , .css-3ea4o3 {
   border: 2px solid var(--sec-color) !important;
 }
@@ -52,10 +55,17 @@
   color: #8f8f91;
 }
 .inputItem input:focus,
+.inputItem select:focus,
+.inputItem option:focus,
 .inputItem textarea:focus {
   background-color: none !important;
   outline: none !important;
   box-shadow: none !important;
+}
+
+.inputItem select option{
+  color: black !important;
+  /* background-color: var(--cardBgColor) !important; */
 }
 /* !Radio Buttons */
 .radio-buttons-container {

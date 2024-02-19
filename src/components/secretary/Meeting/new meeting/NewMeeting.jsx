@@ -7,7 +7,9 @@ import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 import $ from "jquery";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
-import  axios  from "axios";
+import axios from "axios";
+import { useEffect } from "react";
+import toast from "react-hot-toast"
 const newTheme = (theme) =>
   createTheme({
     palette: {
@@ -18,11 +20,14 @@ export default function NewMeeting() {
   let [date, setDate] = useState(null);
   let [time, setTime] = useState(null);
 
+  let [managers, setManagers] = useState([]);
+
   async function addMeeting() {
     let person = $("#meetPerson").val();
     let topic = $("#meetTopic").val();
     let address = $("#meetAddress").val();
     let notes = $("#meetNotes").val();
+    let managerSelected = $("#managerSelected").val();
     let area = $('input[name="radio-group"]:checked').val();
 
     if (
@@ -32,7 +37,8 @@ export default function NewMeeting() {
       topic == "" ||
       address == "" ||
       notes == "" ||
-      area == ""
+      area == "" ||
+      managerSelected == ""
     ) {
       $(".error").removeClass("d-none");
       $(".error").addClass("d-block");
@@ -48,17 +54,28 @@ export default function NewMeeting() {
       });
     }
 
-    let data = {
+    let initData = {
       date: dateInput.split(",")[0],
       time: timeInput.split(",")[1],
       person,
-      topic,
+      about: topic,
       address,
       notes,
-      area,
+      in_or_out: area,
     };
 
-    console.log(data, "manager");
+    try {
+      let { data } = await axios.post(
+        `https://meetingss.onrender.com/secretary/createMeeting/${managerSelected}`,
+        initData,
+        { headers: { token: localStorage.getItem("token") } }
+      );
+      if (data.success) {
+        toast.success(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function getSecManagers() {
@@ -66,7 +83,12 @@ export default function NewMeeting() {
       "https://meetingss.onrender.com/secretary/getSecManagers",
       { headers: { token: localStorage.getItem("token") } }
     );
+    setManagers(data.managers);
   }
+
+  useEffect(() => {
+    getSecManagers();
+  }, []);
 
   const [t, il8n] = useTranslation();
 
@@ -137,52 +159,69 @@ export default function NewMeeting() {
               placeholder={t("CreateOrUpdateMeeting.notes")}
             ></textarea>
           </div>
-          <div className="radios inputItem mb-3 px-5 d-flex gap-3 align-items-center">
-            <div className="radio-buttons-container ">
-              <div className="radio-button d-flex align-items-center">
-                <input
-                  name="radio-group"
-                  id="radio2"
-                  className="radio-button__input"
-                  type="radio"
-                  value={"inside"}
-                />
-                <label
-                  htmlFor="radio2"
-                  className="radio-button__label BlackToWhite"
-                >
-                  <span className="radio-button__custom"></span>
-                  {t("CreateOrUpdateMeeting.inside")}
-                </label>
-              </div>
-              <div className="radio-button d-flex align-items-center">
-                <input
-                  name="radio-group"
-                  id="radio1"
-                  className="radio-button__input"
-                  type="radio"
-                  value={"outside"}
-                />
-                <label
-                  htmlFor="radio1"
-                  className="radio-button__label BlackToWhite"
-                >
-                  <span className="radio-button__custom"></span>
-                  {t("CreateOrUpdateMeeting.outside")}
-                </label>
+          <div className="d-flex justify-content-between">
+            <div className="inputItem mb-3 px-5">
+              <select id="managerSelected" className="py-2 w-auto px-2">
+                <option value="">Choose Manager</option>
+                {managers?.map((manager) => (
+                  <>
+                    <option value={manager.manager_id}>
+                      {manager.first_name} {manager.last_name}
+                    </option>
+                  </>
+                ))}
+              </select>
+            </div>
+            <div className="radios inputItem mb-3 px-5 d-flex gap-3 align-items-center">
+              <div className="radio-buttons-container ">
+                <div className="radio-button d-flex align-items-center">
+                  <input
+                    name="radio-group"
+                    id="radio2"
+                    className="radio-button__input"
+                    type="radio"
+                    value={"Inside"}
+                  />
+                  <label
+                    htmlFor="radio2"
+                    className="radio-button__label BlackToWhite"
+                  >
+                    <span className="radio-button__custom"></span>
+                    {t("CreateOrUpdateMeeting.inside")}
+                  </label>
+                </div>
+                <div className="radio-button d-flex align-items-center">
+                  <input
+                    name="radio-group"
+                    id="radio1"
+                    className="radio-button__input"
+                    type="radio"
+                    value={"Outside"}
+                  />
+                  <label
+                    htmlFor="radio1"
+                    className="radio-button__label BlackToWhite"
+                  >
+                    <span className="radio-button__custom"></span>
+                    {t("CreateOrUpdateMeeting.outside")}
+                  </label>
+                </div>
               </div>
             </div>
           </div>
+
           <div className="d-flex flex-column w-100 justify-content-center align-items-center ">
             <small style={{ color: "red" }} className="error d-none mb-3">
               All Inputs Are Required!
             </small>
+
             <button onClick={addMeeting} className="addButton">
               {t("CreateOrUpdateMeeting.buttonAdd")}
             </button>
           </div>
         </div>
       </div>
+
       <Helmet>
         <title>Add Meeting</title>
       </Helmet>

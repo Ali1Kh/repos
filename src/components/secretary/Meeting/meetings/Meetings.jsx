@@ -12,152 +12,28 @@ import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 export default function Meetings() {
-  let [meetingsRows, setMeetingsRows] = useState([
-    {
-      id: 3341,
-      Date: "20-10-2025",
-      Time: "3:00",
-      Person: "Ali elsaadany",
-      Topic: "I dont know",
-      Address: "hy25a",
-      Notes: "lol",
-      Area: "Inside",
-      Status: "not done",
-    },
-    {
-      id: 2,
-      Date: "10-12-2024",
-      Time: "12:00",
-      Person: "Mustafa salem",
-      Topic: "Lol lol odsasdakijf",
-      Address: "el4ar3",
-      Notes: "lol",
-      Area: "Outside",
-      Status: "done",
-    },
-    {
-      id: 3,
-      Date: "10-05-2024",
-      Time: "2:00",
-      Person: "Qadry omar",
-      Topic: "Modo3 mohom",
-      Address: "hy25a",
-      Notes: "anta mal y3am lorem12fsd",
-      Area: "Inside",
-      Status: "done",
-    },
-    {
-      id: 4,
-      Date: "10-05-2024",
-      Time: "2:00",
-      Person: "Mahmoud khaled",
-      Topic: "Modo3 mohom",
-      Address: "hy25a",
-      Notes: "anta mal y3am lorem12fsd",
-      Area: "Inside",
-      Status: "done",
-    },
-    {
-      id: 5,
-      Date: "10-05-2024",
-      Time: "2:00",
-      Person: "Pop",
-      Topic: "Modo3 mohom",
-      Address: "hy25a",
-      Notes: "anta mal y3am lorem12fsd",
-      Area: "Inside",
-      Status: "cancelled",
-    },
-    {
-      id: 6,
-      Date: "10-05-2024",
-      Time: "2:00",
-      Person: "Taha",
-      Topic: "Modo3 mohom",
-      Address: "hy25a",
-      Notes: "anta mal y3am lorem12fsd",
-      Area: "Inside",
-      Status: "not done",
-    },
-    {
-      id: 7,
-      Date: "10-05-2024",
-      Time: "2:00",
-      Person: "Ali",
-      Topic: "Modo3 mohom",
-      Address: "hy25a",
-      Notes: "anta mal y3am lorem12fsdxxxxxxxxxas as asmjfkjfamisdk fsaokfjad",
-      Area: "Inside",
-      Status: "not done",
-    },
-    {
-      id: 8,
-      Date: "10-05-2024",
-      Time: "2:00",
-      Person: "Salah",
-      Topic: "Modo3 mohom",
-      Address: "hy25a",
-      Notes: "anta mal y3am lorem12fsd",
-      Area: "Inside",
-      Status: "not done",
-    },
-    {
-      id: 9,
-      Date: "10-05-2024",
-      Time: "2:00",
-      Person: "Nabil",
-      Topic: "Modo3 mohom",
-      Address: "hy25a",
-      Notes: "anta mal y3am lorem12fsd",
-      Area: "Inside",
-      Status: "not done",
-    },
-    {
-      id: 10,
-      Date: "10-05-2024",
-      Time: "2:00",
-      Person: "Omar",
-      Topic: "Modo3 mohom",
-      Address: "hy25a",
-      Notes: "anta mal y3am lorem12fsd",
-      Area: "Inside",
-      Status: "done",
-    },
-    {
-      id: 11,
-      Date: "10-05-2024",
-      Time: "2:00",
-      Person: "Ahmed",
-      Topic: "Modo3 mohom",
-      Address: "hy25a",
-      Notes: "anta mal y3am lorem12fsd",
-      Area: "Inside",
-      Status: "not done",
-    },
-    {
-      id: 12,
-      Date: "10-05-2024",
-      Time: "2:00",
-      Person: "Saged",
-      Topic: "Modo3 mohom",
-      Address: "hy25a",
-      Notes: "anta mal y3am lorem12fsd",
-      Area: "Inside",
-      Status: "not done",
-    },
-    {
-      id: 13,
-      Date: "10-05-2024",
-      Time: "2:00",
-      Person: "Ali",
-      Topic: "Modo3 mohom",
-      Address: "hy25a",
-      Notes: "anta mal y3am lorem12fsd",
-      Area: "Inside",
-      Status: "done",
-    },
-  ]);
+  let [meetingsRows, setMeetingsRows] = useState([]);
+  const getRowId = (row) => row.meeting_id;
+
+  async function getSecMeetings(){
+    try {
+      let { data } = await axios.get(
+        `https://meetingss.onrender.com/secretary/getSecMeetings`,
+        { headers: { token: localStorage.getItem("token") } }
+      );
+      if (data.success) {
+        setMeetingsRows(data.meetings)
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(()=>{
+    getSecMeetings();
+  },[])
   const [open, setOpen] = useState(false);
   let [selectedId, setSelectId] = useState(null);
   let meetingNavigate = useNavigate();
@@ -270,7 +146,7 @@ export default function Meetings() {
                 }}
                 columns={[
                   {
-                    field: "Date",
+                    field: "date",
                     headerName: t("Meetings.table.date"),
                     headerClassName: "tableColumns",
                     align: "center",
@@ -278,7 +154,7 @@ export default function Meetings() {
                     width: 125,
                   },
                   {
-                    field: "Time",
+                    field: "time",
                     headerName: t("Meetings.table.time"),
                     headerClassName: "tableColumns",
                     align: "center",
@@ -286,7 +162,7 @@ export default function Meetings() {
                     width: 125,
                   },
                   {
-                    field: "Person",
+                    field: "person",
                     headerName: t("Meetings.table.person"),
                     headerClassName: "tableColumns",
                     align: "center",
@@ -294,7 +170,7 @@ export default function Meetings() {
                     width: 125,
                   },
                   {
-                    field: "Topic",
+                    field: "about",
                     headerName: t("Meetings.table.topic"),
                     headerClassName: "tableColumns",
                     align: "center",
@@ -302,7 +178,7 @@ export default function Meetings() {
                     width: 125,
                   },
                   {
-                    field: "Address",
+                    field: "address",
                     headerName: t("Meetings.table.address"),
                     headerClassName: "tableColumns ",
                     align: "center",
@@ -310,7 +186,7 @@ export default function Meetings() {
                     width: 125,
                   },
                   {
-                    field: "Area",
+                    field: "in_or_out",
                     headerName: t("Meetings.table.area"),
                     headerClassName: "tableColumns",
                     align: "center",
@@ -318,7 +194,7 @@ export default function Meetings() {
                     width: 125,
                   },
                   {
-                    field: "Status",
+                    field: "statues",
                     headerName: t("Meetings.table.status"),
                     headerClassName: "tableColumns",
                     align: "center",
@@ -326,7 +202,7 @@ export default function Meetings() {
                     width: 125,
                   },
                   {
-                    field: "Notes",
+                    field: "notes",
                     headerName: t("Meetings.table.notes"),
                     headerClassName: "tableColumns",
                     align: "center",
@@ -335,6 +211,7 @@ export default function Meetings() {
                   },
                 ]}
                 rows={meetingsRows}
+                getRowId={getRowId}
                 sx={{
                   overflow: "auto",
                   maxHeight: "550px",
