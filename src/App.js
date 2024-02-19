@@ -14,6 +14,7 @@ import NotFound from "./components/NotFound/NotFound";
 import Calender from "./components/manager/Calender/Calender";
 import { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar/Navbar.jsx";
+import CreateManagerAccount from "./components/secretary/Meeting/create manager account/CreateManagerAccount";
 
 const router = createHashRouter([
   {
@@ -44,11 +45,16 @@ const router = createHashRouter([
             element: <UpdateMeeting />,
           },
           {
+            path: "createManagerAccount",
+            element: <CreateManagerAccount />,
+          },
+          {
             path: "*",
             element: <NotFound />,
           },
         ],
       },
+
       {
         path: "/manager",
         children: [

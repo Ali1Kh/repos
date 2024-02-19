@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Maps&family=Work+Sans:wght@200;300;400;500;600;700;800&display=swap");
+
+.signupHead h2 {
+    font-size: 30px !important;
+    font-family: "Work Sans", sans-serif;
+}
+
+.ineer {
+    background-color: var(--cardBgColor);
+    border-radius: 10px !important;
+}
+
+.name input {
+    width: 49%;
+}
+
+.form input {
+    margin-top: 1rem !important;
+    border-radius: 15px;
+    color: var(--BlackToWhite) !important;
+    background: var(--main-color) !important;
+    border: 2px solid var(--sec-color) !important;
+}
+
+.form input::placeholder {
+    color: #8f8f91;
+}
+
+.Signup-btn button {
+    background: var(--sec-color);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.33);
+    color: white;
+    padding: 15px;
+    border: 0;
+    border-radius: 10px;
+    font-family: var(--main-font);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    transition: all 0.5s;
+}
+
+.Signup-btn button:hover {
+    background: darkslateblue;
+}
+
+.error-label {
+    color: #ff0000;
+    font-size: 14px;
+    margin-top: 5px;
+}

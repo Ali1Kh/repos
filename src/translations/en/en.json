@@ -32,14 +32,16 @@
     "button": "Create account",
     "signupheader":"Sign Up",
     "loginHint":"Already Have An Acount ?",
-    "login":"Login"
+    "login":"Login",
+    "createManagerAccount":"Create Manager Account"
   },
   "search":"Search",
   "sidebar": {
     "home": "Home",
     "calendar": "Calendar",
     "meetings":"Meetings",
-    "createMeeting":"Create Meeting"
+    "createMeeting":"Create Meeting",
+    "createManagerAccount":"Create manager account"
   },
   "Calendar":{
     "calendar":"Calendar",

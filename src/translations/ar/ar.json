@@ -37,7 +37,8 @@
     "home": "الاجتماعات",
     "calendar": "تقويم",
     "meetings": "الاجتماعات",
-    "createMeeting": "إنشاء اجتماع"
+    "createMeeting": "إنشاء اجتماع",
+    "createManagerAccount":"إنشاء حساب المدير"
   },
   "Calendar": {
     "calendar":"التقويم",
