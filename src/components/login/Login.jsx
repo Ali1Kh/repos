@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./login.css";
 import logo from "../../image/Logo.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,9 +6,7 @@ import Form from "react-bootstrap/Form";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 
-
 export default function Login() {
-
   const navigate = useNavigate();
 
   const validateEmail = (email) => {
@@ -21,48 +19,50 @@ export default function Login() {
     return passwordRegex.test(password);
   };
 
-  const handleLogin = () => {
+  let [errorMessage, seterrorMessage] = useState();
 
+  const handleLogin = () => {
     const email = document.getElementById("emailName").value;
     const password = document.getElementById("password").value;
     const role = document.getElementById("role").value;
 
     if (!validateEmail(email)) {
-      alert("Invalid email address");
+      seterrorMessage("Invalid Email");
       return;
     }
 
     if (!validatePassword(password)) {
-      alert("Invalid password");
+      seterrorMessage("Invalid password");
       return;
     }
 
     if (role === "Role") {
-      alert("choose a role");
+      seterrorMessage("Choose a Role");
       return;
     }
 
     const formData = {
-      "E_mail": email,
-      "PassWord": password,
-      "role": role
+      E_mail: email,
+      PassWord: password,
+      role: role,
     };
 
-    axios.post('https://meetingss.onrender.com/auth/login', formData)
-      .then(response => {
+    axios
+      .post("https://meetingss.onrender.com/auth/login", formData)
+      .then((response) => {
+        console.log(response);
         const token = response.data.token;
         if (response.data.success === true) {
           localStorage.setItem("token", token);
           navigate("/#");
-          console.log(response.data);
+        } else {
+          seterrorMessage(response.data.message);
         }
       })
-      .catch(error => {
-        console.error('Error:', error);
+      .catch((error) => {
+        console.error("Error:", error);
       });
   };
-
-
 
   const [t] = useTranslation();
   return (
@@ -78,19 +78,26 @@ export default function Login() {
                 <div className="form mb-4">
                   <input
                     id="emailName"
-                    type="text"
+                    type="email"
                     className="user-name mt-3 d-flex justify-content-center form-control"
                     placeholder={t("Login.email")}
                   />
                   <input
                     id="password"
-                    type="text"
+                    type="password"
                     className="user-name mt-3 d-flex justify-content-center form-control"
                     placeholder={t("Login.password")}
                   />
                 </div>
-                <Form.Select id="role" aria-label="Role" className="role mt-3" arial>
-                  <option selected disabled>{t("signup.role")}</option>
+                <Form.Select
+                  id="role"
+                  aria-label="Role"
+                  className="role mt-3"
+                  arial
+                >
+                  <option selected disabled>
+                    {t("signup.role")}
+                  </option>
                   <option value="Manager">{t("signup.manager")}</option>
                   <option value="Secertary">{t("signup.sec")}</option>
                 </Form.Select>
@@ -101,10 +108,12 @@ export default function Login() {
                   {t("Login.signuphint")}
                   <Link to={"/signup"}>{t("Login.signup")}</Link>
                 </p>
-                <div onClick={handleLogin} className="login-btn d-flex justify-content-center align-items-center mt-3">
-                  <Link className="">
-                    {t("Login.button")}
-                  </Link>
+                <small className="text-danger">{errorMessage}</small>
+                <div
+                  onClick={handleLogin}
+                  className="login-btn d-flex justify-content-center align-items-center mt-3"
+                >
+                  <Link className="">{t("Login.button")}</Link>
                 </div>
               </div>
             </div>
