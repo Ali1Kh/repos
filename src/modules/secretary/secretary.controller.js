@@ -78,10 +78,11 @@ export const updateMeeting = async (req, res, next) => {
     where: { meeting_id: req.params.meetingId },
   });
   if (!isMeeting) return next(new Error("Meeting Not Found"));
+
   if (isMeeting.dataValues.addedBy != req.payload.id)
     return next(new Error("You Don't have permissions"));
   isMeeting.update({ ...req.body });
-  return res.json({ success: true, meesage: "Meeting Updated Successfully" });
+  return res.json({ success: true, message: "Meeting Updated Successfully" });
 };
 
 export const deleteMeeting = async (req, res, next) => {
@@ -92,5 +93,5 @@ export const deleteMeeting = async (req, res, next) => {
   if (isMeeting.dataValues.addedBy != req.payload.id)
     return next(new Error("You Don't have permissions"));
   isMeeting.destroy();
-  return res.json({ success: true, meesage: "Meeting Deleted Successfully" });
+  return res.json({ success: true, message: "Meeting Deleted Successfully" });
 };
