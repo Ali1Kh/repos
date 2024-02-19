@@ -1,8 +1,9 @@
 import "./sidebar.css";
 import logo from "../../image/Logo.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { jwtDecode } from "jwt-decode";
 import $ from "jquery";
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -56,6 +57,7 @@ const Sidebar = () => {
     });
 
     $(".logout").click((e) => {
+      localStorage.removeItem("token");
       navigate("/login");
     });
   });
@@ -67,6 +69,21 @@ const Sidebar = () => {
   };
 
   const [t] = useTranslation();
+
+  let [username, setUsername] = useState();
+  let [email, setEmail] = useState();
+  let [role, setRole] = useState();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      const { username, E_mail, role } = jwtDecode(
+        localStorage.getItem("token")
+      );
+      setUsername(username);
+      setRole(role);
+      setEmail(E_mail);
+    }
+  }, []);
 
   return (
     <>
@@ -156,31 +173,29 @@ const Sidebar = () => {
               </span>
               <span>{t("sidebar.createMeeting")}</span>
             </Link>
-            <Link className="sidebarItem animate__animated" to={"/meeting/createManagerAccount"}>
-              <span className="d-inline-flex text-center justify-content-center">
-                <i className="fa-regular fa-plus "></i>
-              </span>
-              <span>{t("sidebar.createManagerAccount")}</span>
-            </Link>
           </div>
           <div className="setting-side mt-auto mb-3">
             <div className="account border-top d-flex justify-content-center align-items-center gap-3 px-3 py-2">
               <div className="accImage text-black d-flex justify-content-center align-items-center bg-info">
-                <span className="m-0 p-0">A</span>
+                <span className="m-0 p-0">
+                  {username?.split("")[0].toUpperCase()}
+                </span>
               </div>
               <div className="accInfo text-white">
                 <div className="username">
-                  <span>Ali Elsaadany</span>
+                  <span>{username}</span>
                 </div>
                 <div className="email" style={{ color: "var(--mutedColor)" }}>
-                  alielsaadany94@gmail.com
+                  {email}
                 </div>
               </div>
               <div className="accMore position-relative cursorPointer d-flex justify-content-center align-items-center ms-auto">
                 <i className="fa-solid fa-ellipsis-vertical text-white"></i>
                 <div className="moreContext">
                   <div className="item">Settings</div>
-                  <div onClick={autoLogoutAfterTime} className="item logout">Logout</div>
+                  <div onClick={autoLogoutAfterTime} className="item logout">
+                    Logout
+                  </div>
                 </div>
               </div>
             </div>

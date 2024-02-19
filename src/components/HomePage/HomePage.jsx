@@ -4,75 +4,14 @@ import "./homePage.css";
 import MeetingDetails from "../manager/meetingDetails/meetingDetails.jsx";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
-let randomColor = require("random-color");
+
 export default function HomePage() {
+
+
   let meetings = [
     {
       GuestName: "Ali Khaled ElSa3dany",
       GuestEmail: "Elsa3dany22@gmail.com",
-      MeetingTopic: "blablbaa",
-      MeetingTime: "12:00 PM",
-      MeetingStatus: "Not Done",
-    },
-    {
-      GuestName: "Mostafa Salem",
-      GuestEmail: "msalem1@gmail.com",
-      MeetingTopic: "blablbaa",
-      MeetingTime: "12:00 PM",
-      MeetingStatus: "Not Done",
-    },
-    {
-      GuestName: "Motaaz",
-      GuestEmail: "motaaz33@gmail.com",
-      MeetingTopic: "blablbaa",
-      MeetingTime: "12:00 PM",
-      MeetingStatus: "Not Done",
-    },
-    {
-      GuestName: "Omar Kadry Dahab",
-      GuestEmail: "dahab10@gmail.com",
-      MeetingTopic: "blablbaa",
-      MeetingTime: "12:00 PM",
-      MeetingStatus: "Not Done",
-    },
-    {
-      GuestName: "Salem Ramadan",
-      GuestEmail: "salem99@gmail.com",
-      MeetingTopic: "blablbaa",
-      MeetingTime: "11:00 PM",
-      MeetingStatus: "Not Done",
-    },
-    {
-      GuestName: "Omar Hefnawy",
-      GuestEmail: "hefnawy7@gmail.com",
-      MeetingTopic: "blablbaa",
-      MeetingTime: "09:00 PM",
-      MeetingStatus: "Not Done",
-    },
-    {
-      GuestName: "Zeyad Nader",
-      GuestEmail: "zezo98@gmail.com",
-      MeetingTopic: "blablbaa",
-      MeetingTime: "12:00 PM",
-      MeetingStatus: "Not Done",
-    },
-    {
-      GuestName: "Mohamed Nabil",
-      GuestEmail: "nabil2@gmail.com",
-      MeetingTopic: "blablbaa",
-      MeetingTime: "12:00 PM",
-      MeetingStatus: "Not Done",
-    },
-    {
-      GuestName: "Saged Sameh",
-      GuestEmail: "saged870@gmail.com",
-      MeetingTopic: "blablbaa",
-      MeetingTime: "12:00 PM",
-      MeetingStatus: "Not Done",
-    },
-    {
-      GuestName: "Taha",
-      GuestEmail: "taha66@gmail.com",
       MeetingTopic: "blablbaa",
       MeetingTime: "12:00 PM",
       MeetingStatus: "Not Done",
