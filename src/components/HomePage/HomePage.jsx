@@ -12,7 +12,7 @@ export default function HomePage() {
 
   useEffect(() => {
     getMeetings();
-  },[]);
+  }, []);
 
   function getMeetings() {
     const authToken = localStorage.getItem('token');
@@ -137,16 +137,13 @@ export default function HomePage() {
                         }}
                       >
                         <span className="m-0 p-0 ">
-                          {meeting.GuestName.split("").slice(0, 1)}
+                          {meeting.person.toUpperCase().split("").slice(0, 1)}
                         </span>
                       </div>
                     </div>
                     <div className="guest-account text-center d-flex flex-column align-items-center mt-3">
                       <div className="guest-name flex-column">
-                        <h4>{meeting.GuestName}</h4>
-                      </div>
-                      <div className="guest-email">
-                        <p>{meeting.GuestEmail}</p>
+                        <h4>{meeting.person}</h4>
                       </div>
                     </div>
                   </div>
@@ -155,28 +152,28 @@ export default function HomePage() {
                       <p className="text-center m-1 heading">
                         {t("HomePage.meetingTopic")}
                       </p>
-                      <p className="text-center m-1">{meeting.MeetingTopic}</p>
+                      <p className="text-center m-1">{meeting.about}</p>
                     </div>
 
                     <div className="meeting-time col-lg-4 col-md-4">
                       <p className="text-center m-1 heading">
                         {t("HomePage.meetingTime")}
                       </p>
-                      <p className="text-center m-1">{meeting.MeetingStatus}</p>
+                      <p className="text-center m-1">{meeting.statues}</p>
                     </div>
 
                     <div className="meeting-date col-lg-4 col-md-4">
                       <p className="text-center m-1 heading">
                         {t("HomePage.meetingDate")}
                       </p>
-                      <p className="text-center m-1">{meeting.MeetingTime}</p>
+                      <p className="text-center m-1">{meeting.time}</p>
                     </div>
                   </div>
                 </div>
               </div>
             )) : ""}
           </div>
-          <MeetingDetails />
+          <MeetingDetails id = {"lol"}/>
         </div>
       </div>
     </>
