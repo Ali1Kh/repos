@@ -7,6 +7,7 @@ import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 import $ from "jquery";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
+import  axios  from "axios";
 const newTheme = (theme) =>
   createTheme({
     palette: {
@@ -17,7 +18,7 @@ export default function NewMeeting() {
   let [date, setDate] = useState(null);
   let [time, setTime] = useState(null);
 
-  function addMeeting() {
+  async function addMeeting() {
     let person = $("#meetPerson").val();
     let topic = $("#meetTopic").val();
     let address = $("#meetAddress").val();
@@ -56,6 +57,15 @@ export default function NewMeeting() {
       notes,
       area,
     };
+
+    console.log(data, "manager");
+  }
+
+  async function getSecManagers() {
+    let { data } = await axios.get(
+      "https://meetingss.onrender.com/secretary/getSecManagers",
+      { headers: { token: localStorage.getItem("token") } }
+    );
   }
 
   const [t, il8n] = useTranslation();
@@ -69,7 +79,7 @@ export default function NewMeeting() {
         >
           {t("CreateOrUpdateMeeting.createMeeting")}
         </h2>
-      
+
         <div className="inputsContainer  w-100  p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
           <div className="calenderPicker row p-0 m-0">
             <div className="col-md-6  inputItem mb-3 px-5">
@@ -137,7 +147,10 @@ export default function NewMeeting() {
                   type="radio"
                   value={"inside"}
                 />
-                <label htmlFor="radio2" className="radio-button__label BlackToWhite">
+                <label
+                  htmlFor="radio2"
+                  className="radio-button__label BlackToWhite"
+                >
                   <span className="radio-button__custom"></span>
                   {t("CreateOrUpdateMeeting.inside")}
                 </label>
@@ -150,7 +163,10 @@ export default function NewMeeting() {
                   type="radio"
                   value={"outside"}
                 />
-                <label htmlFor="radio1" className="radio-button__label BlackToWhite">
+                <label
+                  htmlFor="radio1"
+                  className="radio-button__label BlackToWhite"
+                >
                   <span className="radio-button__custom"></span>
                   {t("CreateOrUpdateMeeting.outside")}
                 </label>
