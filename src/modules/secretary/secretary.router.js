@@ -21,7 +21,7 @@ router.post(
   "/createMeeting/:manager_id",
   isAuthenticated,
   isAuthorized("Secertary"),
-  // uploadFiles().single("attachment"),
+  uploadFiles().single("attachment"),
   validation(secretarySchema.createMeetingSchema),
   asyncHandler(secretaryController.createMeeting)
 );

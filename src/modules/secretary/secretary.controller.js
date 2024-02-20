@@ -63,19 +63,19 @@ export const createMeeting = async (req, res, next) => {
 
   if (dateAndTimeExites.length > 0)
     return next(new Error("Time In This Date Already Exits"));
-
-  // if (req.file) {
-  //   let { secure_url, public_id } = await cloudinary.uploader.upload(
-  //     req.file.path,
-  //     { folder: `meetingsApp/attachments/${req.params.manager_id}/` }
-  //   );
-  //   console.log(secure_url, public_id);
-  // }
-
+  console.log(req.file);
+  let upload;
+  if (req.file) {
+    upload = await cloudinary.uploader.upload(req.file.path, {
+      folder: `meetingsApp/attachments/${req.params.manager_id}/`,
+    });
+  }
   let meeting = await Meetings.create({
     ...req.body,
     statues: "not done",
     addedBy: req.payload.id,
+    attachmentLink: upload?.secure_url,
+    attachmentId: upload?.public_id,
   });
   await meeting_Manager.create({
     manager_id: isManager.manager_id,

@@ -1,6 +1,7 @@
 import multer, { diskStorage } from "multer";
 
 export function uploadFiles() {
+  console.log("HEllo");
   const storage = diskStorage({});
   const fileFilter = (req, file, cb) => {
     if (file.mimetype != "application/pdf") {

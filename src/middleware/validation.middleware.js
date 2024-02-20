@@ -6,7 +6,6 @@ export const validation = (schema) => {
       const errorMessages = validateResult.error.details.map((obj) => {
         return obj.message;
       });
-
       return next(new Error(errorMessages));
     }
     return next();
