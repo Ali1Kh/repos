@@ -17,8 +17,8 @@ export const Meetings = sequelize.define("Meetings", {
   date: { type: DataTypes.DATE, allowNull: false },
   notes: { type: DataTypes.STRING, allowNull: true },
   addedBy: { type: DataTypes.STRING, allowNull: true },
-  attachmentId: { type: DataTypes.STRING },
-  attachment: { type: DataTypes.STRING },
+  // attachmentId: { type: DataTypes.STRING },
+  // attachment: { type: DataTypes.STRING },
 });
 
 Meetings.associate = (models) => {

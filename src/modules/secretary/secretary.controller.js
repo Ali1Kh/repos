@@ -5,7 +5,7 @@ import { asyncHandler } from "../../utils/asyncHandler.js";
 import bcryptjs from "bcryptjs";
 import { meeting_Manager } from "../../../DB/models/meeting_Manager.model.js";
 import cloudinary from "../../utils/cloud.js";
-
+import { Op } from "sequelize";
 //createManagerAccount
 export const createManagerAccount = asyncHandler(async (req, res, next) => {
   const isSecretariesEmail = await Secertary.findOne({
@@ -37,30 +37,52 @@ export const createManagerAccount = asyncHandler(async (req, res, next) => {
 });
 
 export const createMeeting = async (req, res, next) => {
-
   let isManager = await Manager.findByPk(req.params.manager_id);
   if (!isManager) return next(new Error("Invalid Manager Id"));
 
   if (isManager.secretary_id != req.payload.id)
     return next(new Error("You Must Be The Secretary For This Manager Id"));
 
-  if (req.file) {
-    let { secure_url, public_id } = await cloudinary.uploader.upload(
-      req.file.path,
-      { folder: `meetingsApp/attachments/${req.params.manager_id}/` }
-    );
-    console.log(secure_url, public_id);
-  }
+  // Check Time Exitsss
+  const baseTime = new Date(`${req.body.date}T${req.body.time}`);
+  const timePlus30 = new Date(baseTime.getTime() + 30 * 60 * 1000);
+  const timeMinus30 = new Date(baseTime.getTime() - 30 * 60 * 1000);
+  const timePLus = timePlus30.toTimeString().slice(0, 8);
+  const timeMinus = timeMinus30.toTimeString().slice(0, 8);
 
-  let meeting = await Meetings.create({
-    ...req.body,
-    statues: "not done",
-    addedBy: req.payload.id,
+  let dateExits = await Meetings.findAll({
+    where: {
+      date: req.body.date,
+      
+    },
   });
-  await meeting_Manager.create({
-    manager_id: isManager.manager_id,
-    meeting_id: meeting.dataValues.meeting_id,
+  let timeExits = await Meetings.findAll({
+    where: {
+      time: { [Op.between]: [timeMinus, timePLus] },
+    },
   });
+
+  console.log(new Date(req.body.time));
+
+  console.log(timeExits.length);
+
+  // if (req.file) {
+  //   let { secure_url, public_id } = await cloudinary.uploader.upload(
+  //     req.file.path,
+  //     { folder: `meetingsApp/attachments/${req.params.manager_id}/` }
+  //   );
+  //   console.log(secure_url, public_id);
+  // }
+
+  // let meeting = await Meetings.create({
+  //   ...req.body,
+  //   statues: "not done",
+  //   addedBy: req.payload.id,
+  // });
+  // await meeting_Manager.create({
+  //   manager_id: isManager.manager_id,
+  //   meeting_id: meeting.dataValues.meeting_id,
+  // });
   return res.json({ success: true, message: "Meeting created Successfully" });
 };
 
