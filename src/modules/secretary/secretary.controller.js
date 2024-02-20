@@ -63,7 +63,6 @@ export const createMeeting = async (req, res, next) => {
 
   if (dateAndTimeExites.length > 0)
     return next(new Error("Time In This Date Already Exits"));
-  console.log(req.file);
   let upload;
   if (req.file) {
     upload = await cloudinary.uploader.upload(req.file.path, {
