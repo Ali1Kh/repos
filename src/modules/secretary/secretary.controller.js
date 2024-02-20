@@ -6,6 +6,7 @@ import bcryptjs from "bcryptjs";
 import { meeting_Manager } from "../../../DB/models/meeting_Manager.model.js";
 import cloudinary from "../../utils/cloud.js";
 import { Op } from "sequelize";
+import { sequelize } from "../../../DB/connection.js";
 //createManagerAccount
 export const createManagerAccount = asyncHandler(async (req, res, next) => {
   const isSecretariesEmail = await Secertary.findOne({
@@ -49,22 +50,19 @@ export const createMeeting = async (req, res, next) => {
   const timeMinus30 = new Date(baseTime.getTime() - 30 * 60 * 1000);
   const timePLus = timePlus30.toTimeString().slice(0, 8);
   const timeMinus = timeMinus30.toTimeString().slice(0, 8);
+  let dateAndTimeExites = await sequelize.query(
+    `
+  SELECT date,time FROM Meetings
+  JOIN meeting_Manager ON Meetings.meeting_id = meeting_Manager.meeting_id
+  WHERE meeting_Manager.manager_id = ${isManager.manager_id} and
+  date='${req.body.date}' and
+  time between '${timeMinus}' and '${timePLus}';
+  `,
+    { model: Meetings }
+  );
 
-  // let dateExits = await Meetings.findAll({
-  //   where: {
-  //     date: req.body.date,
-
-  //   },
-  // });
-  // let timeExits = await Meetings.findAll({
-  //   where: {
-  //     time: { [Op.between]: [timeMinus, timePLus] },
-  //   },
-  // });
-
-  // console.log(new Date(req.body.time));
-
-  // console.log(timeExits.length);
+  if (dateAndTimeExites.length > 0)
+    return next(new Error("Time In This Date Already Exits"));
 
   // if (req.file) {
   //   let { secure_url, public_id } = await cloudinary.uploader.upload(
