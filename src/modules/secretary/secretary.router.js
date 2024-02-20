@@ -5,6 +5,7 @@ import { validation } from "../../middleware/validation.middleware.js";
 import { isAuthenticated } from "../../middleware/authentication.middleware.js";
 import { isAuthorized } from "../../middleware/authorization.middleware.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
+import { uploadFiles } from "../../utils/multer.js";
 
 const router = Router();
 
@@ -20,6 +21,7 @@ router.post(
   "/createMeeting/:manager_id",
   isAuthenticated,
   isAuthorized("Secertary"),
+  // uploadFiles().single("attachment"),
   validation(secretarySchema.createMeetingSchema),
   asyncHandler(secretaryController.createMeeting)
 );

@@ -4,6 +4,7 @@ import { Secertary } from "../../../DB/models/secertary.model.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
 import bcryptjs from "bcryptjs";
 import { meeting_Manager } from "../../../DB/models/meeting_Manager.model.js";
+import cloudinary from "../../utils/cloud.js";
 
 //createManagerAccount
 export const createManagerAccount = asyncHandler(async (req, res, next) => {
@@ -25,11 +26,7 @@ export const createManagerAccount = asyncHandler(async (req, res, next) => {
     req.body.PassWord,
     parseInt(process.env.SALT_ROUND)
   );
-  console.log({
-    ...req.body,
-    PassWord: managerhashPass,
-    secretary_id: req.payload.id,
-  });
+
   await Manager.create({
     ...req.body,
     PassWord: managerhashPass,
@@ -40,11 +37,20 @@ export const createManagerAccount = asyncHandler(async (req, res, next) => {
 });
 
 export const createMeeting = async (req, res, next) => {
+
   let isManager = await Manager.findByPk(req.params.manager_id);
   if (!isManager) return next(new Error("Invalid Manager Id"));
 
   if (isManager.secretary_id != req.payload.id)
     return next(new Error("You Must Be The Secretary For This Manager Id"));
+
+  if (req.file) {
+    let { secure_url, public_id } = await cloudinary.uploader.upload(
+      req.file.path,
+      { folder: `meetingsApp/attachments/${req.params.manager_id}/` }
+    );
+    console.log(secure_url, public_id);
+  }
 
   let meeting = await Meetings.create({
     ...req.body,
