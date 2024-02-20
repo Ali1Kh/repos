@@ -50,21 +50,21 @@ export const createMeeting = async (req, res, next) => {
   const timePLus = timePlus30.toTimeString().slice(0, 8);
   const timeMinus = timeMinus30.toTimeString().slice(0, 8);
 
-  let dateExits = await Meetings.findAll({
-    where: {
-      date: req.body.date,
-      
-    },
-  });
-  let timeExits = await Meetings.findAll({
-    where: {
-      time: { [Op.between]: [timeMinus, timePLus] },
-    },
-  });
+  // let dateExits = await Meetings.findAll({
+  //   where: {
+  //     date: req.body.date,
 
-  console.log(new Date(req.body.time));
+  //   },
+  // });
+  // let timeExits = await Meetings.findAll({
+  //   where: {
+  //     time: { [Op.between]: [timeMinus, timePLus] },
+  //   },
+  // });
 
-  console.log(timeExits.length);
+  // console.log(new Date(req.body.time));
+
+  // console.log(timeExits.length);
 
   // if (req.file) {
   //   let { secure_url, public_id } = await cloudinary.uploader.upload(
@@ -74,15 +74,15 @@ export const createMeeting = async (req, res, next) => {
   //   console.log(secure_url, public_id);
   // }
 
-  // let meeting = await Meetings.create({
-  //   ...req.body,
-  //   statues: "not done",
-  //   addedBy: req.payload.id,
-  // });
-  // await meeting_Manager.create({
-  //   manager_id: isManager.manager_id,
-  //   meeting_id: meeting.dataValues.meeting_id,
-  // });
+  let meeting = await Meetings.create({
+    ...req.body,
+    statues: "not done",
+    addedBy: req.payload.id,
+  });
+  await meeting_Manager.create({
+    manager_id: isManager.manager_id,
+    meeting_id: meeting.dataValues.meeting_id,
+  });
   return res.json({ success: true, message: "Meeting created Successfully" });
 };
 
