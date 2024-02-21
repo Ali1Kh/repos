@@ -46,7 +46,11 @@ export default function NewMeeting() {
     }
     let dateInput, timeInput;
     if (date) {
-      dateInput = new Date(date.$d).toLocaleString("en-GB");
+      dateInput = new Date(date.$d).toLocaleString("en-GB", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      });
     }
     if (time) {
       timeInput = new Date(time.$d).toLocaleString("en-GB", {
@@ -55,15 +59,15 @@ export default function NewMeeting() {
     }
 
     let initData = {
-      date: dateInput.split(",")[0],
-      time: timeInput.split(",")[1],
+      date: dateInput.split(",")[0].split("/").reverse().join("-"),
+      time: timeInput.split(",")[1].split(" ")[1],
       person,
       about: topic,
       address,
       notes,
       in_or_out: area,
     };
-
+  
     try {
       let { data } = await axios.post(
         `https://meetingss.onrender.com/secretary/createMeeting/${managerSelected}`,
@@ -72,6 +76,8 @@ export default function NewMeeting() {
       );
       if (data.success) {
         toast.success(data.message);
+      } else {
+        console.log(data.message);
       }
     } catch (error) {
       console.log(error);
