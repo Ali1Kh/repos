@@ -23,7 +23,6 @@ table td {
 button.accept-button {
     background-color: #262626;
     color: #cac4d0;
-    border: none;
     width: 80%;
     padding: 8px 20px;
     cursor: pointer;
@@ -39,16 +38,20 @@ button.accept-button:hover {
 i.fa-trash {
     margin: 10px;
     font-size: 20px;
-    padding: 10px;
+    padding: 8px 10px;
     background-color: #262626;
     border-radius: 10px;
     color: #cac4d0;
     border: 1px solid #7E7EBE;
 }
 
-i.fa-trash:hover{
+i.fa-trash:hover {
     background-color: #404040;
     border: 1px solid #7E7EBE;
+}
+
+.header-table{
+    padding: 20px;
 }
 
 .table {
