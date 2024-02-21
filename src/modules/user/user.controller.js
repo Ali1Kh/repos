@@ -88,3 +88,41 @@ export const signIn = asyncHandler(async (req, res, next) => {
   }
 });
 
+//Forget password 
+export const forgetPassword = asyncHandler(async(req,res,next)=>{
+  const secertary = await Secertary.findOne({email:req.body.email})
+  if (!secertary) return next (new Error("User Not Found !"))
+
+  if (req.isUser.forgetPasswordCode !==  req.body.code) {
+      return next(new Error("Invalid Code!")); 
+  }
+  
+  secertary.PassWord = bcryptjs.hashSync(req.body.PassWord,parseInt(process.env.SALT_ROUND))
+  await secertary.save()
+
+  const tokens = await Token.find({secertary:secertary._id})
+  tokens.forEach(async (token)=>{
+  token.isValid = false
+  await token.save()
+  })
+
+  return res.json({success : true , message:"Password Updated Successfully! , Try to Login.."})
+})
+// send Forget Code 
+export const sendForgetPassCode = asyncHandler(async(req,res,next)=>{
+  const secertary = await Secertary.findOne({email:req.body.email})
+  if (!secertary) return next (new Error("User Not Found !"))
+  
+  const code = randomstring.generate({
+      length:6,
+      charset:"numeric"
+  })
+
+  secertary.forgetPasswordCode = code
+  await secertary.save() 
+
+  const messageSent = await sendEmails({to:secertary.E_mail, subject:"Resest Password" , html:`<div>${code}</div>`})
+  if (!messageSent) return next(new Error("Email is Invalid"))
+
+  return res.json({success : true , message:"Code Sent! , Check Your Email.."})
+})

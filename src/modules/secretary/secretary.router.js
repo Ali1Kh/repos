@@ -64,4 +64,6 @@ router.delete(
   validation(secretarySchema.deleteMeetingSchema),
   asyncHandler(secretaryController.deleteMeeting)
 );
+
+
 export default router;

@@ -2,6 +2,7 @@ import { Router } from "express";
 import * as userController from "./user.controller.js";
 import * as UserSchemas from "./user.schema.js";
 import { validation } from "../../middleware/validation.middleware.js";
+import { isAuthenticated } from "../../middleware/authentication.middleware.js";
 
 const router = Router();
 
@@ -18,5 +19,16 @@ router.post(
   validation(UserSchemas.signInSchema),
   userController.signIn 
 );
+
+// Forget Password
+router.patch("/send-forget-code",
+  isAuthenticated,
+  validation(UserSchemas.sendForgetPassCodeSchema),
+  userController.sendForgetPassCode)
+  
+router.post("/forget-password",
+  isAuthenticated,
+  validation(UserSchemas.forgetPassSchema),
+  userController.forgetPassword)
 
 export default router;

@@ -7,6 +7,7 @@ import { meeting_Manager } from "../../../DB/models/meeting_Manager.model.js";
 import cloudinary from "../../utils/cloud.js";
 import { Op } from "sequelize";
 import { sequelize } from "../../../DB/connection.js";
+
 //createManagerAccount
 export const createManagerAccount = asyncHandler(async (req, res, next) => {
   const isSecretariesEmail = await Secertary.findOne({
@@ -122,6 +123,7 @@ export const deleteMeeting = async (req, res, next) => {
     where: { meeting_id: req.params.meetingId },
   });
   if (!isMeeting) return next(new Error("Meeting Not Found"));
+  
   if (isMeeting.dataValues.addedBy != req.payload.id)
     return next(new Error("You Don't have permissions"));
   isMeeting.destroy();
