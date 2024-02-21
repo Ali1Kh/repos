@@ -17,6 +17,7 @@ import { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import CreateManagerAccount from "./components/secretary/Meeting/create manager account/CreateManagerAccount";
 import ProtectedRoutes from "./components/Protected Routes/ProtectedRoutes.jsx";
+import Acceptance from "./components/Acceptance/Acceptance.jsx";
 
 const router = createHashRouter([
   {
@@ -48,6 +49,10 @@ const router = createHashRouter([
           {
             path: "createManagerAccount",
             element: <ProtectedRoutes><CreateManagerAccount /></ProtectedRoutes>,
+          },
+          {
+            path: "Acceptance",
+            element: <ProtectedRoutes><Acceptance /></ProtectedRoutes>,
           },
           {
             path: "*",

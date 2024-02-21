@@ -103,7 +103,7 @@ const Sidebar = () => {
           </div>
           <div className="header-side" style={{ userSelect: "none" }}>
             {role ? (
-              role == "Manager" ? (
+              role === "Manager" ? (
                 <>
                   {" "}
                   <Link
@@ -157,7 +157,7 @@ const Sidebar = () => {
                     <span>{t("sidebar.calendar")}</span>
                   </Link>
                 </>
-              ) : role == "Secertary" ? (
+              ) : role === "Secertary" ? (
                 <>
                   <Link
                     className="sidebarItem animate__animated"
