@@ -50,7 +50,7 @@ i.fa-trash:hover {
     border: 1px solid #7E7EBE;
 }
 
-.header-table{
+.header-table {
     padding: 20px;
 }
 
@@ -59,6 +59,7 @@ i.fa-trash:hover {
     border-radius: 20px;
     margin: 10px;
     padding: 20px;
+    box-shadow: var(--shadow-4);
 }
 
 .table .col {
