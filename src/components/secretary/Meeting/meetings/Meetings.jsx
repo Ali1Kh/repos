@@ -93,7 +93,8 @@ export default function Meetings() {
   function handleClose() {
     setOpen(false);
   }
-  function updateMeeting() {
+  function updateMeeting(rows) {
+    console.log(rows);
     meetingNavigate("updateMeeting/" + selectedId);
   }
   // Holding Row
@@ -256,7 +257,7 @@ export default function Meetings() {
               <i className="fa-solid fa-caret-up fa-rotate-90 me-1"></i>
             </div>
           </div>
-          <div className="item" onClick={updateMeeting}>
+          <div className="item" onClick={(e) => updateMeeting(e)}>
             {t("MeetingContextMenu.update")}
           </div>
           <div className="item" onClick={openAlert}>

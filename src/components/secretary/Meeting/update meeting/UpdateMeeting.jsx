@@ -17,14 +17,34 @@ export default function UpdateMeeting() {
       },
     });
 
-  let [date, setDate] = useState(null);
+  let [date, setDate] = useState();
   let [time, setTime] = useState(null);
 
   const { id } = useParams();
 
   useEffect(() => {
-    $("#meetPerson").val();
+    getMeetingDetails();
   }, []);
+
+  async function getMeetingDetails() {
+    try {
+      let { data } = await axios.get(
+        `https://meetingss.onrender.com/secretary/getSecMeetings/${id}`,
+        { headers: { token: localStorage.getItem("token") } }
+      );
+      if (data.success) {
+        $("#meetPerson").val(data.meetings.person);
+        $("#meetTopic").val(data.meetings.about);
+        $("#meetAddress").val(data.meetings.address);
+        $("#meetNotes").val(data.meetings.notes);
+        $('input[name="radio-group"]')
+          .filter('[value="' + data.meetings.in_or_out + '"]')
+          .prop("checked", true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function updateMeeting() {
     let person = $("#meetPerson").val();
