@@ -3,7 +3,7 @@ import './Acceptance.css';
 import toast from 'react-hot-toast';
 
 const UserRow = ({ user, onAccept, onRemove }) => (
-    <div key={user.email} className='row table justify-content-center'> 
+    <div key={user.email} className='row table justify-content-center'>
         <div class="col">{user.username}</div>
         <div class="col">{user.name}</div>
         <div class="col">{user.email}</div>
@@ -52,7 +52,7 @@ const Acceptance = () => {
                             <h6>Action</h6>
                         </div>
                     </div>
-                    <div className='row table justify-content-center'>
+                    <div className='row justify-content-center'>
                         {users.map((user) => (
                             <UserRow key={user.email} user={user} onAccept={handleAccept} onRemove={handleRemove} />
                         ))}
