@@ -16,10 +16,12 @@ export const Meetings = sequelize.define("Meetings", {
   time: { type: DataTypes.STRING, allowNull: false },
   date: { type: DataTypes.DATE, allowNull: false },
   notes: { type: DataTypes.STRING, allowNull: true },
+  addedBy: { type: DataTypes.STRING, allowNull: true },
+  attachmentId: { type: DataTypes.STRING },
+  attachmentLink: { type: DataTypes.STRING },
 });
 
 Meetings.associate = (models) => {
-  
   Meetings.belongsToMany(Manager, {
     through: meeting_Manager,
     foreignKey: "meeting_id",

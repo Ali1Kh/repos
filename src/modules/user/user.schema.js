@@ -9,7 +9,7 @@ export const signUpSchema = joi
     E_mail: joi.string().email().required(),
     PassWord: joi
       .string()
-      .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
+      .pattern(new RegExp("^[a-zA-Z0-9]{8,30}$"))
       .required(),
     confirmPassword: joi.string().valid(joi.ref("PassWord")).required(),
     // secretary_id:joi.number().required()
@@ -22,7 +22,6 @@ export const signInSchema = joi
     E_mail: joi.string().email().required(),
     PassWord: joi
       .string()
-      .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
       .required(),
     role: joi.string().valid("Manager", "Secertary").required(),
   })
