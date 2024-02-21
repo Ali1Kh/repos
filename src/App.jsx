@@ -18,6 +18,9 @@ import Navbar from "./components/Navbar/Navbar.jsx";
 import CreateManagerAccount from "./components/secretary/Meeting/create manager account/CreateManagerAccount";
 import ProtectedRoutes from "./components/Protected Routes/ProtectedRoutes.jsx";
 import Acceptance from "./components/Acceptance/Acceptance.jsx";
+import ForgotPassword from "./components/forgot password/forgot password/ForgotPassword.jsx";
+import CheckYourEmail from "./components/forgot password/check your email/CheckYourEmail.jsx";
+import ResetPassword from "./components/forgot password/Reset password/ResetPassword.jsx";
 
 const router = createHashRouter([
   {
@@ -94,9 +97,41 @@ const router = createHashRouter([
     path: "/signup",
     element: (
       <>
-        <Navbar /> <Signup />
+        <Navbar />
+        <Signup />
       </>
     ),
+  },
+  {
+    path: "",
+    children: [
+      {
+        path: "/ForgotPassword",
+        element:
+          <>
+            <Navbar />
+            <ForgotPassword />
+          </>,
+      },
+      {
+        path: "/CheckYourEmail",
+        element:
+          <>
+            <Navbar />
+            <CheckYourEmail />
+          </>
+        ,
+      },
+      {
+        path: "/ResetPassword",
+        element: 
+        <>
+            <Navbar />
+            <ResetPassword />
+          </>
+        ,
+      },
+    ],
   },
   {
     path: "*",

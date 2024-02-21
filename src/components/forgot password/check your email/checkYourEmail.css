@@ -1,0 +1,30 @@
+.table-squ {
+    max-width: 70%;
+}
+
+.squares {
+    margin: 25px 20px;
+}
+
+.squares input {
+    width: 14.3%;
+    height: 100%;
+    padding: 20px;
+    margin: 10px;
+}
+
+.btn-forgot-out {
+    background: rgb(126, 126, 190, 0.1);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.33);
+    color: white;
+    padding: 15px;
+    border: 1px solid #7E7EBE;
+    border-radius: 10px;
+    font-family: var(--main-font);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    transition: all 0.5s;
+    margin: 10px;
+}
