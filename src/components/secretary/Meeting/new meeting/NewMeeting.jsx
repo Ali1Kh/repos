@@ -10,6 +10,10 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import Chip from '@mui/material/Chip';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+
 const newTheme = (theme) =>
   createTheme({
     palette: {
@@ -67,7 +71,7 @@ export default function NewMeeting() {
       notes,
       in_or_out: area,
     };
-  
+
     try {
       let { data } = await axios.post(
         `https://meetingss.onrender.com/secretary/createMeeting/${managerSelected}`,
@@ -95,6 +99,8 @@ export default function NewMeeting() {
   useEffect(() => {
     getSecManagers();
   }, []);
+
+  const [buttonPressed, setButtonPressed] = useState('Inside');
 
   const [t, il8n] = useTranslation();
 
@@ -131,15 +137,41 @@ export default function NewMeeting() {
               </ThemeProvider>
             </div>
           </div>
-
-          <div className="inputItem mb-3 px-5 ">
-            <input
-              type="text"
-              className="form-control py-2"
-              id="meetPerson"
-              placeholder={t("CreateOrUpdateMeeting.person")}
-            />
+          <div>
+            {buttonPressed === 'Inside' ? (
+              <div className="inputItem mb-3 px-5">
+                <Autocomplete
+                  multiple
+                  id="tags-filled"
+                  options={managersData.map((option) => option.names)}
+                  freeSolo
+                  renderTags={(value, getTagProps) =>
+                    value.map((option, index) => (
+                      <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+                    ))
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      placeholder={t("CreateOrUpdateMeeting.person")}
+                      className="tagify "
+                      sx={{ backgroundColor: 'var(--cardBgColor)', padding: '8px', color: 'var(--BlackToWhite)', border: '2px solid var(--sec-color)', borderRadius: '8px' }}
+                    />
+                  )}
+                />
+              </div>
+            ) : (
+              <div className="inputItem mb-3 px-5 ">
+                <input
+                  type="text"
+                  className="form-control py-2"
+                  id="meetPerson"
+                  placeholder={t("CreateOrUpdateMeeting.person")}
+                />
+              </div>
+            )}
           </div>
+
           <div className="inputItem mb-3 px-5">
             <input
               type="text"
@@ -187,11 +219,11 @@ export default function NewMeeting() {
                     className="radio-button__input"
                     type="radio"
                     value={"Inside"}
+                    onClick={() => {
+                      setButtonPressed('Inside');
+                    }}
                   />
-                  <label
-                    htmlFor="radio2"
-                    className="radio-button__label BlackToWhite"
-                  >
+                  <label htmlFor="radio2" className="radio-button__label BlackToWhite">
                     <span className="radio-button__custom"></span>
                     {t("CreateOrUpdateMeeting.inside")}
                   </label>
@@ -203,11 +235,11 @@ export default function NewMeeting() {
                     className="radio-button__input"
                     type="radio"
                     value={"Outside"}
+                    onClick={() => {
+                      setButtonPressed('Outside');
+                    }}
                   />
-                  <label
-                    htmlFor="radio1"
-                    className="radio-button__label BlackToWhite"
-                  >
+                  <label htmlFor="radio1" className="radio-button__label BlackToWhite">
                     <span className="radio-button__custom"></span>
                     {t("CreateOrUpdateMeeting.outside")}
                   </label>
@@ -234,3 +266,7 @@ export default function NewMeeting() {
     </div>
   );
 }
+
+const managersData = [
+  { names: 'mustafa', id: 1 },
+];

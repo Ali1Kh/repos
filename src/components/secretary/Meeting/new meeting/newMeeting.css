@@ -9,24 +9,27 @@
 .inputItem select,
 .inputItem option,
 .inputItem textarea,
-.MuiFormControl-root.MuiTextField-root.css-z3c6am-MuiFormControl-root-MuiTextField-root , .css-3ea4o3 {
+.MuiFormControl-root.MuiTextField-root.css-z3c6am-MuiFormControl-root-MuiTextField-root,
+.css-3ea4o3 {
   background-color: var(--inputsBgColor) !important;
   color: var(--BlackToWhite) !important;
   width: 100%;
   border-radius: 8px;
 }
 
-.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-vubbuv{
+.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-vubbuv {
   color: var(--BlackToWhite) !important;
 }
 
 .inputItem input:not(.MuiInputBase-root input),
 .inputItem select,
-.MuiFormControl-root.MuiTextField-root.css-z3c6am-MuiFormControl-root-MuiTextField-root , .css-3ea4o3 {
+.MuiFormControl-root.MuiTextField-root.css-z3c6am-MuiFormControl-root-MuiTextField-root,
+.css-3ea4o3 {
   border: 2px solid var(--sec-color) !important;
 }
+
 .inputItem textarea {
-  border: 2px solid var(--sec-color) !important ;
+  border: 2px solid var(--sec-color) !important;
 }
 
 .MuiInputBase-root * {
@@ -44,16 +47,19 @@
   box-shadow: none !important;
 }
 
-.calenderPicker .inputItem > div {
+.calenderPicker .inputItem>div {
   width: 100% !important;
 }
+
 .calenderPicker .inputItem input {
   padding-block: 10px !important;
 }
+
 .inputItem input::placeholder,
 .inputItem textarea::placeholder {
   color: #8f8f91;
 }
+
 .inputItem input:focus,
 .inputItem select:focus,
 .inputItem option:focus,
@@ -63,10 +69,11 @@
   box-shadow: none !important;
 }
 
-.inputItem select option{
+.inputItem select option {
   color: black !important;
   /* background-color: var(--cardBgColor) !important; */
 }
+
 /* !Radio Buttons */
 .radio-buttons-container {
   display: flex;
@@ -111,13 +118,13 @@
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.radio-button__input:checked + .radio-button__label .radio-button__custom {
+.radio-button__input:checked+.radio-button__label .radio-button__custom {
   transform: translateY(-50%) scale(0.9);
   border: 5px solid var(--sec-color);
   color: var(--sec-color);
 }
 
-.radio-button__input:checked + .radio-button__label {
+.radio-button__input:checked+.radio-button__label {
   color: var(--sec-color);
 }
 
@@ -185,6 +192,19 @@
 }
 
 /* timePicker */
-.timePicker > div {
+.timePicker>div {
   width: 100% !important;
+}
+
+.MuiChip-label {
+  color: #fff;
+}
+
+.MuiChip-deleteIcon {
+  color: var(--sec-color) !important;
+}
+
+.css-gdh49b-MuiAutocomplete-listbox {
+  background-color: var(--cardBgColor) !important;
+  color: #fff;
 }
