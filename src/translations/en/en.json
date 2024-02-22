@@ -42,6 +42,7 @@
     "calendar": "Calendar",
     "meetings":"Meetings",
     "createMeeting":"Create Meeting",
+    "Nots":"Nots",
     "createManagerAccount":"Create Manager"
   },
   "Calendar":{

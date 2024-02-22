@@ -22,6 +22,7 @@ import ForgotPassword from "./components/forgot password/forgot password/ForgotP
 import CheckYourEmail from "./components/forgot password/check your email/CheckYourEmail.jsx";
 import ResetPassword from "./components/forgot password/Reset password/ResetPassword.jsx";
 
+
 const router = createHashRouter([
   {
     path: "/", element: <ProtectedRoutes><Layout /></ProtectedRoutes>,
@@ -76,6 +77,10 @@ const router = createHashRouter([
             path: "calender",
             element: <ProtectedRoutes><Calender /></ProtectedRoutes>,
           },
+          // {
+          //   path: "Nots",
+          //   element: <ProtectedRoutes><Nots /></ProtectedRoutes>,
+          // },
         ],
       },
       {
