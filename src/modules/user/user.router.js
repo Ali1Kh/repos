@@ -22,12 +22,10 @@ router.post(
 
 // Forget Password
 router.patch("/send-forget-code",
-  isAuthenticated,
   validation(UserSchemas.sendForgetPassCodeSchema),
   userController.sendForgetPassCode)
   
 router.post("/forget-password",
-  isAuthenticated,
   validation(UserSchemas.forgetPassSchema),
   userController.forgetPassword)
 

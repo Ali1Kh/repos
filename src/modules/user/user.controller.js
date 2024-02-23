@@ -4,6 +4,9 @@ import { Secertary } from "./../../../DB/models/secertary.model.js";
 import { asyncHandler } from "./../../utils/asyncHandler.js";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
+import randomstring from 'randomstring'
+import { sendEmails } from '../../utils/sendEmails.js'
+
 
 // SignUp
 export const signUp = asyncHandler(async (req, res, next) => {
@@ -39,6 +42,7 @@ export const signIn = asyncHandler(async (req, res, next) => {
       where: { E_mail: req.body.E_mail },
     });
     if (!isManager) return next(new Error("Email Is Invalid"));
+
 
     const managerPassMatch = bcryptjs.compareSync(
       req.body.PassWord,
@@ -90,39 +94,96 @@ export const signIn = asyncHandler(async (req, res, next) => {
 
 //Forget password 
 export const forgetPassword = asyncHandler(async(req,res,next)=>{
-  const secertary = await Secertary.findOne({email:req.body.email})
-  if (!secertary) return next (new Error("User Not Found !"))
+  if (req.body.role == "Manager") {
+    const isManager = await Manager.findOne({E_mail:req.body.E_mail})
+  if (!isManager) return next (new Error("Manager Not Found !"))
 
-  if (req.isUser.forgetPasswordCode !==  req.body.code) {
-      return next(new Error("Invalid Code!")); 
-  }
-  
-  secertary.PassWord = bcryptjs.hashSync(req.body.PassWord,parseInt(process.env.SALT_ROUND))
-  await secertary.save()
+  const managerCodeMatch = bcryptjs.compareSync(
+    req.body.code,
+    isManager.resetCode
+  );
+  if (!managerCodeMatch) return next(new Error("Invalid Code !"));
 
-  const tokens = await Token.find({secertary:secertary._id})
+  isManager.PassWord = bcryptjs.hashSync(req.body.PassWord,parseInt(process.env.SALT_ROUND))
+  await isManager.save()
+
+  const tokens = await Token.find({manager_id:isManager._id})
   tokens.forEach(async (token)=>{
   token.isValid = false
   await token.save()
   })
 
-  return res.json({success : true , message:"Password Updated Successfully! , Try to Login.."})
-})
+  return res.json({success : true , message:"Manager Password Updated Successfully! , Try to Login.."})
+  }
+  else if(req.body.role == "Secertary"){
+    const isSecertary = await Secertary.findOne({E_mail:req.body.E_mail})
+    if (!isSecertary) return next (new Error("Secertary Not Found !"))
+    
+    const secertaryCodeMatch = bcryptjs.compareSync(
+      req.body.code,
+      isSecertary.resetCode
+    );
+    if (!secertaryCodeMatch) return next(new Error("Invalid Code !"));
+  
+    isSecertary.PassWord = bcryptjs.hashSync(req.body.PassWord,parseInt(process.env.SALT_ROUND))
+    await isSecertary.save()
+  
+    const tokens = await Token.find({secertary_id:isSecertary._id})
+    tokens.forEach(async (token)=>{
+    token.isValid = false
+    await token.save()
+    })
+  
+    return res.json({success : true , message:"Secertary Password Updated Successfully! , Try to Login.."})
+  }
+  })
 // send Forget Code 
 export const sendForgetPassCode = asyncHandler(async(req,res,next)=>{
-  const secertary = await Secertary.findOne({email:req.body.email})
-  if (!secertary) return next (new Error("User Not Found !"))
+  if (req.body.role === "Secertary") {
+    const isSecertary = await Secertary.findOne({E_mail:req.body.E_mail})
+    if (!isSecertary) return next (new Error("Secertary Not Found !"))
+    
+    const code = randomstring.generate({
+        length:6,
+        charset:"numeric"
+    })
   
-  const code = randomstring.generate({
-      length:6,
-      charset:"numeric"
+    const secertaryhashCode = bcryptjs.hashSync(
+      code,
+      parseInt(process.env.SALT_ROUND)
+    );
+  
+    isSecertary.resetCode = secertaryhashCode
+    await isSecertary.save() 
+  
+    const messageSent = await sendEmails({to:isSecertary.E_mail, subject:"Resest Password" , html:`<div>${code}</div>`})
+    if (!messageSent) return next(new Error("Email is Invalid"))
+  
+    return res.json({success : true , message:"Code Sent! , Check Your Email.."})
+    }
+    else if (req.body.role === "Manager") {
+      const isManager = await Manager.findOne({E_mail:req.body.E_mail})
+      if (!isManager) return next (new Error("Manager Not Found !"))
+      
+      const code = randomstring.generate({
+          length:6,
+          charset:"numeric"
+      })
+    
+      const managerhashCode = bcryptjs.hashSync(
+        code,
+        parseInt(process.env.SALT_ROUND)
+      );
+    
+      isManager.resetCode = managerhashCode
+      await isManager.save() 
+    
+      const messageSent = await sendEmails({to:isManager.E_mail, subject:"Resest Password" , html:`<div>${code}</div>`})
+      if (!messageSent) return next(new Error("Email is Invalid"))
+    
+      return res.json({success : true , message:"Code Sent! , Check Your Email.."})
+      }
   })
 
-  secertary.forgetPasswordCode = code
-  await secertary.save() 
 
-  const messageSent = await sendEmails({to:secertary.E_mail, subject:"Resest Password" , html:`<div>${code}</div>`})
-  if (!messageSent) return next(new Error("Email is Invalid"))
-
-  return res.json({success : true , message:"Code Sent! , Check Your Email.."})
-})
+  // A2020123
