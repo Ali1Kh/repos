@@ -37,7 +37,7 @@ const Acceptance = () => {
         <>
             <div className='main'>
                 <div className='container mt-5'>
-                    <h2 className='container d-flex flex-column align-items-center justify-content-center p-4'>Acceptance</h2>
+                    <h1 className='container d-flex flex-column align-items-center justify-content-center p-4'>Acceptance</h1>
                     <div className='row header-table justify-content-center'>
                         <div class="col">
                             <h6>Username</h6>

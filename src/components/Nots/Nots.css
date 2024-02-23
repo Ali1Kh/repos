@@ -1,0 +1,53 @@
+.star-icon {
+    color: var(--sec-color);
+    display: inline-block;
+    font-size: 30px;
+    top: 5%;
+    left: 10px;
+}
+
+.text-black h2 {
+    color: var(--sec-color);
+}
+
+.note-icon {
+    background-color: var(--cardBgColor);
+    display: inline-block;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    box-shadow: var(--shadow-4);
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.note-icon:hover {
+    width: 80px;
+    height: 80px;
+    background-color: var(--cardBgColor);
+    transition: transform 0.3s ease;
+
+    &:hover {
+        animation: pulse 1s infinite;
+    }
+}
+
+
+.note-icon i {
+    font-size: 40px;
+    color: var(--sec-color);
+    padding: 20px;
+}

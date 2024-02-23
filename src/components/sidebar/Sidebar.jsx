@@ -157,8 +157,8 @@ const Sidebar = () => {
                     <span>{t("sidebar.calendar")}</span>
                   </Link>
                   <Link
-                    className="sidebarItem  animate__animated "
-                    to={"/Nots"}
+                    className="sidebarItem animate__animated "
+                    to={"/manager/Nots"}
                   >
                     <span className="d-inline-flex text-center justify-content-center">
                       <div className="svgIcon">
@@ -179,7 +179,7 @@ const Sidebar = () => {
                         </svg>
                       </div>
                     </span>
-                    <span>{t("sidebar.home")}</span>
+                    <span>{t("sidebar.Nots")}</span>
                   </Link>
                 </>
               ) : role === "Secertary" ? (

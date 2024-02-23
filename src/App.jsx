@@ -21,6 +21,7 @@ import Acceptance from "./components/Acceptance/Acceptance.jsx";
 import ForgotPassword from "./components/forgot password/forgot password/ForgotPassword.jsx";
 import CheckYourEmail from "./components/forgot password/check your email/CheckYourEmail.jsx";
 import ResetPassword from "./components/forgot password/Reset password/ResetPassword.jsx";
+import Nots from "./components/Nots/Nots.jsx";
 
 
 const router = createHashRouter([
@@ -77,10 +78,10 @@ const router = createHashRouter([
             path: "calender",
             element: <ProtectedRoutes><Calender /></ProtectedRoutes>,
           },
-          // {
-          //   path: "Nots",
-          //   element: <ProtectedRoutes><Nots /></ProtectedRoutes>,
-          // },
+          {
+            path: "Nots",
+            element: <ProtectedRoutes><Nots /></ProtectedRoutes>,
+          },
         ],
       },
       {
