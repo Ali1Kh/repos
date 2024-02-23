@@ -23,3 +23,9 @@ export const updateNoteSchema = joi
     content: joi.string().required(),
   })
   .required();
+
+  export const deleteNoteSchema = joi
+  .object({
+    id: joi.number().required(),
+  })
+  .required();

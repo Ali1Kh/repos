@@ -32,6 +32,15 @@ router.patch(
   noteController.updateNote
 );
 
+router.delete(
+  "/:id",
+  isAuthenticated,
+  isAuthorized("Manager"),
+  validation(NoteSchemas.deleteNoteSchema),
+  noteController.updateNote
+);
+
+
 router.get(
   "/",
   isAuthenticated,
