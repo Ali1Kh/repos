@@ -208,3 +208,9 @@
   background-color: var(--cardBgColor) !important;
   color: #fff;
 }
+
+.dropzone {
+  border: 2px solid var(--sec-color);
+  border-radius: 10px;
+  height: 60px;
+}

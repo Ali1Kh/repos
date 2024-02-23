@@ -32,6 +32,7 @@ export default function HomePage() {
         if (response.data.success === true) {
           setMeetings(response.data.meetings);
         }
+        
       })
       .catch((err) => console.error(err));
   }

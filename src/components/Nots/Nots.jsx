@@ -6,15 +6,12 @@ import Modal from 'react-bootstrap/Modal';
 
 
 export default function Nots() {
-    const nots = [{}, {}, {}, {}, {}, {}, {}];
+    const nots =[{}, {}, {}, {}, {}, {}, {}];
 
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    
-
 
     return (
         <>

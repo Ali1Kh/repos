@@ -17,7 +17,7 @@
 
 .form input {
     margin-top: 1rem !important;
-    border-radius: 15px;
+    border-radius: 10px;
     color: var(--BlackToWhite) !important;
     background: var(--main-color) !important;
     border: 2px solid var(--sec-color) !important;

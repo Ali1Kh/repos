@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import "./newMeeting.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
@@ -13,6 +13,21 @@ import toast from "react-hot-toast";
 import Chip from '@mui/material/Chip';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Dropzone, { useDropzone } from "react-dropzone";
+
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
 
 const newTheme = (theme) =>
   createTheme({
@@ -37,12 +52,12 @@ export default function NewMeeting() {
     if (
       !date ||
       !time ||
-      person == "" ||
-      topic == "" ||
-      address == "" ||
-      notes == "" ||
-      area == "" ||
-      managerSelected == ""
+      person === "" ||
+      topic === "" ||
+      address === "" ||
+      notes === "" ||
+      area === "" ||
+      managerSelected === ""
     ) {
       $(".error").removeClass("d-none");
       $(".error").addClass("d-block");
@@ -101,6 +116,13 @@ export default function NewMeeting() {
   }, []);
 
   const [buttonPressed, setButtonPressed] = useState('Inside');
+
+  const onDrop = useCallback(acceptedFiles => {
+    // Do something with the files
+  }, [])
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+
+
 
   const [t, il8n] = useTranslation();
 
@@ -197,8 +219,18 @@ export default function NewMeeting() {
               placeholder={t("CreateOrUpdateMeeting.notes")}
             ></textarea>
           </div>
+          <div className="inputItem dropzone mb-3 px-5">
+            <div {...getRootProps()}>
+              <input {...getInputProps()} />
+              {
+                isDragActive ?
+                  <p>Drop the files here ...</p> :
+                  <p>Drag 'n' drop some files here, or click to select files</p>
+              }
+            </div>
+          </div>
           <div className="d-flex justify-content-between">
-            <div className="inputItem mb-3 px-5">
+            <div className="inputItem mb-3 px-5 ">
               <select id="managerSelected" className="py-2 w-auto px-2">
                 <option value="">Choose Manager</option>
                 {managers?.map((manager) => (
@@ -209,6 +241,18 @@ export default function NewMeeting() {
                   </>
                 ))}
               </select>
+
+              {/* <Button
+                className="btn btn-primary m-3 mb-4"
+                component="label"
+                role={undefined}
+                variant="contained"
+                tabIndex={-1}
+              >
+                Upload file
+                <VisuallyHiddenInput type="file" />
+              </Button> */}
+
             </div>
             <div className="radios inputItem mb-3 px-5 d-flex gap-3 align-items-center">
               <div className="radio-buttons-container ">
