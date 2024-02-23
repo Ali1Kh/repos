@@ -6,17 +6,10 @@ import { asyncHandler } from "./../../utils/asyncHandler.js";
 
 export const createNote = asyncHandler(async (req, res, next) => {
     await Note.create({
-<<<<<<< HEAD
-        ...req.body,
-        manager_id:req.payload.id,
-        meeting_id:req.params.meeting_id,
-    })
-// 
-=======
       ...req.body,
       manager_id: req.payload.id,
     });
->>>>>>> 7dd3e01393c1428cfbcd3afafb198ebe25770301
+    
     return res.json({ success: true, message: "Note Created Successfully" });
   });
 
