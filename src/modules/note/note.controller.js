@@ -6,9 +6,17 @@ import { asyncHandler } from "./../../utils/asyncHandler.js";
 
 export const createNote = asyncHandler(async (req, res, next) => {
     await Note.create({
+<<<<<<< HEAD
+        ...req.body,
+        manager_id:req.payload.id,
+        meeting_id:req.params.meeting_id,
+    })
+// 
+=======
       ...req.body,
       manager_id: req.payload.id,
     });
+>>>>>>> 7dd3e01393c1428cfbcd3afafb198ebe25770301
     return res.json({ success: true, message: "Note Created Successfully" });
   });
 
@@ -25,7 +33,21 @@ export const createMeetingNote = asyncHandler(async (req, res, next) => {
 });
 
 export const updateNote = asyncHandler(async (req, res, next) => {
+    const isManager = await Manager.findByPk(req.payload.id)
+    if (!isManager) return next(new Error("Manager Not Found!"))
 
+    const isMeeting = await Meetings.findByPk(req.params.meeting_id)
+    if (!isMeeting.dataValues.meeting_id) return next(new Error("Meeting Not Found!"))
+
+    const isNote = await Note.findByPk(req.params.note_id)
+    if (!isNote.dataValues.notes_id) return next(new Error("Note Not Found!"))
+
+
+    if (isNote.dataValues.manager_id !== req.payload.id)
+    return next(new Error("You Don't have permissions"));
+  
+    isNote.update({ ...req.body });
+    
     return res.json({ success: true, message: "Note Updated Successfully" });
 });
 
