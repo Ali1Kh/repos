@@ -106,23 +106,42 @@ export const forgetPassword = asyncHandler(async (req, res, next) => {
     });
     if (!isManager) return next(new Error("Manager Not Found !"));
 
+  if (!isManager.dataValues.resetCode) return next(new Error("Send Rest Code First"));
+
+
     const managerCodeMatch = bcryptjs.compareSync(
       req.body.code,
       isManager.dataValues.resetCode
     );
     if (!managerCodeMatch) return next(new Error("Invalid Code !"));
 
-    isManager.dataValues.PassWord = bcryptjs.hashSync(
+    let hashedPass = bcryptjs.hashSync(
       req.body.PassWord,
       parseInt(process.env.SALT_ROUND)
     );
-    await isManager.save();
 
-    const tokens = await Token.find({ manager_id: isManager.dataValues._id });
-    tokens.forEach(async (token) => {
-      token.isValid = false;
-      await token.save();
-    });
+    await Manager.update(
+      {
+        PassWord: hashedPass,
+        resetCode:null
+      },
+      {
+        where: {
+          manager_id: isManager.dataValues.manager_id,
+        },
+      }
+    );
+
+    await Token.update(
+      {
+        isValid: false,
+      },
+      {
+        where: {
+          manager_id: isManager.dataValues.manager_id,
+        },
+      }
+    );
 
     return res.json({
       success: true,
@@ -134,6 +153,8 @@ export const forgetPassword = asyncHandler(async (req, res, next) => {
     });
     if (!isSecertary) return next(new Error("Secertary Not Found !"));
 
+  if (!isSecertary.dataValues.resetCode) return next(new Error("Send Rest Code First"));
+  
     const secertaryCodeMatch = bcryptjs.compareSync(
       req.body.code,
       isSecertary.dataValues.resetCode
@@ -141,19 +162,32 @@ export const forgetPassword = asyncHandler(async (req, res, next) => {
 
     if (!secertaryCodeMatch) return next(new Error("Invalid Code !"));
 
-    isSecertary.dataValues.PassWord = bcryptjs.hashSync(
+    let hashedPass = bcryptjs.hashSync(
       req.body.PassWord,
       parseInt(process.env.SALT_ROUND)
     );
-    await isSecertary.save();
+    await Secertary.update(
+      {
+        PassWord: hashedPass,
+        resetCode:null
+      },
+      {
+        where: {
+          secretary_id: isSecertary.dataValues.secretary_id,
+        },
+      }
+    );
 
-    const tokens = await Token.find({
-      secertary_id: isSecertary.dataValues._id,
-    });
-    tokens.forEach(async (token) => {
-      token.isValid = false;
-      await token.save();
-    });
+    await Token.update(
+      {
+        isValid: false,
+      },
+      {
+        where: {
+          secretary_id: isSecertary.dataValues.secretary_id,
+        },
+      }
+    );
 
     return res.json({
       success: true,
