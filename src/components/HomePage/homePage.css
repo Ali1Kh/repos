@@ -37,7 +37,7 @@
 
 .modal {
     z-index: 99999999;
-    background: rgba(33, 36, 40, 0.4);
+    background: rgba(33, 36, 40, 0.4) ;
 }
 
 .modal .modal-dialog .modal-content {

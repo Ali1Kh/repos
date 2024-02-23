@@ -51,3 +51,44 @@
     color: var(--sec-color);
     padding: 20px;
 }
+
+.inner-parent {
+    transition: all 500ms;
+}
+
+.inner-parent:hover {
+    scale: 1.03;
+}
+
+.star-icon {
+    transition: all 500ms;
+}
+
+.star-icon:hover {
+    scale: 1.03;
+}
+
+.modal-title,
+.form-label {
+    color: var(--sec-color);
+}
+
+.modal-body .form-control {
+    background-color: var(--cardBgColor) !important;
+    border-radius: 10px !important;
+    border: 1px solid var(--sec-color) !important;
+    color: #CAC4D0 !important;
+}
+
+.modal-body .form-control::placeholder {
+    color: rgb(202, 196, 208,0.6) !important;
+}
+
+.btn-close {}
+
+.btn.btn-primary {
+    background-color: var(--sec-color) !important;
+    border: 1px solid var(--sec-color) !important;
+    color: #CAC4D0 !important;
+
+}
