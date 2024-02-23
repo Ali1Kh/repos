@@ -15,3 +15,11 @@ export const createMeetingNote = joi
     meeting_id: joi.number().required(),
   })
   .required();
+
+export const updateNoteSchema = joi
+  .object({
+    id: joi.number().required(),
+    title: joi.string().required(),
+    content: joi.string().required(),
+  })
+  .required();

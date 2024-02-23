@@ -17,12 +17,14 @@ export const Manager = sequelize.define(
     last_name: { type: DataTypes.STRING },
     PassWord: { type: DataTypes.STRING, allowNull: false },
     UserName: DataTypes.STRING,
-    resetCode:{ type: DataTypes.STRING, defaultValue: false }
+    resetCode: { type: DataTypes.STRING, defaultValue: false },
   },
   {
     freezeTableName: true,
   }
 );
+
+Manager.hasMany(Token, { foreignKey: "manager_id" });
 
 Manager.associate = (models) => {
   Manager.belongsToMany(Meetings, {
