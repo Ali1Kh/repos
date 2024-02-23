@@ -51,12 +51,10 @@ export const deleteNote = asyncHandler(async (req, res, next) => {
   if (!isNote) return next(new Error("Note Not Found"));
   if (isNote.dataValues.manager_id !== req.payload.id)
     return next(new Error("You Don't have permissions"));
-  await Note.delete(
-    {
-      where: {
-        notes_id: req.params.id,
-      },
-    }
-  );
+  await Note.destroy({
+    where: {
+      notes_id: req.params.id,
+    },
+  });
   return res.json({ success: true, message: "Note Deleted Successfully" });
 });

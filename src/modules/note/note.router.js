@@ -37,7 +37,7 @@ router.delete(
   isAuthenticated,
   isAuthorized("Manager"),
   validation(NoteSchemas.deleteNoteSchema),
-  noteController.updateNote
+  noteController.deleteNote
 );
 
 
