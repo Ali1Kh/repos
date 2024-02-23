@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "./../connection.js";
 import { meeting_Manager } from "./meeting_Manager.model.js";
+import { Note } from "./notes.model.js";
 
 export const Meetings = sequelize.define("Meetings", {
   meeting_id: {
@@ -28,4 +29,8 @@ Meetings.associate = (models) => {
   });
 
   Meetings.hasMany(models.meeting_Manager, { foreignKey: "meeting_id" });
+  
+  Meetings.hasOne(models.Note, { foreignKey: "meeting_id" });
+  Note.belongsTo(Meetings, { foreignKey: "meeting_id" });
+
 };

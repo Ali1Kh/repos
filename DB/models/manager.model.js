@@ -3,6 +3,7 @@ import { sequelize } from "./../connection.js";
 import { Token } from "./token.model.js";
 import { Meetings } from "./meeting.model.js";
 import { meeting_Manager } from "./meeting_Manager.model.js";
+import { Note } from "./notes.model.js";
 
 export const Manager = sequelize.define(
   "Manager",
@@ -29,6 +30,8 @@ Manager.associate = (models) => {
     foreignKey: "manager_id",
   });
 
+  Manager.hasMany(models.Note, { foreignKey: "manager_id" });
+  Note.belongsTo(Manager, { foreignKey: "manager_id" });
 
   Manager.hasMany(models.Token, { foreignKey: "manager_id" });
   Token.belongsTo(Manager, { foreignKey: "manager_id" });
