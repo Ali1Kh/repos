@@ -32,7 +32,7 @@ export default function Nots() {
         <>
             <div className='main'>
                 <div className='container mt-5'>
-                    <h1 className='container d-flex flex-column align-items-center justify-content-center p-4'>Nots</h1>
+                    <h1 className='container d-flex flex-column align-items-center justify-content-center p-4'>Notes</h1>
                     <div className="row gy-3">
                         {nots
                             ? nots.map((not, idx) => (
