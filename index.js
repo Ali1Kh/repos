@@ -4,7 +4,9 @@ import dotenv from "dotenv";
 import userRouter from "./src/modules/user/user.router.js";
 import secretaryRouter from "./src/modules/secretary/secretary.router.js";
 import meetingsRouter from "./src/modules/meatings/meetings.router.js";
+import noteRouter from "./src/modules/note/note.router.js";
 import cors from "cors";
+
 dotenv.config();
 
 const app = express();
@@ -25,6 +27,7 @@ await syncFn();
 app.use("/auth", userRouter);
 app.use("/secretary", secretaryRouter);
 app.use("/meetings", meetingsRouter);
+app.use("/notes", noteRouter);
 
 // uptime req
 app.all("/uptime", (req, res) => {
