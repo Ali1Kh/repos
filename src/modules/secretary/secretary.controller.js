@@ -115,6 +115,7 @@ export const updateMeeting = async (req, res, next) => {
   if (isMeeting.dataValues.addedBy != req.payload.id)
     return next(new Error("You Don't have permissions"));
   isMeeting.update({ ...req.body });
+  
   return res.json({ success: true, message: "Meeting Updated Successfully" });
 };
 

@@ -8,14 +8,14 @@ import { isAuthorized } from './../../middleware/authorization.middleware.js';
 const router = Router();
 
 //1 Create Note 
-router.post("/create-note/:manager_id/:meeting_id",
+router.post("/create-note/:meeting_id",
     isAuthenticated,isAuthorized("Manager"),
     validation(NoteSchemas.createNoteSchema),
     noteController.createNote
 );
 
 //2 update Note
-router.post("/update-note/:manager_id/:meeting_id",
+router.post("/update-note/:note_id/:meeting_id",
     isAuthenticated,isAuthorized("Manager"),
     validation(NoteSchemas.updateNoteSchema),
     noteController.updateNote 
