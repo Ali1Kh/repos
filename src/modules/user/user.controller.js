@@ -95,19 +95,21 @@ export const signIn = asyncHandler(async (req, res, next) => {
 //Forget password 
 export const forgetPassword = asyncHandler(async(req,res,next)=>{
   if (req.body.role == "Manager") {
-    const isManager = await Manager.findOne({E_mail:req.body.E_mail})
+    const isManager = await Manager.findOne({
+      where: { E_mail: req.body.E_mail },
+    })
   if (!isManager) return next (new Error("Manager Not Found !"))
 
   const managerCodeMatch = bcryptjs.compareSync(
     req.body.code,
-    isManager.resetCode
+    isManager.dataValues.resetCode
   );
   if (!managerCodeMatch) return next(new Error("Invalid Code !"));
 
-  isManager.PassWord = bcryptjs.hashSync(req.body.PassWord,parseInt(process.env.SALT_ROUND))
+  isManager.dataValues.PassWord = bcryptjs.hashSync(req.body.PassWord,parseInt(process.env.SALT_ROUND))
   await isManager.save()
 
-  const tokens = await Token.find({manager_id:isManager._id})
+  const tokens = await Token.find({manager_id:isManager.dataValues._id})
   tokens.forEach(async (token)=>{
   token.isValid = false
   await token.save()
@@ -116,19 +118,21 @@ export const forgetPassword = asyncHandler(async(req,res,next)=>{
   return res.json({success : true , message:"Manager Password Updated Successfully! , Try to Login.."})
   }
   else if(req.body.role == "Secertary"){
-    const isSecertary = await Secertary.findOne({E_mail:req.body.E_mail})
+    const isSecertary = await Secertary.findOne({
+      where: { E_mail: req.body.E_mail },
+    })
     if (!isSecertary) return next (new Error("Secertary Not Found !"))
     
     const secertaryCodeMatch = bcryptjs.compareSync(
       req.body.code,
-      isSecertary.resetCode
+      isSecertary.dataValues.resetCode
     );
     if (!secertaryCodeMatch) return next(new Error("Invalid Code !"));
   
-    isSecertary.PassWord = bcryptjs.hashSync(req.body.PassWord,parseInt(process.env.SALT_ROUND))
+    isSecertary.dataValues.PassWord = bcryptjs.hashSync(req.body.PassWord,parseInt(process.env.SALT_ROUND))
     await isSecertary.save()
   
-    const tokens = await Token.find({secertary_id:isSecertary._id})
+    const tokens = await Token.find({secertary_id:isSecertary.dataValues._id})
     tokens.forEach(async (token)=>{
     token.isValid = false
     await token.save()
@@ -140,29 +144,33 @@ export const forgetPassword = asyncHandler(async(req,res,next)=>{
 // send Forget Code 
 export const sendForgetPassCode = asyncHandler(async(req,res,next)=>{
   if (req.body.role === "Secertary") {
-    const isSecertary = await Secertary.findOne({E_mail:req.body.E_mail})
+    const isSecertary = await Secertary.findOne({
+      where: { E_mail: req.body.E_mail },
+    })
     if (!isSecertary) return next (new Error("Secertary Not Found !"))
-    
+
     const code = randomstring.generate({
         length:6,
         charset:"numeric"
     })
   
-    const secertaryhashCode = bcryptjs.hashSync(
-      code,
-      parseInt(process.env.SALT_ROUND)
-    );
+      const secertaryhashCode = bcryptjs.hashSync(
+        code,
+        parseInt(process.env.SALT_ROUND)
+      );
   
-    isSecertary.resetCode = secertaryhashCode
-    await isSecertary.save() 
+      isSecertary.dataValues.resetCode = secertaryhashCode
+      await isSecertary.save() 
   
-    const messageSent = await sendEmails({to:isSecertary.E_mail, subject:"Resest Password" , html:`<div>${code}</div>`})
-    if (!messageSent) return next(new Error("Email is Invalid"))
+      const messageSent = await sendEmails({to:isSecertary.dataValues.E_mail, subject:"Resest Password" , html:`<div>code: ${code}</div>`})
+      if (!messageSent) return next(new Error("Email is Invalid"))
   
-    return res.json({success : true , message:"Code Sent! , Check Your Email.."})
+      return res.json({success : true , message:"Code Sent! , Check Your Email.."})
     }
     else if (req.body.role === "Manager") {
-      const isManager = await Manager.findOne({E_mail:req.body.E_mail})
+      const isManager = await Manager.findOne({
+        where: { E_mail: req.body.E_mail },
+      })
       if (!isManager) return next (new Error("Manager Not Found !"))
       
       const code = randomstring.generate({
@@ -175,10 +183,10 @@ export const sendForgetPassCode = asyncHandler(async(req,res,next)=>{
         parseInt(process.env.SALT_ROUND)
       );
     
-      isManager.resetCode = managerhashCode
+      isManager.dataValues.resetCode = managerhashCode
       await isManager.save() 
     
-      const messageSent = await sendEmails({to:isManager.E_mail, subject:"Resest Password" , html:`<div>${code}</div>`})
+      const messageSent = await sendEmails({to:isManager.dataValues.E_mail, subject:"Resest Password" , html:`<div>code: ${code}</div>`})
       if (!messageSent) return next(new Error("Email is Invalid"))
     
       return res.json({success : true , message:"Code Sent! , Check Your Email.."})
