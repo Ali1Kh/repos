@@ -7,16 +7,23 @@ import { isAuthorized } from "./../../middleware/authorization.middleware.js";
 
 const router = Router();
 
-//1 Create Note
+
 router.post(
-  "/create-note/:meeting_id",
+    "/",
+    isAuthenticated,
+    isAuthorized("Manager"),
+    validation(NoteSchemas.createNoteSchema),
+    noteController.createNote
+  );
+
+router.post(
+  "/:meeting_id",
   isAuthenticated,
   isAuthorized("Manager"),
-  validation(NoteSchemas.createNoteSchema),
-  noteController.createNote
+  validation(NoteSchemas.createMeetingNoteSchema),
+  noteController.createMeetingNote
 );
 
-//2 update Note
 router.post(
   "/update-note/:meeting_id",
   isAuthenticated,
@@ -25,9 +32,8 @@ router.post(
   noteController.updateNote
 );
 
-//3 get all notes
 router.get(
-  "/:manager_id",
+  "/",
   isAuthenticated,
   isAuthorized("Manager"),
   noteController.getAllNotes
