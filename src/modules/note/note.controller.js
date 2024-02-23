@@ -15,7 +15,7 @@ export const createNote = asyncHandler(async (req, res, next) => {
         manager_id:req.payload.id,
         meeting_id:req.params.meeting_id,
     })
-
+// 
     return res.json({ success: true, message: "Note Created Successfully" });
 });
 
