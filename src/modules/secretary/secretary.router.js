@@ -14,6 +14,7 @@ router.post(
   "/create-manager/",
   isAuthenticated,
   isAuthorized("Secertary"),
+  uploadFiles().none(),
   validation(secretarySchema.createManagerAccountSchema),
   secretaryController.createManagerAccount
 );
