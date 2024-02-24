@@ -12,6 +12,8 @@ export default function Nots() {
     const [show, setShow] = useState(false);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [id, setId] = useState('');
+
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -19,10 +21,10 @@ export default function Nots() {
     const authToken = localStorage.getItem("token");
 
     useEffect(() => {
-        getAddNotes();
+        getNotes();
     }, []);
 
-    const getAddNotes = () => {
+    const getNotes = () => {
         axios
             .get('https://meetingss.onrender.com/notes/', {
                 headers: {
@@ -33,6 +35,8 @@ export default function Nots() {
                 console.log(response.data);
                 if (response.data.success) {
                     setnotes(response.data.notes)
+                    setContent("")
+                    setTitle("")
                 } else {
                     // Handle failure
                 }
@@ -57,8 +61,7 @@ export default function Nots() {
             .then((response) => {
                 console.log(response.data);
                 if (response.data.success) {
-                    setTitle("");
-                    setContent("");
+                    getNotes();
                 } else {
                     // Handle failure
                 }
@@ -67,16 +70,20 @@ export default function Nots() {
                 console.error('Error:', error);
             });
     };
-    const postUpdateNotes = () => {
+    const patchUpdateNotes = () => {
         axios
-            .patch('https://meetingss.onrender.com/notes/', {
+            .patch(`https://meetingss.onrender.com/notes/${id}`, {
                 title: title,
                 content: content,
+            }, {
+                headers: {
+                    token: authToken,
+                },
             })
             .then((response) => {
                 console.log(response.data);
                 if (response.data.success) {
-                    // Handle success
+
                 } else {
                     // Handle failure
                 }
@@ -88,14 +95,15 @@ export default function Nots() {
 
     const DeleteNotes = () => {
         axios
-            .delete('https://meetingss.onrender.com/notes/', {
-                title: title,
-                content: content,
+            .delete(`https://meetingss.onrender.com/notes/${id}`, {
+                headers: {
+                    token: authToken,
+                },
             })
             .then((response) => {
                 console.log(response.data);
                 if (response.data.success) {
-                    // Handle success
+                    getNotes();
                 } else {
                     // Handle failure
                 }
@@ -120,14 +128,17 @@ export default function Nots() {
                                     data-aos="fade-up"
                                     data-aos-delay="500"
                                     data-aos-once="true"
-                                    onClick={handleShow}
+                                    onClick={() => { handleShow(); setContent(note.content); setTitle(note.title); setId(note.notes_id) }}
                                 >
                                     <div className="inner-card position-relative h-100 shadow rounded-4 gap-4 p-4 flex-column">
                                         <div className="guest-info d-flex flex-column align-items-center">
                                             <div className="guest-icon-profile d-flex justify-content-center align-items-center me-3 mb-2 mt-2 ms-3"
                                                 style={{ width: "50px", height: "150px" }}>
-                                                <div className="text-black d-flex justify-content-center align-items-center">
+                                                <div className="box">
                                                     <h2>{note.title}</h2>
+                                                    <div className="text-black d-flex justify-content-center align-items-center">
+                                                        <p>{note.content}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -140,7 +151,7 @@ export default function Nots() {
                     </div>
                 </div>
                 <div className='note-icon' onClick={handleShow}>
-                    <i class="fa-solid fa-notes-medical"></i>
+                    <i className="fa-solid fa-notes-medical"></i>
                 </div>
             </div>
             <Modal show={show} onHide={handleClose}>
@@ -151,6 +162,8 @@ export default function Nots() {
                                 type="text"
                                 placeholder="Title"
                                 autoFocus
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -158,12 +171,18 @@ export default function Nots() {
                                 as="textarea"
                                 rows={3}
                                 placeholder="Content"
+                                value={content}
+                                onChange={(e) => setContent(e.target.value)}
                             />
                         </Form.Group>
                     </Form>
-                    <Button variant="primary" onClick={() => { handleClose(); postAddNotes(); }}>
+                    { id ? <Button variant="primary" onClick={() => { handleClose(); postAddNotes(); }}>
                         Save
                     </Button>
+                    :<Button variant="primary" onClick={() => { patchUpdateNotes() }}>
+                        Edit
+                    </Button>}
+                    
                     <Button variant="danger" onClick={() => { handleClose(); DeleteNotes(); }}>
                         Delete
                     </Button>
