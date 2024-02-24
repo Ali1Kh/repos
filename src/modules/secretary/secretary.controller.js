@@ -40,7 +40,7 @@ export const createManagerAccount = asyncHandler(async (req, res, next) => {
 
 export const createMeeting = async (req, res, next) => {
   let isManager = await Manager.findByPk(req.params.manager_id);
-  if (!isManager) return next(new Error("Invalid Manager Id"));
+  if (!isManager) return next(new Error("Invalid Manager"));
 
   if (isManager.secretary_id != req.payload.id)
     return next(new Error("You Must Be The Secretary For This Manager"));

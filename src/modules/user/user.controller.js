@@ -104,7 +104,7 @@ export const sendForgetPassCode = asyncHandler(async (req, res, next) => {
     const isSecertary = await Secertary.findOne({
       where: { E_mail: req.body.E_mail },
     });
-    if (!isSecertary) return next(new Error("Secertary Not Found !"));
+    if (!isSecertary) return next(new Error("Incorrect Email"));
 
     const code = randomstring.generate({
       length: 6,
@@ -140,7 +140,7 @@ export const sendForgetPassCode = asyncHandler(async (req, res, next) => {
     const isManager = await Manager.findOne({
       where: { E_mail: req.body.E_mail },
     });
-    if (!isManager) return next(new Error("Manager Not Found !"));
+    if (!isManager) return next(new Error("Incorrect Email"));
 
     const code = randomstring.generate({
       length: 6,
@@ -182,7 +182,7 @@ export const verifyResetCode = asyncHandler(async (req, res, next) => {
     const isManager = await Manager.findOne({
       where: { E_mail: req.body.E_mail },
     });
-    if (!isManager) return next(new Error("Manager Not Found !"));
+    if (!isManager) return next(new Error("Incorrect Email"));
 
     if (!isManager.dataValues.resetCode)
       return next(new Error("Send Rest Code First"));
@@ -213,7 +213,7 @@ export const verifyResetCode = asyncHandler(async (req, res, next) => {
     const isSecertary = await Secertary.findOne({
       where: { E_mail: req.body.E_mail },
     });
-    if (!isSecertary) return next(new Error("Secertary Not Found !"));
+    if (!isSecertary) return next(new Error("Incorrect Email"));
 
     if (!isSecertary.dataValues.resetCode)
       return next(new Error("Send Rest Code First"));
@@ -223,7 +223,7 @@ export const verifyResetCode = asyncHandler(async (req, res, next) => {
       isSecertary.dataValues.resetCode
     );
 
-    if (!secertaryCodeMatch) return next(new Error("Invalid Code !"));
+    if (!secertaryCodeMatch) return next(new Error("Invalid Code"));
 
     await Secertary.update(
       {
@@ -250,7 +250,7 @@ export const forgetPassword = asyncHandler(async (req, res, next) => {
     const isManager = await Manager.findOne({
       where: { E_mail: req.body.E_mail },
     });
-    if (!isManager) return next(new Error("Manager Not Found !"));
+    if (!isManager) return next(new Error("Incorrect Email"));
 
     if (!isManager.dataValues.resetCodeVerified)
       return next(new Error("Verify Rest Code First"));
@@ -291,7 +291,7 @@ export const forgetPassword = asyncHandler(async (req, res, next) => {
     const isSecertary = await Secertary.findOne({
       where: { E_mail: req.body.E_mail },
     });
-    if (!isSecertary) return next(new Error("Secertary Not Found !"));
+    if (!isSecertary) return next(new Error("Incorrect Email"));
 
     console.log(isSecertary.dataValues.resetCodeVerified);
     if (!isSecertary.dataValues.resetCodeVerified)
