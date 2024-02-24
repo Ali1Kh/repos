@@ -70,12 +70,14 @@ export const createMeeting = async (req, res, next) => {
       folder: `meetingsApp/attachments/${req.params.manager_id}/`,
     });
   }
+
   let meeting = await Meetings.create({
     ...req.body,
     statues: "not done",
     addedBy: req.payload.id,
     attachmentLink: upload?.secure_url,
     attachmentId: upload?.public_id,
+    attachmentName:req.file.originalname
   });
   await meeting_Manager.create({
     manager_id: isManager.manager_id,
@@ -115,7 +117,7 @@ export const updateMeeting = async (req, res, next) => {
   if (isMeeting.dataValues.addedBy != req.payload.id)
     return next(new Error("You Don't have permissions"));
   isMeeting.update({ ...req.body });
-  
+
   return res.json({ success: true, message: "Meeting Updated Successfully" });
 };
 
@@ -124,7 +126,7 @@ export const deleteMeeting = async (req, res, next) => {
     where: { meeting_id: req.params.meetingId },
   });
   if (!isMeeting) return next(new Error("Meeting Not Found"));
-  
+
   if (isMeeting.dataValues.addedBy != req.payload.id)
     return next(new Error("You Don't have permissions"));
   isMeeting.destroy();
