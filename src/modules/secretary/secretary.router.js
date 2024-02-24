@@ -33,6 +33,12 @@ router.get(
   isAuthorized("Secertary"),
   asyncHandler(secretaryController.getSecManagers)
 );
+router.get(
+  "/getAllManagers",
+  isAuthenticated,
+  isAuthorized("Secertary"),
+  asyncHandler(secretaryController.getAllManagers)
+);
 
 router.get(
   "/getSecMeetings",
@@ -65,6 +71,5 @@ router.delete(
   validation(secretarySchema.deleteMeetingSchema),
   asyncHandler(secretaryController.deleteMeeting)
 );
-
 
 export default router;

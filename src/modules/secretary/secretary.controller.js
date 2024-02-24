@@ -108,6 +108,13 @@ export const getSecManagers = async (req, res, next) => {
   return res.json({ success: true, managers });
 };
 
+export const getAllManagers = async (req, res, next) => {
+  let managers = await Manager.findAll({
+    attributes: ["manager_id", "first_name", "last_name"],
+  });
+  return res.json({ success: true, managers });
+};
+
 export const updateMeeting = async (req, res, next) => {
   let isMeeting = await Meetings.findOne({
     where: { meeting_id: req.params.meetingId },
