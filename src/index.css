@@ -79,6 +79,10 @@ body {
   cursor: pointer;
 }
 
+.w-fit{
+  width: fit-content !important;
+}
+
 .navbar .collapse.navbar-collapse .nav-item:not(.nav-item.all, .nav-item.search) {
   display: none !important;
 }

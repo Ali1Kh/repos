@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import "./Nots.css"
+import "./Notes.css"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
 
-export default function Nots() {
-    const nots =[{}, {}, {}, {}, {}, {}, {}];
+export default function Notes() {
+    const Notes =[{}, {}, {}, {}, {}, {}, {}];
 
     const [show, setShow] = useState(false);
 
@@ -20,8 +20,8 @@ export default function Nots() {
                     <h1 className='container d-flex flex-column align-items-center justify-content-center p-4'>Notes</h1>
                     <div className="row gy-3">
 
-                        {nots
-                            ? nots.map((not, idx) => (
+                        {Notes
+                            ? Notes.map((not, idx) => (
                                 <>
                                     <div
                                         key={idx}
