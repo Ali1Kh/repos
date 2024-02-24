@@ -53,6 +53,7 @@ router.patch(
   "/updateMeeting/:meetingId",
   isAuthenticated,
   isAuthorized("Secertary"),
+  uploadFiles().single("attachment"),
   validation(secretarySchema.updateMeetingSchema),
   asyncHandler(secretaryController.updateMeeting)
 );

@@ -77,7 +77,7 @@ export const createMeeting = async (req, res, next) => {
     addedBy: req.payload.id,
     attachmentLink: upload?.secure_url,
     attachmentId: upload?.public_id,
-    attachmentName:req.file.originalname
+    attachmentName: req.file?.originalname,
   });
   await meeting_Manager.create({
     manager_id: isManager.manager_id,
@@ -116,7 +116,20 @@ export const updateMeeting = async (req, res, next) => {
 
   if (isMeeting.dataValues.addedBy != req.payload.id)
     return next(new Error("You Don't have permissions"));
-  isMeeting.update({ ...req.body });
+
+  let upload;
+  if (req.file) {
+    upload = await cloudinary.uploader.upload(req.file.path, {
+      folder: `meetingsApp/attachments/${req.params.manager_id}/`,
+    });
+  }
+
+  isMeeting.update({
+    ...req.body,
+    attachmentLink: upload?.secure_url,
+    attachmentId: upload?.public_id,
+    attachmentName: req.file?.originalname,
+  });
 
   return res.json({ success: true, message: "Meeting Updated Successfully" });
 };
