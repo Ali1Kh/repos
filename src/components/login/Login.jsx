@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./login.css";
-import logo from "../../image/Logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import { useTranslation } from "react-i18next";

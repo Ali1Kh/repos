@@ -1,17 +1,19 @@
-.table-squ {
-    max-width: 70%;
+
+
+
+
+.MuiFormControl-root {
+    border: 2px solid var(--sec-color) !important;
+    border-radius: 10px !important;
+    background-color: var(--main-color) !important;
+
 }
 
-.squares {
-    margin: 25px 20px;
+.MuiInputBase-input {
+    color: var(--BlackToWhite) !important;
 }
 
-.squares input {
-    width: 14.3%;
-    height: 100%;
-    padding: 20px;
-    margin: 10px;
-}
+.MuiOtpInput-Box {}
 
 .btn-forgot-out {
     background: rgb(126, 126, 190, 0.1);

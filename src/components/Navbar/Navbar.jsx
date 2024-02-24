@@ -18,6 +18,14 @@ export default function Navbar() {
       $(e.target).parents(".navbarItem").addClass("active");
     });
   });
+
+
+  const createHandleMenuClick = (menuItem) => {
+    return () => {
+      console.log(`Clicked on ${menuItem}`);
+    };
+  };
+
   const [t, il8n] = useTranslation();
 
   return (
@@ -30,7 +38,7 @@ export default function Navbar() {
           >
             <img className="nav-logo" src={logo}></img>
             {location.pathname.split("/")[1] === "login" ||
-            location.pathname.split("/")[1] === "signup" ? (
+              location.pathname.split("/")[1] === "signup" ? (
               <h5 className="text-white mb-0">Meeting Managment</h5>
             ) : (
               ""
@@ -121,6 +129,9 @@ export default function Navbar() {
                   />
                 </div>
               </li>
+              <div >
+
+              </div>
               <li className="nav-item all ms-md-auto d-flex justify-content-center align-items-center me-3">
                 <div className="darkmodeContainer h-100 d-flex justify-content-center align-items-center px-3">
                   <label className="toggle" htmlFor="switch">
