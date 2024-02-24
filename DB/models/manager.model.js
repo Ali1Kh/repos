@@ -17,7 +17,8 @@ export const Manager = sequelize.define(
     last_name: { type: DataTypes.STRING },
     PassWord: { type: DataTypes.STRING, allowNull: false },
     UserName: DataTypes.STRING,
-    resetCode: { type: DataTypes.STRING, defaultValue: false },
+    resetCode:{ type: DataTypes.STRING, defaultValue: null },
+    resetCodeVerified:{ type: DataTypes.BOOLEAN, defaultValue: false }
   },
   {
     freezeTableName: true,
