@@ -79,10 +79,24 @@ export const createMeeting = async (req, res, next) => {
     attachmentId: upload?.public_id,
     attachmentName: req.file?.originalname,
   });
-  await meeting_Manager.create({
-    manager_id: isManager.manager_id,
-    meeting_id: meeting.dataValues.meeting_id,
-  });
+
+  if (req.body.insidePersons) {
+    req.body.insidePersons.map(async (manager) => {
+      let isManager = await Manager.findByPk(manager);
+      if (!isManager) return next(new Error("Invalid Manager"));
+
+      await meeting_Manager.create({
+        manager_id: isManager.manager_id,
+        meeting_id: meeting.dataValues.meeting_id,
+      });
+    });
+  } 
+    await meeting_Manager.create({
+      manager_id: isManager.manager_id,
+      meeting_id: meeting.dataValues.meeting_id,
+    });
+  
+
   return res.json({ success: true, message: "Meeting created Successfully" });
 };
 
@@ -127,7 +141,7 @@ export const updateMeeting = async (req, res, next) => {
   let upload;
   if (req.file) {
     upload = await cloudinary.uploader.upload(req.file.path, {
-      public_id:isMeeting.attachmentId,
+      public_id: isMeeting.attachmentId,
     });
   }
 
