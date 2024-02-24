@@ -10,24 +10,10 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
-import Chip from '@mui/material/Chip';
-import Autocomplete from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import Dropzone, { useDropzone } from "react-dropzone";
-
-const VisuallyHiddenInput = styled('input')({
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
-  height: 1,
-  overflow: 'hidden',
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  whiteSpace: 'nowrap',
-  width: 1,
-});
+import Chip from "@mui/material/Chip";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import { useDropzone } from "react-dropzone";
 
 const newTheme = (theme) =>
   createTheme({
@@ -40,6 +26,8 @@ export default function NewMeeting() {
   let [time, setTime] = useState(null);
 
   let [managers, setManagers] = useState([]);
+  let [allmanagers, setAllManagers] = useState([]);
+  let [insidePersons, setInsidePersons] = useState([]);
 
   async function addMeeting() {
     let person = $("#meetPerson").val();
@@ -85,18 +73,42 @@ export default function NewMeeting() {
       address,
       notes,
       in_or_out: area,
+      insidePersons,
     };
+
+    if (area !== "Inside") {
+      delete initData.insidePersons;
+    }
+
+    const flattenObject = (obj, parentKey = "") => {
+      return Object.keys(obj).reduce((acc, key) => {
+        const currentKey = parentKey ? `${parentKey}[${key}]` : key;
+        if (typeof obj[key] === "object" && obj[key] !== null) {
+          return { ...acc, ...flattenObject(obj[key], currentKey) };
+        } else {
+          return { ...acc, [currentKey]: obj[key] };
+        }
+      }, {});
+    };
+
+    const flattenedData = flattenObject(initData);
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(flattenedData)) {
+      formData.append(key, value);
+    }
+
+    formData.append("attachment", uploadedFiles[0]);
 
     try {
       let { data } = await axios.post(
         `https://meetingss.onrender.com/secretary/createMeeting/${managerSelected}`,
-        initData,
+        formData,
         { headers: { token: localStorage.getItem("token") } }
       );
       if (data.success) {
         toast.success(data.message);
       } else {
-        console.log(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log(error);
@@ -111,24 +123,42 @@ export default function NewMeeting() {
     setManagers(data.managers);
   }
 
+  async function getAllManagers() {
+    let { data } = await axios.get(
+      "https://meetingss.onrender.com/secretary/getAllManagers",
+      { headers: { token: localStorage.getItem("token") } }
+    );
+    setAllManagers(data.managers);
+  }
+
   useEffect(() => {
     getSecManagers();
+    getAllManagers();
   }, []);
 
-  const [buttonPressed, setButtonPressed] = useState('Inside');
+  const [buttonPressed, setButtonPressed] = useState("Inside");
 
-  const onDrop = useCallback(acceptedFiles => {
-    // Do something with the files
-  }, [])
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+  const [uploadedFiles, setUploadedFiles] = useState([]);
 
+  const handleDrop = (acceptedFiles) => {
+    setUploadedFiles(acceptedFiles);
+  };
 
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop: handleDrop,
+    accept: { "application/pdf": [] },
+    multiple: false,
+  });
+
+  const handleManagerChange = (event, value) => {
+    setInsidePersons(value.map((manager) => manager.manager_id));
+  };
 
   const [t, il8n] = useTranslation();
 
   return (
     <div className="main">
-      <div className="container p-4 d-flex flex-column align-items-center justify-content-center p-xxl-4">
+      <div className="container d-flex flex-column align-items-center justify-content-center p-xxl-4">
         <h2
           className="mt-4 mb-xxl-5 mb-3 BlackToWhite"
           style={{ userSelect: "none" }}
@@ -136,7 +166,7 @@ export default function NewMeeting() {
           {t("CreateOrUpdateMeeting.createMeeting")}
         </h2>
 
-        <div className="inputsContainer  w-100  p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
+        <div className="inputsContainer p-0 w-100  p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
           <div className="calenderPicker row p-0 m-0">
             <div className="col-md-6  inputItem mb-3 px-5">
               <ThemeProvider theme={newTheme}>
@@ -160,24 +190,40 @@ export default function NewMeeting() {
             </div>
           </div>
           <div>
-            {buttonPressed === 'Inside' ? (
+            {buttonPressed === "Inside" ? (
               <div className="inputItem mb-3 px-5">
                 <Autocomplete
                   multiple
                   id="tags-filled"
-                  options={managersData.map((option) => option.names)}
+                  onChange={handleManagerChange}
+                  options={allmanagers}
+                  getOptionLabel={(option) =>
+                    option.first_name + " " + option.last_name
+                  }
                   freeSolo
                   renderTags={(value, getTagProps) =>
                     value.map((option, index) => (
-                      <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+                      <Chip
+                        key={option.manager_id}
+                        variant="outlined"
+                        className="bg-info"
+                        label={option.first_name + " " + option.last_name}
+                        {...getTagProps({ index })}
+                      />
                     ))
                   }
                   renderInput={(params) => (
                     <TextField
                       {...params}
                       placeholder={t("CreateOrUpdateMeeting.person")}
-                      className="tagify "
-                      sx={{ backgroundColor: 'var(--cardBgColor)', padding: '8px', color: 'var(--BlackToWhite)', border: '2px solid var(--sec-color)', borderRadius: '8px' }}
+                      className="tagify"
+                      sx={{
+                        backgroundColor: "var(--cardBgColor)",
+                        padding: "8px",
+                        color: "var(--BlackToWhite)",
+                        border: "2px solid var(--sec-color)",
+                        borderRadius: "8px",
+                      }}
                     />
                   )}
                 />
@@ -219,14 +265,67 @@ export default function NewMeeting() {
               placeholder={t("CreateOrUpdateMeeting.notes")}
             ></textarea>
           </div>
-          <div className="inputItem dropzone mb-3 px-5">
-            <div {...getRootProps()}>
-              <input {...getInputProps()} />
-              {
-                isDragActive ?
-                  <p>Drop the files here ...</p> :
-                  <p>Drag 'n' drop some files here, or click to select files</p>
-              }
+          <div className="inputItem  mb-3 px-5 ">
+            <div className="upload-container">
+              <div
+                {...getRootProps()}
+                style={{ borderStyle: "dashed" }}
+                className={`dropzone h-100 ${
+                  isDragActive ? "active h-100" : ""
+                }`}
+              >
+                <input {...getInputProps()} />
+                {isDragActive ? (
+                  <p>Drop the file here</p>
+                ) : (
+                  <div className="d-flex justify-content-center align-items-center flex-column">
+                    <img
+                      width={"60px"}
+                      height={"60px"}
+                      src={require("../../../../image/cloud-upload-regular-240.png")}
+                      alt=""
+                      srcset=""
+                    />
+                    <p className="p-2 text-center">
+                      Drag and drop file here or click to browse
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              <div className="file-list mt-3">
+                {uploadedFiles.length > 0 ? (
+                  <div className="d-flex flex-row flex-wrap gap-3">
+                    {uploadedFiles.map((file, index) => (
+                      <div
+                        className="cursorPointer w-fit p-3 py-2 rounded-3 position-relative"
+                        key={index}
+                        style={{
+                          border: "1px solid var(--cardHeadingColor)",
+                        }}
+                      >
+                        <i className="fa-solid fa-file-pdf"></i>{" "}
+                        <span>{file.name}</span>
+                        <div
+                          onClick={(e) => {
+                            setUploadedFiles(
+                              uploadedFiles.filter(
+                                (fileItem) => fileItem.path != file.path
+                              )
+                            );
+                          }}
+                          className="deleteFile cursorPointer position-absolute"
+                          style={{ top: "-10px", right: "-10px" }}
+                        >
+                          <i className="fa-regular fa-trash-can"></i>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p>No file uploaded</p>
+                )}
+              </div>
             </div>
           </div>
           <div className="d-flex justify-content-between">
@@ -252,7 +351,6 @@ export default function NewMeeting() {
                 Upload file
                 <VisuallyHiddenInput type="file" />
               </Button> */}
-
             </div>
             <div className="radios inputItem mb-3 px-5 d-flex gap-3 align-items-center">
               <div className="radio-buttons-container ">
@@ -264,10 +362,13 @@ export default function NewMeeting() {
                     type="radio"
                     value={"Inside"}
                     onClick={() => {
-                      setButtonPressed('Inside');
+                      setButtonPressed("Inside");
                     }}
                   />
-                  <label htmlFor="radio2" className="radio-button__label BlackToWhite">
+                  <label
+                    htmlFor="radio2"
+                    className="radio-button__label BlackToWhite"
+                  >
                     <span className="radio-button__custom"></span>
                     {t("CreateOrUpdateMeeting.inside")}
                   </label>
@@ -280,10 +381,13 @@ export default function NewMeeting() {
                     type="radio"
                     value={"Outside"}
                     onClick={() => {
-                      setButtonPressed('Outside');
+                      setButtonPressed("Outside");
                     }}
                   />
-                  <label htmlFor="radio1" className="radio-button__label BlackToWhite">
+                  <label
+                    htmlFor="radio1"
+                    className="radio-button__label BlackToWhite"
+                  >
                     <span className="radio-button__custom"></span>
                     {t("CreateOrUpdateMeeting.outside")}
                   </label>
@@ -310,7 +414,3 @@ export default function NewMeeting() {
     </div>
   );
 }
-
-const managersData = [
-  { names: 'mustafa', id: 1 },
-];

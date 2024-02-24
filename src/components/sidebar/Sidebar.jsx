@@ -158,7 +158,7 @@ const Sidebar = () => {
                   </Link>
                   <Link
                     className="sidebarItem animate__animated "
-                    to={"/manager/Nots"}
+                    to={"/manager/Notes"}
                   >
                     <span className="d-inline-flex text-center justify-content-center">
                       <div className="svgIcon">

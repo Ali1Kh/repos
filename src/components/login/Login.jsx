@@ -100,13 +100,22 @@ export default function Login() {
                   <option value="Manager">{t("signup.manager")}</option>
                   <option value="Secertary">{t("signup.sec")}</option>
                 </Form.Select>
-                <p
-                  style={{ fontSize: "14px" }}
-                  className="mt-2 px-3 text-start BlackToWhite"
-                >
-                  {t("Login.signuphint")}
-                  <Link to={"/signup"}>{t("Login.signup")}</Link>
-                </p>
+                <div className="d-flex justify-content-between">
+                  <p
+                    style={{ fontSize: "14px" }}
+                    className="mt-2 px-3 text-start BlackToWhite"
+                  >
+                    {t("Login.signuphint")}
+                    <Link to={"/signup"}>{t("Login.signup")}</Link>
+                  </p>
+                  <p
+                    style={{ fontSize: "14px" }}
+                    className="mt-2  px-3 text-start BlackToWhite"
+                  >
+                    <Link to={"/ForgetPassword"}>Forget Password ?</Link>
+                  </p>
+                </div>
+
                 <small className="text-danger">{errorMessage}</small>
                 <div
                   onClick={handleLogin}
