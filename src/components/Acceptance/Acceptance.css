@@ -35,7 +35,7 @@ button.accept-button:hover {
 
 }
 
-i.fa-trash {
+i.deletAcc {
     margin: 10px;
     font-size: 20px;
     padding: 8px 10px;
@@ -45,7 +45,7 @@ i.fa-trash {
     border: 1px solid #7E7EBE;
 }
 
-i.fa-trash:hover {
+i.deletAcc:hover {
     background-color: #404040;
     border: 1px solid #7E7EBE;
 }

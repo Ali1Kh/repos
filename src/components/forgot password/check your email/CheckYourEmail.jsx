@@ -89,7 +89,7 @@ export default function CheckYourEmail() {
             >Verify</button>
             <button onClick={postSendAgain} className='btn-forgot-out'>Send again</button>
             <Link to={''} className='back d-flex align-items-center justify-content-center'>
-              <i class="fa-solid fa-chevron-left"></i>
+              <i className="fa-solid fa-chevron-left"></i>
               <p>Back to Sign In</p>
             </Link>
           </div>

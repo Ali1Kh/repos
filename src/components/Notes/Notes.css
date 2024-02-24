@@ -45,7 +45,6 @@
     }
 }
 
-
 .note-icon i {
     font-size: 40px;
     color: var(--sec-color);
@@ -90,5 +89,21 @@
     background-color: var(--sec-color) !important;
     border: 1px solid var(--sec-color) !important;
     color: #CAC4D0 !important;
+    margin: 10px !important;
+    padding: 8px 30px !important;
+    transition: 500ms;
+}
 
+.btn.btn-primary:hover {
+    background-color: darkslateblue !important;
+    border: 1px solid darkslateblue !important;
+}
+
+.btn.btn-danger {
+    color: #CAC4D0 !important;
+}
+
+.noContent {
+    font-size: 40px;
+    margin-top: 10rem !important;
 }
