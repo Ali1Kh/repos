@@ -21,7 +21,7 @@ router.post(
 );
 
 // Forget Password
-router.patch(
+router.post(
   "/send-forget-code",
   validation(UserSchemas.sendForgetPassCodeSchema),
   userController.sendForgetPassCode

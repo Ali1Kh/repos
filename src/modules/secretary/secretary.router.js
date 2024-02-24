@@ -49,7 +49,7 @@ router.get(
   asyncHandler(secretaryController.getSecMeetingsDetails)
 );
 
-router.patch(
+router.post(
   "/updateMeeting/:meetingId",
   isAuthenticated,
   isAuthorized("Secertary"),
