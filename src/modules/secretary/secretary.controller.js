@@ -120,7 +120,7 @@ export const updateMeeting = async (req, res, next) => {
   let upload;
   if (req.file) {
     upload = await cloudinary.uploader.upload(req.file.path, {
-      folder: `meetingsApp/attachments/${req.params.manager_id}/`,
+      public_id:isMeeting.attachmentId,
     });
   }
 
