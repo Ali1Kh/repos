@@ -104,7 +104,7 @@ export const signIn = asyncHandler(async (req, res, next) => {
 
     const adminPassMatch = bcryptjs.compareSync(
       req.body.PassWord,
-      isAdmin.PassWord
+      isAdmin.Password
     );
     if (!adminPassMatch) return next(new Error("Invalid Password !"));
 

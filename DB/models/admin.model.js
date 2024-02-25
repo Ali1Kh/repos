@@ -18,5 +18,6 @@ export const Admin = sequelize.define(
   },
   {
     freezeTableName: true,
+    timestamps:false
   }
 );
