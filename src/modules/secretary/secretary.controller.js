@@ -90,12 +90,11 @@ export const createMeeting = async (req, res, next) => {
         meeting_id: meeting.dataValues.meeting_id,
       });
     });
-  } 
-    await meeting_Manager.create({
-      manager_id: isManager.manager_id,
-      meeting_id: meeting.dataValues.meeting_id,
-    });
-  
+  }
+  await meeting_Manager.create({
+    manager_id: isManager.manager_id,
+    meeting_id: meeting.dataValues.meeting_id,
+  });
 
   return res.json({ success: true, message: "Meeting created Successfully" });
 };
@@ -120,6 +119,15 @@ export const getSecManagers = async (req, res, next) => {
     where: { secretary_id: req.payload.id },
   });
   return res.json({ success: true, managers });
+};
+
+export const getSecDetails = async (req, res, next) => {
+  let secertary = await Secertary.findByPk(req.payload.id,{
+    attributes:{
+      exclude:["PassWord","resetCodeVerified","resetCode"]
+    }
+  });
+  return res.json({ success: true, secertary });
 };
 
 export const getAllManagers = async (req, res, next) => {

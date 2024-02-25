@@ -29,6 +29,13 @@ router.post(
 );
 
 router.get(
+  "/getSecDetails",
+  isAuthenticated,
+  isAuthorized("Secertary"),
+  asyncHandler(secretaryController.getSecDetails)
+);
+
+router.get(
   "/getSecManagers",
   isAuthenticated,
   isAuthorized("Secertary"),
