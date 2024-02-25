@@ -1,193 +1,280 @@
-import React, { useEffect, useState } from 'react'
-import "./Notes.css"
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
-import axios from 'axios';
-
+import React, { useEffect, useState } from "react";
+import "./Notes.css";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useQuery } from "react-query";
+import { TailSpin } from "react-loader-spinner";
 
 export default function Nots() {
-    const [notes, setnotes] = useState([]);
+  const [show, setShow] = useState(false);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [type, setType] = useState();
+  const [id, setId] = useState("");
 
-    const [show, setShow] = useState(false);
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [id, setId] = useState('');
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
+  const authToken = localStorage.getItem("token");
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  let { data, isLoading } = useQuery("getNotes", getNotes);
 
-    const authToken = localStorage.getItem("token");
+  function getNotes() {
+    setContent("");
+    setTitle("");
+    return axios
+      .get("https://meetingss.onrender.com/notes/", {
+        headers: {
+          token: authToken,
+        },
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
 
-    useEffect(() => {
-        getNotes();
-    }, []);
+  const postAddNotes = () => {
+    if (title == "" || content == "") {
+      toast.error("Please Fill All Inputs", {
+        style: {
+          zIndex: 9999,
+        },
+      });
+      return;
+    }
+    axios
+      .post(
+        "https://meetingss.onrender.com/notes/",
+        {
+          title: title,
+          content: content,
+        },
+        {
+          headers: {
+            token: authToken,
+          },
+        }
+      )
+      .then((response) => {
+        if (response.data.success) {
+          toast.success("Note Added Successfully");
+          getNotes();
+        } else {
+          // Handle failure
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+  const patchUpdateNotes = () => {
+    if (title == "" || content == "") {
+      toast.error("Please Fill All Inputs", {
+        style: {
+          zIndex: 9999,
+        },
+      });
+      return;
+    }
 
-    const getNotes = () => {
-        axios
-            .get('https://meetingss.onrender.com/notes/', {
-                headers: {
-                    token: authToken,
-                },
-            })
-            .then((response) => {
-                console.log(response.data);
-                if (response.data.success) {
-                    setnotes(response.data.notes)
-                    setContent("")
-                    setTitle("")
-                } else {
-                    // Handle failure
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    };
+    if (title == "" && content == "") {
+      toast.error("Please Enter Different Data", {
+        style: {
+          zIndex: 9999,
+        },
+      });
+      return;
+    }
+    axios
+      .patch(
+        `https://meetingss.onrender.com/notes/${id}`,
+        {
+          title: title,
+          content: content,
+        },
+        {
+          headers: {
+            token: authToken,
+          },
+        }
+      )
+      .then((response) => {
+        if (response.data.success) {
+          toast.success("Note Updated Successfully");
+          getNotes();
+          handleClose();
+        } else {
+          // Handle failure
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
-    const postAddNotes = () => {
-        axios
-            .post('https://meetingss.onrender.com/notes/', {
-                title: title,
-                content: content,
-            }, {
+  const DeleteNotes = () => {
+    axios
+      .delete(`https://meetingss.onrender.com/notes/${id}`, {
+        headers: {
+          token: authToken,
+        },
+      })
+      .then((response) => {
+        if (response.data.success) {
+          toast.success("Note Deleted Successfully");
 
-                headers: {
-                    token: authToken,
+          getNotes();
+        } else {
+          // Handle failure
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
-                },
-            })
-            .then((response) => {
-                console.log(response.data);
-                if (response.data.success) {
-                    getNotes();
-                } else {
-                    // Handle failure
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    };
-    const patchUpdateNotes = () => {
-        axios
-            .patch(`https://meetingss.onrender.com/notes/${id}`, {
-                title: title,
-                content: content,
-            }, {
-                headers: {
-                    token: authToken,
-                },
-            })
-            .then((response) => {
-                console.log(response.data);
-                if (response.data.success) {
-
-                } else {
-                    // Handle failure
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    };
-
-    const DeleteNotes = () => {
-        axios
-            .delete(`https://meetingss.onrender.com/notes/${id}`, {
-                headers: {
-                    token: authToken,
-                },
-            })
-            .then((response) => {
-                console.log(response.data);
-                if (response.data.success) {
-                    getNotes();
-                } else {
-                    // Handle failure
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    };
-
-
-    return (
-        <>
-            <div className='main'>
-                <div className='container mt-5'>
-                    <h1 className='container d-flex flex-column align-items-center justify-content-center p-4'>Notes</h1>
-                    <div className="row gy-3">
-                        {Array.isArray(notes) && notes.length > 0 ? (
-                            notes.map((note, idx) => (
-                                <div
-                                    key={idx}
-                                    className="inner-parent col-lg-3 px-lg-3 col-md-12 col-sm-12 mt-4 animate__animated animate__fadeIn animate__slower"
-                                    data-aos="fade-up"
-                                    data-aos-delay="500"
-                                    data-aos-once="true"
-                                    onClick={() => { handleShow(); setContent(note.content); setTitle(note.title); setId(note.notes_id) }}
-                                >
-                                    <div className="inner-card position-relative h-100 shadow rounded-4 gap-4 p-4 flex-column">
-                                        <div className="guest-info d-flex flex-column align-items-center">
-                                            <div className="guest-icon-profile d-flex justify-content-center align-items-center me-3 mb-2 mt-2 ms-3"
-                                                style={{ width: "50px", height: "150px" }}>
-                                                <div className="box">
-                                                    <h2>{note.title}</h2>
-                                                    <div className="text-black d-flex justify-content-center align-items-center">
-                                                        <p>{note.content}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))
-                        ) : (
-                            <p className='noContent d-flex justify-content-center align-items-center' >No notes available.</p>
-                        )}
+  return (
+    <>
+      <div className="main">
+        <div className="container mt-5">
+          <h1 className="container d-flex flex-column align-items-center justify-content-center p-4">
+            Notes
+          </h1>
+          <div className="row gy-3 p-5 pt-0">
+            {isLoading ? (
+              <div
+                className="d-flex justify-content-center align-items-center"
+                style={{ height: "65vh" }}
+              >
+                <TailSpin
+                  visible={true}
+                  height="90"
+                  width="90"
+                  color="var(--sec-color)"
+                  ariaLabel="tail-spin-loading"
+                  radius="1"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                />
+              </div>
+            ) : (
+              <>
+                {data?.data.notes.length > 0 ? (
+                  data?.data.notes.map((note, idx) => (
+                    <div
+                      key={idx}
+                      className="inner-parent col-lg-3 px-lg-3 col-md-12 col-sm-12 mt-4 animate__animated animate__fadeIn animate__slower"
+                      data-aos="fade-up"
+                      data-aos-delay="500"
+                      data-aos-once="true"
+                      onClick={() => {
+                        handleShow();
+                        setContent(note.content);
+                        setTitle(note.title);
+                        setId(note.notes_id);
+                        setType("update");
+                      }}
+                    >
+                      <div className="inner-card  h-100 shadow rounded-4 gap-4 p-4 flex-column">
+                        <div className="box d-flex  flex-column h-100">
+                          <h5>{note.title}</h5>
+                          <div className="text-black d-flex mt-2 align-items-center">
+                            <p>{note.content}</p>
+                          </div>
+                          <small className="mt-auto">
+                            {new Date(note.createdAt).toLocaleDateString(
+                              "en-US",
+                              {
+                                month: "long",
+                                day: "numeric",
+                                year: "numeric",
+                              }
+                            )}
+                          </small>
+                        </div>
+                      </div>
                     </div>
-                </div>
-                <div className='note-icon' onClick={handleShow}>
-                    <i className="fa-solid fa-notes-medical"></i>
-                </div>
-            </div>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Body>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Control
-                                type="text"
-                                placeholder="Title"
-                                autoFocus
-                                value={title}
-                                onChange={(e) => setTitle(e.target.value)}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                            <Form.Control
-                                as="textarea"
-                                rows={3}
-                                placeholder="Content"
-                                value={content}
-                                onChange={(e) => setContent(e.target.value)}
-                            />
-                        </Form.Group>
-                    </Form>
-                    { id ? <Button variant="primary" onClick={() => { handleClose(); postAddNotes(); }}>
-                        Save
-                    </Button>
-                    :<Button variant="primary" onClick={() => { patchUpdateNotes() }}>
-                        Edit
-                    </Button>}
-                    
-                    <Button variant="danger" onClick={() => { handleClose(); DeleteNotes(); }}>
-                        Delete
-                    </Button>
-                </Modal.Body>
-            </Modal>
-        </>
-    )
+                  ))
+                ) : (
+                  <p className="noContent d-flex justify-content-center align-items-center">
+                    No notes available.
+                  </p>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+        <div
+          className="note-icon"
+          onClick={() => {
+            handleShow();
+            setType("new");
+          }}
+        >
+          <i className="fa-solid fa-notes-medical"></i>
+        </div>
+      </div>
+      <Modal show={show} onHide={handleClose} style={{ zIndex: 9998 }}>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Control
+                type="text"
+                placeholder="Title"
+                autoFocus
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea1"
+            >
+              <Form.Control
+                as="textarea"
+                rows={3}
+                placeholder="Content"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
+          {type == "new" ? (
+            <Button
+              variant="primary"
+              onClick={() => {
+                postAddNotes();
+              }}
+            >
+              Save
+            </Button>
+          ) : type == "update" ? (
+            <Button
+              variant="primary"
+              onClick={() => {
+                patchUpdateNotes();
+              }}
+            >
+              Update
+            </Button>
+          ) : (
+            ""
+          )}
+
+          <Button
+            variant="danger"
+            onClick={() => {
+              handleClose();
+              DeleteNotes();
+            }}
+          >
+            Delete
+          </Button>
+        </Modal.Body>
+      </Modal>
+    </>
+  );
 }

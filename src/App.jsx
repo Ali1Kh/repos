@@ -23,41 +23,73 @@ import CheckYourEmail from "./components/forgot password/check your email/CheckY
 import ResetPassword from "./components/forgot password/Reset password/ResetPassword.jsx";
 import Notes from "./components/Notes/Notes.jsx";
 
-
 const router = createHashRouter([
   {
-    path: "/", element: <ProtectedRoutes><Layout /></ProtectedRoutes>,
+    path: "/",
+    element: (
+      <ProtectedRoutes>
+        <Layout />
+      </ProtectedRoutes>
+    ),
     children: [
       {
         path: "/",
-        element: <ProtectedRoutes><HomePage /></ProtectedRoutes>,
+        element: (
+          <ProtectedRoutes>
+            <HomePage />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "home",
-        element: <ProtectedRoutes><HomePage /></ProtectedRoutes>,
+        element: (
+          <ProtectedRoutes>
+            <HomePage />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "/meeting",
         children: [
           {
             path: "",
-            element: <ProtectedRoutes><Meetings /></ProtectedRoutes>,
+            element: (
+              <ProtectedRoutes>
+                <Meetings />
+              </ProtectedRoutes>
+            ),
           },
           {
             path: "addMeeting",
-            element: <ProtectedRoutes><NewMeeting /></ProtectedRoutes>,
+            element: (
+              <ProtectedRoutes>
+                <NewMeeting />
+              </ProtectedRoutes>
+            ),
           },
           {
             path: "updateMeeting/:id",
-            element: <ProtectedRoutes><UpdateMeeting /></ProtectedRoutes>,
+            element: (
+              <ProtectedRoutes>
+                <UpdateMeeting />
+              </ProtectedRoutes>
+            ),
           },
           {
             path: "createManagerAccount",
-            element: <ProtectedRoutes><CreateManagerAccount /></ProtectedRoutes>,
+            element: (
+              <ProtectedRoutes>
+                <CreateManagerAccount />
+              </ProtectedRoutes>
+            ),
           },
           {
             path: "Acceptance",
-            element: <ProtectedRoutes><Acceptance /></ProtectedRoutes>,
+            element: (
+              <ProtectedRoutes>
+                <Acceptance />
+              </ProtectedRoutes>
+            ),
           },
           {
             path: "*",
@@ -69,18 +101,37 @@ const router = createHashRouter([
       {
         path: "/manager",
         children: [
-          { path: "", element: <ProtectedRoutes><HomePage /></ProtectedRoutes> },
+          {
+            path: "",
+            element: (
+              <ProtectedRoutes>
+                <HomePage />
+              </ProtectedRoutes>
+            ),
+          },
           {
             path: "meetingDetails",
-            element: <ProtectedRoutes><MeetingDetails /></ProtectedRoutes>,
+            element: (
+              <ProtectedRoutes>
+                <MeetingDetails />
+              </ProtectedRoutes>
+            ),
           },
           {
             path: "calender",
-            element: <ProtectedRoutes><Calender /></ProtectedRoutes>,
+            element: (
+              <ProtectedRoutes>
+                <Calender />
+              </ProtectedRoutes>
+            ),
           },
           {
             path: "Notes",
-            element: <ProtectedRoutes><Notes /></ProtectedRoutes>,
+            element: (
+              <ProtectedRoutes>
+                <Notes />
+              </ProtectedRoutes>
+            ),
           },
         ],
       },
@@ -113,29 +164,30 @@ const router = createHashRouter([
     children: [
       {
         path: "/ForgetPassword",
-        element:
+        element: (
           <>
             <Navbar />
             <ForgotPassword />
-          </>,
+          </>
+        ),
       },
       {
         path: "/CheckYourEmail",
-        element:
+        element: (
           <>
             <Navbar />
             <CheckYourEmail />
           </>
-        ,
+        ),
       },
       {
         path: "/ResetPassword",
-        element: 
-        <>
+        element: (
+          <>
             <Navbar />
             <ResetPassword />
           </>
-        ,
+        ),
       },
     ],
   },
@@ -154,7 +206,7 @@ function App() {
             <RouterProvider router={router} />
           </ThemeProvider>
         </LocalizationProvider>
-        <Toaster />
+        <Toaster toastOptions={{ style: { zIndex: "99999" } }} />
       </QueryClientProvider>
     </>
   );

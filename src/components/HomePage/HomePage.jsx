@@ -5,16 +5,15 @@ import MeetingDetails from "../manager/meetingDetails/meetingDetails.jsx";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
+import { useQuery } from "react-query";
+import { TailSpin } from "react-loader-spinner";
 
 export default function HomePage() {
-  const [meetings, setMeetings] = useState([]);
   const [t] = useTranslation();
 
-  useEffect(() => {
-    getMeetings();
-  }, []);
+  let { data, isLoading } = useQuery("getMeetings", getMeetings);
 
-  function getMeetings() {
+  async function getMeetings() {
     const authToken = localStorage.getItem("token");
 
     if (!authToken) {
@@ -22,41 +21,12 @@ export default function HomePage() {
       return;
     }
 
-    axios
-      .get("https://meetingss.onrender.com/meetings/", {
-        headers: {
-          token: authToken,
-        },
-      })
-      .then((response) => {
-        if (response.data.success === true) {
-          setMeetings(response.data.meetings);
-        }
-        
-      })
-      .catch((err) => console.error(err));
+    return await axios.get("https://meetingss.onrender.com/meetings/", {
+      headers: {
+        token: authToken,
+      },
+    });
   }
-
-  // let meetings = [
-  //   {
-  //     GuestName: "Ali Khaled ElSa3dany",
-  //     GuestEmail: "Elsa3dany22@gmail.com",
-  //     MeetingTopic: "blablbaa",
-  //     MeetingTime: "12:00 PM",
-  //     MeetingStatus: "Not Done",
-  //   },
-  // ];
-
-  // let meetingsDetails = {
-  //   GuestName: "Omar Kadry Dahab",
-  //   MeetingTopic: "Drdsha",
-  //   MeetingDate: "20/10/2024",
-  //   MeetingAddress: "Bolaq Abo El3ela",
-  //   Area: "Outside",
-  //   MeetingTime: "12:00 PM",
-  //   MeetingStatus: "Not Done",
-  //   Comments: "No Comment",
-  // };
 
   let colors = JSON.parse(localStorage.getItem("colors")) || [
     "#FFB399",
@@ -107,83 +77,108 @@ export default function HomePage() {
             style={{ userSelect: "none" }}
           >
             {t("HomePage.header")}
-          </h2>
-          <div className="row gy-3">
-            {meetings
-              ? meetings.map((meeting, idx) => (
-                  <>
-                    <div
-                      key={idx}
-                      className="inner-parent  col-lg-4 px-lg-4 col-md-12 col-sm-12 mt-4 animate__animated animate__fadeIn animate__slower"
-                      data-aos="fade-up"
-                      data-aos-delay="500"
-                      data-aos-once="true"
-                    >
-                      <div
-                        className="inner-card h-100 shadow rounded-4 gap-3 p-4 flex-column"
-                        data-bs-toggle="modal"
-                        data-bs-target={`#meetingModal${meeting.meeting_id}`}
-                      >
-                        <div className="guest-info d-flex flex-column align-items-center">
+          </h2>{" "}
+          {isLoading ? (
+            <div className="d-flex justify-content-center align-items-center" style={{height:"65vh"}}>
+              <TailSpin
+                visible={true}
+                height="90"
+                width="90"
+                color="var(--sec-color)"
+                ariaLabel="tail-spin-loading"
+                radius="1"
+                wrapperStyle={{}}
+                wrapperClass=""
+              />
+            </div>
+          ) : (
+            <div className="row gy-3">
+              <>
+                {data
+                  ? data.data.meetings.map((meeting, idx) => (
+                      <>
+                        <div
+                          key={idx}
+                          className="inner-parent  col-lg-4 px-lg-4 col-md-12 col-sm-12 mt-4 animate__animated animate__fadeIn animate__slower"
+                          data-aos="fade-up"
+                          data-aos-delay="500"
+                          data-aos-once="true"
+                        >
                           <div
-                            className="guest-icon-profile d-flex justify-content-center align-items-center me-3 mb-2 mt-2 ms-3"
-                            style={{ width: "55px", height: "50px" }}
+                            className="inner-card h-100 shadow rounded-4 gap-3 p-4 flex-column"
+                            data-bs-toggle="modal"
+                            data-bs-target={`#meetingModal${meeting.meeting_id}`}
                           >
-                            <div
-                              className="meetingGuestIcon text-black d-flex justify-content-center align-items-center"
-                              style={{
-                                backgroundColor: `${
-                                  colors[
-                                    Math.floor(Math.random() * colors.length)
-                                  ]
-                                }`,
-                              }}
-                            >
-                              <span className="m-0 p-0 ">
-                                {meeting.person
-                                  .toUpperCase()
-                                  .split("")
-                                  .slice(0, 1)}
-                              </span>
+                            <div className="guest-info d-flex flex-column align-items-center">
+                              <div
+                                className="guest-icon-profile d-flex justify-content-center align-items-center me-3 mb-2 mt-2 ms-3"
+                                style={{ width: "55px", height: "50px" }}
+                              >
+                                <div
+                                  className="meetingGuestIcon text-black d-flex justify-content-center align-items-center"
+                                  style={{
+                                    backgroundColor: `${
+                                      colors[
+                                        Math.floor(
+                                          Math.random() * colors.length
+                                        )
+                                      ]
+                                    }`,
+                                  }}
+                                >
+                                  <span className="m-0 p-0 ">
+                                    {meeting.person
+                                      .toUpperCase()
+                                      .split("")
+                                      .slice(0, 1)}
+                                  </span>
+                                </div>
+                              </div>
+                              <div className="guest-account text-center d-flex flex-column align-items-center mt-3">
+                                <div className="guest-name flex-column">
+                                  <h4>{meeting.person}</h4>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                          <div className="guest-account text-center d-flex flex-column align-items-center mt-3">
-                            <div className="guest-name flex-column">
-                              <h4>{meeting.person}</h4>
+                            <div className="meeting-info row mt-2">
+                              <div className="meeting-topic col-lg-4 col-md-4">
+                                <p className="text-center m-1 heading">
+                                  {t("HomePage.meetingTopic")}
+                                </p>
+                                <p className="text-center m-1">
+                                  {meeting.about}
+                                </p>
+                              </div>
+
+                              <div className="meeting-time col-lg-4 col-md-4">
+                                <p className="text-center m-1 heading">
+                                  {t("HomePage.meetingTime")}
+                                </p>
+                                <p className="text-center m-1">
+                                  {meeting.statues}
+                                </p>
+                              </div>
+
+                              <div className="meeting-date col-lg-4 col-md-4">
+                                <p className="text-center m-1 heading">
+                                  {t("HomePage.meetingDate")}
+                                </p>
+                                <p className="text-center m-1">
+                                  {meeting.time}
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
-                        <div className="meeting-info row mt-2">
-                          <div className="meeting-topic col-lg-4 col-md-4">
-                            <p className="text-center m-1 heading">
-                              {t("HomePage.meetingTopic")}
-                            </p>
-                            <p className="text-center m-1">{meeting.about}</p>
-                          </div>
-
-                          <div className="meeting-time col-lg-4 col-md-4">
-                            <p className="text-center m-1 heading">
-                              {t("HomePage.meetingTime")}
-                            </p>
-                            <p className="text-center m-1">{meeting.statues}</p>
-                          </div>
-
-                          <div className="meeting-date col-lg-4 col-md-4">
-                            <p className="text-center m-1 heading">
-                              {t("HomePage.meetingDate")}
-                            </p>
-                            <p className="text-center m-1">{meeting.time}</p>
-                          </div>
+                        <div className="details position-absolute">
+                          <MeetingDetails meetingsDetails={meeting} />
                         </div>
-                      </div>
-                    </div>
-                    <div className="details position-absolute">
-                      <MeetingDetails meetingsDetails={meeting} />
-                    </div>
-                  </>
-                ))
-              : ""}
-          </div>
+                      </>
+                    ))
+                  : ""}
+              </>
+            </div>
+          )}
         </div>
       </div>
     </>

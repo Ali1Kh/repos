@@ -1,10 +1,4 @@
-.star-icon {
-    color: var(--sec-color);
-    display: inline-block;
-    font-size: 30px;
-    top: 5px;
-    left: 10px;
-}
+
 
 .text-black h2 {
     color: var(--sec-color);
