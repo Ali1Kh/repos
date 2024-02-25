@@ -200,7 +200,7 @@ const Sidebar = () => {
                 <>
                   <Link
                     className="sidebarItem animate__animated"
-                    to={"/dashboard/meeting"}
+                    to={"/dashboard/meetings"}
                   >
                     <span className="d-inline-flex text-center justify-content-center">
                       <i className="fa-regular fa-handshake"></i>
