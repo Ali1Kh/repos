@@ -17,7 +17,7 @@ import { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import CreateManagerAccount from "./components/secretary/Meeting/create manager account/CreateManagerAccount";
 import ProtectedRoutes from "./components/Protected Routes/ProtectedRoutes.jsx";
-import Acceptance from "./components/Acceptance/Acceptance.jsx";
+import Acceptance from "./components/dashBoard/Acceptance/Acceptance.jsx";
 import ForgotPassword from "./components/forgot password/forgot password/ForgotPassword.jsx";
 import CheckYourEmail from "./components/forgot password/check your email/CheckYourEmail.jsx";
 import ResetPassword from "./components/forgot password/Reset password/ResetPassword.jsx";
@@ -34,9 +34,9 @@ const router = createHashRouter([
     ),
     children: [
       {
-        path: "/",
+        path: "/meetings",
         element: (
-          <ProtectedRoutes>
+          <ProtectedRoutes role={"Manager"}>
             <HomePage />
           </ProtectedRoutes>
         ),
@@ -44,7 +44,7 @@ const router = createHashRouter([
       {
         path: "home",
         element: (
-          <ProtectedRoutes>
+          <ProtectedRoutes role={"Manager"}>
             <HomePage />
           </ProtectedRoutes>
         ),
@@ -63,7 +63,7 @@ const router = createHashRouter([
           {
             path: "",
             element: (
-              <ProtectedRoutes>
+              <ProtectedRoutes role={"Secertary"}>
                 <Meetings />
               </ProtectedRoutes>
             ),
@@ -72,7 +72,7 @@ const router = createHashRouter([
             path: "addMeeting",
             element: (
               <ProtectedRoutes>
-                <NewMeeting />
+                <NewMeeting role={"Secertary"} />
               </ProtectedRoutes>
             ),
           },
@@ -80,40 +80,32 @@ const router = createHashRouter([
             path: "updateMeeting/:id",
             element: (
               <ProtectedRoutes>
-                <UpdateMeeting />
+                <UpdateMeeting role={"Secertary"} />
               </ProtectedRoutes>
             ),
           },
           {
             path: "createManagerAccount",
             element: (
-              <ProtectedRoutes>
+              <ProtectedRoutes role={"Secertary"}>
                 <CreateManagerAccount />
               </ProtectedRoutes>
             ),
           },
-          {
-            path: "Acceptance",
-            element: (
-              <ProtectedRoutes>
-                <Acceptance />
-              </ProtectedRoutes>
-            ),
-          },
+
           {
             path: "*",
             element: <NotFound />,
           },
         ],
       },
-
       {
         path: "/manager",
         children: [
           {
             path: "",
             element: (
-              <ProtectedRoutes>
+              <ProtectedRoutes role={"Manager"}>
                 <HomePage />
               </ProtectedRoutes>
             ),
@@ -121,7 +113,7 @@ const router = createHashRouter([
           {
             path: "meetingDetails",
             element: (
-              <ProtectedRoutes>
+              <ProtectedRoutes role={"Manager"}>
                 <MeetingDetails />
               </ProtectedRoutes>
             ),
@@ -129,7 +121,7 @@ const router = createHashRouter([
           {
             path: "calender",
             element: (
-              <ProtectedRoutes>
+              <ProtectedRoutes role={"Manager"}>
                 <Calender />
               </ProtectedRoutes>
             ),
@@ -137,8 +129,53 @@ const router = createHashRouter([
           {
             path: "Notes",
             element: (
-              <ProtectedRoutes>
+              <ProtectedRoutes role={"Manager"}>
                 <Notes />
+              </ProtectedRoutes>
+            ),
+          },
+        ],
+      },
+      {
+        path: "/dashboard",
+        children: [
+          {
+            path: "meetings",
+            element: (
+              <ProtectedRoutes role={"Admin"}>
+                {/* <MeetingDetails /> */}
+              </ProtectedRoutes>
+            ),
+          },
+          {
+            path: "managers",
+            element: (
+              <ProtectedRoutes role={"Admin"}>
+                {/* <Calender /> */}
+              </ProtectedRoutes>
+            ),
+          },
+          {
+            path: "secertaries",
+            element: (
+              <ProtectedRoutes role={"Admin"}>
+                {/* <Calender /> */}
+              </ProtectedRoutes>
+            ),
+          },
+          {
+            path: "history",
+            element: (
+              <ProtectedRoutes role={"Admin"}>
+                {/* <Calender /> */}
+              </ProtectedRoutes>
+            ),
+          },
+          {
+            path: "Acceptance",
+            element: (
+              <ProtectedRoutes role={"Admin"}>
+                <Acceptance />
               </ProtectedRoutes>
             ),
           },

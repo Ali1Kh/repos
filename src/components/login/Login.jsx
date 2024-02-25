@@ -53,7 +53,13 @@ export default function Login() {
         const token = response.data.token;
         if (response.data.success === true) {
           localStorage.setItem("token", token);
-          navigate("/#");
+          if (role == "Manager") {
+            navigate("/manager");
+          } else if (role == "Secertary") {
+            navigate("/meeting");
+          } else if (role == "Admin") {
+            navigate("/dashboard");
+          }
         } else {
           seterrorMessage(response.data.message);
         }
@@ -99,6 +105,7 @@ export default function Login() {
                   </option>
                   <option value="Manager">{t("signup.manager")}</option>
                   <option value="Secertary">{t("signup.sec")}</option>
+                  <option value="Admin">{t("signup.admin")}</option>
                 </Form.Select>
                 <div className="d-flex justify-content-between">
                   <p

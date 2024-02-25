@@ -161,7 +161,7 @@ const Sidebar = () => {
                     to={"/manager/Notes"}
                   >
                     <span className="d-inline-flex text-center justify-content-center">
-                    <i className="fa-regular fa-note-sticky"></i>
+                      <i className="fa-regular fa-note-sticky"></i>
                     </span>
                     <span>{t("sidebar.Nots")}</span>
                   </Link>
@@ -194,6 +194,54 @@ const Sidebar = () => {
                       <i className="fa fa-user-plus "></i>
                     </span>
                     <span>{t("sidebar.createManagerAccount")}</span>
+                  </Link>
+                </>
+              ) : role === "Admin" ? (
+                <>
+                  <Link
+                    className="sidebarItem animate__animated"
+                    to={"/dashboard/meeting"}
+                  >
+                    <span className="d-inline-flex text-center justify-content-center">
+                      <i className="fa-regular fa-handshake"></i>
+                    </span>
+                    <span>{t("sidebar.meetings")}</span>
+                  </Link>
+                  <Link
+                    className="sidebarItem animate__animated"
+                    to={"/dashboard/managers"}
+                  >
+                    <span className="d-inline-flex text-center justify-content-center">
+                      <i className="fa-solid fa-users"></i>
+                    </span>
+                    <span>Managers</span>
+                  </Link>
+                  <Link
+                    className="sidebarItem animate__animated"
+                    to={"/dashboard/secertaries"}
+                  >
+                    <span className="d-inline-flex text-center justify-content-center">
+                    <i className="fa-solid fa-chalkboard-user"></i>
+                    </span>
+                    <span>Secertaries</span>
+                  </Link>
+                  <Link
+                    className="sidebarItem animate__animated"
+                    to={"/dashboard/Acceptance"}
+                  >
+                    <span className="d-inline-flex  text-center justify-content-center">
+                      <i class="fa-regular fa-thumbs-up"></i>
+                    </span>
+                    <span>Acceptance</span>
+                  </Link>
+                  <Link
+                    className="sidebarItem animate__animated"
+                    to={"/dashboard/history"}
+                  >
+                    <span className="d-inline-flex  text-center justify-content-center">
+                      <i className="fa-regular fa-file-lines"></i>
+                    </span>
+                    <span>History</span>
                   </Link>
                 </>
               ) : (
