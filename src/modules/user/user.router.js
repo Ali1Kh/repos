@@ -17,16 +17,26 @@ router.post(
 router.post(
   "/login",
   validation(UserSchemas.signInSchema),
-  userController.signIn 
+  userController.signIn
 );
 
 // Forget Password
-router.patch("/send-forget-code",
+router.post(
+  "/send-forget-code",
   validation(UserSchemas.sendForgetPassCodeSchema),
-  userController.sendForgetPassCode)
-  
-router.post("/forget-password",
+  userController.sendForgetPassCode
+);
+
+router.post(
+  "/verifyResetCode",
+  validation(UserSchemas.verifyResetCodeSchema),
+  userController.verifyResetCode
+);
+
+router.post(
+  "/forget-password",
   validation(UserSchemas.forgetPassSchema),
-  userController.forgetPassword)
+  userController.forgetPassword
+);
 
 export default router;

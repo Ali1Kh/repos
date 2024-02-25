@@ -25,12 +25,21 @@ router.post(
 );
 
 router.patch(
-  "/update-note/:meeting_id",
+  "/:id",
   isAuthenticated,
   isAuthorized("Manager"),
   validation(NoteSchemas.updateNoteSchema),
   noteController.updateNote
 );
+
+router.delete(
+  "/:id",
+  isAuthenticated,
+  isAuthorized("Manager"),
+  validation(NoteSchemas.deleteNoteSchema),
+  noteController.deleteNote
+);
+
 
 router.get(
   "/",

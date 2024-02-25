@@ -98,110 +98,13 @@ export const signIn = asyncHandler(async (req, res, next) => {
   }
 });
 
-//Forget password
-export const forgetPassword = asyncHandler(async (req, res, next) => {
-  if (req.body.role == "Manager") {
-    const isManager = await Manager.findOne({
-      where: { E_mail: req.body.E_mail },
-    });
-    if (!isManager) return next(new Error("Manager Not Found !"));
-
-  if (!isManager.dataValues.resetCode) return next(new Error("Send Rest Code First"));
-
-
-    const managerCodeMatch = bcryptjs.compareSync(
-      req.body.code,
-      isManager.dataValues.resetCode
-    );
-    if (!managerCodeMatch) return next(new Error("Invalid Code !"));
-
-    let hashedPass = bcryptjs.hashSync(
-      req.body.PassWord,
-      parseInt(process.env.SALT_ROUND)
-    );
-
-    await Manager.update(
-      {
-        PassWord: hashedPass,
-        resetCode:null
-      },
-      {
-        where: {
-          manager_id: isManager.dataValues.manager_id,
-        },
-      }
-    );
-
-    await Token.update(
-      {
-        isValid: false,
-      },
-      {
-        where: {
-          manager_id: isManager.dataValues.manager_id,
-        },
-      }
-    );
-
-    return res.json({
-      success: true,
-      message: "Manager Password Updated Successfully! , Try to Login..",
-    });
-  } else if (req.body.role == "Secertary") {
-    const isSecertary = await Secertary.findOne({
-      where: { E_mail: req.body.E_mail },
-    });
-    if (!isSecertary) return next(new Error("Secertary Not Found !"));
-
-  if (!isSecertary.dataValues.resetCode) return next(new Error("Send Rest Code First"));
-  
-    const secertaryCodeMatch = bcryptjs.compareSync(
-      req.body.code,
-      isSecertary.dataValues.resetCode
-    );
-
-    if (!secertaryCodeMatch) return next(new Error("Invalid Code !"));
-
-    let hashedPass = bcryptjs.hashSync(
-      req.body.PassWord,
-      parseInt(process.env.SALT_ROUND)
-    );
-    await Secertary.update(
-      {
-        PassWord: hashedPass,
-        resetCode:null
-      },
-      {
-        where: {
-          secretary_id: isSecertary.dataValues.secretary_id,
-        },
-      }
-    );
-
-    await Token.update(
-      {
-        isValid: false,
-      },
-      {
-        where: {
-          secretary_id: isSecertary.dataValues.secretary_id,
-        },
-      }
-    );
-
-    return res.json({
-      success: true,
-      message: "Secertary Password Updated Successfully! , Try to Login..",
-    });
-  }
-});
 // send Forget Code
 export const sendForgetPassCode = asyncHandler(async (req, res, next) => {
   if (req.body.role === "Secertary") {
     const isSecertary = await Secertary.findOne({
       where: { E_mail: req.body.E_mail },
     });
-    if (!isSecertary) return next(new Error("Secertary Not Found !"));
+    if (!isSecertary) return next(new Error("Incorrect Email"));
 
     const code = randomstring.generate({
       length: 6,
@@ -237,7 +140,7 @@ export const sendForgetPassCode = asyncHandler(async (req, res, next) => {
     const isManager = await Manager.findOne({
       where: { E_mail: req.body.E_mail },
     });
-    if (!isManager) return next(new Error("Manager Not Found !"));
+    if (!isManager) return next(new Error("Incorrect Email"));
 
     const code = randomstring.generate({
       length: 6,
@@ -269,6 +172,161 @@ export const sendForgetPassCode = asyncHandler(async (req, res, next) => {
     return res.json({
       success: true,
       message: "Rest Code Sent , Check Your Email..",
+    });
+  }
+});
+
+//Verify Reset Code
+export const verifyResetCode = asyncHandler(async (req, res, next) => {
+  if (req.body.role == "Manager") {
+    const isManager = await Manager.findOne({
+      where: { E_mail: req.body.E_mail },
+    });
+    if (!isManager) return next(new Error("Incorrect Email"));
+
+    if (!isManager.dataValues.resetCode)
+      return next(new Error("Send Rest Code First"));
+
+    const managerCodeMatch = bcryptjs.compareSync(
+      req.body.code,
+      isManager.dataValues.resetCode
+    );
+    if (!managerCodeMatch) return next(new Error("Invalid Code"));
+
+    await Manager.update(
+      {
+        resetCode: null,
+        resetCodeVerified: true,
+      },
+      {
+        where: {
+          manager_id: isManager.dataValues.manager_id,
+        },
+      }
+    );
+
+    return res.json({
+      success: true,
+      message: "Code Verified",
+    });
+  } else if (req.body.role == "Secertary") {
+    const isSecertary = await Secertary.findOne({
+      where: { E_mail: req.body.E_mail },
+    });
+    if (!isSecertary) return next(new Error("Incorrect Email"));
+
+    if (!isSecertary.dataValues.resetCode)
+      return next(new Error("Send Rest Code First"));
+
+    const secertaryCodeMatch = bcryptjs.compareSync(
+      req.body.code,
+      isSecertary.dataValues.resetCode
+    );
+
+    if (!secertaryCodeMatch) return next(new Error("Invalid Code"));
+
+    await Secertary.update(
+      {
+        resetCode: null,
+        resetCodeVerified: true,
+      },
+      {
+        where: {
+          secretary_id: isSecertary.dataValues.secretary_id,
+        },
+      }
+    );
+
+    return res.json({
+      success: true,
+      message: "Code Verified Successfully",
+    });
+  }
+});
+
+//Forget password
+export const forgetPassword = asyncHandler(async (req, res, next) => {
+  if (req.body.role == "Manager") {
+    const isManager = await Manager.findOne({
+      where: { E_mail: req.body.E_mail },
+    });
+    if (!isManager) return next(new Error("Incorrect Email"));
+
+    if (!isManager.dataValues.resetCodeVerified)
+      return next(new Error("Verify Rest Code First"));
+
+    let hashedPass = bcryptjs.hashSync(
+      req.body.PassWord,
+      parseInt(process.env.SALT_ROUND)
+    );
+
+    await Manager.update(
+      {
+        PassWord: hashedPass,
+        resetCodeVerified: false,
+      },
+      {
+        where: {
+          manager_id: isManager.dataValues.manager_id,
+        },
+      }
+    );
+
+    await Token.update(
+      {
+        isValid: false,
+      },
+      {
+        where: {
+          manager_id: isManager.dataValues.manager_id,
+        },
+      }
+    );
+
+    return res.json({
+      success: true,
+      message: "Manager Password Updated Successfully! , Try to Login..",
+    });
+  } else if (req.body.role == "Secertary") {
+    const isSecertary = await Secertary.findOne({
+      where: { E_mail: req.body.E_mail },
+    });
+    if (!isSecertary) return next(new Error("Incorrect Email"));
+
+    console.log(isSecertary.dataValues.resetCodeVerified);
+    if (!isSecertary.dataValues.resetCodeVerified)
+      return next(new Error("Verify Rest Code First"));
+
+    let hashedPass = bcryptjs.hashSync(
+      req.body.PassWord,
+      parseInt(process.env.SALT_ROUND)
+    );
+    await Secertary.update(
+      {
+        PassWord: hashedPass,
+        resetCodeVerified: false,
+      },
+      {
+        where: {
+          secretary_id: isSecertary.dataValues.secretary_id,
+        },
+      }
+    );
+
+    await Token.update(
+      {
+        isValid: false,
+      },
+      {
+        where: {
+          secretary_id: isSecertary.dataValues.secretary_id,
+        },
+      }
+    );
+
+    return res.json({
+      success: true,
+      message: "Secertary Password Updated Successfully! , Try to Login..",
     });
   }
 });

@@ -16,7 +16,8 @@ export const Secertary = sequelize.define(
     last_name: { type: DataTypes.STRING, allowNull: false },
     PassWord: DataTypes.STRING,
     UserName: DataTypes.STRING,
-    resetCode:{ type: DataTypes.STRING, defaultValue: false }
+    resetCode:{ type: DataTypes.STRING, defaultValue: null },
+    resetCodeVerified:{ type: DataTypes.BOOLEAN, defaultValue: false }
   },
   {
     freezeTableName: true,

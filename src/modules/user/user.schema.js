@@ -31,6 +31,14 @@ export const sendForgetPassCodeSchema = joi
   })
   .required();
 
+export const verifyResetCodeSchema = joi
+  .object({
+    code: joi.string().length(6).required(),
+    E_mail: joi.string().email().required(),
+    role: joi.string().valid("Manager", "Secertary").required(),
+  })
+  .required();
+
 export const forgetPassSchema = joi
   .object({
     E_mail: joi.string().email().required(),
@@ -46,6 +54,5 @@ export const forgetPassSchema = joi
         "any.only": "Confirm Password must be Equal Main password.",
       }),
     role: joi.string().valid("Manager", "Secertary").required(),
-    code: joi.string().length(6).required(),
   })
   .required();

@@ -3,20 +3,18 @@ import { Meetings } from "../../../DB/models/meeting.model.js";
 import { Note } from "../../../DB/models/notes.model.js";
 import { asyncHandler } from "./../../utils/asyncHandler.js";
 
-
 export const createNote = asyncHandler(async (req, res, next) => {
-    await Note.create({
-      ...req.body,
-      manager_id: req.payload.id,
-    });
-    
-    return res.json({ success: true, message: "Note Created Successfully" });
+  await Note.create({
+    ...req.body,
+    manager_id: req.payload.id,
   });
+
+  return res.json({ success: true, message: "Note Created Successfully" });
+});
 
 export const createMeetingNote = asyncHandler(async (req, res, next) => {
   const isMeeting = await Meetings.findByPk(req.params.meeting_id);
-  if (!isMeeting)
-    return next(new Error("Meeting Not Found!"));
+  if (!isMeeting) return next(new Error("Meeting Not Found!"));
   await Note.create({
     ...req.body,
     manager_id: req.payload.id,
@@ -26,27 +24,37 @@ export const createMeetingNote = asyncHandler(async (req, res, next) => {
 });
 
 export const updateNote = asyncHandler(async (req, res, next) => {
-    const isManager = await Manager.findByPk(req.payload.id)
-    if (!isManager) return next(new Error("Manager Not Found!"))
-
-    const isMeeting = await Meetings.findByPk(req.params.meeting_id)
-    if (!isMeeting.dataValues.meeting_id) return next(new Error("Meeting Not Found!"))
-
-    const isNote = await Note.findByPk(req.params.note_id)
-    if (!isNote.dataValues.notes_id) return next(new Error("Note Not Found!"))
-
-
-    if (isNote.dataValues.manager_id !== req.payload.id)
+  const isNote = await Note.findByPk(req.params.id);
+  if (!isNote) return next(new Error("Note Not Found"));
+  if (isNote.dataValues.manager_id !== req.payload.id)
     return next(new Error("You Don't have permissions"));
-  
-    isNote.update({ ...req.body });
-    
-    return res.json({ success: true, message: "Note Updated Successfully" });
+  await Note.update(
+    { ...req.body },
+    {
+      where: {
+        notes_id: req.params.id,
+      },
+    }
+  );
+  return res.json({ success: true, message: "Note Updated Successfully" });
 });
 
 export const getAllNotes = asyncHandler(async (req, res, next) => {
   const isManager = await Manager.findByPk(req.payload.id);
   if (!isManager) return next(new Error("Manager Not Found!"));
   const notes = await Note.findAll({ where: { manager_id: req.payload.id } });
-  return res.json({ success: true, notes  });
+  return res.json({ success: true, notes });
+});
+
+export const deleteNote = asyncHandler(async (req, res, next) => {
+  const isNote = await Note.findByPk(req.params.id);
+  if (!isNote) return next(new Error("Note Not Found"));
+  if (isNote.dataValues.manager_id !== req.payload.id)
+    return next(new Error("You Don't have permissions"));
+  await Note.destroy({
+    where: {
+      notes_id: req.params.id,
+    },
+  });
+  return res.json({ success: true, message: "Note Deleted Successfully" });
 });

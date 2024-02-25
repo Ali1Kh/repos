@@ -14,6 +14,7 @@ router.post(
   "/create-manager/",
   isAuthenticated,
   isAuthorized("Secertary"),
+  uploadFiles().none(),
   validation(secretarySchema.createManagerAccountSchema),
   secretaryController.createManagerAccount
 );
@@ -33,6 +34,12 @@ router.get(
   isAuthorized("Secertary"),
   asyncHandler(secretaryController.getSecManagers)
 );
+router.get(
+  "/getAllManagers",
+  isAuthenticated,
+  isAuthorized("Secertary"),
+  asyncHandler(secretaryController.getAllManagers)
+);
 
 router.get(
   "/getSecMeetings",
@@ -49,10 +56,11 @@ router.get(
   asyncHandler(secretaryController.getSecMeetingsDetails)
 );
 
-router.patch(
+router.post(
   "/updateMeeting/:meetingId",
   isAuthenticated,
   isAuthorized("Secertary"),
+  uploadFiles().single("attachment"),
   validation(secretarySchema.updateMeetingSchema),
   asyncHandler(secretaryController.updateMeeting)
 );
@@ -64,6 +72,5 @@ router.delete(
   validation(secretarySchema.deleteMeetingSchema),
   asyncHandler(secretaryController.deleteMeeting)
 );
-
 
 export default router;

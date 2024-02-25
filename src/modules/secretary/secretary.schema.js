@@ -10,6 +10,11 @@ export const createMeetingSchema = joi
     date: joi.date().required(),
     notes: joi.string().required(),
     in_or_out: joi.string().valid("Inside", "Outside").required(),
+    insidePersons: joi.array().when('in_or_out', {
+      is: 'Inside',
+      then: joi.array(),
+      otherwise: joi.array().forbidden()
+    })
   })
   .required();
 

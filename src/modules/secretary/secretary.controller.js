@@ -40,7 +40,7 @@ export const createManagerAccount = asyncHandler(async (req, res, next) => {
 
 export const createMeeting = async (req, res, next) => {
   let isManager = await Manager.findByPk(req.params.manager_id);
-  if (!isManager) return next(new Error("Invalid Manager Id"));
+  if (!isManager) return next(new Error("Invalid Manager"));
 
   if (isManager.secretary_id != req.payload.id)
     return next(new Error("You Must Be The Secretary For This Manager"));
@@ -70,17 +70,33 @@ export const createMeeting = async (req, res, next) => {
       folder: `meetingsApp/attachments/${req.params.manager_id}/`,
     });
   }
+
   let meeting = await Meetings.create({
     ...req.body,
     statues: "not done",
     addedBy: req.payload.id,
     attachmentLink: upload?.secure_url,
     attachmentId: upload?.public_id,
+    attachmentName: req.file?.originalname,
   });
-  await meeting_Manager.create({
-    manager_id: isManager.manager_id,
-    meeting_id: meeting.dataValues.meeting_id,
-  });
+
+  if (req.body.insidePersons) {
+    req.body.insidePersons.map(async (manager) => {
+      let isManager = await Manager.findByPk(manager);
+      if (!isManager) return next(new Error("Invalid Manager"));
+
+      await meeting_Manager.create({
+        manager_id: isManager.manager_id,
+        meeting_id: meeting.dataValues.meeting_id,
+      });
+    });
+  } 
+    await meeting_Manager.create({
+      manager_id: isManager.manager_id,
+      meeting_id: meeting.dataValues.meeting_id,
+    });
+  
+
   return res.json({ success: true, message: "Meeting created Successfully" });
 };
 
@@ -106,6 +122,13 @@ export const getSecManagers = async (req, res, next) => {
   return res.json({ success: true, managers });
 };
 
+export const getAllManagers = async (req, res, next) => {
+  let managers = await Manager.findAll({
+    attributes: ["manager_id", "first_name", "last_name"],
+  });
+  return res.json({ success: true, managers });
+};
+
 export const updateMeeting = async (req, res, next) => {
   let isMeeting = await Meetings.findOne({
     where: { meeting_id: req.params.meetingId },
@@ -114,8 +137,21 @@ export const updateMeeting = async (req, res, next) => {
 
   if (isMeeting.dataValues.addedBy != req.payload.id)
     return next(new Error("You Don't have permissions"));
-  isMeeting.update({ ...req.body });
-  
+
+  let upload;
+  if (req.file) {
+    upload = await cloudinary.uploader.upload(req.file.path, {
+      public_id: isMeeting.attachmentId,
+    });
+  }
+
+  isMeeting.update({
+    ...req.body,
+    attachmentLink: upload?.secure_url,
+    attachmentId: upload?.public_id,
+    attachmentName: req.file?.originalname,
+  });
+
   return res.json({ success: true, message: "Meeting Updated Successfully" });
 };
 
@@ -124,7 +160,7 @@ export const deleteMeeting = async (req, res, next) => {
     where: { meeting_id: req.params.meetingId },
   });
   if (!isMeeting) return next(new Error("Meeting Not Found"));
-  
+
   if (isMeeting.dataValues.addedBy != req.payload.id)
     return next(new Error("You Don't have permissions"));
   isMeeting.destroy();
