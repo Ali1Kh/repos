@@ -95,7 +95,7 @@ export default function HomePage() {
             <div className="row gy-3">
               <>
                 {data
-                  ? data.data.meetings.map((meeting, idx) => (
+                  ? data.data.meetings?.map((meeting, idx) => (
                       <>
                         <div
                           key={idx}

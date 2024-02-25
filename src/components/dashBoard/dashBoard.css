@@ -1,0 +1,20 @@
+.nav .logo {
+    width: 45px;
+}
+  
+.nav .logo img {
+    width: 100%;
+}
+
+.accImage {
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+    border-radius: 100vh !important;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.nav {
+    background-color:  #323644;
+}

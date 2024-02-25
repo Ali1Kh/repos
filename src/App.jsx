@@ -22,6 +22,7 @@ import ForgotPassword from "./components/forgot password/forgot password/ForgotP
 import CheckYourEmail from "./components/forgot password/check your email/CheckYourEmail.jsx";
 import ResetPassword from "./components/forgot password/Reset password/ResetPassword.jsx";
 import Notes from "./components/Notes/Notes.jsx";
+import DashBoard from './components/DashBoard/DashBoard.jsx';
 
 const router = createHashRouter([
   {
@@ -45,6 +46,14 @@ const router = createHashRouter([
         element: (
           <ProtectedRoutes>
             <HomePage />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "/dashbord",
+        element: (
+          <ProtectedRoutes>
+            <DashBoard/>
           </ProtectedRoutes>
         ),
       },
