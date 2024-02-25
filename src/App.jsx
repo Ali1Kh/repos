@@ -17,15 +17,15 @@ import { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import CreateManagerAccount from "./components/secretary/Meeting/create manager account/CreateManagerAccount";
 import ProtectedRoutes from "./components/Protected Routes/ProtectedRoutes.jsx";
-import Acceptance from "./components/dashBoard/Acceptance/Acceptance.jsx";
+import Acceptance from "./components/DashBoard/Acceptance/Acceptance.jsx";
 import ForgotPassword from "./components/forgot password/forgot password/ForgotPassword.jsx";
 import CheckYourEmail from "./components/forgot password/check your email/CheckYourEmail.jsx";
 import ResetPassword from "./components/forgot password/Reset password/ResetPassword.jsx";
 import Notes from "./components/Notes/Notes.jsx";
-import DashboardManagers from './components/dashBoard/DashboardManagers/DashboardManagers.jsx';
-import DashboardMeetings from "./components/dashBoard/DashboardMeetings/DashboardMeetings.jsx";
-import DashboardSecertaries from "./components/dashBoard/DashboardSecertaries/DashboardSecertaries.jsx";
-import History from "./components/dashBoard/History/History.jsx";
+import DashboardManagers from "./components/DashBoard/DashboardManagers/DashboardManagers.jsx";
+import DashboardMeetings from "./components/DashBoard/DashboardMeetings/DashboardMeetings.jsx";
+import DashboardSecertaries from "./components/DashBoard/DashboardSecertaries/DashboardSecertaries.jsx";
+import History from "./components/DashBoard/History/History.jsx";
 
 const router = createHashRouter([
   {
@@ -56,7 +56,7 @@ const router = createHashRouter([
         path: "/dashbord",
         element: (
           <ProtectedRoutes>
-            <DashboardManagers/>
+            <DashboardManagers />
           </ProtectedRoutes>
         ),
       },
