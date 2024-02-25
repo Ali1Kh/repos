@@ -121,7 +121,6 @@ export const signIn = asyncHandler(async (req, res, next) => {
     await Token.create({
       token,
       role: "Admin",
-      secretary_id: isAdmin.secretary_id,
       agent: req.headers["user-agent"],
     });
 
