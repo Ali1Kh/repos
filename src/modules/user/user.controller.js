@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken";
 import randomstring from "randomstring";
 import { sendEmails } from "../../utils/sendEmails.js";
 import { sendResetCode } from "../../utils/htmlTemplates.js";
+import { Admin } from "../../../DB/models/admin.model.js";
 
 // SignUp
 export const signUp = asyncHandler(async (req, res, next) => {
@@ -95,6 +96,36 @@ export const signIn = asyncHandler(async (req, res, next) => {
     });
 
     return res.json({ success: true, message: "Welcome Secertary !", token });
+  }else if (req.body.role == "Admin") {
+    const isAdmin = await Admin.findOne({
+      where: { E_mail: req.body.E_mail },
+    });
+    if (!isAdmin) return next(new Error("Email is Invalid !"));
+
+    const adminPassMatch = bcryptjs.compareSync(
+      req.body.PassWord,
+      isAdmin.PassWord
+    );
+    if (!adminPassMatch) return next(new Error("Invalid Password !"));
+
+    const token = jwt.sign(
+      {
+        id: isAdmin.secretary_id,
+        E_mail: isAdmin.E_mail,
+        username: isAdmin.UserName,
+        role: "Admin",
+      },
+      process.env.SECRET_KEY
+    );
+
+    await Token.create({
+      token,
+      role: "Admin",
+      secretary_id: isAdmin.secretary_id,
+      agent: req.headers["user-agent"],
+    });
+
+    return res.json({ success: true, message: "Welcome Admin !", token });
   }
 });
 
