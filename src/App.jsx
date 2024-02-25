@@ -22,7 +22,10 @@ import ForgotPassword from "./components/forgot password/forgot password/ForgotP
 import CheckYourEmail from "./components/forgot password/check your email/CheckYourEmail.jsx";
 import ResetPassword from "./components/forgot password/Reset password/ResetPassword.jsx";
 import Notes from "./components/Notes/Notes.jsx";
-import DashBoard from './components/DashBoard/DashBoard.jsx';
+import DashboardManagers from './components/dashBoard/DashboardManagers/DashboardManagers.jsx';
+import DashboardMeetings from "./components/dashBoard/DashboardMeetings/DashboardMeetings.jsx";
+import DashboardSecertaries from "./components/dashBoard/DashboardSecertaries/DashboardSecertaries.jsx";
+import History from "./components/dashBoard/History/History.jsx";
 
 const router = createHashRouter([
   {
@@ -53,7 +56,7 @@ const router = createHashRouter([
         path: "/dashbord",
         element: (
           <ProtectedRoutes>
-            <DashBoard/>
+            <DashboardManagers/>
           </ProtectedRoutes>
         ),
       },
@@ -143,7 +146,7 @@ const router = createHashRouter([
             path: "meetings",
             element: (
               <ProtectedRoutes role={"Admin"}>
-                {/* <MeetingDetails /> */}
+                <DashboardMeetings />
               </ProtectedRoutes>
             ),
           },
@@ -151,7 +154,7 @@ const router = createHashRouter([
             path: "managers",
             element: (
               <ProtectedRoutes role={"Admin"}>
-                {/* <Calender /> */}
+                <DashboardManagers />
               </ProtectedRoutes>
             ),
           },
@@ -159,7 +162,7 @@ const router = createHashRouter([
             path: "secertaries",
             element: (
               <ProtectedRoutes role={"Admin"}>
-                {/* <Calender /> */}
+                <DashboardSecertaries />
               </ProtectedRoutes>
             ),
           },
@@ -167,7 +170,7 @@ const router = createHashRouter([
             path: "history",
             element: (
               <ProtectedRoutes role={"Admin"}>
-                {/* <Calender /> */}
+                <History />
               </ProtectedRoutes>
             ),
           },
