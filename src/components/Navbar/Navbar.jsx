@@ -5,8 +5,23 @@ import { Link, useLocation } from "react-router-dom";
 import $ from "jquery";
 import { useTranslation } from "react-i18next";
 
+import { Unstable_Popup as BasePopup } from "@mui/base/Unstable_Popup";
+import { styled } from "@mui/system";
+
 export default function Navbar() {
   const location = useLocation();
+
+  const [anchor, setAnchor] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchor(anchor ? null : event.currentTarget);
+  };
+
+  const open = Boolean(anchor);
+  const id = open ? "simple-popper" : undefined;
+
+
+
   useEffect(() => {
     // ?Active
     $(".navbarItem").click((e) => {
@@ -18,13 +33,6 @@ export default function Navbar() {
       $(e.target).parents(".navbarItem").addClass("active");
     });
   });
-
-
-  const createHandleMenuClick = (menuItem) => {
-    return () => {
-      console.log(`Clicked on ${menuItem}`);
-    };
-  };
 
   const [t, il8n] = useTranslation();
 
@@ -129,10 +137,26 @@ export default function Navbar() {
                   />
                 </div>
               </li>
-              <div >
-
-              </div>
+              <div></div>
               <li className="nav-item all ms-md-auto d-flex justify-content-center align-items-center me-3">
+                <div>
+                  <Button
+                    aria-describedby={id}
+                    type="button"
+                    onClick={handleClick}
+                  >
+                    <i className="fa-regular fa-bell"></i>
+                  </Button>
+                  <BasePopup id={id} open={open} anchor={anchor}>
+                    <PopupBody className="d-flex justify-content-center align-items-center me-3">
+                      <div className="justify-content-center align-items-center me-3">
+                        <p className="fs-6">Your Manager Ali Khaled Were Added To A New Inside Meeting</p>
+                        <button className="btn accept-button">Accept</button>
+                        <i className="fa-solid fa-trash deletAcc"></i>
+                      </div>
+                    </PopupBody>
+                  </BasePopup>
+                </div>
                 <div className="darkmodeContainer h-100 d-flex justify-content-center align-items-center px-3">
                   <label className="toggle" htmlFor="switch">
                     <input
@@ -183,7 +207,6 @@ export default function Navbar() {
                         />
                         <span>EN</span>
                       </label>
-
                       <label>
                         <input
                           type="radio"
@@ -205,3 +228,46 @@ export default function Navbar() {
     </>
   );
 }
+
+const PopupBody = styled('div')(
+  ({ theme }) => `
+  padding: 12px 16px;
+  margin: 20px 0;
+  border-radius: 8px;
+  border: 1px solid var(--sec-color);
+  background-color: var(--main-color);
+  box-shadow: ${theme.palette.mode === 'dark'
+      ? `0px 4px 8px rgb(0 0 0 / 0.7)`
+      : `0px 4px 8px rgb(0 0 0 / 0.1)`
+    };
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.875rem;
+  z-index: 1;
+`,
+);
+
+const Button = styled('button')(
+  ({ theme }) => `
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  background-color: var(--sideBarColor);
+  border-radius: 40px;
+  color: var(--sec-color);
+  transition: all 150ms ease;
+  cursor: pointer;
+  border: 3px solid var(--sec-color);
+  transition: 0.5s ease !important;
+
+  &:hover {
+    background-color: var(--sec-color);
+    color: var(--sideBarColor);
+  }
+
+  &:active {
+    background-color: var(--sec-color)};
+    box-shadow: none;
+  }
+`,
+);

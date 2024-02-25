@@ -71,7 +71,7 @@ export default function Nots() {
       });
   };
   const patchUpdateNotes = () => {
-    if (title == "" || content == "") {
+    if (title === "" || content === "") {
       toast.error("Please Fill All Inputs", {
         style: {
           zIndex: 9999,
@@ -80,14 +80,6 @@ export default function Nots() {
       return;
     }
 
-    if (title == "" && content == "") {
-      toast.error("Please Enter Different Data", {
-        style: {
-          zIndex: 9999,
-        },
-      });
-      return;
-    }
     axios
       .patch(
         `https://meetingss.onrender.com/notes/${id}`,

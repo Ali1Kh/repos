@@ -77,8 +77,6 @@
     color: rgb(202, 196, 208, 0.6) !important;
 }
 
-.btn-close {}
-
 .btn.btn-primary {
     background-color: var(--sec-color) !important;
     border: 1px solid var(--sec-color) !important;

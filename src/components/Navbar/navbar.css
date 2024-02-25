@@ -6,10 +6,12 @@
   right: 0;
   z-index: 1999;
 }
+
 .navbar .navbar-toggler:focus {
   outline: none !important;
   box-shadow: none;
 }
+
 .nav-logo {
   width: 35px;
 }
@@ -40,6 +42,7 @@
   margin-right: 8px;
   width: 15px;
 }
+
 /* .navbarItem:hover {
   background-color: rgba(23, 145, 186, 0.3);
 }
@@ -71,17 +74,17 @@
   width: 1px !important;
 }
 
-.langBtn .mydict input[type="radio"]:checked + span {
+.langBtn .mydict input[type="radio"]:checked+span {
   box-shadow: 0 0 0 0.0625em var(--sec-color) !important;
-  background-color: #dee7ff !important;
+  background-color: var(--sec-color) !important;
   z-index: 1 !important;
-  color: black !important;
+  color: var(--sideBarColor) !important;
 }
 
 .langBtn label span {
   display: block !important;
   cursor: pointer !important;
-  background-color: #fff !important;
+  background-color: var(--sideBarColor) !important;
   padding: 0.375em 0.75em !important;
   position: relative !important;
   margin-left: 0.0625em !important;
@@ -107,18 +110,59 @@
   border-color: var(--sec-color);
   border-radius: 8px;
 }
+
+.darkmodeContainer label {
+  cursor: pointer !important;
+  background-color: var(--sideBarColor) !important;
+  color: var(--sec-color) !important;
+  transition: background-color 0.5s ease !important;
+  border: 3px solid var(--sec-color);
+}
+
+.switchIcon {
+  display: block !important;
+  cursor: pointer !important;
+  color: var(--sec-color) !important;
+  transition: 0.5s ease !important;
+}
+
+.darkmodeContainer {}
+
+.darkmodeContainer label:hover {
+  cursor: pointer !important;
+  background-color: var(--sec-color) !important;
+  border: 3px solid var(--sec-color);
+
+}
+
+.switchIcon:hover {
+  display: block !important;
+  cursor: pointer !important;
+  color: var(--sideBarColor) !important;
+}
+
 .searchInput {
   border-width: 2px 2px 2px 0px !important;
   border-color: var(--sec-color);
   background-color: transparent;
   color: white;
 }
+
 .searchInput::placeholder {
   color: #8f8f91;
 }
+
 .searchInput:focus {
   border-width: 2px 2px 2px 0px !important;
   border-color: var(--sec-color);
   background-color: transparent;
   box-shadow: none !important;
+}
+
+.notification-data {
+
+}
+
+.MuiPopup-root {
+  left: -15% !important;
 }
