@@ -49,4 +49,20 @@ router.get(
   dashboardController.getLoginHistory
 );
 
+router.delete(
+  "/deleteManager/:manager_id",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  validation(dashboardSchemas.deleteManagerAccSchema),
+  dashboardController.deleteManager
+);
+
+router.delete(
+  "/deleteSecretary/:secretary_id",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  validation(dashboardSchemas.acceptAccSchema),
+  dashboardController.deleteSecretary
+);
+
 export default router;

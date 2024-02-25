@@ -5,3 +5,9 @@ export const acceptAccSchema = joi
     secretary_id: joi.number().required(),
   })
   .required();
+
+export const deleteManagerAccSchema = joi
+  .object({
+    manager_id: joi.number().required(),
+  })
+  .required();

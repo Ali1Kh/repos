@@ -71,3 +71,21 @@ export const getLoginHistory = asyncHandler(async (req, res, next) => {
   });
   return res.json({ success: true, history });
 });
+
+export const deleteManager = asyncHandler(async (req, res, next) => {
+  let isManager = await Manager.findOne({
+    where: { manager_id: req.params.manager_id },
+  });
+  if (!isManager) return next(new Error("Manager Not Found"));
+  await isManager.destroy();
+  return res.json({ success: true, message: "Manager Deleted Successfully" });
+});
+
+export const deleteSecretary = asyncHandler(async (req, res, next) => {
+  let isSecretary = await Secertary.findOne({
+    where: { secretary_id: req.params.secretary_id },
+  });
+  if (!isSecretary) return next(new Error("Secertary Not Found"));
+  await isSecretary.destroy();
+  return res.json({ success: true, message: "Secertary Deleted Successfully" });
+});
