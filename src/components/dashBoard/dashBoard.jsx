@@ -14,7 +14,7 @@ export default function DashBoard() {
           
           
 
-          <div>
+          <div className='search-parent'>
             <div className="nav-search d-flex justify-content-center align-items-center">
               <li className="nav-item-search search ms-auto d-flex justify-content-center align-items-center">
                 <div className="input-group w-100 ps-0">
@@ -37,9 +37,9 @@ export default function DashBoard() {
           <thead>
             <tr>
               <th scope="col">Username</th>
+              <th scope="col">Name</th>
               <th scope="col">Email</th>
               <th scope="col">Role</th>
-              <th scope="col">Acceptance</th>
               <th scope="col">
                 Acceptance
               </th>
@@ -51,9 +51,9 @@ export default function DashBoard() {
                 <td>Mark</td>
                 <td>Otto</td>
                 <td>@mdo</td>
-                <td>Accept</td>
+                <td>Manager</td>
                 <td>
-                  <button className='btn btn-warning'>Update</button>
+                Accept
                 </td>
                 <td>
                   <button className='btn btn-danger'>Delete</button>
@@ -64,9 +64,9 @@ export default function DashBoard() {
                 <td>Jacob</td>
                 <td>Thornton</td>
                 <td>@fat</td>
-                <td>Accept</td>
+                <td>Manager</td>
                 <td>
-                  <button className='btn btn-warning'>Update</button>
+                Accept
                 </td>
                 <td>
                   <button className='btn btn-danger'>Delete</button>
@@ -74,12 +74,12 @@ export default function DashBoard() {
 
             </tr>
             <tr>
-                <td>Larry the Bird</td>
-                <td>Accept</td>
-                <td>@twitter</td>
-                <td>Amdin</td>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+                <td>Manager</td>
                 <td>
-                  <button className='btn btn-warning'>Update</button>
+                Accept
                 </td>
                 <td>
                   <button className='btn btn-danger'>Delete</button>
