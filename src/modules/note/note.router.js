@@ -24,7 +24,7 @@ router.post(
   noteController.createMeetingNote
 );
 
-router.post(
+router.patch(
   "/update-note/:meeting_id",
   isAuthenticated,
   isAuthorized("Manager"),
