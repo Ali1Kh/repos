@@ -29,6 +29,7 @@
     "role": "Role",
     "manager": "Manager",
     "sec": "Secretary",
+    "admin": "Admin",
     "button": "Create account",
     "signupheader":"Sign Up",
     "loginHint":"Already Have An Acount ?",
