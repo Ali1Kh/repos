@@ -10,8 +10,43 @@ router.get(
   "/getAllMeetings",
   isAuthenticated,
   isAuthorized("Admin"),
-  validation(dashboardSchemas.createNoteSchema),
   dashboardController.getAllMeetings
+);
+
+router.get(
+  "/getNotAcceptedSec",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  dashboardController.getNotAccepted
+);
+
+router.post(
+  "/acceptAcc/:secretary_id",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  validation(dashboardSchemas.acceptAccSchema),
+  dashboardController.acceptAcc
+);
+
+router.get(
+  "/getAllSecretaries",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  dashboardController.getAllSecretaries
+);
+
+router.get(
+  "/getAllManagers",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  dashboardController.getAllManagers
+);
+
+router.get(
+  "/getLoginHistory",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  dashboardController.getLoginHistory
 );
 
 export default router;
