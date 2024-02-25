@@ -10,11 +10,9 @@ export default function DashBoard() {
   return <>
     <div className="main d-flex justify-content-center align-items-center mh-100">
       <div className="container">
-        <div className="nav d-flex justify-content-between align-items-center bg-light p-2">
+        <div className="parent-dash justify-content-between align-items-center p-2 bg-light mb-3 rounded">
           
-          <div className="logo mb-1 ms-2">
-            <img src={logo} alt="" />
-          </div>
+          
 
           <div>
             <div className="nav-search d-flex justify-content-center align-items-center">
@@ -34,16 +32,8 @@ export default function DashBoard() {
               <button className='btn btn-primary border-start ms-2'>filter</button> 
             </div>
           </div>
-
-          <div className="profile-logo me-3">
-              <div className='accImage text-black d-flex justify-content-center align-items-center bg-primary'>
-                <span className='m-0 p-0'>O</span>
-              </div>
-            </div>  
-
-        </div>
-
-        <table class="table ms-0">
+ 
+          <table class="table ms-0">
           <thead>
             <tr>
               <th scope="col">Username</th>
@@ -99,6 +89,9 @@ export default function DashBoard() {
           </tbody>
           
         </table>
+        </div>
+
+       
 
       </div>
     </div>

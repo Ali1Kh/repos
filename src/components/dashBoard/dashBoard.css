@@ -15,6 +15,20 @@
     user-select: none;
 }
 
+table tr th {
+    background-color:var(--main-color) !important;
+    border-bottom: 1px solid rgb(255, 255, 255 , 0.2) ;
+    color: #ffff !important;
+}
+
+table tr td {
+    background-color:var(--main-color) !important;
+    border-bottom: 0px;
+    color: #ffff !important;
+}
+
+
+
 .nav {
-    background-color:  #323644;
+    background-color: var(--main-color);
 }
