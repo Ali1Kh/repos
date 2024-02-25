@@ -51,7 +51,20 @@ export const getAllManagers = asyncHandler(async (req, res, next) => {
 
 export const getLoginHistory = asyncHandler(async (req, res, next) => {
   let history = await Token.findAll({
-    
+    include: [
+      {
+        model: Secertary,
+        attributes: {
+          exclude: ["PassWord", "resetCode", "resetCodeVerified"],
+        },
+      },
+      {
+        model: Manager,
+        attributes: {
+          exclude: ["PassWord", "resetCode", "resetCodeVerified"],
+        },
+      },
+    ],
     attributes: {
       exclude: ["token"],
     },
