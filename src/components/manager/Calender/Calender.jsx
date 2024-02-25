@@ -74,7 +74,7 @@ export default function Calender() {
   const [t, il8n] = useTranslation();
 
   return (
-    <div className="main  px-md-5">
+    <div className="main  px-md-2">
       <div className="container p-5 d-flex flex-column justify-content-center align-items-center ">
         <h2 className="mb-5 animate__animated animate__zoomIn BlackToWhite">
           {t("Calendar.calendar")}

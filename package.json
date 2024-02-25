@@ -37,6 +37,7 @@
     "react-helmet": "^6.1.0",
     "react-hot-toast": "^2.4.1",
     "react-i18next": "^14.0.0",
+    "react-loader-spinner": "^6.1.6",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.21.0",
     "react-scripts": "5.0.1",
