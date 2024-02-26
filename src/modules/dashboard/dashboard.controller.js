@@ -31,6 +31,21 @@ export const acceptAcc = asyncHandler(async (req, res, next) => {
   return res.json({ success: true, message: "Account Accepted Successfully" });
 });
 
+export const rejectAcc = asyncHandler(async (req, res, next) => {
+  let isAccount = await Secertary.findOne({
+    where: { secretary_id: req.params.secretary_id },
+  });
+  if (!isAccount) return next(new Error("Account Not Found"));
+  if (isAccount.Accepted_Acc)
+    return next(new Error("Account Already Accepted"));
+
+  isAccount.destroy();
+  return res.json({
+    success: true,
+    message: "Account Rejected Deleted Successfully",
+  });
+});
+
 export const getAllSecretaries = asyncHandler(async (req, res, next) => {
   let secertaries = await Secertary.findAll({
     attributes: {

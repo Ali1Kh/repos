@@ -28,6 +28,14 @@ router.post(
   dashboardController.acceptAcc
 );
 
+router.post(
+  "/rejectAcc/:secretary_id",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  validation(dashboardSchemas.acceptAccSchema),
+  dashboardController.rejectAcc
+);
+
 router.get(
   "/getAllSecretaries",
   isAuthenticated,
