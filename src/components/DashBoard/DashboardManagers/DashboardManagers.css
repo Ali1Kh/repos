@@ -31,10 +31,7 @@ table th {
 
 }
 
-.MuiTablePagination-root{
-    border: 0px !important;
-    border-top: 1px solid rgb(255, 255, 255 , 0.2) !important;
-}
+
 /* * {
     scrollbar-width: auto;
     scrollbar-color: #15181d;

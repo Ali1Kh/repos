@@ -1,0 +1,14 @@
+.MuiTablePagination-root {
+    background-color: var(--main-color) !important;
+
+}
+
+.MuiPaper-root {
+    border-radius: 30px !important;
+    box-shadow: none !important;
+    background-color: var(--main-color) !important;
+}
+
+.MuiButtonBase-root {
+    color: white !important;
+}

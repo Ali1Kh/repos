@@ -1,216 +1,119 @@
-import  React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { styled } from '@mui/system';
-import  './DashboardManagers.css';
-
-import {
-TablePagination,
-  tablePaginationClasses as classes,
-} from '@mui/base/TablePagination';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import './DashboardManagers.css';
 import axios from 'axios';
 import { useQuery } from 'react-query';
+import { TailSpin } from 'react-loader-spinner';
 
 export default function DashBoardManagers() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-  // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number,
-  ) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
   const token = localStorage.getItem("token")
 
-  const {data , isLoading} = useQuery(getDashBoardManager,"getDashBoardManager")
+  const { data, isLoading } = useQuery("getDashBoardSecertar", getDashBoardSecertar);
 
-  useEffect(()=>{
-    getDashBoardManager()
-  })
-
-  function getDashBoardManager(){
-    
-    axios.get("https://meetingss.onrender.com/dashboard/getAllManagers",{
-      headers:{
-        token:token
+  function getDashBoardSecertar() {
+    return axios.get("https://meetingss.onrender.com/dashboard/getAllSecretaries", {
+      headers: {
+        token: token
       }
-    }).
-    then((response)=>{
-      console.log(response);
-    
-        if (response.data.success) {
-        }else{
 
-        }
-      }
-    ).catch((error)=>{
-      console.error(error);
     })
   }
 
-  return <>
-    <div className="main bg-danger d-flex justify-content-center align-items-center">
-      <div className="container parent-dash p-2 d-flex justify-content-center ">
-        
-<Root sx={{ maxWidth: '100%', width: 2000 ,  }}>
-      <table aria-label="custom pagination table">
-        <thead>
-          <tr>
-            <th>User Name</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Acceptance</th>
-            <th>
-             Delete
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {(data
-            ? data.data.managers?.map((manager,idx) => (
-            <tr key={idx}>
-              <td style={{ width: 270 , border:0  }}>{manager.UserName}</td>
-              <td style={{ width: 270 , border:0 }} align="right">
-                {manager.first_name+' '+manager.last_name}
-              </td>
-              <td style={{ width: 270 , border:0 }} align="right">
-                {manager.E_mail}
-              </td>
-              <td style={{ width: 250 , border:0 }} align="right">
-                {manager.fat}
-              </td>
-              <td style={{ width: 250 , border:0 }} align="right">
-              <button className='btn btn-danger'>
-              Delete
-              </button> 
-              </td>
+  console.log(data);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-            </tr>
-          )):"")}
-          {emptyRows > 0 && (
-            <tr style={{ height: 41 * emptyRows }}>
-              <td colSpan={3} aria-hidden />
-            </tr>
-          )}
-        </tbody>
-        <tfoot>
-          <tr>
-            <CustomTablePagination
-              rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-              colSpan={6}
-              count={rows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              slotProps={{
-                select: {
-                  'aria-label': 'rows per page',
-                },
-                actions: {
-                  showFirstButton: true,
-                  showLastButton: true,
-                },
-              }}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </tr>
-        </tfoot>
-      </table>
-    </Root>
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  return <>
+    <div className="main">
+      <div className="container mt-5">
+        <h1 className="container d-flex flex-column align-items-center justify-content-center p-4">
+          Secertaries
+        </h1>
+        <div className="row gy-3 p-5 pt-0">
+          {isLoading ?
+            (
+              <div
+                className="d-flex justify-content-center align-items-center"
+                style={{ height: "65vh" }}
+              >
+                <TailSpin
+                  visible={true}
+                  height="90"
+                  width="90"
+                  color="var(--sec-color)"
+                  ariaLabel="tail-spin-loading"
+                  radius="1"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                />
+              </div>
+            ) : (
+              <div className="row gy-3">
+                <div>
+
+                  <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                    <TableContainer sx={{ maxHeight: 440 }}>
+                      <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                          <TableRow>
+                            <TableCell align="center">UserName</TableCell>
+                            <TableCell align="center">Name</TableCell>
+                            <TableCell align="center">Email</TableCell>
+                            <TableCell align="center">Accepted</TableCell>
+                            <TableCell align="center">Delete</TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {data
+                            ? data.data.secertaries?.map((secertarie, idx) => (
+                              <TableRow hover tabIndex={-1} key={idx}>
+                                <TableCell align="center" component="th" scope="row">{secertarie.UserName}</TableCell>
+                                <TableCell align="center" component="th">{secertarie.first_name + " " + secertarie.last_name}</TableCell>
+                                <TableCell align="center" component="th">{secertarie.E_mail}</TableCell>
+                                <TableCell align="center" component="th">{secertarie.Accepted_Acc ? "Accept" : "Refused"}</TableCell>
+                                <TableCell align="center" component="th">
+                                  <button align="center" className='btn btn-danger'>
+                                    Delete
+                                  </button>
+                                </TableCell>
+
+                              </TableRow>
+                            )) : ""}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                    <TablePagination
+                      rowsPerPageOptions={[5, 10, 25]}
+                      component="div"
+                      count={data?.data.secertaries?.length}
+                      rowsPerPage={rowsPerPage}
+                      page={page}
+                      onPageChange={handleChangePage}
+                      onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                  </Paper>
+                </div>
+              </div>
+            )}
+        </div>
       </div>
     </div>
-    
-  
   </>
-  
 }
-
-function createData(name: string, calories: number, fat: number) {
-  return { name, calories, fat };
-}
-
-const rows = [
-  createData('Cupcake', 305, 3.7),
-].sort((a, b) => (a.calories < b.calories ? -1 : 1));
-
-const grey = {
-  50: '#F3F6F9',
-  100: '#E5EAF2',
-  200: '#DAE2ED',
-  300: '#C7D0DD',
-  400: '#B0B8C4',
-  500: '#9DA8B7',
-  600: '#6B7A90',
-  700: '#434D5B',
-  800: '#303740',
-  900: '#1C2025',
-};
-
-const Root = styled('div')(
-  ({ theme }) => `
-  table {
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 0.875rem;
-    border-collapse: collapse;
-    width: 100%;
-  }
-
-  td,
-  th {
-    border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[200]};
-    text-align: left;
-    padding: 8px;
-  }
-
-  th {
-    background-color: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-  }
-  `,
-);
-
-const CustomTablePagination = styled(TablePagination)`
-  & .${classes.toolbar} {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-
-    @media (min-width: 768px) {
-      flex-direction: row;
-      align-items: center;
-    }
-  }
-
-  & .${classes.selectLabel} {
-    margin: 0;
-  }
-
-  & .${classes.displayedRows} {
-    margin: 0;
-
-    @media (min-width: 768px) {
-      margin-left: auto;
-    }
-  }
-
-  & .${classes.spacer} {
-    display: none;
-  }
-
-  & .${classes.actions} {
-    display: flex;
-    gap: 0.25rem;
-  }
-`;
