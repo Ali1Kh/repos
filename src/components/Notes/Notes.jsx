@@ -99,7 +99,7 @@ export default function Nots() {
           getNotes();
           handleClose();
         } else {
-          // Handle failure
+          toast.error("Something went Wrong!");
         }
       })
       .catch((error) => {
