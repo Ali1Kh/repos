@@ -1,5 +1,6 @@
 import joi from "joi";
 
+
 // signUpSchema
 export const signUpSchema = joi
   .object({
