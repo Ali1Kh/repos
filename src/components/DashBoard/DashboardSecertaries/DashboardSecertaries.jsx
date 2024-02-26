@@ -96,7 +96,6 @@ export default function DashboardSecertaries() {
             ) : (
               <div className="row gy-3">
                 <div>
-
                   <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                     <TableContainer sx={{ maxHeight: 440 }}>
                       <Table stickyHeader aria-label="sticky table">
@@ -124,7 +123,6 @@ export default function DashboardSecertaries() {
                                     Delete
                                   </button>
                                 </TableCell>
-
                               </TableRow>
                             )) : ""}
                         </TableBody>
