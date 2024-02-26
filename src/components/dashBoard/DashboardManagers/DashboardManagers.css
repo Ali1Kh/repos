@@ -1,9 +1,5 @@
-.nav .logo {
-    width: 45px;
-}
-  
-.nav .logo img {
-    width: 100%;
+.main .parent-dash{
+    background-color: var(--black-color);
 }
 
 .accImage {
@@ -27,7 +23,32 @@ table tr td {
     color: #ffff !important;
 }
 
+table th {
+    border: 0px !important;
+    background-color:var(--main-color) !important;
+    border-bottom: 1px solid rgb(255, 255, 255 , 0.2) !important ;
+    color: #ffff !important;
 
+}
+
+.MuiTablePagination-root{
+    border: 0px !important;
+    border-top: 1px solid rgb(255, 255, 255 , 0.2) !important;
+}
+/* * {
+    scrollbar-width: auto;
+    scrollbar-color: #15181d;
+  }
+  *::-webkit-scrollbar {
+    width: 7px;
+  }
+  *::-webkit-scrollbar-track {
+    background: #343a41;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #15181d;
+    border-radius: 10px;
+  } */
 
 .nav {
     background-color: var(--main-color);
