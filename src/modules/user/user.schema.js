@@ -21,14 +21,14 @@ export const signInSchema = joi
   .object({
     E_mail: joi.string().email().required(),
     PassWord: joi.string().required(),
-    role: joi.string().valid("Manager", "Secertary").required(),
+    role: joi.string().valid("Manager", "Secertary","Admin").required(),
   })
   .required();
 
 export const sendForgetPassCodeSchema = joi
   .object({
     E_mail: joi.string().email().required(),
-    role: joi.string().valid("Manager", "Secertary").required(),
+    role: joi.string().valid("Manager", "Secertary","Admin").required(),
   })
   .required();
 
@@ -36,7 +36,7 @@ export const verifyResetCodeSchema = joi
   .object({
     code: joi.string().length(6).required(),
     E_mail: joi.string().email().required(),
-    role: joi.string().valid("Manager", "Secertary").required(),
+    role: joi.string().valid("Manager", "Secertary","Admin").required(),
   })
   .required();
 
@@ -54,6 +54,6 @@ export const forgetPassSchema = joi
       .messages({
         "any.only": "Confirm Password must be Equal Main password.",
       }),
-    role: joi.string().valid("Manager", "Secertary").required(),
+    role: joi.string().valid("Manager", "Secertary","Admin").required(),
   })
   .required();

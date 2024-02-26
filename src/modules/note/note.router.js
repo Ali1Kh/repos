@@ -7,14 +7,13 @@ import { isAuthorized } from "./../../middleware/authorization.middleware.js";
 
 const router = Router();
 
-
 router.post(
-    "/",
-    isAuthenticated,
-    isAuthorized("Manager"),
-    validation(NoteSchemas.createNoteSchema),
-    noteController.createNote
-  );
+  "/",
+  isAuthenticated,
+  isAuthorized("Manager"),
+  validation(NoteSchemas.createNoteSchema),
+  noteController.createNote
+);
 
 router.post(
   "/:meeting_id",
@@ -39,7 +38,6 @@ router.delete(
   validation(NoteSchemas.deleteNoteSchema),
   noteController.deleteNote
 );
-
 
 router.get(
   "/",

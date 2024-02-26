@@ -7,7 +7,7 @@ export const createMeetingSchema = joi
     about: joi.string().required(),
     address: joi.string().required(),
     time: joi.string().required(),
-    date: joi.date().required(),
+    date: joi.date().greater(Date.now()).required(),
     notes: joi.string().required(),
     in_or_out: joi.string().valid("Inside","Outside").required(),
   })

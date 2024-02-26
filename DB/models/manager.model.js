@@ -17,8 +17,8 @@ export const Manager = sequelize.define(
     last_name: { type: DataTypes.STRING },
     PassWord: { type: DataTypes.STRING, allowNull: false },
     UserName: DataTypes.STRING,
-    resetCode:{ type: DataTypes.STRING, defaultValue: null },
-    resetCodeVerified:{ type: DataTypes.BOOLEAN, defaultValue: false }
+    resetCode: { type: DataTypes.STRING, defaultValue: null },
+    resetCodeVerified: { type: DataTypes.BOOLEAN, defaultValue: false },
   },
   {
     freezeTableName: true,
@@ -26,6 +26,7 @@ export const Manager = sequelize.define(
 );
 
 Manager.hasMany(Token, { foreignKey: "manager_id" });
+Token.belongsTo(Manager, { foreignKey: "manager_id" });
 
 Manager.associate = (models) => {
   Manager.belongsToMany(Meetings, {

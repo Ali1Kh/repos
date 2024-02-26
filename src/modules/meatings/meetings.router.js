@@ -22,4 +22,5 @@ router.get(
   asyncHandler(meetingsController.getManagerMeetingDetails)
 );
 
+
 export default router;
