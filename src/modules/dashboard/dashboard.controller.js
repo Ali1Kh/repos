@@ -42,7 +42,7 @@ export const rejectAcc = asyncHandler(async (req, res, next) => {
   isAccount.destroy();
   return res.json({
     success: true,
-    message: "Account Rejected Deleted Successfully",
+    message: "Account Rejected Successfully",
   });
 });
 
