@@ -43,7 +43,7 @@ export default function DashboardMeetings() {
   return <>
     <div className="main">
       <div className="container mt-5">
-        <h1 className="container d-flex flex-column align-items-center justify-content-center p-4">
+        <h1 className="container d-flex flex-column align-items-center justify-content-center p-4 fw-bold text-white">
           Meetings
         </h1>
         <div className="row gy-3 p-5 pt-0">
