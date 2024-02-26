@@ -72,6 +72,14 @@ router.post(
   asyncHandler(secretaryController.updateMeeting)
 );
 
+router.post(
+  "/changeStatus/:meetingId",
+  isAuthenticated,
+  isAuthorized("Secertary"),
+  validation(secretarySchema.changeStatusSchema),
+  asyncHandler(secretaryController.changeStatus)
+);
+
 router.delete(
   "/deleteMeeting/:meetingId",
   isAuthenticated,

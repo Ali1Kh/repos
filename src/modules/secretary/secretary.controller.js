@@ -122,10 +122,10 @@ export const getSecManagers = async (req, res, next) => {
 };
 
 export const getSecDetails = async (req, res, next) => {
-  let secertary = await Secertary.findByPk(req.payload.id,{
-    attributes:{
-      exclude:["PassWord","resetCodeVerified","resetCode"]
-    }
+  let secertary = await Secertary.findByPk(req.payload.id, {
+    attributes: {
+      exclude: ["PassWord", "resetCodeVerified", "resetCode"],
+    },
   });
   return res.json({ success: true, secertary });
 };
@@ -161,6 +161,22 @@ export const updateMeeting = async (req, res, next) => {
   });
 
   return res.json({ success: true, message: "Meeting Updated Successfully" });
+};
+
+export const changeStatus = async (req, res, next) => {
+  let isMeeting = await Meetings.findOne({
+    where: { meeting_id: req.params.meetingId },
+  });
+  if (!isMeeting) return next(new Error("Meeting Not Found"));
+
+  if (isMeeting.dataValues.addedBy != req.payload.id)
+    return next(new Error("You Don't have permissions"));
+
+  isMeeting.update({
+    statues: req.body.status,
+  });
+
+  return res.json({ success: true, message: "Meeting Status Changed Successfully" });
 };
 
 export const deleteMeeting = async (req, res, next) => {
