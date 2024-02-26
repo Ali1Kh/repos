@@ -10,10 +10,10 @@ import { sequelize } from "../../../DB/connection.js";
 
 //createManagerAccount
 export const createManagerAccount = asyncHandler(async (req, res, next) => {
-  const isSecretariesEmail = await Secertary.findOne({
-    where: { E_mail: req.body.E_mail },
-  });
-  if (isSecretariesEmail) return next(new Error("Email Already Existed!"));
+  // const isSecretariesEmail = await Secertary.findOne({
+  //   where: { E_mail: req.body.E_mail },
+  // });
+  // if (isSecretariesEmail) return next(new Error("Email Already Existed!"));
 
   const isManager = await Manager.findOne({
     where: { E_mail: req.body.E_mail },
