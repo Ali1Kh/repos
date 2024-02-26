@@ -58,7 +58,7 @@ export default function Login() {
           } else if (role == "Secertary") {
             navigate("/meeting");
           } else if (role == "Admin") {
-            navigate("/dashboard");
+            navigate("/dashboard/meetings");
           }
         } else {
           seterrorMessage(response.data.message);

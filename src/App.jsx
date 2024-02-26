@@ -22,7 +22,7 @@ import ForgotPassword from "./components/forgot password/forgot password/ForgotP
 import CheckYourEmail from "./components/forgot password/check your email/CheckYourEmail.jsx";
 import ResetPassword from "./components/forgot password/Reset password/ResetPassword.jsx";
 import Notes from "./components/Notes/Notes.jsx";
-import DashboardManagers from './components/DashBoard/DashboardManagers/DashboardManagers.jsx';
+import DashboardManagers from "./components/DashBoard/DashboardManagers/DashboardManagers.jsx";
 import DashboardMeetings from "./components/DashBoard/DashboardMeetings/DashboardMeetings.jsx";
 import DashboardSecertaries from "./components/DashBoard/DashboardSecertaries/DashboardSecertaries.jsx";
 import History from "./components/DashBoard/History/History.jsx";
@@ -56,7 +56,7 @@ const router = createHashRouter([
         path: "/dashbord",
         element: (
           <ProtectedRoutes>
-            <DashboardManagers/>
+            <DashboardManagers />
           </ProtectedRoutes>
         ),
       },
