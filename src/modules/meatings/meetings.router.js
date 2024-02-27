@@ -12,6 +12,7 @@ router.get(
   "/",
   isAuthenticated,
   isAuthorized("Manager"),
+  validation(meetingsSchema.getManagerMeetingSchema),
   asyncHandler(meetingsController.getManagerMeeting)
 );
 

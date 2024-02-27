@@ -37,10 +37,18 @@ export const signUp = asyncHandler(async (req, res, next) => {
 // signIn
 export const signIn = asyncHandler(async (req, res, next) => {
   if (req.body.role == "Manager") {
-    const isManager = await Manager.findOne({
-      where: { E_mail: req.body.E_mail },
-    });
-    if (!isManager) return next(new Error("Email Is Invalid"));
+    let isManager;
+    if (req.body.E_mail) {
+      isManager = await Manager.findOne({
+        where: { E_mail: req.body.E_mail },
+      });
+      if (!isManager) return next(new Error("Email Is Invalid"));
+    } else if (req.body.UserName) {
+      isManager = await Manager.findOne({
+        where: { UserName: req.body.UserName },
+      });
+      if (!isManager) return next(new Error("UserName Is Invalid"));
+    }
 
     const managerPassMatch = bcryptjs.compareSync(
       req.body.PassWord,
@@ -67,10 +75,19 @@ export const signIn = asyncHandler(async (req, res, next) => {
 
     return res.json({ success: true, message: "Welcome Manager !", token });
   } else if (req.body.role == "Secertary") {
-    const isSecertary = await Secertary.findOne({
-      where: { E_mail: req.body.E_mail },
-    });
-    if (!isSecertary) return next(new Error("Email is Invalid !"));
+    let isSecertary;
+
+    if (req.body.E_mail) {
+      isSecertary = await Secertary.findOne({
+        where: { E_mail: req.body.E_mail },
+      });
+      if (!isSecertary) return next(new Error("Email is Invalid !"));
+    } else if (req.body.UserName) {
+      isSecertary = await Secertary.findOne({
+        where: { UserName: req.body.UserName },
+      });
+      if (!isSecertary) return next(new Error("Username is Invalid !"));
+    }
 
     const secertaryPassMatch = bcryptjs.compareSync(
       req.body.PassWord,
@@ -96,7 +113,7 @@ export const signIn = asyncHandler(async (req, res, next) => {
     });
 
     return res.json({ success: true, message: "Welcome Secertary !", token });
-  }else if (req.body.role == "Admin") {
+  } else if (req.body.role == "Admin") {
     const isAdmin = await Admin.findOne({
       where: { E_mail: req.body.E_mail },
     });

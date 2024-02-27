@@ -33,7 +33,10 @@ export const meeting_Manager = sequelize.define(
   }
 );
 
+
+
 meeting_Manager.associate = (models) => {
-  meeting_Manager.belongsTo(models.Manager, { foreignKey: "manager_id" });
-  meeting_Manager.belongsTo(models.Meetings, { foreignKey: "meeting_id" });
+  meeting_Manager.belongsTo(Manager, { foreignKey: 'manager_id', targetKey: 'manager_id' });
+  meeting_Manager.belongsTo(Meetings, { foreignKey: 'meeting_id', targetKey: 'meeting_id' });
+  
 };

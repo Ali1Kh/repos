@@ -29,10 +29,6 @@ Manager.hasMany(Token, { foreignKey: "manager_id" });
 Token.belongsTo(Manager, { foreignKey: "manager_id" });
 
 Manager.associate = (models) => {
-  Manager.belongsToMany(Meetings, {
-    through: meeting_Manager,
-    foreignKey: "manager_id",
-  });
 
   Manager.hasMany(models.Note, { foreignKey: "manager_id" });
   Note.belongsTo(Manager, { foreignKey: "manager_id" });
