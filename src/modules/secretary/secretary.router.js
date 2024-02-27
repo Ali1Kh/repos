@@ -20,6 +20,14 @@ router.post(
 );
 
 router.post(
+  "/addExistingManager/",
+  isAuthenticated,
+  isAuthorized("Secertary"),
+  validation(secretarySchema.addExistingManagerSchema),
+  secretaryController.addExistingManager
+);
+
+router.post(
   "/createMeeting/:manager_id",
   isAuthenticated,
   isAuthorized("Secertary"),

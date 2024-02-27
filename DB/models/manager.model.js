@@ -1,9 +1,8 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "./../connection.js";
 import { Token } from "./token.model.js";
-import { Meetings } from "./meeting.model.js";
-import { meeting_Manager } from "./meeting_Manager.model.js";
 import { Note } from "./notes.model.js";
+import { Manager_Secretary } from "./Manager_Secretary.model.js";
 
 export const Manager = sequelize.define(
   "Manager",
@@ -11,6 +10,7 @@ export const Manager = sequelize.define(
     manager_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
     },
     E_mail: { type: DataTypes.STRING, unique: true, allowNull: false },
     first_name: { type: DataTypes.STRING },
@@ -25,14 +25,11 @@ export const Manager = sequelize.define(
   }
 );
 
+
+
+
 Manager.hasMany(Token, { foreignKey: "manager_id" });
 Token.belongsTo(Manager, { foreignKey: "manager_id" });
 
-Manager.associate = (models) => {
-
-  Manager.hasMany(models.Note, { foreignKey: "manager_id" });
-  Note.belongsTo(Manager, { foreignKey: "manager_id" });
-
-  Manager.hasMany(models.Token, { foreignKey: "manager_id" });
-  Token.belongsTo(Manager, { foreignKey: "manager_id" });
-};
+Manager.hasMany(Note, { foreignKey: "manager_id" });
+Note.belongsTo(Manager, { foreignKey: "manager_id" });

@@ -2,6 +2,7 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "./../connection.js";
 import { Token } from "./token.model.js";
 import { Manager } from "./manager.model.js";
+import { meeting_Manager } from "./meeting_Manager.model.js";
 
 export const Secertary = sequelize.define(
   "Secretary",
@@ -27,5 +28,3 @@ export const Secertary = sequelize.define(
 Secertary.hasMany(Token, { foreignKey: "secretary_id" });
 Token.belongsTo(Secertary, { foreignKey: "secretary_id" });
 
-Secertary.hasMany(Manager, { foreignKey: "secretary_id" });
-Manager.belongsTo(Secertary, { foreignKey: "secretary_id" });

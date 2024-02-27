@@ -9,6 +9,9 @@ import dashboardRouter from "./src/modules/dashboard/dashboard.router.js";
 import managerRouter from "./src/modules/manager/manager.router.js";
 
 import cors from "cors";
+import { Manager } from "./DB/models/manager.model.js";
+import { Secertary } from "./DB/models/secertary.model.js";
+import { Manager_Secretary } from "./DB/models/Manager_Secretary.model.js";
 
 dotenv.config();
 
@@ -26,6 +29,15 @@ try {
 }
 
 await syncFn();
+
+Manager.belongsToMany(Secertary, {
+  through: "Manager_Secretary",
+  foreignKey: "manager_id",
+});
+Secertary.belongsToMany(Manager, {
+  through: "Manager_Secretary",
+  foreignKey: "secretary_id",
+});
 
 app.use("/auth", userRouter);
 app.use("/secretary", secretaryRouter);

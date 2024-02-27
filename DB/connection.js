@@ -13,6 +13,7 @@ export const sequelize = new Sequelize(
   }
 );
 
+
 export const syncFn = async () => {
   await sequelize.sync({ logging: false });
 };

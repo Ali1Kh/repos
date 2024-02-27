@@ -7,14 +7,10 @@ import { meeting_Manager } from "../../../DB/models/meeting_Manager.model.js";
 import cloudinary from "../../utils/cloud.js";
 import { Op } from "sequelize";
 import { sequelize } from "../../../DB/connection.js";
+import { Manager_Secretary } from "../../../DB/models/Manager_Secretary.model.js";
 
 //createManagerAccount
 export const createManagerAccount = asyncHandler(async (req, res, next) => {
-  // const isSecretariesEmail = await Secertary.findOne({
-  //   where: { E_mail: req.body.E_mail },
-  // });
-  // if (isSecretariesEmail) return next(new Error("Email Already Existed!"));
-
   const isManager = await Manager.findOne({
     where: { E_mail: req.body.E_mail },
   });
@@ -29,11 +25,40 @@ export const createManagerAccount = asyncHandler(async (req, res, next) => {
     parseInt(process.env.SALT_ROUND)
   );
 
-  await Manager.create({
+  let manager = await Manager.create({
     ...req.body,
     PassWord: managerhashPass,
-    secretary_id: req.payload.id,
   });
+
+  await manager.addSecretaries(req.payload.id);
+
+  return res.json({ success: true, message: "Manager Created Successfully" });
+});
+
+export const addExistingManager = asyncHandler(async (req, res, next) => {
+  // const isManager = await Manager.findOne({
+  //   where: { E_mail: req.body.E_mail },
+  // });
+  // if (!isManager) return next(new Error("Manager Not Found"));
+
+  // let managers = await Manager_Secretary.findAll({
+  //   attributes: { exclude: "id" },
+  // });
+  // console.log(managers);
+
+  let test = await Manager.findAll({
+    include: [
+      {
+        model: Manager_Secretary,
+      },
+    ],
+  });
+
+  // await Manager.create({
+  //   ...req.body,
+  //   PassWord: managerhashPass,
+  //   secretary_id: req.payload.id,
+  // });
 
   return res.json({ success: true, message: "Manager Created Successfully" });
 });
@@ -116,7 +141,15 @@ export const getSecMeetingsDetails = async (req, res, next) => {
 export const getSecManagers = async (req, res, next) => {
   let managers = await Manager.findAll({
     attributes: ["manager_id", "first_name", "last_name"],
-    where: { secretary_id: req.payload.id },
+    include: [
+      {
+        model: Secertary,
+        attributes: [],
+        where: {
+          secretary_id: req.payload.id,
+        },
+      },
+    ],
   });
   return res.json({ success: true, managers });
 };
@@ -176,7 +209,10 @@ export const changeStatus = async (req, res, next) => {
     statues: req.body.status,
   });
 
-  return res.json({ success: true, message: "Meeting Status Changed Successfully" });
+  return res.json({
+    success: true,
+    message: "Meeting Status Changed Successfully",
+  });
 };
 
 export const deleteMeeting = async (req, res, next) => {

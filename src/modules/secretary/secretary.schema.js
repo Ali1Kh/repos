@@ -27,6 +27,12 @@ export const createManagerAccountSchema = joi.object({
   confirmPassword: joi.string().valid(joi.ref("PassWord")).required(),
 });
 
+export const addExistingManagerSchema = joi
+  .object({
+    E_mail: joi.string().email().required(),
+  })
+  .required();
+
 export const updateMeetingSchema = joi
   .object({
     meetingId: joi.number().required(),

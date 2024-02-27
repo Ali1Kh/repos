@@ -5,7 +5,10 @@ export const signUpSchema = joi
   .object({
     first_name: joi.string().required(),
     last_name: joi.string().required(),
-    UserName: joi.string().required(),
+    UserName: joi
+      .string()
+      .pattern(new RegExp("^[a-zA-Z][a-zA-Z0-9]{3,50}$"))
+      .required(),
     E_mail: joi.string().email().required(),
     PassWord: joi
       .string()
