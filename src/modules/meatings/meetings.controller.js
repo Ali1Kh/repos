@@ -32,6 +32,20 @@ export const getManagerMeeting = async (req, res, next) => {
     replacements.in_or_out = req.query.in_or_out;
   }
 
+  if (req.query?.person) {
+    whereClause += " AND person = :person";
+    replacements.person = req.query.person;
+  }
+
+  if (req.query?.about) {
+    whereClause += " AND about = :about";
+    replacements.about = req.query.about;
+  }
+
+  if (req.query?.address) {
+    whereClause += " AND address = :address";
+    replacements.address = req.query.address;
+  }
 
   if (req.query.time?.eq) {
     whereClause += " AND time = :timeEq";
@@ -47,8 +61,6 @@ export const getManagerMeeting = async (req, res, next) => {
     whereClause += " AND time <= :timeLte";
     replacements.timeLte = req.query.time.lte;
   }
-
-  
 
   const meetings = await sequelize.query(
     `

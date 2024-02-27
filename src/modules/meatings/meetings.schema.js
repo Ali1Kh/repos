@@ -44,4 +44,7 @@ export const getManagerMeetingSchema = joi.object({
     }),
   status: joi.string().valid("Not Done", "Done"),
   in_or_out: joi.string().valid("Inside", "Outside"),
+  person: joi.string(),
+  about: joi.string(),
+  address: joi.string(),
 });
