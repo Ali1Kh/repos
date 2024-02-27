@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect  , useState} from "react";
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,23 +11,52 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { TailSpin } from "react-loader-spinner";
 import "./DashboardSecertaries.css"
+import toast from "react-hot-toast";
+import { HashLoader } from 'react-spinners';
+import $ from 'jquery'
+
 
 export default function DashboardSecertaries() {
 
   const token = localStorage.getItem("token")
 
-  const { data, isLoading } = useQuery("getDashBoardSecertar", getDashBoardSecertar);
+  const [data, setData] = useState([]);
 
-  function getDashBoardSecertar() {
-    return axios.get("https://meetingss.onrender.com/dashboard/getAllSecretaries", {
+
+  const { isLoading } = useQuery("getDashBoardSecertar", getDashBoardSecertar);
+
+  async function getDashBoardSecertar() {
+    const {data} = await axios.get("https://meetingss.onrender.com/dashboard/getAllSecretaries", {
       headers: {
         token: token
       }
-
     })
+    if (data.success) {
+        setData(data)
+    }
   }
 
-  console.log(data);
+  const DeleteSecertary = async (id) => {
+    await axios
+    .delete(`https://meetingss.onrender.com/dashboard/deleteSecretary/${id}`, {
+      headers: {
+        token: token,
+      },
+    })
+    .then((response) => {
+      if (response.data.success) {
+        toast.success("Secertary Deleted Successfully");
+        getDashBoardSecertar()
+      } else {
+        console.log(response.data);
+        toast.error("Something went Wrong!");
+      }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+};
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -43,7 +72,7 @@ export default function DashboardSecertaries() {
   return <>
     <div className="main">
       <div className="container mt-5">
-        <h1 className="container d-flex flex-column align-items-center justify-content-center p-4">
+        <h1 className="container d-flex flex-column align-items-center justify-content-center p-4 fw-bold text-white">
           Secertaries
         </h1>
         <div className="row gy-3 p-5 pt-0">
@@ -72,23 +101,25 @@ export default function DashboardSecertaries() {
                       <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                           <TableRow>
-                            <TableCell align="center">UserName</TableCell>
-                            <TableCell align="center">Name</TableCell>
-                            <TableCell align="center">Email</TableCell>
-                            <TableCell align="center">Accepted</TableCell>
-                            <TableCell align="center">Delete</TableCell>
+                            <TableCell align="center" className="fw-bold">UserName</TableCell>
+                            <TableCell align="center" className="fw-bold">Name</TableCell>
+                            <TableCell align="center" className="fw-bold">Email</TableCell>
+                            <TableCell align="center" className="fw-bold">Accepted</TableCell>
+                            <TableCell align="center" className="fw-bold">Delete</TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
                           {data
-                            ? data.data.secertaries?.map((secertarie, idx) => (
+                            ? data.secertaries?.map((secertarie, idx) => (
                               <TableRow hover tabIndex={-1} key={idx}>
                                 <TableCell align="center" component="th" scope="row">{secertarie.UserName}</TableCell>
                                 <TableCell align="center" component="th">{secertarie.first_name + " " + secertarie.last_name}</TableCell>
                                 <TableCell align="center" component="th">{secertarie.E_mail}</TableCell>
                                 <TableCell align="center" component="th">{secertarie.Accepted_Acc ? "Accept" : "Refused"}</TableCell>
                                 <TableCell align="center" component="th">
-                                  <button align="center" className='btn btn-danger'>
+                                  <button align="center" className='btn btn-danger' onClick={(e)=>{DeleteSecertary(secertarie.secretary_id);
+                                    // $(e.target).html("loading..")
+                                  }}>
                                     Delete
                                   </button>
                                 </TableCell>
@@ -100,7 +131,7 @@ export default function DashboardSecertaries() {
                     <TablePagination
                       rowsPerPageOptions={[5, 10, 25]}
                       component="div"
-                      count={data?.data.secertaries?.length}
+                      count={data?.secertaries?.length}
                       rowsPerPage={rowsPerPage}
                       page={page}
                       onPageChange={handleChangePage}
