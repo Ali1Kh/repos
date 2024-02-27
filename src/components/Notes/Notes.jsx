@@ -234,7 +234,7 @@ export default function Nots() {
               />
             </Form.Group>
           </Form>
-          {type == "new" ? (
+          {type === "new" ? (
             <Button
               variant="primary"
               onClick={() => {
@@ -243,7 +243,7 @@ export default function Nots() {
             >
               Save
             </Button>
-          ) : type == "update" ? (
+          ) : type === "update" ? (
             <Button
               variant="primary"
               onClick={() => {
