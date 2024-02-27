@@ -84,5 +84,38 @@
     },
     "update": "تعديل",
     "delete": "مسح"
+  },
+  "Dashborad": {
+    "Acceptacne": {
+      "AcceptacneName":"القبول",
+      "userName": "اسم المستخدم",
+      "name": "الاسم" ,
+      "E_mail": "البريد الإلكتروني",
+      "action": "الإجراء"
+    },
+    "ManageresAndSecretaries": {
+      "ManageresName":"مديرين",
+      "SecretariesName":"سكرتاريين",
+      "userName": "اسم المستخدم",
+      "name": "الاسم" ,
+      "E_mail": "البريد الإلكتروني",
+      "Accepted": "الحالة",
+      "delete": "حذف"
+    },
+    "history": {
+      "historyName":"السجل"
+    },
+    "Meetings": {
+      "MeetingsName":"الاجتماعات",
+      "person": "الاسم",
+      "Topic": "الموضوع" ,
+      "Address": "العنوان",
+      "MeetingPlace": "الموقع",
+      "status": "الحالة",
+      "time": "الوقت",
+      "date": "التاريخ",
+      "Delete":"حذف"
+    }
   }
+  
 }

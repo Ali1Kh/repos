@@ -11,6 +11,8 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { TailSpin } from "react-loader-spinner";
 import "./DashboardMeetings.css"
+import { useTranslation } from "react-i18next";
+
 
 export default function DashboardMeetings() {
 
@@ -40,11 +42,13 @@ export default function DashboardMeetings() {
     setPage(0);
   };
 
+  const [t, il8n] = useTranslation();
+
   return <>
     <div className="main">
       <div className="container mt-5">
         <h1 className="container d-flex flex-column align-items-center justify-content-center p-4 fw-bold text-white">
-          Meetings
+          {t("Dashborad.Meetings.MeetingsName")}
         </h1>
         <div className="row gy-3 p-5 pt-0">
           {isLoading ?
@@ -72,15 +76,14 @@ export default function DashboardMeetings() {
                       <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                           <TableRow>
-                            <TableCell align="center">Person</TableCell>
-                            <TableCell align="center">Topic</TableCell>
-                            <TableCell align="center">Address</TableCell>
-                            <TableCell align="center">Meeting Place</TableCell>
-                            <TableCell align="center">statues</TableCell>
-                            <TableCell align="center">time</TableCell>
-                            <TableCell align="center">date</TableCell>
-                            <TableCell align="center">time</TableCell>
-                            <TableCell align="center">Delete</TableCell>
+                            <TableCell align="center">{t("Dashborad.Meetings.person")}</TableCell>
+                            <TableCell align="center">{t("Dashborad.Meetings.Topic")}</TableCell>
+                            <TableCell align="center">{t("Dashborad.Meetings.Address")}</TableCell>
+                            <TableCell align="center">{t("Dashborad.Meetings.MeetingPlace")}</TableCell>
+                            <TableCell align="center">{t("Dashborad.Meetings.status")}</TableCell>
+                            <TableCell align="center">{t("Dashborad.Meetings.time")}</TableCell>
+                            <TableCell align="center">{t("Dashborad.Meetings.date")}</TableCell>
+                            <TableCell align="center">{t("Dashborad.Meetings.Delete")}</TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
@@ -94,10 +97,9 @@ export default function DashboardMeetings() {
                                 <TableCell align="center" component="th">{meeting.statues}</TableCell>
                                 <TableCell align="center" component="th">{meeting.time}</TableCell>
                                 <TableCell align="center" component="th">{meeting.date}</TableCell>
-                                <TableCell align="center" component="th">{meeting.time}</TableCell>
                                 <TableCell align="center" component="th">
                                   <button align="center" className='btn btn-danger'>
-                                    Delete
+                                  {t("Dashborad.Meetings.Delete")}
                                   </button>
                                 </TableCell>
                               </TableRow>

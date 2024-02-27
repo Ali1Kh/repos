@@ -12,8 +12,7 @@ import { useQuery } from "react-query";
 import { TailSpin } from "react-loader-spinner";
 import "./DashboardSecertaries.css"
 import toast from "react-hot-toast";
-import { HashLoader } from 'react-spinners';
-import $ from 'jquery'
+import { useTranslation } from "react-i18next";
 
 
 export default function DashboardSecertaries() {
@@ -69,11 +68,14 @@ export default function DashboardSecertaries() {
     setPage(0);
   };
 
+
+  const [t, il8n] = useTranslation();
+
   return <>
     <div className="main">
       <div className="container mt-5">
         <h1 className="container d-flex flex-column align-items-center justify-content-center p-4 fw-bold text-white">
-          Secertaries
+          {t("Dashborad.ManageresAndSecretaries.SecretariesName")}
         </h1>
         <div className="row gy-3 p-5 pt-0">
           {isLoading ?
@@ -101,11 +103,11 @@ export default function DashboardSecertaries() {
                       <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                           <TableRow>
-                            <TableCell align="center" className="fw-bold">UserName</TableCell>
-                            <TableCell align="center" className="fw-bold">Name</TableCell>
-                            <TableCell align="center" className="fw-bold">Email</TableCell>
-                            <TableCell align="center" className="fw-bold">Accepted</TableCell>
-                            <TableCell align="center" className="fw-bold">Delete</TableCell>
+                            <TableCell align="center" className="fw-bold">{t("Dashborad.ManageresAndSecretaries.userName")}</TableCell>
+                            <TableCell align="center" className="fw-bold">{t("Dashborad.ManageresAndSecretaries.name")}</TableCell>
+                            <TableCell align="center" className="fw-bold">{t("Dashborad.ManageresAndSecretaries.E_mail")}</TableCell>
+                            <TableCell align="center" className="fw-bold">{t("Dashborad.ManageresAndSecretaries.Accepted")}</TableCell>
+                            <TableCell align="center" className="fw-bold">{t("Dashborad.ManageresAndSecretaries.delete")}</TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
@@ -120,7 +122,7 @@ export default function DashboardSecertaries() {
                                   <button align="center" className='btn btn-danger' onClick={(e)=>{DeleteSecertary(secertarie.secretary_id);
                                     // $(e.target).html("loading..")
                                   }}>
-                                    Delete
+                                    {t("Dashborad.ManageresAndSecretaries.delete")}
                                   </button>
                                 </TableCell>
                               </TableRow>

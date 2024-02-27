@@ -82,6 +82,38 @@
     "statusContext":{"done":"Done","changedate":"Change Date","cancel":"Cancel"},
     "update":"Update",
     "delete":"Delete"
+  },
+  "Dashborad": {
+    "Acceptacne": {
+      "AcceptacneName":"Acceptacne",
+      "userName": "Username",
+      "name": "Name" ,
+      "E_mail": "Email",
+      "action": "Action"
+    },
+    "ManageresAndSecretaries": {
+      "ManageresName":"Manageres",
+      "SecretariesName":"Secretaries",
+      "userName": "Username",
+      "name": "Name" ,
+      "E_mail": "Email",
+      "Accepted": "Accepted",
+      "delete": "Delete"
+    },
+    "history": {
+      "historyName":"History"
+    },
+    "Meetings": {
+      "MeetingsName":"Meetings",
+      "person": "Person",
+      "Topic": "Topic" ,
+      "Address": "Address",
+      "MeetingPlace": "Meeting Place",
+      "status": "status",
+      "time": "Time",
+      "date": "Date",
+      "Delete":"Delete"
+    }
   }
 
 }
