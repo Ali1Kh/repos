@@ -89,7 +89,8 @@
       "userName": "Username",
       "name": "Name" ,
       "E_mail": "Email",
-      "action": "Action"
+      "action": "Action",
+      "acceptBtn": "Accept"
     },
     "ManageresAndSecretaries": {
       "ManageresName":"Manageres",
