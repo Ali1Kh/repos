@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import "./newMeeting.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
@@ -154,7 +154,7 @@ export default function NewMeeting() {
     setInsidePersons(value.map((manager) => manager.manager_id));
   };
 
-  const [t, il8n] = useTranslation();
+  const [t] = useTranslation();
 
   return (
     <div className="main">
@@ -218,7 +218,7 @@ export default function NewMeeting() {
                       placeholder={t("CreateOrUpdateMeeting.person")}
                       className="tagify"
                       sx={{
-                        backgroundColor: "var(--cardBgColor)",
+                        // backgroundColor: "var(--main-color) !important",
                         padding: "8px",
                         color: "var(--BlackToWhite)",
                         border: "2px solid var(--sec-color)",
@@ -270,9 +270,8 @@ export default function NewMeeting() {
               <div
                 {...getRootProps()}
                 style={{ borderStyle: "dashed" }}
-                className={`dropzone h-100 ${
-                  isDragActive ? "active h-100" : ""
-                }`}
+                className={`dropzone h-100 ${isDragActive ? "active h-100" : ""
+                  }`}
               >
                 <input {...getInputProps()} />
                 {isDragActive ? (
@@ -310,7 +309,7 @@ export default function NewMeeting() {
                           onClick={(e) => {
                             setUploadedFiles(
                               uploadedFiles.filter(
-                                (fileItem) => fileItem.path != file.path
+                                (fileItem) => fileItem.path !== file.path
                               )
                             );
                           }}
@@ -328,7 +327,7 @@ export default function NewMeeting() {
               </div>
             </div>
           </div>
-          <div className="d-flex justify-content-between">
+          <div className="d-flex flex-column-md justify-content-between">
             <div className="inputItem mb-3 px-5 ">
               <select id="managerSelected" className="py-2 w-auto px-2">
                 <option value="">Choose Manager</option>
@@ -341,20 +340,10 @@ export default function NewMeeting() {
                 ))}
               </select>
 
-              {/* <Button
-                className="btn btn-primary m-3 mb-4"
-                component="label"
-                role={undefined}
-                variant="contained"
-                tabIndex={-1}
-              >
-                Upload file
-                <VisuallyHiddenInput type="file" />
-              </Button> */}
             </div>
-            <div className="radios inputItem mb-3 px-5 d-flex gap-3 align-items-center">
-              <div className="radio-buttons-container ">
-                <div className="radio-button d-flex align-items-center">
+            <div className="radios inputItem mb-4 px-5 d-flex flex-column flex-md-row gap-3 align-items-center">
+              <div className="radio-buttons-container d-flex flex-column flex-md-row">
+                <div className="radio-button mb-2 mb-md-0">
                   <input
                     name="radio-group"
                     id="radio2"
