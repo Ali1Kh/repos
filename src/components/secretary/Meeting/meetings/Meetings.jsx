@@ -9,10 +9,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
+
 export default function Meetings() {
   let [meetingsRows, setMeetingsRows] = useState([]);
   const getRowId = (row) => row.meeting_id;
@@ -34,6 +35,7 @@ export default function Meetings() {
   useEffect(() => {
     getSecMeetings();
   }, []);
+  
   const [open, setOpen] = useState(false);
   let [selectedId, setSelectId] = useState(null);
   let meetingNavigate = useNavigate();
@@ -118,7 +120,7 @@ export default function Meetings() {
   //   // clearTimeout(holdTimeout);
   // }
 
-  const [t, il8n] = useTranslation();
+  const [t] = useTranslation();
 
   return (
     <>
@@ -242,9 +244,9 @@ export default function Meetings() {
                     display: "none",
                   },
                   "& [data-testid='ArrowUpwardIcon'], [data-testid='ArrowDownwardIcon']":
-                    {
-                      display: "none",
-                    },
+                  {
+                    display: "none",
+                  },
                 }}
               />
             </div>

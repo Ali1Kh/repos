@@ -240,7 +240,7 @@ export default function UpdateMeeting() {
                       placeholder={t("CreateOrUpdateMeeting.person")}
                       className="tagify"
                       sx={{
-                        backgroundColor: "var(--cardBgColor)",
+                        // backgroundColor: "var(--main-color) !important",
                         padding: "8px",
                         color: "var(--BlackToWhite)",
                         border: "2px solid var(--sec-color)",

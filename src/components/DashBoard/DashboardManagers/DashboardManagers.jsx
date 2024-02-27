@@ -96,7 +96,6 @@ export default function DashBoardManagers() {
             ) : (
               <div className="row gy-3">
                 <div>
-
                   <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                     <TableContainer sx={{ maxHeight: 440 }}>
                       <Table stickyHeader aria-label="sticky table">
