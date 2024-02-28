@@ -7,7 +7,6 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { TailSpin } from "react-loader-spinner";
-import Meetings from './../secretary/Meeting/meetings/Meetings';
 
 export default function HomePage() {
   const [t] = useTranslation();
