@@ -116,14 +116,17 @@ export default function Calender() {
               <div className="dayMeetings p-4">
                 <div
                   style={{ color: "var(--mutedColor)" }}
-                  className="todayDate d-flex justify-content-between mb-3"
+                  className="todayDate  d-flex justify-content-between mb-3"
                 >
-                  <span>{day}</span>
-                  <span>
+                  <span className="BlackToWhite">{day}</span>
+                  <span className="BlackToWhite">
                     {date.$D}/{date.$M + 1}/{date.$y}
                   </span>
                 </div>
-                <div className="dayMeetingsCards  BlackToWhite overflow-y-scroll" style={{ maxHeight: "320px" }}>
+                <div
+                  className="dayMeetingsCards  BlackToWhite overflow-y-scroll"
+                  style={{ maxHeight: "320px" }}
+                >
                   {dayMeetings.length > 0 ? (
                     dayMeetings.map((meet) => (
                       <div className="meetingItem border-bottom py-3">

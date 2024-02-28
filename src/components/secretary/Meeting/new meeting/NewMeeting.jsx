@@ -44,7 +44,7 @@ export default function NewMeeting() {
         return;
       }
     } else {
-      if (!person) {
+      if (insidePersons.length <= 0) {
         $(".error").removeClass("d-none");
         $(".error").addClass("d-block");
         return;
@@ -89,7 +89,6 @@ export default function NewMeeting() {
       insidePersons,
     };
 
-    console.log(area);
     if (area != "Inside") {
       delete initData.insidePersons;
     }
@@ -169,7 +168,11 @@ export default function NewMeeting() {
   });
 
   const handleManagerChange = (event, value) => {
-    setInsidePersons(value.map((manager) => manager.manager_id));
+    setInsidePersons(
+      value
+        .filter((item) => typeof item === "object")
+        .map((manager) => manager.manager_id)
+    );
   };
 
   const [t] = useTranslation();
@@ -226,7 +229,11 @@ export default function NewMeeting() {
                         key={option.manager_id}
                         variant="outlined"
                         className="bg-info"
-                        label={option.first_name + " " + option.last_name}
+                        label={
+                          typeof option === "string"
+                            ? option
+                            : option.first_name + " " + option.last_name
+                        }
                         {...getTagProps({ index })}
                       />
                     ))
