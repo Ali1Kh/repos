@@ -36,31 +36,32 @@ export const createManagerAccount = asyncHandler(async (req, res, next) => {
 });
 
 export const addExistingManager = asyncHandler(async (req, res, next) => {
-  // const isManager = await Manager.findOne({
-  //   where: { E_mail: req.body.E_mail },
-  // });
-  // if (!isManager) return next(new Error("Manager Not Found"));
+  const isManager = await Manager.findOne({
+    where: { E_mail: req.body.E_mail },
+  });
+  if (!isManager) return next(new Error("Manager Not Found"));
 
-  // let managers = await Manager_Secretary.findAll({
-  //   attributes: { exclude: "id" },
-  // });
-  // console.log(managers);
-
-  let test = await Manager.findAll({
+  const isMyManager = await Manager.findOne({
+    where: { E_mail: req.body.E_mail },
     include: [
       {
-        model: Manager_Secretary,
+        model: Secertary,
+        attributes: [],
+        where: {
+          secretary_id: req.payload.id,
+        },
       },
     ],
   });
+  if (isMyManager)
+    return next(new Error("You Are Already Secretary  For This Manager"));
 
-  // await Manager.create({
-  //   ...req.body,
-  //   PassWord: managerhashPass,
-  //   secretary_id: req.payload.id,
-  // });
+  await isManager.addSecretaries(req.payload.id);
 
-  return res.json({ success: true, message: "Manager Created Successfully" });
+  return res.json({
+    success: true,
+    message: "Manager Added Successfully To Your Account",
+  });
 });
 
 export const createMeeting = async (req, res, next) => {
@@ -75,9 +76,11 @@ export const createMeeting = async (req, res, next) => {
 
   if (!isManager) return next(new Error("Invalid Manager"));
 
-  if (!isManager.dataValues.Secretaries.find((secretary) => {
-    return secretary.dataValues.secretary_id === req.payload.id;
-  }))
+  if (
+    !isManager.dataValues.Secretaries.find((secretary) => {
+      return secretary.dataValues.secretary_id === req.payload.id;
+    })
+  )
     return next(new Error("You Must Be The Secretary For This Manager"));
 
   // Check Time Exitsss
