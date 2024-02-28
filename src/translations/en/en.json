@@ -71,7 +71,7 @@
     "outside":"Outside Company",
     "buttonAdd":"ADD MEETING",
     "buttonUpdate":"Update Meeting",
-    "Drag":"Drag and drop file here or click to browse",
+    "Drag":"Drag and Drop File Here or Click to Browse",
     "nofile":"No File Uploaded",
     "choose":"Choose Manager"
   },
@@ -119,7 +119,7 @@
       "name":"Name",
       "email":"Email",
       "createdAtdate":"Created Date",
-      "createdAttime":"Created time",
+      "createdAttime":"Created Time",
       "agent":"Agent"
     },
     "Meetings": {
@@ -128,7 +128,7 @@
       "Topic": "Topic" ,
       "Address": "Address",
       "MeetingPlace": "Meeting Place",
-      "status": "status",
+      "status": "Status",
       "time": "Time",
       "date": "Date",
       "Delete":"Delete"

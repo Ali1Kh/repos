@@ -92,10 +92,10 @@ export default function History() {
                             <TableCell align="center">
                               {t("Dashborad.history.email")}
                             </TableCell>
-                            <TableCell align="center">
+                            <TableCell align="center" className="fw-bold text-white">
                               {t("Dashborad.history.createdAtdate")}
                             </TableCell>
-                            <TableCell align="center">
+                            <TableCell align="center" className="fw-bold text-white">
                               {t("Dashborad.history.createdAttime")}
                             </TableCell>
                             <TableCell align="center">
