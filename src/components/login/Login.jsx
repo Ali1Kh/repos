@@ -30,9 +30,9 @@ export default function Login() {
     const emailOrUsername = document.getElementById("emailName").value;
     const password = document.getElementById("password").value;
     const role = document.getElementById("role").value;
-  
+
     let formData;
-  
+
     if (validateEmail(emailOrUsername)) {
       formData = {
         E_mail: emailOrUsername,
@@ -49,17 +49,17 @@ export default function Login() {
       seterrorMessage("Invalid email or username");
       return;
     }
-  
+
     if (!validatePassword(password)) {
       seterrorMessage("Invalid password");
       return;
     }
-  
+
     if (role === "Role") {
       seterrorMessage("Choose a Role");
       return;
     }
-  
+
     axios
       .post("https://meetingss.onrender.com/auth/login", formData)
       .then((response) => {
@@ -84,7 +84,7 @@ export default function Login() {
   };
 
 
-   
+
 
   const [t] = useTranslation();
   return (
@@ -101,31 +101,31 @@ export default function Login() {
                   <input
                     id="emailName"
                     type="email"
-                    className="user-name mt-3 d-flex justify-content-center form-control"
+                    className="user-name mt-3 mb-3 d-flex justify-content-center form-control"
                     placeholder={t("Login.placeholder")}
                   />
-                  <div className="password-input d-flex rounded-pill">
+                  <div className="password-input d-flex">
                     <input
                       id="password"
                       type="password"
-                      className="pass-word mt-3 d-flex justify-content-center form-control rounded-pill"
+                      className="pass-word mt-3 d-flex justify-content-center form-control"
                       placeholder={t("Login.password")}
                     />
-                    <button id="eye" className="btn d-flex justify-content-center align-items-center text-white ms-2" 
-                    onClick={()=>{
-                      let password = document.getElementById("password")
-                      let eyeicon = document.getElementById("eye-icon")
+                    <button id="eye" className="btn d-flex justify-content-center align-items-center text-white ms-2"
+                      onClick={() => {
+                        let password = document.getElementById("password")
+                        let eyeicon = document.getElementById("eye-icon")
 
-                      if (password.type == "password") {
-                        password.type = "text"
-                        eyeicon.className = "fa-solid fa-eye"
-                      }
-                      else{
-                      password.type = "password"
-                      eyeicon.className = "fa-solid fa-eye-slash"
-                      }
-                    }}>
-                    <i id="eye-icon" class="fa-solid fa-eye-slash"></i>
+                        if (password.type === "password") {
+                          password.type = "text"
+                          eyeicon.className = "fa-solid fa-eye"
+                        }
+                        else {
+                          password.type = "password"
+                          eyeicon.className = "fa-solid fa-eye-slash"
+                        }
+                      }}>
+                      <i id="eye-icon" class="fa-solid fa-eye-slash"></i>
                     </button>
                   </div>
                 </div>
