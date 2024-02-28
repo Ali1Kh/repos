@@ -4,22 +4,11 @@ import "./navbar.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import $ from "jquery";
 import { useTranslation } from "react-i18next";
-
-import { Unstable_Popup as BasePopup } from "@mui/base/Unstable_Popup";
 import { styled } from "@mui/system";
 import { jwtDecode } from "jwt-decode";
 
 export default function Navbar() {
   const location = useLocation();
-
-  const [anchor, setAnchor] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchor(anchor ? null : event.currentTarget);
-  };
-
-  const open = Boolean(anchor);
-  const id = open ? "simple-popper" : undefined;
 
   const navigate = useNavigate();
 
@@ -58,7 +47,6 @@ export default function Navbar() {
       localStorage.removeItem("token");
     }, 2000);
   };
-
 
 
   let [username, setUsername] = useState();

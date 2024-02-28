@@ -80,18 +80,24 @@
     "nofile":"No File Uploaded",
     "choose":"Choose Manager"
   },
-  "Meetings":{
-    "meetings":"Meetings",
+
+  "meetings":{
+    "meetingDetails":"Meeting Details",
+    "btnShow":"Show PDF",
+    "btnAddNotes":"Add Notes",
     "table":{
-      "date":"Date",
-      "time":"Time",
+      "date":"Meeting Date",
+      "time":"Meeting Time",
       "person":"Person",
+      "guestName":"Guest Name",
       "topic":"Topic",
       "address":"Address",
       "area":"Area",
       "status":"Status",
-      "notes":"Notes"
+      "comments":"Comments",
+      "inOrOut":"In Or Out side"
     }
+
   },
   "MeetingContextMenu":{
     "status":"Change Status",
