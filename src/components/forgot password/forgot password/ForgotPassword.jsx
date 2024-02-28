@@ -40,7 +40,7 @@ export default function ForgotPassword() {
           toast.success("Reset Code Sent To Your Email Successfully");
           navigateUpdatePass("/CheckYourEmail");
         } else {
-          toast.error(response.data.message);
+          toast.error("Role Is Invalid");
         }
       })
       .catch((error) => {
