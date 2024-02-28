@@ -179,13 +179,12 @@
 @media screen and (min-width: 992px) {
   .notification-body  {
     display: none !important;
-    background-color: red !important;
   }
   .bell  {
     display: none !important;
   }
 } 
 
-.notification-body-toggler{
+.notification-body--toggler{
   margin-right: 50px !important;
 }

@@ -122,7 +122,7 @@ export default function Navbar() {
                   <BasePopup id={id} open={open} anchor={anchor} >
                     <PopupBody className="notification-body-toggler d-flex mt-4">
                       <div className="justify-content-center align-items-center me-3">
-                        <p className="fs-6 text-danger">Your Manager Ali Khaled Were Added To A New Inside Meeting</p>
+                        <p className="fs-6">Your Manager Ali Khaled Were Added To A New Inside Meeting</p>
                         <button className="btn accept-button">Accept</button>
                         <i className="fa-solid fa-trash deletAcc"></i>
                       </div>
