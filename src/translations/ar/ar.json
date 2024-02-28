@@ -10,16 +10,11 @@
     "meetingStatus": "حالة الاجتماع",
     "comments": "ملاحظات"
   },
-  "nav": {
-    "navInner":{
-      "Home": "الرئيسية",
-      "calendar": "التقويم",
-      "meeting": "الاجتماعات",
-      "createMeeting": "انشاء اجتماع"
-    },
-    "toggler":{
-      "acceptbtn":"القبول" 
-    }
+  "navInner": {
+    "Home": "الرئيسية",
+    "calendar": "التقويم",
+    "meeting": "الاجتماعات",
+    "createMeeting": "انشاء اجتماع"
   },
   "Login": {
     "loginheader": "تسجيل دخول",
@@ -78,25 +73,21 @@
     "choose": "اختر المدير"
   },
   "search": "بحث",
-  
   "meetings": {
     "meetingDetails": "تفاصيل الاجتماع",
-    "btnShow": "عرض PDF",
+    "btnShow": "PDF عرض",
     "btnAddNotes": "إضافة ملاحظات",
-    "table": {
-      "date": "تاريخ الاجتماع",
-      "time": "وقت الاجتماع",
-      "person": "شخص",
-      "guestName": "اسم الضيف",
-      "topic": "الموضوع",
-      "address": "العنوان",
-      "area": "المنطقة",
-      "status": "الحالة",
-      "comments": "تعليقات",
-      "inOrOut": "داخل أو خارج"
-    }
+    "date": "تاريخ الاجتماع",
+    "time": "وقت الاجتماع",
+    "person": "شخص",
+    "guestName": "اسم الضيف",
+    "topic": "الموضوع",
+    "address": "العنوان",
+    "area": "المنطقة",
+    "status": "الحالة",
+    "Comments": "تعليقات",
+    "inOrOut": "داخل أو خارج"
   },
-
   "MeetingContextMenu": {
     "status": "تعديل الحالة",
     "statusContext": {

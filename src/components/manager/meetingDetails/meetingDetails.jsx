@@ -1,6 +1,7 @@
 import "./meetingDetails.css";
 import { useTranslation } from "react-i18next";
 export default function MeetingDetails({ meetingsDetails }) {
+
   const [t] = useTranslation();
 
   return (
@@ -28,25 +29,25 @@ export default function MeetingDetails({ meetingsDetails }) {
                 <div className="row g-md-5">
                   <div className="col-md-6">
                     <div className="col-ineer">
-                      <span>{t("meetings.table.guestName")}</span>
+                      <span>{t("meetings.guestName")}</span>
                       <h5 className="mb-3">{meetingsDetails.person}</h5>
-                      <span className="fw-normal">{t("meetings.table.topic")}</span>
+                      <span className="fw-normal">{t("meetings.topic")}</span>
                       <h5 className="mb-3">{meetingsDetails.about}</h5>
-                      <span>{t("meetings.table.status")}</span>
+                      <span>{t("meetings.status")}</span>
                       <h5 className="mb-3">{meetingsDetails.statues}</h5>
-                      <span>{t("meetings.table.comments")}</span>
+                      <span>{t("meetings.Comments")}</span>
                       <h5 className="mb-3">{meetingsDetails.notes}</h5>
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="col-ineer">
-                      <span>{t("meetings.table.address")}</span>
+                      <span>{t("meetings.address")}</span>
                       <h5 className="mb-3">{meetingsDetails.address}</h5>
-                      <span>{t("meetings.table.inOrOut")}</span>
+                      <span>{t("meetings.inOrOut")}</span>
                       <h5 className="mb-3">{meetingsDetails.in_or_out}</h5>
-                      <span>{t("meetings.table.date")}</span>
+                      <span>{t("meetings.date")}</span>
                       <h5 className="mb-3">{meetingsDetails.date}</h5>
-                      <span>{t("meetings.table.time")}</span>
+                      <span>{t("meetings.time")}</span>
                       <h5 className="mb-3">{meetingsDetails.time}</h5>
                       <div className="d-flex justify-content-center">
                         <button type="button" class="btn-meeting">{t("meetings.btnShow")}</button>
