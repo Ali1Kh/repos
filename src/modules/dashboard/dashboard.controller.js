@@ -1,3 +1,4 @@
+import { Admin } from "../../../DB/models/admin.model.js";
 import { Manager } from "../../../DB/models/manager.model.js";
 import { Meetings } from "../../../DB/models/meeting.model.js";
 import { Secertary } from "../../../DB/models/secertary.model.js";
@@ -104,3 +105,14 @@ export const deleteSecretary = asyncHandler(async (req, res, next) => {
   await isSecretary.destroy();
   return res.json({ success: true, message: "Secertary Deleted Successfully" });
 });
+
+export const getAdminDetails = async (req, res, next) => {
+  console.log(req.payload);
+  let admin = await Admin.findByPk(req.payload.id, {
+    attributes: {
+      exclude: ["Password", "resetCodeVerified", "resetCode"],
+    },
+  });
+  console.log(admin);
+  return res.json({ success: true, admin });
+};

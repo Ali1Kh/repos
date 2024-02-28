@@ -127,7 +127,7 @@ export const signIn = asyncHandler(async (req, res, next) => {
 
     const token = jwt.sign(
       {
-        id: isAdmin.secretary_id,
+        id: isAdmin.Admin_id,
         E_mail: isAdmin.E_mail,
         username: isAdmin.UserName,
         role: "Admin",

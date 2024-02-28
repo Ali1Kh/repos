@@ -64,7 +64,6 @@ export const addExistingManager = asyncHandler(async (req, res, next) => {
 });
 
 export const createMeeting = async (req, res, next) => {
-  console.log(req.payload.id);
   let isManager = await Manager.findByPk(req.params.manager_id, {
     include: [
       {

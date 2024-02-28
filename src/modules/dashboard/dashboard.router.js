@@ -51,6 +51,13 @@ router.get(
 );
 
 router.get(
+  "/getAdminDetails",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  dashboardController.getAdminDetails
+);
+
+router.get(
   "/getLoginHistory",
   isAuthenticated,
   isAuthorized("Admin"),
