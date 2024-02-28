@@ -9,6 +9,11 @@
     "meetingTime": "وقت",
     "meetingStatus": "حالة الاجتماع",
     "comments": "ملاحظات"
+  },"navInner": {
+    "Home": "الرئيسية",
+    "calendar": "التقويم",
+    "meeting": "الاجتماعات",
+    "createMeeting": "انشاء اجتماع"
   },
   "Login": {
     "loginheader": "تسجيل دخول",
@@ -17,7 +22,8 @@
     "password": "كلمة المرور",
     "button": "تسجيل الدخول",
     "signuphint": "ليس لديك حساب ؟",
-    "signup": "اشتراك"
+    "signup": "اشتراك",
+    "forget":"نسيت كلمة السر؟"
   },
   "signup": {
     "signupheader": "انشاء حساب",
@@ -60,7 +66,10 @@
     "inside": "داخل الهيئة",
     "outside": "خارج الهيئة",
     "buttonAdd": "أضف الاجتماع",
-    "buttonUpdate": "تعديل الاجتماع"
+    "buttonUpdate": "تعديل الاجتماع",
+    "Drag":"قم بسحب وإسقاط الملف هنا أو انقر للتصفح",
+    "nofile":"لم يتم تحميل أي ملف",
+    "choose":"اختر المدير"
   },
   "search": "بحث",
   "Meetings": {
@@ -92,7 +101,8 @@
       "userName": "اسم المستخدم",
       "name": "الاسم",
       "E_mail": "البريد الإلكتروني",
-      "action": "الإجراء"
+      "action": "الإجراء",
+      "acceptBtn": "قبول"
     },
     "ManageresAndSecretaries": {
       "ManageresName": "مديرين",
@@ -105,6 +115,13 @@
     },
     "history": {
       "historyName": "السجل"
+      "historyName":"السجل",
+      "role":"المسمى الوظيفي",
+      "userName":"اسم المستخدم",
+      "name":"الاسم",
+      "email":"البريد الإلكتروني",
+      "createdAt":"تاريخ الإنشاء",
+      "agent":"اسم الجهاز"
     },
     "Meetings": {
       "MeetingsName": "الاجتماعات",

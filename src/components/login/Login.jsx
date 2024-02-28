@@ -83,6 +83,9 @@ export default function Login() {
       });
   };
 
+
+   
+
   const [t] = useTranslation();
   return (
     <>
@@ -101,12 +104,30 @@ export default function Login() {
                     className="user-name mt-3 d-flex justify-content-center form-control"
                     placeholder={t("Login.placeholder")}
                   />
-                  <input
-                    id="password"
-                    type="password"
-                    className="user-name mt-3 d-flex justify-content-center form-control"
-                    placeholder={t("Login.password")}
-                  />
+                  <div className="password-input d-flex rounded-pill">
+                    <input
+                      id="password"
+                      type="password"
+                      className="pass-word mt-3 d-flex justify-content-center form-control rounded-pill"
+                      placeholder={t("Login.password")}
+                    />
+                    <button id="eye" className="btn d-flex justify-content-center align-items-center text-white ms-2" 
+                    onClick={()=>{
+                      let password = document.getElementById("password")
+                      let eyeicon = document.getElementById("eye-icon")
+
+                      if (password.type == "password") {
+                        password.type = "text"
+                        eyeicon.className = "fa-solid fa-eye"
+                      }
+                      else{
+                      password.type = "password"
+                      eyeicon.className = "fa-solid fa-eye-slash"
+                      }
+                    }}>
+                    <i id="eye-icon" class="fa-solid fa-eye-slash"></i>
+                    </button>
+                  </div>
                 </div>
                 <Form.Select
                   id="role"
@@ -133,7 +154,7 @@ export default function Login() {
                     style={{ fontSize: "14px" }}
                     className="mt-2  px-3 text-start BlackToWhite"
                   >
-                    <Link to={"/ForgetPassword"}>Forget Password ?</Link>
+                    <Link to={"/ForgetPassword"}>{t("Login.forget")}</Link>
                   </p>
                 </div>
 

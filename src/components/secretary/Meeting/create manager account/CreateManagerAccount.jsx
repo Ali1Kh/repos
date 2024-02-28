@@ -6,7 +6,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import toast from "react-hot-toast";
-
+import $ from "jquery";
 const SignupSchema = Yup.object().shape({
   userName: Yup.string()
     .required("Username is required")
@@ -70,7 +70,10 @@ function CreateManagerAccount() {
           <h2 className="mb-5 animate__animated animate__zoomIn BlackToWhite">
             {t("signup.createManagerAccount")}
           </h2>
-          <div className="row justify-content-center">
+          <div
+            id="createManagerContainer"
+            className="row justify-content-center"
+          >
             <div className="col-md-9">
               <Formik
                 initialValues={{
@@ -159,12 +162,76 @@ function CreateManagerAccount() {
                       className="error-label"
                     />
                   </div>
+                  <div className="addExistingButton w-100 text-start ms-2 mt-2">
+                    <a
+                      onClick={() => {
+                        $("#addExistingContainer").removeClass("d-none");
+                        $("#createManagerContainer").addClass("d-none");
+                      }}
+                      className="cursorPointer"
+                    >
+                      Add Existing Account
+                    </a>
+                  </div>
                   <div
                     id="btn"
                     type="submit"
                     className="Signup-btn d-flex justify-content-center align-items-center mt-3"
                   >
-                    <button type="submit">{t("signup.createManagerAccount")}</button>
+                    <button type="submit">
+                      {t("signup.createManagerAccount")}
+                    </button>
+                  </div>
+                </Form>
+              </Formik>
+            </div>
+          </div>
+          <div
+            id="addExistingContainer"
+            className="row justify-content-center d-none"
+          >
+            <div className="col-md-9">
+              <Formik
+                initialValues={{
+                  email: "",
+                }}
+                validationSchema={SignupSchema}
+                onSubmit={handleManagerAccount}
+              >
+                <Form className="ineer shadow p-5">
+                  <div className="form text-start">
+                    <Field
+                      type="email"
+                      name="email"
+                      className="user-name mt-3 d-flex justify-content-center form-control"
+                      placeholder={t("signup.email")}
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="label"
+                      className="error-label"
+                    />
+                  </div>
+                  <div className="createManagerButton w-100 text-start ms-2 mt-2">
+                    <a
+                      onClick={() => {
+                        $("#addExistingContainer").addClass("d-none");
+                        $("#createManagerContainer").removeClass("d-none");
+                      }}
+                      className="cursorPointer"
+                    >
+                      {t("signup.createManagerAccount")}
+                    </a>
+                  </div>
+                  <div
+                    id="addExistingBtn"
+                    type="submit"
+                    className="Signup-btn d-flex justify-content-center align-items-center mt-3"
+                  >
+                    <button type="submit">
+                      Add Existing Manager
+                      {/* {t("signup.createManagerAccount")} */}
+                    </button>
                   </div>
                 </Form>
               </Formik>
