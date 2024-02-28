@@ -139,7 +139,7 @@ export default function Signup() {
                       className="pass-word mt-3 d-flex justify-content-center form-control"
                       placeholder={t("signup.password")}
                     />
-                    <button id="eye" className="btn d-flex justify-content-center align-items-center ms-2"
+                    <button id="eye" className="btn btn-eye d-flex justify-content-center align-items-center ms-2"
                       onClick={() => {
                         let password = document.getElementById("password")
                         let eyeicon = document.getElementById("eye-icon")

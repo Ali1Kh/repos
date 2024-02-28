@@ -11,13 +11,11 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
 
 const Acceptance = () => {
     const token = localStorage.getItem("token")
-    const [id, setId] = useState("");
     const [data, setData] = useState([]);
 
     const getNotAcceptedAccounts = async () => {
@@ -83,18 +81,6 @@ const Acceptance = () => {
         }
     };
 
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
-
 
     const [t] = useTranslation();
 
@@ -127,7 +113,7 @@ const Acceptance = () => {
                                 ? data.secertaries?.map((secretary, idx) => (
                                     <div>
                                         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                                            <TableContainer sx={{ maxHeight: 440 }}>
+                                            <TableContainer sx={{ maxHeight: 500 }}>
                                                 <Table stickyHeader aria-label="sticky table">
                                                     <TableHead>
                                                         <TableRow>
@@ -140,9 +126,7 @@ const Acceptance = () => {
                                                     </TableHead>
                                                     <TableBody>
 
-                                                        <TableRow hover tabIndex={-1} key={idx} onClick={() => {
-                                                            setId(secretary.manager_id)
-                                                        }}>
+                                                        <TableRow hover tabIndex={-1} key={idx} >
                                                             <TableCell align="center" component="th" scope="row">{secretary.UserName}</TableCell>
                                                             <TableCell align="center" component="th">{secretary.first_name + " " + secretary.last_name}</TableCell>
                                                             <TableCell align="center" component="th">{secretary.E_mail}</TableCell>
@@ -170,15 +154,6 @@ const Acceptance = () => {
                                                     </TableBody>
                                                 </Table>
                                             </TableContainer>
-                                            <TablePagination
-                                                rowsPerPageOptions={[5, 10, 25]}
-                                                component="div"
-                                                count={data?.managers?.length}
-                                                rowsPerPage={rowsPerPage}
-                                                page={page}
-                                                onPageChange={handleChangePage}
-                                                onRowsPerPageChange={handleChangeRowsPerPage}
-                                            />
                                         </Paper>
                                     </div>
                                 )) : ""}

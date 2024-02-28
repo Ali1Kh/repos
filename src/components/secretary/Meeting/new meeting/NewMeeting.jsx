@@ -44,8 +44,8 @@ export default function NewMeeting() {
     let managerSelected = $("#managerSelected").val();
     let area = $('input[name="radio-group"]:checked').val();
 
-    if (area == "Outside") {
-      if (person == "") {
+    if (area === "Outside") {
+      if (person === "") {
         $(".error").removeClass("d-none");
         $(".error").addClass("d-block");
         return;
@@ -96,7 +96,7 @@ export default function NewMeeting() {
       insidePersons,
     };
 
-    if (area != "Inside") {
+    if (area !== "Inside") {
       delete initData.insidePersons;
     }
 
@@ -206,7 +206,7 @@ export default function NewMeeting() {
           {t("CreateOrUpdateMeeting.createMeeting")}
         </h2>
 
-        <div className="inputsContainer p-0 w-100  p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
+        <div className="ineer py-5 d-flex flex-column justify-content-center align-items">
           <div className="calenderPicker row p-0 m-0">
             <div className="col-md-6  inputItem mb-3 px-5">
               <ThemeProvider theme={newTheme}>
@@ -234,9 +234,9 @@ export default function NewMeeting() {
           </div>
           <div>
             {buttonPressed === "Inside" ? (
-              <div className="inputItem mb-3 px-5">
+              <div className="inputItem tagify mb-3 px-5">
                 <Autocomplete
-                  ref={autocompleteRef} 
+                  ref={autocompleteRef}
                   multiple
                   id="tags-filled"
                   onChange={handleManagerChange}
@@ -264,7 +264,7 @@ export default function NewMeeting() {
                     <TextField
                       {...params}
                       placeholder={t("CreateOrUpdateMeeting.person")}
-                      className="tagify"
+                      className=""
                       sx={{
                         // backgroundColor: "var(--main-color) !important",
                         padding: "8px",
@@ -318,9 +318,8 @@ export default function NewMeeting() {
               <div
                 {...getRootProps()}
                 style={{ borderStyle: "dashed" }}
-                className={`dropzone h-100 ${
-                  isDragActive ? "active h-100" : ""
-                }`}
+                className={`dropzone h-100 ${isDragActive ? "active h-100" : ""
+                  }`}
               >
                 <input {...getInputProps()} />
                 {isDragActive ? (

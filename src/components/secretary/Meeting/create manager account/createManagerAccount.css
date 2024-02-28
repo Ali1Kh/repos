@@ -9,6 +9,7 @@
 .ineer {
     background-color: var(--cardBgColor);
     border-radius: 10px !important;
+    margin-bottom: 20px  !important ;
 }
 
 .name input {
@@ -50,4 +51,17 @@
     color: #ff0000;
     font-size: 14px;
     margin-top: 5px;
+}
+
+form .user-name {
+    margin: 20px 0 5px 0 !important;
+}
+
+form .password-input {
+    margin: 20px 0 5px 0 !important;
+}
+
+.btn-eye {
+    border: 0 !important;
+    outline: 0 !important;
 }

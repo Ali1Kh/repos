@@ -117,11 +117,11 @@ export default function UpdateMeeting() {
     if (
       !date ||
       !time ||
-      person == "" ||
-      topic == "" ||
-      address == "" ||
-      notes == "" ||
-      area == ""
+      person  === "" ||
+      topic   === "" ||
+      address === "" ||
+      notes   === "" ||
+      area    === ""
     ) {
       $(".error").removeClass("d-none");
       $(".error").addClass("d-block");
@@ -181,7 +181,7 @@ export default function UpdateMeeting() {
     }
   }
 
-  const [t, il8n] = useTranslation();
+  const [t] = useTranslation();
 
   return (
     <div className="main">
@@ -190,7 +190,7 @@ export default function UpdateMeeting() {
           {t("CreateOrUpdateMeeting.updateMeeting")}
         </h2>
 
-        <div className="inputsContainer w-100  p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
+        <div className="inputsContainer p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
           <div className="calenderPicker row p-0 m-0">
             <div className="col-md-6  inputItem mb-3 px-5">
               <ThemeProvider theme={newTheme}>
@@ -313,7 +313,6 @@ export default function UpdateMeeting() {
                   </div>
                 )}
               </div>
-
               <div className="file-list mt-3">
                 {uploadedFiles.length > 0 ? (
                   <div className="d-flex flex-row flex-wrap gap-3">
@@ -331,7 +330,7 @@ export default function UpdateMeeting() {
                           onClick={(e) => {
                             setUploadedFiles(
                               uploadedFiles.filter(
-                                (fileItem) => fileItem.path != file.path
+                                (fileItem) => fileItem.path !== file.path
                               )
                             );
                           }}
@@ -349,48 +348,51 @@ export default function UpdateMeeting() {
               </div>
             </div>
           </div>
-          <div className="radios inputItem mb-3 px-5 d-flex gap-3 align-items-center">
-            <div className="radio-buttons-container ">
-              <div className="radio-button d-flex align-items-center">
-                <input
-                  name="radio-group"
-                  id="radio2"
-                  className="radio-button__input"
-                  type="radio"
-                  value={"Inside"}
-                  onClick={() => {
-                    setButtonPressed("Inside");
-                  }}
-                />
-                <label
-                  htmlFor="radio2"
-                  className="radio-button__label BlackToWhite"
-                >
-                  <span className="radio-button__custom"></span>
-                  {t("CreateOrUpdateMeeting.inside")}
-                </label>
-              </div>
-              <div className="radio-button d-flex align-items-center">
-                <input
-                  name="radio-group"
-                  id="radio1"
-                  className="radio-button__input"
-                  type="radio"
-                  value={"Outside"}
-                  onClick={() => {
-                    setButtonPressed("Outside");
-                  }}
-                />
-                <label
-                  htmlFor="radio1"
-                  className="radio-button__label BlackToWhite"
-                >
-                  <span className="radio-button__custom"></span>
-                  {t("CreateOrUpdateMeeting.outside")}
-                </label>
+          <div className="d-md-flex justify-content-end">
+            <div className="radios inputItem mb-3 px-5 d-flex gap-md-2 align-items-center">
+              <div className="radio-buttons-container d-flex flex-md-row flex-column align-items-start">
+                <div className="radio-button d-flex align-items-center">
+                  <input
+                    name="radio-group"
+                    id="radio2"
+                    className="radio-button__input"
+                    type="radio"
+                    value={"Inside"}
+                    onClick={() => {
+                      setButtonPressed("Inside");
+                    }}
+                  />
+                  <label
+                    htmlFor="radio2"
+                    className="radio-button__label BlackToWhite"
+                  >
+                    <span className="radio-button__custom"></span>
+                    {t("CreateOrUpdateMeeting.inside")}
+                  </label>
+                </div>
+                <div className="radio-button d-flex align-items-center">
+                  <input
+                    name="radio-group"
+                    id="radio1"
+                    className="radio-button__input"
+                    type="radio"
+                    value={"Outside"}
+                    onClick={() => {
+                      setButtonPressed("Outside");
+                    }}
+                  />
+                  <label
+                    htmlFor="radio1"
+                    className="radio-button__label BlackToWhite"
+                  >
+                    <span className="radio-button__custom"></span>
+                    {t("CreateOrUpdateMeeting.outside")}
+                  </label>
+                </div>
               </div>
             </div>
           </div>
+
           <div className="d-flex flex-column w-100 justify-content-center align-items-center ">
             <small style={{ color: "red" }} className="error d-none mb-3">
               All Inputs Are Required!
