@@ -47,4 +47,5 @@ export const getManagerMeetingSchema = joi.object({
   person: joi.string(),
   about: joi.string(),
   address: joi.string(),
+  sort: joi.string(),
 });

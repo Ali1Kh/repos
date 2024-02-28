@@ -43,6 +43,10 @@ export const getAllNotes = asyncHandler(async (req, res, next) => {
   const isManager = await Manager.findByPk(req.payload.id);
   if (!isManager) return next(new Error("Manager Not Found!"));
 
+  const sortParam = req.query.sort || "createdAt";
+  const sortOrder = sortParam.startsWith("-") ? "DESC" : "ASC";
+  const sortField = sortParam.replace(/^-/, "");
+
   const whereClause = {
     manager_id: req.payload.id,
   };
@@ -56,10 +60,13 @@ export const getAllNotes = asyncHandler(async (req, res, next) => {
   }
 
   if (req.query.content) {
-    whereClause[Op.or].push({ content: { [Op.like]: `%${req.query.content}%` } });
+    whereClause[Op.or].push({
+      content: { [Op.like]: `%${req.query.content}%` },
+    });
   }
 
   const notes = await Note.findAll({
+    order: [[sortField, sortOrder]],
     where: whereClause,
   });
 

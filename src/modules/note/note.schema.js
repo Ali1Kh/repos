@@ -5,6 +5,7 @@ export const getNotesSchema = joi
   .object({
     title: joi.string(),
     content: joi.string(),
+    sort: joi.string(),
   })
 
 // createNoteSchema

@@ -6,6 +6,9 @@ import { meeting_Manager } from "../../../DB/models/meeting_Manager.model.js";
 export const getManagerMeeting = async (req, res, next) => {
   let whereClause = "1=1";
   const replacements = {};
+  const sortParam = req.query.sort || 'createdAt';
+  const sortOrder = sortParam.startsWith('-') ? 'DESC' : 'ASC';
+  const sortField = sortParam.replace(/^-/, '');
 
   if (req.query.date?.eq) {
     whereClause += " AND date = :dateEq";
@@ -72,7 +75,7 @@ export const getManagerMeeting = async (req, res, next) => {
     `
   SELECT * FROM Meetings
   JOIN meeting_Manager ON Meetings.meeting_id = meeting_Manager.meeting_id
-  WHERE meeting_Manager.manager_id = ${req.payload.id}  AND ${whereClause};
+  WHERE meeting_Manager.manager_id = ${req.payload.id}  AND ${whereClause} ORDER BY ${sortField} ${sortOrder};
   `,
     {
       replacements: { ...replacements },
