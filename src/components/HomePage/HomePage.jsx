@@ -73,6 +73,23 @@ export default function HomePage() {
 
   localStorage.setItem("colors", JSON.stringify(colors));
 
+  async function search(name) {
+    const {data} = await axios.get(`https://meetingss.onrender.com/meetings?person=${name}`, {
+      headers: {
+        token: authToken
+      }
+    })
+    if (data.success) { 
+      setData(data)
+    }
+  }
+
+  let searchName=$("#searchName");
+  searchName.keyup(function(){
+      search(searchName.val())
+      // console.log(data);
+  })
+
   return (
     <>
       <div className="main p-4 mt-5">
@@ -103,7 +120,7 @@ export default function HomePage() {
             <div className="row gy-3">
               <>
                 {data
-                  ? data.data.meetings?.map((meeting, idx) => (
+                  ? data.meetings?.map((meeting, idx) => (
                     <>
                       <div
                         key={idx}
