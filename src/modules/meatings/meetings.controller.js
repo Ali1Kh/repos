@@ -32,19 +32,25 @@ export const getManagerMeeting = async (req, res, next) => {
     replacements.in_or_out = req.query.in_or_out;
   }
 
+  const conditions = [];
+
   if (req.query?.person) {
-    whereClause += " AND person = :person";
-    replacements.person = req.query.person;
+    conditions.push("person LIKE :person");
+    replacements.person = `%${req.query.person}%`;
   }
-
+  
   if (req.query?.about) {
-    whereClause += " AND about = :about";
-    replacements.about = req.query.about;
+    conditions.push("about LIKE :about");
+    replacements.about = `%${req.query.about}%`;
   }
-
+  
   if (req.query?.address) {
-    whereClause += " AND address = :address";
-    replacements.address = req.query.address;
+    conditions.push("address LIKE :address");
+    replacements.address = `%${req.query.address}%`;
+  }
+  
+  if (conditions.length > 0) {
+    whereClause += " AND (" + conditions.join(" OR ") + ")";
   }
 
   if (req.query.time?.eq) {
