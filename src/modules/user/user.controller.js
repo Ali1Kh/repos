@@ -95,6 +95,13 @@ export const signIn = asyncHandler(async (req, res, next) => {
     );
     if (!secertaryPassMatch) return next(new Error("Invalid Password !"));
 
+    if (isSecertary.Accepted_Acc == false)
+      return next(
+        new Error(
+          "Your Account Is Not Accepted , Contact Admin To Accept Your Account !"
+        )
+      );
+
     const token = jwt.sign(
       {
         id: isSecertary.secretary_id,
