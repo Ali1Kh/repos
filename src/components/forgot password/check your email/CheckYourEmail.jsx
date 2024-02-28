@@ -15,6 +15,7 @@ export default function CheckYourEmail() {
   const handleChange = (newValue) => {
     setCode(newValue);
   };
+
   async function resetCode() {
 
 
@@ -40,7 +41,7 @@ export default function CheckYourEmail() {
 
   const postSendAgain = () => {
     axios
-      .patch("https://meetingss.onrender.com/auth/send-forget-code", {
+      .post("https://meetingss.onrender.com/auth/send-forget-code", {
         E_mail: email,
         role: role
       })

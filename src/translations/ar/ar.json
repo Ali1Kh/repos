@@ -10,16 +10,11 @@
     "meetingStatus": "حالة الاجتماع",
     "comments": "ملاحظات"
   },
-  "nav": {
-    "navInner":{
-      "Home": "الرئيسية",
-      "calendar": "التقويم",
-      "meeting": "الاجتماعات",
-      "createMeeting": "انشاء اجتماع"
-    },
-    "toggler":{
-      "acceptbtn":"القبول" 
-    }
+  "navInner": {
+    "Home": "الرئيسية",
+    "calendar": "التقويم",
+    "meeting": "الاجتماعات",
+    "createMeeting": "انشاء اجتماع"
   },
   "Login": {
     "loginheader": "تسجيل دخول",
@@ -29,7 +24,7 @@
     "button": "تسجيل الدخول",
     "signuphint": "ليس لديك حساب ؟",
     "signup": "اشتراك",
-    "forget":"نسيت كلمة السر؟"
+    "forget": "نسيت كلمة السر؟"
   },
   "signup": {
     "signupheader": "انشاء حساب",
@@ -73,24 +68,45 @@
     "outside": "خارج الهيئة",
     "buttonAdd": "أضف الاجتماع",
     "buttonUpdate": "تعديل الاجتماع",
-    "Drag":"قم بسحب وإسقاط الملف هنا أو انقر للتصفح",
-    "nofile":"لم يتم تحميل أي ملف",
-    "choose":"اختر المدير"
+    "Drag": "قم بسحب وإسقاط الملف هنا أو انقر للتصفح",
+    "nofile": "لم يتم تحميل أي ملف",
+    "choose": "اختر المدير"
   },
   "search": "بحث",
-  "Meetings": {
+  "meetings": {
+    "meetingDetails": "تفاصيل الاجتماع",
+    "btnShow": "PDF عرض",
+    "btnAddNotes": "إضافة ملاحظات",
+    "date": "تاريخ الاجتماع",
+    "time": "وقت الاجتماع",
+    "person": "شخص",
+    "guestName": "اسم الضيف",
+    "topic": "الموضوع",
+    "address": "العنوان",
+    "area": "المنطقة",
+    "status": "الحالة",
+    "Comments": "تعليقات",
+    "inOrOut": "داخل أو خارج"
+  },
+
+  "tableMeetings": {
     "meetings": "الاجتماعات",
+    "btnShow": "عرض PDF",
+    "btnAddNotes": "إضافة ملاحظات",
     "table": {
-      "date": "تاريخ",
-      "time": "الوقت",
-      "person": "الشخص",
-      "topic": "عنوان",
+      "date": "تاريخ الاجتماع",
+      "time": "وقت الاجتماع",
+      "person": "شخص",
+      "guestName": "اسم الضيف",
+      "topic": "الموضوع",
       "address": "العنوان",
       "area": "المنطقة",
       "status": "الحالة",
-      "notes": "ملاحظات"
+      "comments": "تعليقات",
+      "inOrOut": "داخل أو خارج"
     }
   },
+
   "MeetingContextMenu": {
     "status": "تعديل الحالة",
     "statusContext": {
@@ -121,13 +137,13 @@
     },
     "history": {
       "historyName": "السجل",
-      "role":"المسمى الوظيفي",
-      "userName":"اسم المستخدم",
-      "name":"الاسم",
-      "email":"البريد الإلكتروني",
-      "createdAtdate":"تاريخ الإنشاء",
-      "createdAttime":"وقت الإنشاء",
-      "agent":"اسم الجهاز"
+      "role": "المسمى الوظيفي",
+      "userName": "اسم المستخدم",
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "createdAtdate": "تاريخ الإنشاء",
+      "createdAttime": "وقت الإنشاء",
+      "agent": "اسم الجهاز"
     },
     "Meetings": {
       "MeetingsName": "الاجتماعات",

@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
-import React from "react";
+import React, { useEffect } from "react";
 import "./homePage.css";
 import MeetingDetails from "../manager/meetingDetails/meetingDetails.jsx";
-import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { useQuery } from "react-query";
@@ -38,7 +36,7 @@ export default function HomePage() {
     }
   }
 
-  let colors = JSON.parse(localStorage.getItem("colors")) || [
+  let colors = [
     "#FFB399",
     "#FFFFFF99",
     "#00B3E6",
@@ -75,25 +73,8 @@ export default function HomePage() {
 
   localStorage.setItem("colors", JSON.stringify(colors));
 
-  async function search(name) {
-    const {data} = await axios.get(`https://meetingss.onrender.com/meetings?person=${name}`, {
-      headers: {
-        token: authToken
-      }
-    })
-    if (data.success) { 
-      setData(data)
-    }
-  }
-
-  let searchName=$("#searchName");
-  searchName.keyup(function(){
-      search(searchName.val())
-  })
-
   return (
     <>
-
       <div className="main p-4 mt-5">
         <div className="container">
           <h2
@@ -103,7 +84,10 @@ export default function HomePage() {
             {t("HomePage.header")}
           </h2>{" "}
           {isLoading ? (
-            <div className="d-flex justify-content-center align-items-center" style={{ height: "65vh" }}>
+            <div
+              className="d-flex justify-content-center align-items-center"
+              style={{ height: "65vh" }}
+            >
               <TailSpin
                 visible={true}
                 height="90"
@@ -119,7 +103,7 @@ export default function HomePage() {
             <div className="row gy-3">
               <>
                 {data
-                  ? data.meetings?.map((meeting, idx) => (
+                  ? data.data.meetings?.map((meeting, idx) => (
                     <>
                       <div
                         key={idx}
@@ -147,57 +131,88 @@ export default function HomePage() {
                                     )
                                     ]
                                     }`,
-                                }}
-                              >
-                                <span className="m-0 p-0 ">
-                                  {meeting.person
-                                    .toUpperCase()
-                                    .split("")
-                                    .slice(0, 1)}
-                                </span>
+                                  }}
+                                >
+                                  <span className="m-0 p-0 ">
+                                    {meeting.person
+                                      .toUpperCase()
+                                      .split("")
+                                      .slice(0, 1)}
+                                  </span>
+                                </div>
+                              </div>
+                              <div className="guest-account text-center d-flex flex-column align-items-center mt-3">
+                                <div className="guest-name flex-column">
+                                  <h4>{meeting.person}</h4>
+                                </div>
                               </div>
                             </div>
-                            <div className="guest-account text-center d-flex flex-column align-items-center mt-3">
-                              <div className="guest-name flex-column">
-                                <h4>{meeting.person}</h4>
+                            <div className="meeting-info row mt-2">
+                              <div className="meeting-topic col-lg-4 col-md-4">
+                                <p className="text-center m-1 heading">
+                                  {t("HomePage.meetingTopic")}
+                                </p>
+                                <p className="text-center m-1">
+                                  {meeting.about}
+                                </p>
                               </div>
-                            </div>
-                          </div>
-                          <div className="meeting-info row mt-2">
-                            <div className="meeting-topic col-lg-4 col-md-4">
-                              <p className="text-center m-1 heading">
-                                {t("HomePage.meetingTopic")}
-                              </p>
-                              <p className="text-center m-1">
-                                {meeting.about}
-                              </p>
-                            </div>
 
-                            <div className="meeting-time col-lg-4 col-md-4">
-                              <p className="text-center m-1 heading">
-                                {t("HomePage.meetingTime")}
-                              </p>
-                              <p className="text-center m-1">
-                                {meeting.statues}
-                              </p>
-                            </div>
+                              <div className="meeting-time col-lg-4 col-md-4">
+                                <p className="text-center m-1 heading">
+                                  {t("HomePage.meetingTime")}
+                                </p>
+                                <p className="text-center m-1">
+                                  {meeting.time}
+                                </p>
+                              </div>
 
-                            <div className="meeting-date col-lg-4 col-md-4">
-                              <p className="text-center m-1 heading">
-                                {t("HomePage.meetingDate")}
-                              </p>
-                              <p className="text-center m-1">
-                                {meeting.time}
-                              </p>
+                              <div className="meeting-date col-lg-4 col-md-4">
+                                <p className="text-center m-1 heading">
+                                  {t("HomePage.meetingDate")}
+                                </p>
+                                <p className="text-center m-1">
+                                  {meeting.time}
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="details position-absolute">
-                        <MeetingDetails meetingsDetails={meeting} />
-                      </div>
-                    </>
-                  ))
+                        <div className="details position-absolute">
+                          <MeetingDetails meetingsDetails={meeting} />
+                        </div>
+                        <div
+                          className="pdfContainer d-none rounded-3 pt-5 overflow-auto container position-fixed start-50 translate-middle-x p-2"
+                          style={{
+                            width: "70%",
+                            height: "95vh",
+                            top: "25px",
+                            zIndex: 9999,
+                          }}
+                        >
+                          <i
+                            style={{ backgroundColor: "#323639" }}
+                            className="fa fa-xmark rounded-3 me-3 position-absolute top-0 end-0 mb-5 p-2 fs-5 z-3 cursorPointer"
+                          ></i>
+                          <div className="pdfView h-100 w-100">
+                            <div
+                              className="pdfFrame d-"
+                              style={{ width: "100%", height: "100%" }}
+                            >
+                              <div className="h-100">
+                                <iframe
+                                  className="rounded-3"
+                                  src={
+                                    "https://res.cloudinary.com/dqhm8q5ku/image/upload/v1708810740/meetingsApp/attachments/18/ob7pnahntgqodwvxng5y.pdf"
+                                  }
+                                  width="100%"
+                                  height="100%"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    ))
                   : ""}
               </>
             </div>

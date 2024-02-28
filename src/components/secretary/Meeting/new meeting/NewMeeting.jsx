@@ -37,14 +37,27 @@ export default function NewMeeting() {
     let managerSelected = $("#managerSelected").val();
     let area = $('input[name="radio-group"]:checked').val();
 
+    if (area == "Outside") {
+      if (person == "") {
+        $(".error").removeClass("d-none");
+        $(".error").addClass("d-block");
+        return;
+      }
+    } else {
+      if (insidePersons.length <= 0) {
+        $(".error").removeClass("d-none");
+        $(".error").addClass("d-block");
+        return;
+      }
+    }
+
     if (
       !date ||
       !time ||
-      person === "" ||
       topic === "" ||
       address === "" ||
       notes === "" ||
-      area === "" ||
+      !area ||
       managerSelected === ""
     ) {
       $(".error").removeClass("d-none");
@@ -76,7 +89,7 @@ export default function NewMeeting() {
       insidePersons,
     };
 
-    if (area !== "Inside") {
+    if (area != "Inside") {
       delete initData.insidePersons;
     }
 
@@ -97,7 +110,9 @@ export default function NewMeeting() {
       formData.append(key, value);
     }
 
-    formData.append("attachment", uploadedFiles[0]);
+    if (uploadedFiles[0]) {
+      formData.append("attachment", uploadedFiles[0]);
+    }
 
     try {
       let { data } = await axios.post(
@@ -107,6 +122,8 @@ export default function NewMeeting() {
       );
       if (data.success) {
         toast.success(data.message);
+        $(".error").addClass("d-none");
+        $(".error").removeClass("d-block");
       } else {
         toast.error(data.message);
       }
@@ -151,7 +168,11 @@ export default function NewMeeting() {
   });
 
   const handleManagerChange = (event, value) => {
-    setInsidePersons(value.map((manager) => manager.manager_id));
+    setInsidePersons(
+      value
+        .filter((item) => typeof item === "object")
+        .map((manager) => manager.manager_id)
+    );
   };
 
   const [t] = useTranslation();
@@ -173,6 +194,7 @@ export default function NewMeeting() {
                 <DesktopDatePicker
                   format="LL"
                   onChange={(val) => setDate(val)}
+                  disablePast
                 />
               </ThemeProvider>
             </div>
@@ -207,7 +229,11 @@ export default function NewMeeting() {
                         key={option.manager_id}
                         variant="outlined"
                         className="bg-info"
-                        label={option.first_name + " " + option.last_name}
+                        label={
+                          typeof option === "string"
+                            ? option
+                            : option.first_name + " " + option.last_name
+                        }
                         {...getTagProps({ index })}
                       />
                     ))
@@ -270,8 +296,9 @@ export default function NewMeeting() {
               <div
                 {...getRootProps()}
                 style={{ borderStyle: "dashed" }}
-                className={`dropzone h-100 ${isDragActive ? "active h-100" : ""
-                  }`}
+                className={`dropzone h-100 ${
+                  isDragActive ? "active h-100" : ""
+                }`}
               >
                 <input {...getInputProps()} />
                 {isDragActive ? (
@@ -286,7 +313,7 @@ export default function NewMeeting() {
                       srcset=""
                     />
                     <p className="p-2 text-center">
-                    {t("CreateOrUpdateMeeting.Drag")}
+                      {t("CreateOrUpdateMeeting.Drag")}
                     </p>
                   </div>
                 )}
@@ -328,7 +355,7 @@ export default function NewMeeting() {
             </div>
           </div>
 
-          <div className="flex-column-md">
+          <div className="d-md-flex justify-content-between">
             <div className="inputItem mb-3 px-5 ">
               <select id="managerSelected" className="py-2 w-auto px-2">
                 <option value="">{t("CreateOrUpdateMeeting.choose")}</option>
@@ -340,11 +367,10 @@ export default function NewMeeting() {
                   </>
                 ))}
               </select>
-
             </div>
-            <div className="radios inputItem mb-4 px-5 d-flex flex-column flex-md-row gap-3 ">
-              <div className="radio-buttons-container flex-md-row">
-                <div className="radio-button mb-2 mb-md-0">
+            <div className="radios inputItem mb-3 px-5 d-flex   gap-md-2 align-items-center">
+              <div className="radio-buttons-container d-flex flex-md-row flex-column align-items-start">
+                <div className="radio-button d-flex align-items-center">
                   <input
                     name="radio-group"
                     id="radio2"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Notes.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";

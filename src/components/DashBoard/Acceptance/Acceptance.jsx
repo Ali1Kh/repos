@@ -123,22 +123,23 @@ const Acceptance = () => {
                         </div>
                     ) : (
                         <div className="row gy-3">
-                            <div>
-                                <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                                    <TableContainer sx={{ maxHeight: 440 }}>
-                                        <Table stickyHeader aria-label="sticky table">
-                                            <TableHead>
-                                                <TableRow>
-                                                    <TableCell align="center" className="fw-bold">{t("Dashborad.Acceptacne.userName")}</TableCell>
-                                                    <TableCell align="center" className="fw-bold">{t("Dashborad.Acceptacne.name")}</TableCell>
-                                                    <TableCell align="center" className="fw-bold">{t("Dashborad.Acceptacne.E_mail")}</TableCell>
-                                                    <TableCell align="right" className="fw-bold">{t("Dashborad.Acceptacne.reject")}</TableCell>
-                                                    <TableCell align="center" className="fw-bold">{t("Dashborad.Acceptacne.accept")}</TableCell>
-                                                </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-                                                {data
-                                                    ? data.secertaries?.map((secretary, idx) => (
+                            {data
+                                ? data.secertaries?.map((secretary, idx) => (
+                                    <div>
+                                        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                                            <TableContainer sx={{ maxHeight: 440 }}>
+                                                <Table stickyHeader aria-label="sticky table">
+                                                    <TableHead>
+                                                        <TableRow>
+                                                            <TableCell align="center" className="fw-bold">{t("Dashborad.Acceptacne.userName")}</TableCell>
+                                                            <TableCell align="center" className="fw-bold">{t("Dashborad.Acceptacne.name")}</TableCell>
+                                                            <TableCell align="center" className="fw-bold">{t("Dashborad.Acceptacne.E_mail")}</TableCell>
+                                                            <TableCell align="right" className="fw-bold">{t("Dashborad.Acceptacne.reject")}</TableCell>
+                                                            <TableCell align="center" className="fw-bold">{t("Dashborad.Acceptacne.accept")}</TableCell>
+                                                        </TableRow>
+                                                    </TableHead>
+                                                    <TableBody>
+
                                                         <TableRow hover tabIndex={-1} key={idx} onClick={() => {
                                                             setId(secretary.manager_id)
                                                         }}>
@@ -160,26 +161,27 @@ const Acceptance = () => {
                                                                         acceptAccount(secretary.secretary_id);
                                                                     }}
                                                                 >
-                                                                    {t("Dashborad.Acceptacne.acceptBtn")}
+                                                                    {t("Dashborad.Acceptacne.accept")}
                                                                 </button>
                                                             </TableCell>
 
                                                         </TableRow>
-                                                    )) : ""}
-                                            </TableBody>
-                                        </Table>
-                                    </TableContainer>
-                                    <TablePagination
-                                        rowsPerPageOptions={[5, 10, 25]}
-                                        component="div"
-                                        count={data?.managers?.length}
-                                        rowsPerPage={rowsPerPage}
-                                        page={page}
-                                        onPageChange={handleChangePage}
-                                        onRowsPerPageChange={handleChangeRowsPerPage}
-                                    />
-                                </Paper>
-                            </div>
+
+                                                    </TableBody>
+                                                </Table>
+                                            </TableContainer>
+                                            <TablePagination
+                                                rowsPerPageOptions={[5, 10, 25]}
+                                                component="div"
+                                                count={data?.managers?.length}
+                                                rowsPerPage={rowsPerPage}
+                                                page={page}
+                                                onPageChange={handleChangePage}
+                                                onRowsPerPageChange={handleChangeRowsPerPage}
+                                            />
+                                        </Paper>
+                                    </div>
+                                )) : ""}
                         </div>
                     )}
                 </div>
