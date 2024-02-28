@@ -15,7 +15,7 @@
   --bgMainColor: linear-gradient(180deg,
       rgba(37, 50, 57, 1) 0%,
       rgba(39, 42, 55, 1) 92%);
-  --BlackToWhite: #CAC4D0;
+  --BlackToWhite: #e5e0eb;
   --sideBarColor: #15181d;
   --pageHeading: black;
   --table-color: #262626;
@@ -23,6 +23,7 @@
   --cardBgColor: #343a46;
   --placeHolderColor: #8f8f91;
 }
+
 /*  */
 :root {
   --black-color: #262a2e;
@@ -48,7 +49,7 @@
 .main {
   background: var(--bgMainColor);
   min-height: 100vh !important;
-  color: white;
+  color: var(--BlackToWhite);
   padding-top: 3rem !important;
 }
 
@@ -76,11 +77,23 @@ body {
   padding: 0;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+i,
+span {
+  color: var(--BlackToWhite);
+}
+
 .cursorPointer {
   cursor: pointer;
 }
 
-.w-fit{
+.w-fit {
   width: fit-content !important;
 }
 

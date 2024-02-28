@@ -25,7 +25,7 @@
   font-size: 16px;
   cursor: pointer;
   text-decoration: none;
-  color: #cac4d0;
+  color: var(--BlackToWhite);
   display: block;
   border-radius: 10px;
   transition: all 700ms;
@@ -159,9 +159,7 @@
   box-shadow: none !important;
 }
 
-.notification-data {
-  
-}
+.notification-data {}
 
 .MuiPopup-root {
   left: -15% !important;
