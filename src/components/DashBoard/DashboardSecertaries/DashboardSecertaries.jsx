@@ -24,36 +24,36 @@ export default function DashboardSecertaries() {
   const { isLoading } = useQuery("getDashBoardSecertar", getDashBoardSecertar);
 
   async function getDashBoardSecertar() {
-    const {data} = await axios.get("https://meetingss.onrender.com/dashboard/getAllSecretaries", {
+    const { data } = await axios.get("https://meetingss.onrender.com/dashboard/getAllSecretaries", {
       headers: {
         token: token
       }
     })
     if (data.success) {
-        setData(data)
+      setData(data)
     }
   }
 
   const DeleteSecertary = async (id) => {
     await axios
-    .delete(`https://meetingss.onrender.com/dashboard/deleteSecretary/${id}`, {
-      headers: {
-        token: token,
-      },
-    })
-    .then((response) => {
-      if (response.data.success) {
-        toast.success("Secertary Deleted Successfully");
-        getDashBoardSecertar()
-      } else {
-        console.log(response.data);
-        toast.error("Something went Wrong!");
-      }
+      .delete(`https://meetingss.onrender.com/dashboard/deleteSecretary/${id}`, {
+        headers: {
+          token: token,
+        },
+      })
+      .then((response) => {
+        if (response.data.success) {
+          toast.success("Secertary Deleted Successfully");
+          getDashBoardSecertar()
+        } else {
+          console.log(response.data);
+          toast.error("Something went Wrong!");
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
       });
-};
+  };
 
   const [t] = useTranslation();
 
@@ -85,7 +85,7 @@ export default function DashboardSecertaries() {
               <div className="row gy-3">
                 <div>
                   <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                    <TableContainer sx={{ maxHeight: 440 }}>
+                    <TableContainer sx={{ maxHeight: 500 }}>
                       <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                           <TableRow>
@@ -105,7 +105,8 @@ export default function DashboardSecertaries() {
                                 <TableCell align="center" component="th">{secertarie.E_mail}</TableCell>
                                 <TableCell align="center" component="th">{secertarie.Accepted_Acc ? "Accept" : "Refused"}</TableCell>
                                 <TableCell align="center" component="th">
-                                  <button align="center" className='btn btn-danger' onClick={(e)=>{DeleteSecertary(secertarie.secretary_id);
+                                  <button align="center" className='btn btn-danger' onClick={(e) => {
+                                    DeleteSecertary(secertarie.secretary_id);
                                     // $(e.target).html("loading..")
                                   }}>
                                     {t("Dashborad.ManageresAndSecretaries.delete")}
