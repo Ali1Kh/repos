@@ -11,12 +11,6 @@
   user-select: none;
 }
 
-table tr th {
-  background-color: var(--cardBgColor) !important;
-  border-bottom: 1px solid rgb(255, 255, 255, 0.2);
-  color: var(--BlackToWhite) !important;
-  width: 100px !important;
-}
 
 table tr td {
   background-color: var(--cardBgColor) !important;
@@ -29,7 +23,7 @@ table th {
   background-color: var(--cardBgColor) !important;
   border-bottom: 1px solid rgb(255, 255, 255, 0.2) !important;
   color: var(--BlackToWhite) !important;
-
+  width: 100px !important;
 }
 
 .nav {

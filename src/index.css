@@ -22,6 +22,7 @@
   --table-color: #262626;
   --inputsBgColor: transparent;
   --cardBgColor: #343a46;
+  --headercardBgColor: #1a1d24;
   --placeHolderColor: #8f8f91;
 }
 
@@ -45,6 +46,7 @@
   --sideBarColor: #111926;
   --BlackToWhite: black;
   --cardBgColor: #ecf0ef;
+  --headercardBgColor: #40444e;
   --cardHeadingColor: #7e7ebe;
 }
 
