@@ -6,11 +6,17 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 
 export default function Login() {
+
   const navigate = useNavigate();
 
   const validateEmail = (email) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
+  };
+
+  const validateUsername = (email) => {
+    const usernameRegex = /^[a-zA-Z][a-zA-Z0-9]{3,30}$/;
+    return usernameRegex.test(email);
   };
 
   const validatePassword = (password) => {
@@ -21,31 +27,39 @@ export default function Login() {
   let [errorMessage, seterrorMessage] = useState();
 
   const handleLogin = () => {
-    const email = document.getElementById("emailName").value;
+    const emailOrUsername = document.getElementById("emailName").value;
     const password = document.getElementById("password").value;
     const role = document.getElementById("role").value;
-
-    if (!validateEmail(email)) {
-      seterrorMessage("Invalid Email");
+  
+    let formData;
+  
+    if (validateEmail(emailOrUsername)) {
+      formData = {
+        E_mail: emailOrUsername,
+        PassWord: password,
+        role: role,
+      };
+    } else if (validateUsername(emailOrUsername)) {
+      formData = {
+        UserName: emailOrUsername,
+        PassWord: password,
+        role: role,
+      };
+    } else {
+      seterrorMessage("Invalid email or username");
       return;
     }
-
+  
     if (!validatePassword(password)) {
       seterrorMessage("Invalid password");
       return;
     }
-
+  
     if (role === "Role") {
       seterrorMessage("Choose a Role");
       return;
     }
-
-    const formData = {
-      E_mail: email,
-      PassWord: password,
-      role: role,
-    };
-
+  
     axios
       .post("https://meetingss.onrender.com/auth/login", formData)
       .then((response) => {
@@ -53,11 +67,11 @@ export default function Login() {
         const token = response.data.token;
         if (response.data.success === true) {
           localStorage.setItem("token", token);
-          if (role == "Manager") {
+          if (role === "Manager") {
             navigate("/manager");
-          } else if (role == "Secertary") {
+          } else if (role === "Secertary") {
             navigate("/meeting");
-          } else if (role == "Admin") {
+          } else if (role === "Admin") {
             navigate("/dashboard/meetings");
           }
         } else {
@@ -85,7 +99,7 @@ export default function Login() {
                     id="emailName"
                     type="email"
                     className="user-name mt-3 d-flex justify-content-center form-control"
-                    placeholder={t("Login.email")}
+                    placeholder={t("Login.placeholder")}
                   />
                   <input
                     id="password"

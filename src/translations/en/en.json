@@ -13,6 +13,7 @@
   },
   "Login": {
     "loginheader":"Login",
+    "placeholder":"Username or Email",
     "email": "Email",
     "password": "Password",
     "button": "Login",

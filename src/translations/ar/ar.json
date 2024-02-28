@@ -12,6 +12,7 @@
   },
   "Login": {
     "loginheader": "تسجيل دخول",
+    "placeholder": "اسم المستخدم أو البريد الالكتروني",
     "email": "بريد إلكتروني",
     "password": "كلمة المرور",
     "button": "تسجيل الدخول",
@@ -40,7 +41,7 @@
     "calendar": "تقويم",
     "meetings": "الاجتماعات",
     "createMeeting": "إنشاء اجتماع",
-    "Nots":"ملاحظات",
+    "Nots": "ملاحظات",
     "createManagerAccount": "إنشاء حساب المدير"
   },
   "Calendar": {
@@ -87,35 +88,34 @@
   },
   "Dashborad": {
     "Acceptacne": {
-      "AcceptacneName":"القبول",
+      "AcceptacneName": "القبول",
       "userName": "اسم المستخدم",
-      "name": "الاسم" ,
+      "name": "الاسم",
       "E_mail": "البريد الإلكتروني",
       "action": "الإجراء"
     },
     "ManageresAndSecretaries": {
-      "ManageresName":"مديرين",
-      "SecretariesName":"سكرتاريين",
+      "ManageresName": "مديرين",
+      "SecretariesName": "سكرتاريين",
       "userName": "اسم المستخدم",
-      "name": "الاسم" ,
+      "name": "الاسم",
       "E_mail": "البريد الإلكتروني",
       "Accepted": "الحالة",
       "delete": "حذف"
     },
     "history": {
-      "historyName":"السجل"
+      "historyName": "السجل"
     },
     "Meetings": {
-      "MeetingsName":"الاجتماعات",
+      "MeetingsName": "الاجتماعات",
       "person": "الاسم",
-      "Topic": "الموضوع" ,
+      "Topic": "الموضوع",
       "Address": "العنوان",
       "MeetingPlace": "الموقع",
       "status": "الحالة",
       "time": "الوقت",
       "date": "التاريخ",
-      "Delete":"حذف"
+      "Delete": "حذف"
     }
   }
-  
 }

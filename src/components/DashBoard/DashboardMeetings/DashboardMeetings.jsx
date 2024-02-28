@@ -42,7 +42,7 @@ export default function DashboardMeetings() {
     setPage(0);
   };
 
-  const [t, il8n] = useTranslation();
+  const [t] = useTranslation();
 
   return <>
     <div className="main">
@@ -72,7 +72,7 @@ export default function DashboardMeetings() {
               <div className="row gy-3">
                 <div>
                   <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                    <TableContainer sx={{ maxHeight: 440 }}>
+                    <TableContainer sx={{ maxHeight: 500 }}>
                       <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                           <TableRow>
@@ -90,7 +90,7 @@ export default function DashboardMeetings() {
                           {data
                             ? data.data.meetings?.map((meeting, idx) => (
                               <TableRow hover tabIndex={-1} key={idx}>
-                                <TableCell align="center" component="th" scope="row">{meeting.person}</TableCell>
+                                <TableCell align="center" component="th">{meeting.person}</TableCell>
                                 <TableCell align="center" component="th">{meeting.about}</TableCell>
                                 <TableCell align="center" component="th">{meeting.address}</TableCell>
                                 <TableCell align="center" component="th">{meeting.in_or_out}</TableCell>
@@ -99,7 +99,7 @@ export default function DashboardMeetings() {
                                 <TableCell align="center" component="th">{meeting.date}</TableCell>
                                 <TableCell align="center" component="th">
                                   <button align="center" className='btn btn-danger'>
-                                  {t("Dashborad.Meetings.Delete")}
+                                    {t("Dashborad.Meetings.Delete")}
                                   </button>
                                 </TableCell>
                               </TableRow>
@@ -108,9 +108,10 @@ export default function DashboardMeetings() {
                       </Table>
                     </TableContainer>
                     <TablePagination
-                      rowsPerPageOptions={[5, 10, 25]}
+                      rowsPerPageOptions={[ 10, 25, 100]}
                       component="div"
-                      count={data?.data.meetings?.length}
+                      count={data?.data.meetings?.length || 0}
+
                       rowsPerPage={rowsPerPage}
                       page={page}
                       onPageChange={handleChangePage}
