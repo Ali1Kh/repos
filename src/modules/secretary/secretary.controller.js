@@ -153,7 +153,7 @@ export const getSecMeetingsDetails = async (req, res, next) => {
 
 export const getSecManagers = async (req, res, next) => {
   let managers = await Manager.findAll({
-    attributes: ["manager_id", "first_name", "last_name"],
+    attributes: ["manager_id", "first_name", "last_name","UserName","E_mail"],
     include: [
       {
         model: Secertary,
