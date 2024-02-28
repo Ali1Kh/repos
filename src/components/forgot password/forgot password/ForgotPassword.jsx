@@ -14,18 +14,18 @@ export default function ForgotPassword() {
   const [t] = useTranslation();
 
   const postEmail = () => {
-   if (role=="") {
-    toast.error("Role Is Required");
-    return;
-   }
-    if (email == "") {
+    if (role === "") {
+      toast.error("Role Is Required");
+      return;
+    }
+    if (email === "") {
       toast.error("Email Is Required");
       return;
-    }else{
-        if (!email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/)) {
-            toast.error("Email Is Invalid");
-            return;
-        }
+    } else {
+      if (!email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/)) {
+        toast.error("Email Is Invalid");
+        return;
+      }
     }
     axios
       .post("https://meetingss.onrender.com/auth/send-forget-code", {
@@ -77,7 +77,7 @@ export default function ForgotPassword() {
               <Form.Select
                 id="role"
                 aria-label="Role"
-                className="role mt-3"
+                className="role forgot mt-3"
                 value={role}
                 onChange={handleRoleChange}
               >
@@ -90,7 +90,7 @@ export default function ForgotPassword() {
               <button type="submit" className="btn-forgot">
                 Send
               </button>
-              <Link to={""} className="back d-flex align-items-center">
+              <Link to={"/signup"} className="back d-flex align-items-center">
                 <i className="fa-solid fa-chevron-left"></i>
                 <p>Back to Sign In</p>
               </Link>

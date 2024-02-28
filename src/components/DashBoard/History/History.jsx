@@ -1,36 +1,36 @@
-import React, { useEffect , useState } from "react";
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
+import React, { useEffect, useState } from "react";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { TailSpin } from "react-loader-spinner";
 import { useTranslation } from "react-i18next";
 
-
 export default function History() {
-
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
 
   const [data, setData] = useState([]);
 
   const { isLoading } = useQuery("getHistory", getHistory);
 
-
   async function getHistory() {
-    const {data} = await axios.get("https://meetingss.onrender.com/dashboard/getLoginHistory", {
-      headers: {
-        token: token
+    const { data } = await axios.get(
+      "https://meetingss.onrender.com/dashboard/getLoginHistory",
+      {
+        headers: {
+          token: token,
+        },
       }
-    })
+    );
     if (data.success) {
-      console.log(data);
-        setData(data)
+      console.log(data.history[0]);
+      setData(data);
     }
   }
 
@@ -48,15 +48,15 @@ export default function History() {
 
   const [t, il8n] = useTranslation();
 
-  return <>
-    <div className="main">
-      <div className="container mt-5">
-        <h1 className="container d-flex flex-column align-items-center justify-content-center p-4 fw-bold text-white">
-        {t("Dashborad.history.historyName")}
-        </h1>
-        <div className="row gy-3 p-5 pt-0">
-          {isLoading ?
-            (
+  return (
+    <>
+      <div className="main">
+        <div className="container mt-5">
+          <h1 className="container d-flex flex-column align-items-center justify-content-center p-4 fw-bold text-white">
+            {t("Dashborad.history.historyName")}
+          </h1>
+          <div className="row gy-3 p-5 pt-0">
+            {isLoading ? (
               <div
                 className="d-flex justify-content-center align-items-center"
                 style={{ height: "65vh" }}
@@ -75,31 +75,56 @@ export default function History() {
             ) : (
               <div className="row gy-3">
                 <div>
-                  <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                  <Paper sx={{ width: "100%", overflow: "hidden" }}>
                     <TableContainer sx={{ maxHeight: 440 }}>
                       <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                           <TableRow>
-                            <TableCell align="center">{t("Dashborad.history.role")}</TableCell>
-                            <TableCell align="center">{t("Dashborad.history.userName")}</TableCell>
-                            <TableCell align="center">{t("Dashborad.history.name")}</TableCell>
-                            <TableCell align="center">{t("Dashborad.history.email")}</TableCell>
-                            <TableCell align="center">{t("Dashborad.history.createdAt")}</TableCell>
-                            <TableCell align="center">{t("Dashborad.history.agent")}</TableCell>
+                            <TableCell align="center">
+                              {t("Dashborad.history.role")}
+                            </TableCell>
+                            <TableCell align="center">
+                              {t("Dashborad.history.userName")}
+                            </TableCell>
+                            <TableCell align="center">
+                              {t("Dashborad.history.name")}
+                            </TableCell>
+                            <TableCell align="center">
+                              {t("Dashborad.history.email")}
+                            </TableCell>
+                            <TableCell align="center">
+                              {t("Dashborad.history.createdAt")}
+                            </TableCell>
+                            <TableCell align="center">
+                              {t("Dashborad.history.agent")}
+                            </TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
-                          {/* {data
+                          {data
                             ? data?.history?.map((histor, idx) => (
-                              <TableRow hover tabIndex={-1} key={idx}>
-                                <TableCell align="center" component="th" scope="row">{histor.role}</TableCell>
-                                <TableCell align="center" component="th">{histor.Secretary.UserName}</TableCell>
-                                <TableCell align="center" component="th">{histor["Secretary"].first_name + " " + histor["Secretary"].last_name}</TableCell>
-                                <TableCell align="center" component="th">{histor["Secretary"].E_mail}</TableCell>
-                                <TableCell align="center" component="th">{histor.createdAt}</TableCell>
-                                <TableCell align="center" component="th">{histor.agent}</TableCell>
-                              </TableRow>
-                            )) : ""} */}
+                                <TableRow hover tabIndex={-1} key={idx}>
+                                  <TableCell
+                                    align="center"
+                                    component="th"
+                                    scope="row"
+                                  >
+                                    {histor.role}
+                                  </TableCell>
+                                  <TableCell align="center" component="th">
+                                    {histor.Secretary?.UserName}
+                                  </TableCell>
+                                  <TableCell align="center" component="th">{histor.Secretary?.first_name + " " + histor.Secretary?.last_name}</TableCell>
+                                  <TableCell align="center" component="th">{histor.Secretary?.E_mail}</TableCell>
+                                  <TableCell align="center" component="th">
+                                    {histor.createdAt}
+                                  </TableCell>
+                                  <TableCell align="center" component="th">
+                                    {histor.agent}
+                                  </TableCell>
+                                </TableRow>
+                              ))
+                            : ""}
                         </TableBody>
                       </Table>
                     </TableContainer>
@@ -116,8 +141,9 @@ export default function History() {
                 </div>
               </div>
             )}
+          </div>
         </div>
       </div>
-    </div>
-  </>
+    </>
+  );
 }

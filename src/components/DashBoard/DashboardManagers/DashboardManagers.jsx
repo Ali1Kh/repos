@@ -1,5 +1,4 @@
 import React, { useEffect , useState } from 'react';
-import { styled } from '@mui/system';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -67,7 +66,7 @@ export default function DashBoardManagers() {
     setPage(0);
   };
 
-  const [t, il8n] = useTranslation();
+  const [t] = useTranslation();
 
   return <>
     <div className="main">

@@ -6,11 +6,17 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 
 export default function Login() {
+
   const navigate = useNavigate();
 
   const validateEmail = (email) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
+  };
+
+  const validateUsername = (email) => {
+    const usernameRegex = /^[a-zA-Z][a-zA-Z0-9]{3,30}$/;
+    return usernameRegex.test(email);
   };
 
   const validatePassword = (password) => {
@@ -21,12 +27,26 @@ export default function Login() {
   let [errorMessage, seterrorMessage] = useState();
 
   const handleLogin = () => {
-    const email = document.getElementById("emailName").value;
+    const emailOrUsername = document.getElementById("emailName").value;
     const password = document.getElementById("password").value;
     const role = document.getElementById("role").value;
 
-    if (!validateEmail(email)) {
-      seterrorMessage("Invalid Email");
+    let formData;
+
+    if (validateEmail(emailOrUsername)) {
+      formData = {
+        E_mail: emailOrUsername,
+        PassWord: password,
+        role: role,
+      };
+    } else if (validateUsername(emailOrUsername)) {
+      formData = {
+        UserName: emailOrUsername,
+        PassWord: password,
+        role: role,
+      };
+    } else {
+      seterrorMessage("Invalid email or username");
       return;
     }
 
@@ -40,12 +60,6 @@ export default function Login() {
       return;
     }
 
-    const formData = {
-      E_mail: email,
-      PassWord: password,
-      role: role,
-    };
-
     axios
       .post("https://meetingss.onrender.com/auth/login", formData)
       .then((response) => {
@@ -53,11 +67,11 @@ export default function Login() {
         const token = response.data.token;
         if (response.data.success === true) {
           localStorage.setItem("token", token);
-          if (role == "Manager") {
+          if (role === "Manager") {
             navigate("/manager");
-          } else if (role == "Secertary") {
+          } else if (role === "Secertary") {
             navigate("/meeting");
-          } else if (role == "Admin") {
+          } else if (role === "Admin") {
             navigate("/dashboard/meetings");
           }
         } else {
@@ -70,7 +84,7 @@ export default function Login() {
   };
 
 
-   
+
 
   const [t] = useTranslation();
   return (
@@ -88,30 +102,30 @@ export default function Login() {
                     id="emailName"
                     type="email"
                     className="user-name mt-3 mb-3 d-flex justify-content-center form-control"
-                    placeholder={t("Login.email")}
+                    placeholder={t("Login.placeholder")}
                   />
-                  <div className="password-input d-flex rounded-pill">
+                  <div className="password-input d-flex">
                     <input
                       id="password"
                       type="password"
-                      className="pass-word mt-3 d-flex justify-content-center form-control rounded-pill"
+                      className="pass-word mt-3 d-flex justify-content-center form-control"
                       placeholder={t("Login.password")}
                     />
-                    <button id="eye" className="btn d-flex justify-content-center align-items-center text-white ms-2" 
-                    onClick={()=>{
-                      let password = document.getElementById("password")
-                      let eyeicon = document.getElementById("eye-icon")
+                    <button id="eye" className="btn d-flex justify-content-center align-items-center text-white ms-2"
+                      onClick={() => {
+                        let password = document.getElementById("password")
+                        let eyeicon = document.getElementById("eye-icon")
 
-                      if (password.type == "password") {
-                        password.type = "text"
-                        eyeicon.className = "fa-solid fa-eye"
-                      }
-                      else{
-                      password.type = "password"
-                      eyeicon.className = "fa-solid fa-eye-slash"
-                      }
-                    }}>
-                    <i id="eye-icon" class="fa-solid fa-eye-slash"></i>
+                        if (password.type === "password") {
+                          password.type = "text"
+                          eyeicon.className = "fa-solid fa-eye"
+                        }
+                        else {
+                          password.type = "password"
+                          eyeicon.className = "fa-solid fa-eye-slash"
+                        }
+                      }}>
+                      <i id="eye-icon" class="fa-solid fa-eye-slash"></i>
                     </button>
                   </div>
                 </div>

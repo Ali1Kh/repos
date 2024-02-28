@@ -71,7 +71,7 @@ export default function CheckYourEmail() {
         <div className='container mt-5'>
           <h1 className='container d-flex flex-column align-items-center justify-content-center p-4'>Check your Email</h1>
           <p className='d-flex flex-column align-items-center justify-content-center'>We've the code your Email</p>
-          <div className='row table  d-flex align-items-center justify-content-center m-auto'>
+          <div className='row table table-squ d-flex align-items-center justify-content-center m-auto'>
             <div className='mb-3 d-flex align-items-center justify-content-center'>
               <MuiOtpInput
                 TextFieldsProps={{ size: "small" }}
@@ -88,7 +88,7 @@ export default function CheckYourEmail() {
               className="btn-forgot"
             >Verify</button>
             <button onClick={postSendAgain} className='btn-forgot-out'>Send again</button>
-            <Link to={''} className='back d-flex align-items-center justify-content-center'>
+            <Link to={'/signup'} className='back d-flex align-items-center justify-content-center'>
               <i className="fa-solid fa-chevron-left"></i>
               <p>Back to Sign In</p>
             </Link>

@@ -87,7 +87,7 @@ export default function ResetPassword() {
                                 <div className="invalid-feedback">{formik.errors.confirmPassword}</div>
                             ) : null}
                             <button type="submit" className='btn-forgot'>Done</button>
-                            <Link to={''} className='back d-flex align-items-center'>
+                            <Link to={'/signup'} className='back d-flex align-items-center'>
                                 <i className="fa-solid fa-chevron-left"></i>
                                 <p>Back to Sign In</p>
                             </Link>

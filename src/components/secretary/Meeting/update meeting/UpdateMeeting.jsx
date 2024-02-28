@@ -240,7 +240,7 @@ export default function UpdateMeeting() {
                       placeholder={t("CreateOrUpdateMeeting.person")}
                       className="tagify"
                       sx={{
-                        // backgroundColor: "var(--main-color) !important",
+                        backgroundColor: "var(--cardBgColor) !important",
                         padding: "8px",
                         color: "var(--BlackToWhite)",
                         border: "2px solid var(--sec-color)",
@@ -292,9 +292,8 @@ export default function UpdateMeeting() {
               <div
                 {...getRootProps()}
                 style={{ borderStyle: "dashed" }}
-                className={`dropzone h-100 ${
-                  isDragActive ? "active h-100" : ""
-                }`}
+                className={`dropzone h-100 ${isDragActive ? "active h-100" : ""
+                  }`}
               >
                 <input {...getInputProps()} />
                 {isDragActive ? (
