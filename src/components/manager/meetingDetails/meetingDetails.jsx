@@ -1,6 +1,70 @@
 import "./meetingDetails.css";
 import { useTranslation } from "react-i18next";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useState } from "react";
 export default function MeetingDetails({ meetingsDetails }) {
+
+  const [show, setShow] = useState(false);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const authToken = localStorage.getItem("token");
+
+  function getNotes() {
+    return axios
+      .get("https://meetingss.onrender.com/notes/", {
+        headers: {
+          token: authToken,
+        },
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+
+  const postAddNotes = () => {
+    if (title === "" || content === "") {
+      toast.error("Please Fill All Inputs", {
+        style: {
+          zIndex: 9999,
+        },
+      });
+      return;
+    }
+    axios
+      .post(
+        "https://meetingss.onrender.com/notes/",
+        {
+          title: title,
+          content: content,
+        },
+        {
+          headers: {
+            token: authToken,
+          },
+        }
+      )
+      .then((response) => {
+        if (response.data.success) {
+          toast.success("Note Added Successfully");
+          getNotes();
+        } else {
+          // Handle failure
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+
   const [t] = useTranslation();
 
   return (
@@ -28,29 +92,37 @@ export default function MeetingDetails({ meetingsDetails }) {
                 <div className="row g-md-5">
                   <div className="col-md-6">
                     <div className="col-ineer">
-                      <span>{t("meetings.table.guestName")}</span>
+                      <span>{t("meetings.guestName")}</span>
                       <h5 className="mb-3">{meetingsDetails.person}</h5>
-                      <span className="fw-normal">{t("meetings.table.topic")}</span>
+                      <span className="fw-normal">{t("meetings.topic")}</span>
                       <h5 className="mb-3">{meetingsDetails.about}</h5>
-                      <span>{t("meetings.table.status")}</span>
+                      <span>{t("meetings.status")}</span>
                       <h5 className="mb-3">{meetingsDetails.statues}</h5>
-                      <span>{t("meetings.table.comments")}</span>
+                      <span>{t("meetings.Comments")}</span>
                       <h5 className="mb-3">{meetingsDetails.notes}</h5>
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="col-ineer">
-                      <span>{t("meetings.table.address")}</span>
+                      <span>{t("meetings.address")}</span>
                       <h5 className="mb-3">{meetingsDetails.address}</h5>
-                      <span>{t("meetings.table.inOrOut")}</span>
+                      <span>{t("meetings.inOrOut")}</span>
                       <h5 className="mb-3">{meetingsDetails.in_or_out}</h5>
-                      <span>{t("meetings.table.date")}</span>
+                      <span>{t("meetings.date")}</span>
                       <h5 className="mb-3">{meetingsDetails.date}</h5>
-                      <span>{t("meetings.table.time")}</span>
+                      <span>{t("meetings.time")}</span>
                       <h5 className="mb-3">{meetingsDetails.time}</h5>
                       <div className="d-flex justify-content-center">
                         <button type="button" class="btn-meeting">{t("meetings.btnShow")}</button>
-                        <button type="button" class="btn-meeting">{t("meetings.btnAddNotes")}</button>
+                        <button
+                          type="button"
+                          class="btn-meeting"
+                          onClick={() => {
+                            handleShow();
+                            setContent();
+                            setTitle();
+                          }}
+                        >{t("meetings.btnAddNotes")}</button>
                       </div>
                     </div>
                   </div>
@@ -60,6 +132,41 @@ export default function MeetingDetails({ meetingsDetails }) {
           </div>
         </div>
       </div>
+      <Modal show={show} onHide={handleClose} style={{ zIndex: 9999999 }}>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Control
+                type="text"
+                placeholder="Title"
+                autoFocus
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea1"
+            >
+              <Form.Control
+                as="textarea"
+                rows={3}
+                placeholder="Content"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
+          <Button
+            variant="primary"
+            onClick={() => {
+              postAddNotes();
+            }}
+          >
+            Save
+          </Button>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }

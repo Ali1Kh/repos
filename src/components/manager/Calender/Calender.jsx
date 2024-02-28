@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./calender.css";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -51,7 +51,7 @@ export default function Calender() {
   function monthChanged(month) {
     setHighlightedDays([20, 25, 1]);
   }
-  const [t, il8n] = useTranslation();
+  const [t] = useTranslation();
 
   let [dayMeetings, setDayMeetings] = useState([]);
 

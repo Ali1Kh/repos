@@ -8,9 +8,8 @@
 }
 
 button.btn-meeting {
-    background-color: #262626;
+    background-color: var(--btnBlackToWhite);
     color: var(--BlackToWhite);
-    
     padding: 8px 20px;
     cursor: pointer;
     border: 1px solid #7E7EBE;
@@ -19,5 +18,10 @@ button.btn-meeting {
 }
 
 button.btn-meeting:hover {
-    background-color: #404040;
+    background-color: var(--hover);
+}
+
+.modal {
+    z-index: 9999 !important;
+    background: rgba(33, 36, 40, 0.4);
 }
