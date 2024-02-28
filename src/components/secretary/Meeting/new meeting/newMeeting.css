@@ -125,6 +125,7 @@
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+
 .radio-button__input:checked+.radio-button__label .radio-button__custom {
   transform: translateY(-50%) scale(0.9);
   border: 5px solid var(--sec-color);
