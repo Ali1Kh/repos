@@ -291,7 +291,7 @@ export default function Navbar() {
                       </span>
                       <input
                         type="text"
-                        className="form-control ps-0 pe-5 searchInput py-2"
+                        className="form-control ps-0 pe-5 searchInput py-2 text-white"
                         id="search"
                         placeholder={t("search")}
                       />

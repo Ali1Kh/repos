@@ -28,6 +28,11 @@ const SignupSchema = Yup.object().shape({
     .required("Confirm password is required"),
 });
 
+const addExitManagerSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+});
 function CreateManagerAccount() {
   const handleManagerAccount = async (values, { resetForm }) => {
     try {
@@ -62,6 +67,34 @@ function CreateManagerAccount() {
     }
   };
 
+  const handleAddExitingManagerAccount = async (values, { resetForm }) => {
+    try {
+      const authToken = localStorage.getItem("token");
+
+      const formData = {
+        E_mail: values.email,
+      };
+
+      const headers = {
+        token: authToken,
+      };
+
+      const response = await axios.post(
+        "https://meetingss.onrender.com/secretary/addExistingManager",
+        formData,
+        { headers }
+      );
+
+      if (response.data.success) {
+        toast.success(response.data.message);
+        resetForm();
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
   const [t] = useTranslation();
   return (
     <>
@@ -195,8 +228,8 @@ function CreateManagerAccount() {
                 initialValues={{
                   email: "",
                 }}
-                validationSchema={SignupSchema}
-                onSubmit={handleManagerAccount}
+                validationSchema={addExitManagerSchema}
+                onSubmit={handleAddExitingManagerAccount}
               >
                 <Form className="ineer shadow p-5">
                   <div className="form text-start">

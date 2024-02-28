@@ -144,14 +144,14 @@ export default function HomePage() {
                               </p>
                             </div>
 
-                            <div className="meeting-time col-lg-4 col-md-4">
-                              <p className="text-center m-1 heading">
-                                {t("HomePage.meetingTime")}
-                              </p>
-                              <p className="text-center m-1">
-                                {meeting.statues}
-                              </p>
-                            </div>
+                              <div className="meeting-time col-lg-4 col-md-4">
+                                <p className="text-center m-1 heading">
+                                  {t("HomePage.meetingTime")}
+                                </p>
+                                <p className="text-center m-1">
+                                  {meeting.time}
+                                </p>
+                              </div>
 
                             <div className="meeting-date col-lg-4 col-md-4">
                               <p className="text-center m-1 heading">
