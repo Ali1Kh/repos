@@ -11,11 +11,16 @@
     "meetingStatus":"Status",
     "comments":"Comments"
   },
-  "navInner": {
-    "Home": "Home",
-    "calendar": "Calendar",
-    "meeting": "Meetings",
-    "createMeeting": "Create Meeting"
+  "nav": {
+    "navInner":{
+      "Home": "Home",
+      "calendar": "Calendar",
+      "meeting": "Meeting",
+      "createMeeting": "Create Meeting"
+    },
+    "toggler":{
+      "acceptbtn":"Accept" 
+    }
   },
   "Login": {
     "loginheader":"Login",

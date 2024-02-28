@@ -148,6 +148,10 @@
   color: white;
 }
 
+.input-group-text i {
+  color: white !important;
+}
+
 .searchInput::placeholder {
   color: #8f8f91;
 }
@@ -159,7 +163,7 @@
   box-shadow: none !important;
 }
 
-.notification-data {}
+/* .notification-data {} */
 
 .MuiPopup-root {
   left: -14% !important;

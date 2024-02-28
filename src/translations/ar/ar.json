@@ -9,11 +9,17 @@
     "meetingTime": "وقت",
     "meetingStatus": "حالة الاجتماع",
     "comments": "ملاحظات"
-  },"navInner": {
-    "Home": "الرئيسية",
-    "calendar": "التقويم",
-    "meeting": "الاجتماعات",
-    "createMeeting": "انشاء اجتماع"
+  },
+  "nav": {
+    "navInner":{
+      "Home": "الرئيسية",
+      "calendar": "التقويم",
+      "meeting": "الاجتماعات",
+      "createMeeting": "انشاء اجتماع"
+    },
+    "toggler":{
+      "acceptbtn":"القبول" 
+    }
   },
   "Login": {
     "loginheader": "تسجيل دخول",
