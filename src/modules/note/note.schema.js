@@ -1,5 +1,12 @@
 import joi from "joi";
 
+
+export const getNotesSchema = joi
+  .object({
+    title: joi.string(),
+    content: joi.string(),
+  })
+
 // createNoteSchema
 export const createNoteSchema = joi
   .object({
@@ -8,7 +15,7 @@ export const createNoteSchema = joi
   })
   .required();
 
-export const createMeetingNote = joi
+export const createMeetingNoteSchema = joi
   .object({
     title: joi.string().required(),
     content: joi.string().required(),
