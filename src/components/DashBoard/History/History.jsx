@@ -10,6 +10,8 @@ import TableRow from '@mui/material/TableRow';
 import axios from "axios";
 import { useQuery } from "react-query";
 import { TailSpin } from "react-loader-spinner";
+import { useTranslation } from "react-i18next";
+
 
 export default function History() {
 
@@ -38,11 +40,13 @@ export default function History() {
     setPage(0);
   };
 
+  const [t, il8n] = useTranslation();
+
   return <>
     <div className="main">
       <div className="container mt-5">
-        <h1 className="container d-flex flex-column align-items-center justify-content-center p-4">
-          Meetings
+        <h1 className="container d-flex flex-column align-items-center justify-content-center p-4 fw-bold text-white">
+        {t("Dashborad.history.historyName")}
         </h1>
         <div className="row gy-3 p-5 pt-0">
           {isLoading ?
@@ -70,12 +74,12 @@ export default function History() {
                       <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                           <TableRow>
-                            <TableCell align="center">Role</TableCell>
-                            <TableCell align="center">UserName</TableCell>
-                            <TableCell align="center">name</TableCell>
-                            <TableCell align="center">Email</TableCell>
-                            <TableCell align="center">createdAt</TableCell>
-                            <TableCell align="center">agent</TableCell>
+                            <TableCell align="center">{t("Dashborad.history.role")}</TableCell>
+                            <TableCell align="center">{t("Dashborad.history.userName")}</TableCell>
+                            <TableCell align="center">{t("Dashborad.history.name")}</TableCell>
+                            <TableCell align="center">{t("Dashborad.history.email")}</TableCell>
+                            <TableCell align="center">{t("Dashborad.history.createdAt")}</TableCell>
+                            <TableCell align="center">{t("Dashborad.history.agent")}</TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>

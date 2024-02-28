@@ -74,7 +74,7 @@ export default function Navbar() {
                     <span className="d-inline-flex text-center justify-content-center">
                       <i className="fa-solid fa-house"></i>
                     </span>
-                    <span>Home</span>
+                    <span>{t("navInner.Home")}</span>
                   </div>
                 </Link>
               </li>
@@ -87,7 +87,7 @@ export default function Navbar() {
                     <span className="d-inline-flex text-center justify-content-center">
                       <i className="fa-regular fa-calendar-days"></i>
                     </span>
-                    <span>Calendar</span>
+                    <span>{t("navInner.calendar")}</span>
                   </div>
                 </Link>
               </li>
@@ -107,7 +107,7 @@ export default function Navbar() {
                     <span className="d-inline-flex text-center justify-content-center">
                       <i className="fa-regular fa-note-sticky"></i>
                     </span>
-                    <span>Meetings</span>
+                    <span>{t("navInner.meeting")}</span>
                   </div>
                 </Link>
               </li>
@@ -120,7 +120,7 @@ export default function Navbar() {
                     <span className="d-inline-flex text-center justify-content-center">
                       <i className="fa-regular fa-plus"></i>
                     </span>
-                    <span>Create Meeting</span>
+                    <span>{t("navInner.createMeeting")}</span>
                   </div>
                 </Link>
               </li>

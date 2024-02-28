@@ -81,7 +81,7 @@ const Acceptance = () => {
         <>
             <div className="main">
                 <div className="container mt-5">
-                    <h1 className="container d-flex flex-column align-items-center justify-content-center p-4">
+                    <h1 className="container d-flex flex-column align-items-center justify-content-center p-4 fw-bold text-white">
                     {t("Dashborad.Acceptacne.AcceptacneName")}
                     </h1>
                     {isLoading ? (

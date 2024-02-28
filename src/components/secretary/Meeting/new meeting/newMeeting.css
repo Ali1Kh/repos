@@ -69,6 +69,10 @@
   box-shadow: none !important;
 }
 
+.inputItem select {
+  padding: 8px 25px !important;
+  /* background-color: var(--cardBgColor) !important; */
+}
 .inputItem select option {
   color: black !important;
   /* background-color: var(--cardBgColor) !important; */
@@ -137,7 +141,7 @@
 /* !Button */
 .addButton {
   --color: var(--sec-color);
-  padding: 8px 12px;
+  padding: 10px 50px;
   background-color: transparent;
   border-radius: 0.3em;
   position: relative;

@@ -286,7 +286,7 @@ export default function NewMeeting() {
                       srcset=""
                     />
                     <p className="p-2 text-center">
-                      Drag and drop file here or click to browse
+                    {t("CreateOrUpdateMeeting.Drag")}
                     </p>
                   </div>
                 )}
@@ -322,15 +322,16 @@ export default function NewMeeting() {
                     ))}
                   </div>
                 ) : (
-                  <p>No file uploaded</p>
+                  <p>{t("CreateOrUpdateMeeting.nofile")}</p>
                 )}
               </div>
             </div>
           </div>
-          <div className="d-flex flex-column-md justify-content-between">
+
+          <div className="flex-column-md">
             <div className="inputItem mb-3 px-5 ">
               <select id="managerSelected" className="py-2 w-auto px-2">
-                <option value="">Choose Manager</option>
+                <option value="">{t("CreateOrUpdateMeeting.choose")}</option>
                 {managers?.map((manager) => (
                   <>
                     <option value={manager.manager_id}>
@@ -341,8 +342,8 @@ export default function NewMeeting() {
               </select>
 
             </div>
-            <div className="radios inputItem mb-4 px-5 d-flex flex-column flex-md-row gap-3 align-items-center">
-              <div className="radio-buttons-container d-flex flex-column flex-md-row">
+            <div className="radios inputItem mb-4 px-5 d-flex flex-column flex-md-row gap-3 ">
+              <div className="radio-buttons-container flex-md-row">
                 <div className="radio-button mb-2 mb-md-0">
                   <input
                     name="radio-group"
