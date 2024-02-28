@@ -21,34 +21,33 @@ table td {
 }
 */
 button.accept-button {
-    background-color: #262626;
+    background-color: var(--btnBlackToWhite);
     color: var(--BlackToWhite);
     width: 80%;
     padding: 8px 20px;
     cursor: pointer;
-    border: 1px solid #7E7EBE;
+    border: 1px solid var(--sec-color);
 }
 
 button.accept-button:hover {
-    background-color: #404040;
-    border: 1px solid #7E7EBE;
-
+    background-color: var(--btnBlackToWhite);
+    border: 1px solid var(--sec-color);
 }
 
 i.deletAcc {
     margin: 10px;
     font-size: 20px;
     padding: 8px 10px;
-    background-color: #262626;
+    background-color: var(--btnBlackToWhite);
     border-radius: 10px;
     color: var(--BlackToWhite);
-    border: 1px solid #7E7EBE;
+    border: 1px solid var(--sec-color);
     transition: all 0.5s;
 }
 
 i.deletAcc:hover {
     background-color: red;
-    border: 1px solid var(--main-color);
+    border: 1px solid var(--main-color) !important;
 }
 
 .header-table {

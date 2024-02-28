@@ -15,6 +15,7 @@ export default function CheckYourEmail() {
   const handleChange = (newValue) => {
     setCode(newValue);
   };
+
   async function resetCode() {
 
 

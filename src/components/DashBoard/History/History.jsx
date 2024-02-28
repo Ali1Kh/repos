@@ -114,7 +114,7 @@ export default function History() {
                                   <TableCell align="center" component="th">{histor.Manager?.E_mail}</TableCell>
                                   <TableCell align="center" component="th">{histor.createdAt.slice(0, 10)}</TableCell>
                                   <TableCell align="center" component="th">{histor.createdAt.slice(11, 19)}</TableCell>
-                                  <TableCell align="center" component="th">{histor.agent}</TableCell>
+                                  <TableCell align="center" component="th">{histor.agent.slice(0, 12)}</TableCell>
                                 </TableRow>
                                 : histor.Manager === null ?
                                   <TableRow hover tabIndex={-1} key={idx}>
@@ -124,7 +124,7 @@ export default function History() {
                                     <TableCell align="center" component="th">{histor.Secretary?.E_mail}</TableCell>
                                     <TableCell align="center" component="th">{histor.createdAt.slice(0, 10)}</TableCell>
                                     <TableCell align="center" component="th">{histor.createdAt.slice(11, 19)}</TableCell>
-                                    <TableCell align="center" component="th">{histor.agent}</TableCell>
+                                    <TableCell align="center" component="th">{histor.agent.slice(0, 12)}</TableCell>
                                   </TableRow>
                                   : ""
                               )

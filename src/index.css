@@ -100,8 +100,9 @@ i {
 span i,
 span,
 a {
-  color: var(--BlackWhite);
+  color: var(--BlackWhite) !important;
 }
+
 
 .cursorPointer {
   cursor: pointer;
