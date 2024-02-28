@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logo from "../../image/Logo.png";
 import "./navbar.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { styled } from "@mui/system";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
+import { searchContext } from "../context/searchContext";
 
 export default function Navbar() {
   const location = useLocation();
@@ -49,7 +50,6 @@ export default function Navbar() {
     }, 2000);
   };
 
-
   let [username, setUsername] = useState();
   let [email, setEmail] = useState();
   let [role, setRole] = useState();
@@ -65,8 +65,6 @@ export default function Navbar() {
     }
   }, []);
 
-
-
   useEffect(() => {
     // ?Active
     $(".navbarItem").click((e) => {
@@ -79,28 +77,15 @@ export default function Navbar() {
     });
   });
 
-  const [data, setData] = useState([]);
-
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
 
   const [t, il8n] = useTranslation();
 
-  // async function search(name) {
-  //   const {data} = await axios.get(`https://meetingss.onrender.com/meetings?person=${name}`, {
-  //     headers: {
-  //       token: token
-  //     }
-  //   })
-  //   if (data.success) { 
-  //     setData(data)
-  //   }
-  // }
+  let { search } = useContext(searchContext);
+  const handleKeyPress = (event) => {
+    search(event.target.value);
+  };
 
-  // let searchName=$("#searchName");
-  // searchName.keyup(function(){
-  //     search(searchName.val())
-  // })
-  
   return (
     <>
       <nav className="navbar navbar-expand-lg">
@@ -111,7 +96,7 @@ export default function Navbar() {
           >
             <img className="nav-logo" src={logo}></img>
             {location.pathname.split("/")[1] === "login" ||
-              location.pathname.split("/")[1] === "signup" ? (
+            location.pathname.split("/")[1] === "signup" ? (
               <h5 className=" mb-0">Meeting Managment</h5>
             ) : (
               ""
@@ -265,7 +250,9 @@ export default function Navbar() {
                         <span className="d-inline-flex text-center justify-content-center">
                           <i className="fa-solid fa-users"></i>
                         </span>
-                        <span>{t("Dashborad.ManageresAndSecretaries.ManageresName")}</span>
+                        <span>
+                          {t("Dashborad.ManageresAndSecretaries.ManageresName")}
+                        </span>
                       </Link>
                       <Link
                         className="nav-item animate__animated"
@@ -274,7 +261,11 @@ export default function Navbar() {
                         <span className="d-inline-flex text-center justify-content-center">
                           <i className="fa-solid fa-chalkboard-user"></i>
                         </span>
-                        <span>{t("Dashborad.ManageresAndSecretaries.SecretariesName")}</span>
+                        <span>
+                          {t(
+                            "Dashborad.ManageresAndSecretaries.SecretariesName"
+                          )}
+                        </span>
                       </Link>
                       <Link
                         className="nav-item animate__animated"
@@ -303,21 +294,27 @@ export default function Navbar() {
                 )}
               </div>
               {role ? (
-                role === "Manager" ?
+                role === "Manager" ? (
                   <li className="nav-item search ms-auto d-flex justify-content-center align-items-center me-3">
                     <div className="input-group w-100 ps-0 pe-5">
                       <span className="input-group-text" id="basic-addon1">
                         <i className="fa-solid fa-magnifying-glass"></i>
                       </span>
                       <input
-                        type="text"
+                        type="search"
                         className="form-control ps-0 pe-5 searchInput py-2 text-white"
                         id="searchName"
+                        onChange={handleKeyPress}
                         placeholder={t("search")}
                       />
                     </div>
                   </li>
-                  : "") : ""}
+                ) : (
+                  ""
+                )
+              ) : (
+                ""
+              )}
 
               <li className="nav-item all ms-md-auto d-flex justify-content-center align-items-center me-3">
                 {/* <div>
@@ -406,29 +403,30 @@ export default function Navbar() {
             </ul>
           </div>
         </div>
-      </nav >
+      </nav>
     </>
   );
 }
 
-const PopupBody = styled('div')(
+const PopupBody = styled("div")(
   ({ theme }) => `
   padding: 12px 16px;
   margin: 20px 0;
   border-radius: 8px;
   border: 1px solid var(--sec-color);
   background-color: var(--main-color);
-  box-shadow: ${theme.palette.mode === 'dark'
+  box-shadow: ${
+    theme.palette.mode === "dark"
       ? `0px 4px 8px rgb(0 0 0 / 0.7)`
       : `0px 4px 8px rgb(0 0 0 / 0.1)`
-    };
+  };
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 0.875rem;
   z-index: 1;
-`,
+`
 );
 
-const Button = styled('button')(
+const Button = styled("button")(
   ({ theme }) => `
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 600;
@@ -451,5 +449,5 @@ const Button = styled('button')(
     background-color: var(--sec-color)};
     box-shadow: none;
   }
-`,
+`
 );
