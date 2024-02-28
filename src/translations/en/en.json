@@ -100,8 +100,8 @@
       "userName": "Username",
       "name": "Name" ,
       "E_mail": "Email",
-      "action": "Action",
-      "acceptBtn": "Accept"
+      "reject": "Reject",
+      "accept": "Accept"
     },
     "ManageresAndSecretaries": {
       "ManageresName":"Manageres",

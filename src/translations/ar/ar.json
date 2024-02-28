@@ -101,8 +101,8 @@
       "userName": "اسم المستخدم",
       "name": "الاسم",
       "E_mail": "البريد الإلكتروني",
-      "action": "الإجراء",
-      "acceptBtn": "قبول"
+      "reject": "رفض",
+      "accept": "قبول"
     },
     "ManageresAndSecretaries": {
       "ManageresName": "مديرين",

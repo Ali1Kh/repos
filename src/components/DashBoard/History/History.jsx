@@ -80,22 +80,22 @@ export default function History() {
                       <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                           <TableRow>
-                            <TableCell align="center">
+                            <TableCell align="center" className="fw-bold text-white">
                               {t("Dashborad.history.role")}
                             </TableCell>
-                            <TableCell align="center">
+                            <TableCell align="center" className="fw-bold text-white">
                               {t("Dashborad.history.userName")}
                             </TableCell>
-                            <TableCell align="center">
+                            <TableCell align="center" className="fw-bold text-white">
                               {t("Dashborad.history.name")}
                             </TableCell>
-                            <TableCell align="center">
+                            <TableCell align="center" className="fw-bold text-white">
                               {t("Dashborad.history.email")}
                             </TableCell>
-                            <TableCell align="center">
+                            <TableCell align="center" className="fw-bold text-white">
                               {t("Dashborad.history.createdAt")}
                             </TableCell>
-                            <TableCell align="center">
+                            <TableCell align="center" className="fw-bold text-white">
                               {t("Dashborad.history.agent")}
                             </TableCell>
                           </TableRow>

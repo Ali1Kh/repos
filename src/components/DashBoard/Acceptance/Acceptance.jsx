@@ -129,11 +129,11 @@ const Acceptance = () => {
                                         <Table stickyHeader aria-label="sticky table">
                                             <TableHead>
                                                 <TableRow>
-                                                    <TableCell align="center" className="fw-bold">UserName</TableCell>
-                                                    <TableCell align="center" className="fw-bold">Name</TableCell>
-                                                    <TableCell align="center" className="fw-bold">Email</TableCell>
-                                                    <TableCell align="right" className="fw-bold">Reject</TableCell>
-                                                    <TableCell align="center" className="fw-bold">Accept</TableCell>
+                                                    <TableCell align="center" className="fw-bold">{t("Dashborad.Acceptacne.userName")}</TableCell>
+                                                    <TableCell align="center" className="fw-bold">{t("Dashborad.Acceptacne.name")}</TableCell>
+                                                    <TableCell align="center" className="fw-bold">{t("Dashborad.Acceptacne.E_mail")}</TableCell>
+                                                    <TableCell align="right" className="fw-bold">{t("Dashborad.Acceptacne.reject")}</TableCell>
+                                                    <TableCell align="center" className="fw-bold">{t("Dashborad.Acceptacne.accept")}</TableCell>
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
