@@ -119,7 +119,8 @@
       "userName":"اسم المستخدم",
       "name":"الاسم",
       "email":"البريد الإلكتروني",
-      "createdAt":"تاريخ الإنشاء",
+      "createdAtdate":"تاريخ الإنشاء",
+      "createdAttime":"وقت الإنشاء",
       "agent":"اسم الجهاز"
     },
     "Meetings": {

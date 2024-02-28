@@ -1,4 +1,4 @@
-import React, { useEffect , useState } from 'react';
+import React, { useState } from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -24,7 +24,7 @@ export default function DashBoardManagers() {
   const { isLoading } = useQuery("getDashBoardManager", getDashBoardManager);
 
   async function getDashBoardManager() {
-    const {data} = await axios.get("https://meetingss.onrender.com/dashboard/getAllManagers", {
+    const { data } = await axios.get("https://meetingss.onrender.com/dashboard/getAllManagers", {
       headers: {
         token: token
       }
@@ -36,23 +36,23 @@ export default function DashBoardManagers() {
 
   const DeleteManager = async () => {
     await axios
-    .delete(`https://meetingss.onrender.com/dashboard/deleteManager/${id}`, {
-      headers: {
-        token: token,
-      },
-    })
-    .then((response) => {
-      if (response.data.success) {
-        toast.success("Manager Deleted Successfully");
-        getDashBoardManager()
-      } else {
-        toast.error("Something went Wrong!");
-      }
+      .delete(`https://meetingss.onrender.com/dashboard/deleteManager/${id}`, {
+        headers: {
+          token: token,
+        },
+      })
+      .then((response) => {
+        if (response.data.success) {
+          toast.success("Manager Deleted Successfully");
+          getDashBoardManager()
+        } else {
+          toast.error("Something went Wrong!");
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
       });
-};
+  };
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -72,7 +72,7 @@ export default function DashBoardManagers() {
     <div className="main">
       <div className="container mt-5">
         <h1 className="container d-flex flex-column align-items-center justify-content-center p-4 fw-bold text-white">
-        {t("Dashborad.ManageresAndSecretaries.ManageresName")}
+          {t("Dashborad.ManageresAndSecretaries.ManageresName")}
         </h1>
         <div className="row gy-3 p-5 pt-0">
           {isLoading ?
@@ -110,15 +110,15 @@ export default function DashBoardManagers() {
                         <TableBody>
                           {data
                             ? data.managers?.map((manager, idx) => (
-                              <TableRow hover tabIndex={-1} key={idx}  onClick={()=>{
-                                    setId(manager.manager_id)
+                              <TableRow hover tabIndex={-1} key={idx} onClick={() => {
+                                setId(manager.manager_id)
                               }}>
                                 <TableCell align="center" component="th" scope="row">{manager.UserName}</TableCell>
                                 <TableCell align="center" component="th">{manager.first_name + " " + manager.last_name}</TableCell>
                                 <TableCell align="center" component="th">{manager.E_mail}</TableCell>
                                 <TableCell align="center" component="th">{manager.Accepted_Acc ? "Accept" : "Refused"}</TableCell>
                                 <TableCell align="center" component="th">
-                                  <button align="center" className='btn btn-danger' onClick={()=>{
+                                  <button align="center" className='btn btn-danger' onClick={() => {
                                     DeleteManager(idx);
                                   }}>
                                     {t("Dashborad.ManageresAndSecretaries.delete")}

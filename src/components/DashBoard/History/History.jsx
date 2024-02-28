@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -46,7 +46,7 @@ export default function History() {
     setPage(0);
   };
 
-  const [t, il8n] = useTranslation();
+  const [t] = useTranslation();
 
   return (
     <>
@@ -76,7 +76,7 @@ export default function History() {
               <div className="row gy-3">
                 <div>
                   <Paper sx={{ width: "100%", overflow: "hidden" }}>
-                    <TableContainer sx={{ maxHeight: 440 }}>
+                    <TableContainer sx={{ maxHeight: 500 }}>
                       <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                           <TableRow>
@@ -92,8 +92,11 @@ export default function History() {
                             <TableCell align="center" className="fw-bold text-white">
                               {t("Dashborad.history.email")}
                             </TableCell>
-                            <TableCell align="center" className="fw-bold text-white">
-                              {t("Dashborad.history.createdAt")}
+                            <TableCell align="center">
+                              {t("Dashborad.history.createdAtdate")}
+                            </TableCell>
+                            <TableCell align="center">
+                              {t("Dashborad.history.createdAttime")}
                             </TableCell>
                             <TableCell align="center" className="fw-bold text-white">
                               {t("Dashborad.history.agent")}
@@ -103,27 +106,16 @@ export default function History() {
                         <TableBody>
                           {data
                             ? data?.history?.map((histor, idx) => (
-                                <TableRow hover tabIndex={-1} key={idx}>
-                                  <TableCell
-                                    align="center"
-                                    component="th"
-                                    scope="row"
-                                  >
-                                    {histor.role}
-                                  </TableCell>
-                                  <TableCell align="center" component="th">
-                                    {histor.Secretary?.UserName}
-                                  </TableCell>
-                                  <TableCell align="center" component="th">{histor.Secretary?.first_name + " " + histor.Secretary?.last_name}</TableCell>
-                                  <TableCell align="center" component="th">{histor.Secretary?.E_mail}</TableCell>
-                                  <TableCell align="center" component="th">
-                                    {histor.createdAt}
-                                  </TableCell>
-                                  <TableCell align="center" component="th">
-                                    {histor.agent}
-                                  </TableCell>
-                                </TableRow>
-                              ))
+                              <TableRow hover tabIndex={-1} key={idx}>
+                                <TableCell align="center" component="th" scope="row">{histor.role}</TableCell>
+                                <TableCell align="center" component="th">{histor.Secretary?.UserName}</TableCell>
+                                <TableCell align="center" component="th">{histor.Secretary?.first_name + " " + histor.Secretary?.last_name}</TableCell>
+                                <TableCell align="center" component="th">{histor.Secretary?.E_mail}</TableCell>
+                                <TableCell align="center" component="th">{histor.createdAt.slice(0, 10)}</TableCell>
+                                <TableCell align="center" component="th">{histor.createdAt.slice(11, 19)}</TableCell>
+                                <TableCell align="center" component="th">{histor.agent}</TableCell>
+                              </TableRow>
+                            ))
                             : ""}
                         </TableBody>
                       </Table>
@@ -131,7 +123,7 @@ export default function History() {
                     <TablePagination
                       rowsPerPageOptions={[5, 10, 25]}
                       component="div"
-                      count={data?.meetings?.length}
+                      count={data?.history?.length}
                       rowsPerPage={rowsPerPage}
                       page={page}
                       onPageChange={handleChangePage}

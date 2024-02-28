@@ -118,7 +118,8 @@
       "userName":"UserName",
       "name":"Name",
       "email":"Email",
-      "createdAt":"CreatedAt",
+      "createdAtdate":"Created Date",
+      "createdAttime":"Created time",
       "agent":"Agent"
     },
     "Meetings": {
