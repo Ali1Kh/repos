@@ -166,3 +166,27 @@
 .MuiPopup-root {
   left: -15% !important;
 }
+
+/* media Screen */
+
+@media screen and (max-width: 991px) {
+  .notification-body-toggler  {
+    display: none !important;
+  }
+  .bell  {
+    display: none !important;
+  }
+}  
+
+@media screen and (min-width: 992px) {
+  .notification-body  {
+    display: none !important;
+  }
+  .bell-toggler  {
+    display: none !important;
+  }
+} 
+
+.notification-body{
+  margin-right: 50px !important;
+}

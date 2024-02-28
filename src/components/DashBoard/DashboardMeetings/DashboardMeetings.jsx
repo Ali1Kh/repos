@@ -76,14 +76,14 @@ export default function DashboardMeetings() {
                       <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                           <TableRow>
-                            <TableCell align="center">{t("Dashborad.Meetings.person")}</TableCell>
-                            <TableCell align="center">{t("Dashborad.Meetings.Topic")}</TableCell>
-                            <TableCell align="center">{t("Dashborad.Meetings.Address")}</TableCell>
-                            <TableCell align="center">{t("Dashborad.Meetings.MeetingPlace")}</TableCell>
-                            <TableCell align="center">{t("Dashborad.Meetings.status")}</TableCell>
-                            <TableCell align="center">{t("Dashborad.Meetings.time")}</TableCell>
-                            <TableCell align="center">{t("Dashborad.Meetings.date")}</TableCell>
-                            <TableCell align="center">{t("Dashborad.Meetings.Delete")}</TableCell>
+                            <TableCell align="center" className="fw-bold text-white">{t("Dashborad.Meetings.person")}</TableCell>
+                            <TableCell align="center" className="fw-bold text-white">{t("Dashborad.Meetings.Topic")}</TableCell>
+                            <TableCell align="center" className="fw-bold text-white">{t("Dashborad.Meetings.Address")}</TableCell>
+                            <TableCell align="center" className="fw-bold text-white">{t("Dashborad.Meetings.MeetingPlace")}</TableCell>
+                            <TableCell align="center" className="fw-bold text-white">{t("Dashborad.Meetings.status")}</TableCell>
+                            <TableCell align="center" className="fw-bold text-white">{t("Dashborad.Meetings.time")}</TableCell>
+                            <TableCell align="center" className="fw-bold text-white">{t("Dashborad.Meetings.date")}</TableCell>
+                            <TableCell align="center" className="fw-bold text-white">{t("Dashborad.Meetings.Delete")}</TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
