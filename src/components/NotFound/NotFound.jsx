@@ -16,7 +16,7 @@ export default function NotFound() {
           <h4>Page Not Found</h4>
           <Link
             to={"/home"}
-            className="returnBtn btn rounded-3 mt-4 text-decoration-none text-white"
+            className="returnBtn btn rounded-3 mt-4 text-decoration-none"
           >
             Go Home
           </Link>

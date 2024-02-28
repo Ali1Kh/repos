@@ -11,44 +11,21 @@
   user-select: none;
 }
 
-table tr th {
-  background-color: var(--main-color) !important;
-  border-bottom: 1px solid rgb(255, 255, 255, 0.2);
-  color: #ffff !important;
-  width: 100px !important;
-}
 
 table tr td {
-  background-color: var(--main-color) !important;
+  background-color: var(--cardBgColor) !important;
   border-bottom: 0px;
-  color: #ffff !important;
+  color: var(--BlackToWhite) !important;
 }
 
 table th {
   border: 0px !important;
-  background-color: var(--main-color) !important;
+  background-color: var(--cardBgColor) !important;
   border-bottom: 1px solid rgb(255, 255, 255, 0.2) !important;
-  color: #ffff !important;
-
+  color: var(--BlackToWhite) !important;
+  width: 100px !important;
 }
-
-
-/* * {
-    scrollbar-width: auto;
-    scrollbar-color: #15181d;
-  }
-  *::-webkit-scrollbar {
-    width: 7px;
-  }
-  *::-webkit-scrollbar-track {
-    background: #343a41;
-  }
-  *::-webkit-scrollbar-thumb {
-    background-color: #15181d;
-    border-radius: 10px;
-  } */
 
 .nav {
-  background-color: var(--main-color);
+  background-color: var(--cardBgColor);
 }
-

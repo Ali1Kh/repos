@@ -23,7 +23,7 @@
 .login-btn a {
   background: var(--sec-color);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.33);
-  color: #CAC4D0;
+  color: var(--BlackToWhite);
   padding: 15px 100px;
   border: 0;
   border-radius: 20px;

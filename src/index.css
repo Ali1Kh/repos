@@ -15,14 +15,17 @@
   --bgMainColor: linear-gradient(180deg,
       rgba(37, 50, 57, 1) 0%,
       rgba(39, 42, 55, 1) 92%);
-  --BlackToWhite: #CAC4D0;
+  --BlackToWhite: #e5e0eb;
+  --BlackWhite: #e5e0eb;
   --sideBarColor: #15181d;
   --pageHeading: black;
   --table-color: #262626;
   --inputsBgColor: transparent;
   --cardBgColor: #343a46;
+  --headercardBgColor: #1a1d24;
   --placeHolderColor: #8f8f91;
 }
+
 /*  */
 :root {
   --black-color: #262a2e;
@@ -38,17 +41,19 @@
   --mutedColor: rgb(135, 136, 149);
   --hoverColor: rgba(23, 145, 186, 0.3);
   --inputsBgColor: transparent;
+  --BlackWhite: #e5e0eb;
   --bgMainColor: #eaeaea;
   --sideBarColor: #111926;
   --BlackToWhite: black;
   --cardBgColor: #ecf0ef;
+  --headercardBgColor: #40444e;
   --cardHeadingColor: #7e7ebe;
 }
 
 .main {
   background: var(--bgMainColor);
   min-height: 100vh !important;
-  color: white;
+  color: var(--BlackToWhite);
   padding-top: 3rem !important;
 }
 
@@ -76,11 +81,28 @@ body {
   padding: 0;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+i {
+  color: var(--BlackToWhite) !important;
+}
+
+span i,
+span,
+a {
+  color: var(--BlackWhite);
+}
+
 .cursorPointer {
   cursor: pointer;
 }
 
-.w-fit{
+.w-fit {
   width: fit-content !important;
 }
 

@@ -1,5 +1,5 @@
 /* h2 {
-    color: #cac4d0;
+    color: var(--BlackToWhite);
 }
 
 
@@ -17,12 +17,12 @@ table td {
     border: none;
     padding: 8px;
     text-align: left;
-    color: #cac4d0;
+    color: var(--BlackToWhite);
 }
 */
 button.accept-button {
     background-color: #262626;
-    color: #cac4d0;
+    color: var(--BlackToWhite);
     width: 80%;
     padding: 8px 20px;
     cursor: pointer;
@@ -41,7 +41,7 @@ i.deletAcc {
     padding: 8px 10px;
     background-color: #262626;
     border-radius: 10px;
-    color: #cac4d0;
+    color: var(--BlackToWhite);
     border: 1px solid #7E7EBE;
     transition: all 0.5s;
 }
@@ -68,10 +68,10 @@ i.deletAcc:hover {
 }
 
 .table .col h6 {
-    color: #cac4d0;
+    color: var(--BlackToWhite);
 
 }
 
 .row .col {
-    color: #cac4d0;
+    color: var(--BlackToWhite);
 }

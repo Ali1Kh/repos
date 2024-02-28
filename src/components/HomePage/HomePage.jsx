@@ -73,7 +73,7 @@ export default function HomePage() {
       <div className="main p-4 mt-5">
         <div className="container">
           <h2
-            className="pageHeading mt-4 mb-xxl-5 mb-4 text-center text-white animate__animated animate__zoomIn"
+            className="pageHeading mt-4 mb-xxl-5 mb-4 text-center animate__animated animate__zoomIn"
             style={{ userSelect: "none" }}
           >
             {t("HomePage.header")}

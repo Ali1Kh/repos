@@ -71,7 +71,7 @@ export default function DashBoardManagers() {
   return <>
     <div className="main">
       <div className="container mt-5">
-        <h1 className="container d-flex flex-column align-items-center justify-content-center p-4 fw-bold text-white">
+        <h1 className="container d-flex flex-column align-items-center justify-content-center p-4 fw-bold">
           {t("Dashborad.ManageresAndSecretaries.ManageresName")}
         </h1>
         <div className="row gy-3 p-5 pt-0">
