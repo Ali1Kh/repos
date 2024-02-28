@@ -168,7 +168,6 @@ export default function Nots() {
                         setType("update");
                       }}
                     >
-                    
                       <div className="inner-card-notes h-100 shadow rounded-4 gap-4 p-4 flex-column">
                         <div className="box d-flex  flex-column h-100">
                           <h5>{note.title}</h5>
