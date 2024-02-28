@@ -2,6 +2,14 @@
   background-color: var(--cardBgColor);
 }
 
+.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+  background-color: var(--sec-color) !important;
+}
+
+/* .MuiPickersDay-root{
+  color: var(--calander) !important;
+} */
+
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   .calenderCard {

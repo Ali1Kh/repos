@@ -97,3 +97,7 @@
     font-size: 40px;
     margin-top: 10rem !important;
 }
+
+.fa-notes-medical {
+    color: var(--sec-color) !important;
+}

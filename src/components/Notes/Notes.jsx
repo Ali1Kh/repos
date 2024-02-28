@@ -23,8 +23,6 @@ export default function Nots() {
   let { data, isLoading } = useQuery("getNotes", getNotes);
 
   function getNotes() {
-    setContent("");
-    setTitle("");
     return axios
       .get("https://meetingss.onrender.com/notes/", {
         headers: {
@@ -37,7 +35,7 @@ export default function Nots() {
   }
 
   const postAddNotes = () => {
-    if (title == "" || content == "") {
+    if (title === "" || content === "") {
       toast.error("Please Fill All Inputs", {
         style: {
           zIndex: 9999,
@@ -170,7 +168,7 @@ export default function Nots() {
                         setType("update");
                       }}
                     >
-                      <div className="inner-card  h-100 shadow rounded-4 gap-4 p-4 flex-column">
+                      <div className="inner-card-notes h-100 shadow rounded-4 gap-4 p-4 flex-column">
                         <div className="box d-flex  flex-column h-100">
                           <h5>{note.title}</h5>
                           <div className="text-black d-flex mt-2 align-items-center">
