@@ -1,8 +1,23 @@
-.parent h2{
+.parent h2 {
     font-family: var(--main-font);
 }
 
-.inner{
+.inner {
     height: 70vh;
     background-color: var(--sec-color);
+}
+
+button.btn-meeting {
+    background-color: #262626;
+    color: var(--BlackToWhite);
+    
+    padding: 8px 20px;
+    cursor: pointer;
+    border: 1px solid #7E7EBE;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+button.btn-meeting:hover {
+    background-color: #404040;
 }

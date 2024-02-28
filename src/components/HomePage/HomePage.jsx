@@ -1,13 +1,10 @@
-import { useEffect, useState } from "react";
 import React from "react";
 import "./homePage.css";
 import MeetingDetails from "../manager/meetingDetails/meetingDetails.jsx";
-import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { TailSpin } from "react-loader-spinner";
-import Meetings from './../secretary/Meeting/meetings/Meetings';
 
 export default function HomePage() {
   const [t] = useTranslation();
@@ -29,7 +26,7 @@ export default function HomePage() {
     });
   }
 
-  let colors = JSON.parse(localStorage.getItem("colors")) || [
+  let colors = [
     "#FFB399",
     "#FFFFFF99",
     "#00B3E6",
@@ -64,7 +61,6 @@ export default function HomePage() {
     "#666666FF",
   ];
 
-  localStorage.setItem("colors", JSON.stringify(colors));
 
   return (
     <>

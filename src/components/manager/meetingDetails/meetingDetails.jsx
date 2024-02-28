@@ -22,32 +22,36 @@ export default function MeetingDetails({ meetingsDetails }) {
                 <i className="shadow fa-solid fa-xmark"></i>
               </div>
               <div className="meeting-topic m-3">
-                <h2 className="BlackToWhite">Meeting Details</h2>
+                <h2 className="BlackToWhite">{t("meetings.meetingDetails")}</h2>
               </div>
               <div className="container meeting-container">
                 <div className="row g-md-5">
                   <div className="col-md-6">
                     <div className="col-ineer">
-                      <span>Guest Name</span>
+                      <span>{t("meetings.table.guestName")}</span>
                       <h5 className="mb-3">{meetingsDetails.person}</h5>
-                      <span className="fw-normal">Meeting Topic</span>
+                      <span className="fw-normal">{t("meetings.table.topic")}</span>
                       <h5 className="mb-3">{meetingsDetails.about}</h5>
-                      <span>Meeting Date</span>
-                      <h5 className="mb-3">{meetingsDetails.date}</h5>
-                      <span>Meeting Time</span>
-                      <h5 className="mb-3">{meetingsDetails.time}</h5>
+                      <span>{t("meetings.table.status")}</span>
+                      <h5 className="mb-3">{meetingsDetails.statues}</h5>
+                      <span>{t("meetings.table.comments")}</span>
+                      <h5 className="mb-3">{meetingsDetails.notes}</h5>
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="col-ineer">
-                      <span>Meeting Address</span>
+                      <span>{t("meetings.table.address")}</span>
                       <h5 className="mb-3">{meetingsDetails.address}</h5>
-                      <span>Inside Or Out side The Facility</span>
+                      <span>{t("meetings.table.inOrOut")}</span>
                       <h5 className="mb-3">{meetingsDetails.in_or_out}</h5>
-                      <span>Meeting Status</span>
-                      <h5 className="mb-3">{meetingsDetails.statues}</h5>
-                      <span>Comments</span>
-                      <h5 className="mb-3">{meetingsDetails.notes}</h5>
+                      <span>{t("meetings.table.date")}</span>
+                      <h5 className="mb-3">{meetingsDetails.date}</h5>
+                      <span>{t("meetings.table.time")}</span>
+                      <h5 className="mb-3">{meetingsDetails.time}</h5>
+                      <div className="d-flex justify-content-center">
+                        <button type="button" class="btn-meeting">{t("meetings.btnShow")}</button>
+                        <button type="button" class="btn-meeting">{t("meetings.btnAddNotes")}</button>
+                      </div>
                     </div>
                   </div>
                 </div>
