@@ -162,29 +162,32 @@
 .notification-data {}
 
 .MuiPopup-root {
-  left: -15% !important;
+  left: -14% !important;
 }
 
 /* media Screen */
 
+.fa-bell{
+  color: var(--sec-color) !important;
+}
+
 @media screen and (max-width: 991px) {
-  .notification-body-toggler  {
+  .notification-body-toggler {
     display: none !important;
   }
-  .bell-toggler  {
+
+  .bell-toggler {
     display: none !important;
   }
-}  
+}
 
 @media screen and (min-width: 992px) {
-  .notification-body  {
+  .notification-body {
     display: none !important;
   }
-  .bell  {
-    display: none !important;
-  }
-} 
 
-.notification-body--toggler{
-  margin-right: 50px !important;
+  .bell {
+    display: none !important;
+  }
 }
+
