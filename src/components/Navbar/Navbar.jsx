@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { Unstable_Popup as BasePopup } from "@mui/base/Unstable_Popup";
 import { styled } from "@mui/system";
 import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 export default function Navbar() {
   const location = useLocation();
@@ -90,9 +91,28 @@ export default function Navbar() {
     });
   });
 
+  const [data, setData] = useState([]);
+
+  const token = localStorage.getItem("token")
 
   const [t, il8n] = useTranslation();
 
+  // async function search(name) {
+  //   const {data} = await axios.get(`https://meetingss.onrender.com/meetings?person=${name}`, {
+  //     headers: {
+  //       token: token
+  //     }
+  //   })
+  //   if (data.success) { 
+  //     setData(data)
+  //   }
+  // }
+
+  // let searchName=$("#searchName");
+  // searchName.keyup(function(){
+  //     search(searchName.val())
+  // })
+  
   return (
     <>
       <nav className="navbar navbar-expand-lg">
@@ -304,7 +324,7 @@ export default function Navbar() {
                       <input
                         type="text"
                         className="form-control ps-0 pe-5 searchInput py-2 text-white"
-                        id="search"
+                        id="searchName"
                         placeholder={t("search")}
                       />
                     </div>

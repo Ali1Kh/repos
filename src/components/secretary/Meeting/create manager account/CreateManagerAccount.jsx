@@ -139,23 +139,61 @@ function CreateManagerAccount() {
                       component="label"
                       className="error-label"
                     />
+                    <div className="password-input d-flex">
                     <Field
+                      id= "password" 
                       type="password"
                       name="password"
-                      className="password mt-3 d-flex justify-content-center form-control"
+                      className="pass-word mt-3 d-flex justify-content-center form-control"
                       placeholder={t("signup.password")}
                     />
+                    <button id="eye" className="btn d-flex justify-content-center align-items-center ms-2"
+                      onClick={() => {
+                        let password = document.getElementById("password")
+                        let eyeicon = document.getElementById("eye-icon")
+
+                        if (password.type == "password") {
+                          password.type = "text"
+                          eyeicon.className = "fa-solid fa-eye"
+                        }
+                        else {
+                          password.type = "password"
+                          eyeicon.className = "fa-solid fa-eye-slash"
+                        }
+                      }}>
+                      <i id="eye-icon" class="fa-solid fa-eye-slash"></i>
+                    </button>
+                    </div>
                     <ErrorMessage
                       name="password"
                       component="label"
                       className="error-label"
                     />
+                    <div className="password-input d-flex">
                     <Field
+                      id= "confirm-password"
                       type="password"
                       name="confirmPassword"
-                      className="confirm-password mt-3 d-flex justify-content-center form-control"
+                      className="pass-word mt-3 d-flex justify-content-center form-control"
                       placeholder={t("signup.confirmPassword")}
                     />
+                    <button id="eye" className="btn d-flex justify-content-center align-items-center ms-2"
+                      onClick={() => {
+                        let password = document.getElementById("confirm-password")
+                        let eyeiconconfirm = document.getElementById("eye-icon-confirm")
+
+                        if (password.type === "password") {
+                          password.type = "text"
+                          eyeiconconfirm.className = "fa-solid fa-eye"
+                        }
+                        else {
+                          password.type = "password"
+                          eyeiconconfirm.className = "fa-solid fa-eye-slash"
+                        }
+                      }}>
+                      <i id="eye-icon-confirm" class="fa-solid fa-eye-slash"></i>
+                    </button>
+                    </div>
                     <ErrorMessage
                       name="confirmPassword"
                       component="label"

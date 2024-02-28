@@ -7,26 +7,35 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { TailSpin } from "react-loader-spinner";
+import $ from "jquery";
 import Meetings from './../secretary/Meeting/meetings/Meetings';
 
 export default function HomePage() {
   const [t] = useTranslation();
 
-  let { data, isLoading } = useQuery("getMeetings", getMeetings);
+  const [data, setData] = useState([]);
+
+
+  let {  isLoading } = useQuery("getMeetings", getMeetings);
+
+  const authToken = localStorage.getItem("token");
 
   async function getMeetings() {
-    const authToken = localStorage.getItem("token");
 
     if (!authToken) {
       console.error("Authentication token not found in Local Storage");
       return;
     }
 
-    return await axios.get("https://meetingss.onrender.com/meetings/", {
+    const {data} = await axios.get("https://meetingss.onrender.com/meetings/", {
       headers: {
         token: authToken,
       },
     });
+
+    if (data.success) {
+      setData(data)
+    }
   }
 
   let colors = JSON.parse(localStorage.getItem("colors")) || [
@@ -66,6 +75,22 @@ export default function HomePage() {
 
   localStorage.setItem("colors", JSON.stringify(colors));
 
+  async function search(name) {
+    const {data} = await axios.get(`https://meetingss.onrender.com/meetings?person=${name}`, {
+      headers: {
+        token: authToken
+      }
+    })
+    if (data.success) { 
+      setData(data)
+    }
+  }
+
+  let searchName=$("#searchName");
+  searchName.keyup(function(){
+      search(searchName.val())
+  })
+
   return (
     <>
 
@@ -94,7 +119,7 @@ export default function HomePage() {
             <div className="row gy-3">
               <>
                 {data
-                  ? data.data.meetings?.map((meeting, idx) => (
+                  ? data.meetings?.map((meeting, idx) => (
                     <>
                       <div
                         key={idx}
