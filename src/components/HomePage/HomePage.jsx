@@ -155,7 +155,7 @@ export default function HomePage() {
                                   {t("HomePage.meetingTime")}
                                 </p>
                                 <p className="text-center m-1">
-                                  {meeting.statues}
+                                  {meeting.time}
                                 </p>
                               </div>
 

@@ -7,27 +7,8 @@ import { PickersDay } from "@mui/x-date-pickers/PickersDay";
 import MeetingDetails from "../meetingDetails/meetingDetails.jsx";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
-function ServerDay(props) {
-  const { highlightedDays = [], day, outsideCurrentMonth, ...other } = props;
-  const isSelected =
-    !props.outsideCurrentMonth &&
-    highlightedDays.indexOf(props.day.date()) >= 0;
-  return (
-    <Badge
-      key={props.day.toString()}
-      overlap="circular"
-      badgeContent={isSelected ? "🕑" : undefined}
-      style={{ cursor: "pointer", userSelect: "none" }}
-    >
-      <PickersDay
-        {...other}
-        outsideCurrentMonth={outsideCurrentMonth}
-        day={day}
-      />
-    </Badge>
-  );
-}
 export default function Calender() {
   const [highlightedDays, setHighlightedDays] = useState([1, 2, 30]);
   const newTheme = (theme) =>
@@ -45,7 +26,7 @@ export default function Calender() {
               backgroundColor: "#99A1B3",
               minHeight: 350,
               width: "100%",
-              boxShadow:"0 0.5rem 1rem rgba(0, 0, 0, 0.15);"
+              boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.15);",
             },
           },
         },
@@ -68,10 +49,38 @@ export default function Calender() {
   });
   let [day, setDay] = useState(weekday[new Date().getDay()]);
   function monthChanged(month) {
-    console.log(month);
     setHighlightedDays([20, 25, 1]);
   }
   const [t, il8n] = useTranslation();
+
+  let [dayMeetings, setDayMeetings] = useState([]);
+
+  async function dateChanged(val) {
+    let vDate = val;
+
+    const authToken = localStorage.getItem("token");
+    if (!authToken) {
+      console.error("Authentication token not found in Local Storage");
+      return;
+    }
+
+    let { data } = await axios.get(
+      `https://meetingss.onrender.com/meetings/?date[eq]=${
+        new Date(`${vDate.$y}-${vDate.$M + 1}-${vDate.$D + 1}`)
+          .toISOString()
+          .split("T")[0]
+      }`,
+      {
+        headers: {
+          token: authToken,
+        },
+      }
+    );
+
+    if (data.success) {
+      setDayMeetings(data.meetings);
+    }
+  }
 
   return (
     <div className="main  px-md-2">
@@ -81,7 +90,7 @@ export default function Calender() {
         </h2>
         <div className="calenderCard shadow rounded-4 p-sm-4">
           <div className="row my-3 gy-3">
-            <div className="col-lg-6 p-4">
+            <div className="col-lg-6 p-4 h-100">
               <ThemeProvider theme={newTheme}>
                 <DateCalendar
                   showDaysOutsideCurrentMonth
@@ -89,6 +98,7 @@ export default function Calender() {
                   onChange={(val) => {
                     setDate(val);
                     setDay(weekday[new Date(val).getDay()]);
+                    dateChanged(val);
                   }}
                   onMonthChange={(val) => monthChanged(val.$M + 1)}
                   slots={{
@@ -102,7 +112,7 @@ export default function Calender() {
                 />
               </ThemeProvider>
             </div>
-            <div className="col-lg-6">
+            <div className="col-lg-6 h-100">
               <div className="dayMeetings p-4">
                 <div
                   style={{ color: "var(--mutedColor)" }}
@@ -113,29 +123,39 @@ export default function Calender() {
                     {date.$D}/{date.$M + 1}/{date.$y}
                   </span>
                 </div>
-                <div className="dayMeetingsCards BlackToWhite">
-                  <div className="meetingItem border-bottom py-3">
-                    <p>{t("Calendar.meetingTopic")} : blblsbab</p>
-                    <p>{t("Calendar.meetingTime")} : 1:00</p>
-                    <a
-                      // data-bs-toggle="modal"
-                      // data-bs-target="#meetingModal"
-                      className="mb-3 cursorPointer"
-                    >
-                      {t("Calendar.showDetails")}
-                    </a>
-                  </div>
-                  <div className="meetingItem border-bottom py-3">
-                    <p>{t("Calendar.meetingTopic")} : blblsbab</p>
-                    <p>{t("Calendar.meetingTime")} : 2:00</p>
-                    <a
-                      // data-bs-toggle="modal"
-                      // data-bs-target="#meetingModal"
-                      className="mb-3 cursorPointer"
-                    >
-                      {t("Calendar.showDetails")}
-                    </a>
-                  </div>
+                <div className="dayMeetingsCards  BlackToWhite overflow-y-scroll" style={{ maxHeight: "320px" }}>
+                  {dayMeetings.length > 0 ? (
+                    dayMeetings.map((meet) => (
+                      <div className="meetingItem border-bottom py-3">
+                        <p>
+                          {t("Calendar.meetingTopic")} : {meet.about}
+                        </p>
+                        <p>
+                          {t("Calendar.meetingTime")} :{" "}
+                          {convertTo12HourFormat(meet.time)}
+                        </p>
+                        <a
+                          // data-bs-toggle="modal"
+                          // data-bs-target="#meetingModal"
+                          className="mb-3 cursorPointer"
+                        >
+                          {t("Calendar.showDetails")}
+                        </a>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="mt-5 d-flex flex-column justify-content-center align-items-center gap-3">
+                      <div style={{ width: "80px" }} className="noDateImg">
+                        <img
+                          className="w-100"
+                          src={require("../../../image/nodate.png")}
+                          alt=""
+                        />
+                      </div>
+
+                      <h4>No Meetings In This Day</h4>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -148,4 +168,39 @@ export default function Calender() {
       </Helmet>
     </div>
   );
+}
+
+function ServerDay(props) {
+  const { highlightedDays = [], day, outsideCurrentMonth, ...other } = props;
+  const isSelected =
+    !props.outsideCurrentMonth &&
+    highlightedDays.indexOf(props.day.date()) >= 0;
+  return (
+    <Badge
+      key={props.day.toString()}
+      overlap="circular"
+      badgeContent={isSelected ? "🕑" : undefined}
+      style={{ cursor: "pointer", userSelect: "none" }}
+    >
+      <PickersDay
+        {...other}
+        outsideCurrentMonth={outsideCurrentMonth}
+        day={day}
+      />
+    </Badge>
+  );
+}
+
+function convertTo12HourFormat(time) {
+  const [hours, minutes] = time.split(":");
+  let formattedHours = parseInt(hours, 10);
+  let amPmIndicator = "AM";
+  if (formattedHours >= 12) {
+    formattedHours =
+      formattedHours === 12 ? formattedHours : formattedHours - 12;
+    amPmIndicator = "PM";
+  }
+  formattedHours = formattedHours < 10 ? "0" + formattedHours : formattedHours;
+  const formattedTime = `${formattedHours}:${minutes} ${amPmIndicator}`;
+  return formattedTime;
 }
