@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { TailSpin } from "react-loader-spinner";
+import Meetings from './../secretary/Meeting/meetings/Meetings';
 
 export default function HomePage() {
   const [t] = useTranslation();
@@ -67,9 +68,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Helmet>
-        <title>Home</title>
-      </Helmet>
+
       <div className="main p-4 mt-5">
         <div className="container">
           <h2
@@ -79,7 +78,7 @@ export default function HomePage() {
             {t("HomePage.header")}
           </h2>{" "}
           {isLoading ? (
-            <div className="d-flex justify-content-center align-items-center" style={{height:"65vh"}}>
+            <div className="d-flex justify-content-center align-items-center" style={{ height: "65vh" }}>
               <TailSpin
                 visible={true}
                 height="90"
@@ -96,85 +95,84 @@ export default function HomePage() {
               <>
                 {data
                   ? data.data.meetings?.map((meeting, idx) => (
-                      <>
+                    <>
+                      <div
+                        key={idx}
+                        className="inner-parent  col-lg-4 px-lg-4 col-md-12 col-sm-12 mt-4 animate__animated animate__fadeIn animate__slower"
+                        data-aos="fade-up"
+                        data-aos-delay="500"
+                        data-aos-once="true"
+                      >
                         <div
-                          key={idx}
-                          className="inner-parent  col-lg-4 px-lg-4 col-md-12 col-sm-12 mt-4 animate__animated animate__fadeIn animate__slower"
-                          data-aos="fade-up"
-                          data-aos-delay="500"
-                          data-aos-once="true"
+                          className="inner-card h-100 shadow rounded-4 gap-3 p-4 flex-column"
+                          data-bs-toggle="modal"
+                          data-bs-target={`#meetingModal${meeting.meeting_id}`}
                         >
-                          <div
-                            className="inner-card h-100 shadow rounded-4 gap-3 p-4 flex-column"
-                            data-bs-toggle="modal"
-                            data-bs-target={`#meetingModal${meeting.meeting_id}`}
-                          >
-                            <div className="guest-info d-flex flex-column align-items-center">
+                          <div className="guest-info d-flex flex-column align-items-center">
+                            <div
+                              className="guest-icon-profile d-flex justify-content-center align-items-center me-3 mb-2 mt-2 ms-3"
+                              style={{ width: "55px", height: "50px" }}
+                            >
                               <div
-                                className="guest-icon-profile d-flex justify-content-center align-items-center me-3 mb-2 mt-2 ms-3"
-                                style={{ width: "55px", height: "50px" }}
-                              >
-                                <div
-                                  className="meetingGuestIcon text-black d-flex justify-content-center align-items-center"
-                                  style={{
-                                    backgroundColor: `${
-                                      colors[
-                                        Math.floor(
-                                          Math.random() * colors.length
-                                        )
-                                      ]
+                                className="meetingGuestIcon text-black d-flex justify-content-center align-items-center"
+                                style={{
+                                  backgroundColor: `${colors[
+                                    Math.floor(
+                                      Math.random() * colors.length
+                                    )
+                                    ]
                                     }`,
-                                  }}
-                                >
-                                  <span className="m-0 p-0 ">
-                                    {meeting.person
-                                      .toUpperCase()
-                                      .split("")
-                                      .slice(0, 1)}
-                                  </span>
-                                </div>
-                              </div>
-                              <div className="guest-account text-center d-flex flex-column align-items-center mt-3">
-                                <div className="guest-name flex-column">
-                                  <h4>{meeting.person}</h4>
-                                </div>
+                                }}
+                              >
+                                <span className="m-0 p-0 ">
+                                  {meeting.person
+                                    .toUpperCase()
+                                    .split("")
+                                    .slice(0, 1)}
+                                </span>
                               </div>
                             </div>
-                            <div className="meeting-info row mt-2">
-                              <div className="meeting-topic col-lg-4 col-md-4">
-                                <p className="text-center m-1 heading">
-                                  {t("HomePage.meetingTopic")}
-                                </p>
-                                <p className="text-center m-1">
-                                  {meeting.about}
-                                </p>
-                              </div>
-
-                              <div className="meeting-time col-lg-4 col-md-4">
-                                <p className="text-center m-1 heading">
-                                  {t("HomePage.meetingTime")}
-                                </p>
-                                <p className="text-center m-1">
-                                  {meeting.statues}
-                                </p>
-                              </div>
-
-                              <div className="meeting-date col-lg-4 col-md-4">
-                                <p className="text-center m-1 heading">
-                                  {t("HomePage.meetingDate")}
-                                </p>
-                                <p className="text-center m-1">
-                                  {meeting.time}
-                                </p>
+                            <div className="guest-account text-center d-flex flex-column align-items-center mt-3">
+                              <div className="guest-name flex-column">
+                                <h4>{meeting.person}</h4>
                               </div>
                             </div>
                           </div>
+                          <div className="meeting-info row mt-2">
+                            <div className="meeting-topic col-lg-4 col-md-4">
+                              <p className="text-center m-1 heading">
+                                {t("HomePage.meetingTopic")}
+                              </p>
+                              <p className="text-center m-1">
+                                {meeting.about}
+                              </p>
+                            </div>
+
+                            <div className="meeting-time col-lg-4 col-md-4">
+                              <p className="text-center m-1 heading">
+                                {t("HomePage.meetingTime")}
+                              </p>
+                              <p className="text-center m-1">
+                                {meeting.statues}
+                              </p>
+                            </div>
+
+                            <div className="meeting-date col-lg-4 col-md-4">
+                              <p className="text-center m-1 heading">
+                                {t("HomePage.meetingDate")}
+                              </p>
+                              <p className="text-center m-1">
+                                {meeting.time}
+                              </p>
+                            </div>
+                          </div>
                         </div>
-                        <div className="details position-absolute">
-                          <MeetingDetails meetingsDetails={meeting} />
-                        </div>
-                      </>
-                    ))
+                      </div>
+                      <div className="details position-absolute">
+                        <MeetingDetails meetingsDetails={meeting} />
+                      </div>
+                    </>
+                  ))
                   : ""}
               </>
             </div>

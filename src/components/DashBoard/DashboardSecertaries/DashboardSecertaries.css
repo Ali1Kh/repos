@@ -9,6 +9,6 @@
     background-color: var(--cardBgColor) !important;
 }
 
-.MuiButtonBase-root {
+.stickyHeader.MuiButtonBase-root {
     color: var(--BlackToWhite) !important;
 }

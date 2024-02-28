@@ -97,3 +97,19 @@
     font-size: 40px;
     margin-top: 10rem !important;
 }
+
+.inner-card-notes {
+    cursor: pointer;
+    background-color: var(--cardBgColor);
+}
+
+.inner-card-notes h5,
+.note-createdAt {
+    color: var(--sec-color) !important;
+}
+
+
+
+.fa-notes-medical {
+    color: var(--sec-color) !important;
+}

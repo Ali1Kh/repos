@@ -110,39 +110,38 @@ export default function Navbar() {
             )}
           </a>
           <div className="d-flex">
-          <div>
-                  <Button
-                    aria-describedby={id}
-                    type="button"
-                    onClick={handleClick}
-                    className="mt-1 me-2 bell"
-                  >
-                    <i className="fa-regular fa-bell"></i>
-                  </Button>
-                  <BasePopup id={id} open={open} anchor={anchor} >
-                    <PopupBody className="notification-body-toggler d-flex mt-4">
-                      <div className="justify-content-center align-items-center me-3">
-                        <p className="fs-6">Your Manager Ali Khaled Were Added To A New Inside Meeting</p>
-                        <button className="btn accept-button">Accept</button>
-                        <i className="fa-solid fa-trash deletAcc"></i>
-                      </div>
-                    </PopupBody>
-                  </BasePopup>
-                </div>
-                <button
-            className="navbar-toggler border-0 animate__animated animate__fadeInRight"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <i className="fa fa-bars text-white fs-1"></i>
-            
-          </button>
+            {/* <div>
+              <Button
+                aria-describedby={id}
+                type="button"
+                onClick={handleClick}
+                className="mt-1 me-2 bell"
+              >
+                <i className="fa-regular fa-bell"></i>
+              </Button>
+              <BasePopup id={id} open={open} anchor={anchor} >
+                <PopupBody className="notification-body-toggler d-flex mt-4">
+                  <div className="justify-content-center align-items-center me-3">
+                    <p className="fs-6">Your Manager Ali Khaled Were Added To A New Inside Meeting</p>
+                    <button className="btn accept-button">Accept</button>
+                    <i className="fa-solid fa-trash deletAcc"></i>
+                  </div>
+                </PopupBody>
+              </BasePopup>
+            </div> */}
+            <button
+              className="navbar-toggler border-0 animate__animated animate__fadeInRight"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <i className="fa fa-bars text-white fs-1"></i>
+            </button>
           </div>
-          
+
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav w-100 d-flex  align-items-center mt-2 mb-2 mb-lg-0">
               <div className="header-side" style={{ userSelect: "none" }}>
@@ -173,7 +172,7 @@ export default function Navbar() {
                             </svg>
                           </div>
                         </span>
-                        <span>{t("sidebar.home")}</span>
+                        <span>{t("sidebar.meetings")}</span>
                       </Link>
                       <Link
                         className="nav-item animate__animated"
@@ -313,13 +312,12 @@ export default function Navbar() {
                   : "") : ""}
 
               <li className="nav-item all ms-md-auto d-flex justify-content-center align-items-center me-3">
-                <div>
+                {/* <div>
                   <Button
                     aria-describedby={id}
                     type="button"
                     onClick={handleClick}
                     className="bell-toggler"
-                    
                   >
                     <i className="fa-regular fa-bell"></i>
                   </Button>
@@ -332,7 +330,7 @@ export default function Navbar() {
                       </div>
                     </PopupBody>
                   </BasePopup>
-                </div>
+                </div> */}
                 <div className="darkmodeContainer h-100 d-flex justify-content-center align-items-center px-3">
                   <label className="toggle" htmlFor="switch">
                     <input
