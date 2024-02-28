@@ -16,6 +16,7 @@
       rgba(37, 50, 57, 1) 0%,
       rgba(39, 42, 55, 1) 92%);
   --BlackToWhite: #e5e0eb;
+  --BlackWhite: #e5e0eb;
   --sideBarColor: #15181d;
   --pageHeading: black;
   --table-color: #262626;
@@ -39,6 +40,7 @@
   --mutedColor: rgb(135, 136, 149);
   --hoverColor: rgba(23, 145, 186, 0.3);
   --inputsBgColor: transparent;
+  --BlackWhite: #e5e0eb;
   --bgMainColor: #eaeaea;
   --sideBarColor: #111926;
   --BlackToWhite: black;
@@ -84,9 +86,14 @@ h4,
 h5,
 h6,
 p,
-i,
-span {
-  color: var(--BlackToWhite);
+i {
+  color: var(--BlackToWhite) !important;
+}
+
+span i,
+span,
+a {
+  color: var(--BlackWhite);
 }
 
 .cursorPointer {

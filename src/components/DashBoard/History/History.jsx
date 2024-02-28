@@ -80,16 +80,16 @@ export default function History() {
                       <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                           <TableRow>
-                            <TableCell align="center" className="fw-bold text-white">
+                            <TableCell align="center">
                               {t("Dashborad.history.role")}
                             </TableCell>
-                            <TableCell align="center" className="fw-bold text-white">
+                            <TableCell align="center">
                               {t("Dashborad.history.userName")}
                             </TableCell>
-                            <TableCell align="center" className="fw-bold text-white">
+                            <TableCell align="center">
                               {t("Dashborad.history.name")}
                             </TableCell>
-                            <TableCell align="center" className="fw-bold text-white">
+                            <TableCell align="center">
                               {t("Dashborad.history.email")}
                             </TableCell>
                             <TableCell align="center">
@@ -98,7 +98,7 @@ export default function History() {
                             <TableCell align="center">
                               {t("Dashborad.history.createdAttime")}
                             </TableCell>
-                            <TableCell align="center" className="fw-bold text-white">
+                            <TableCell align="center">
                               {t("Dashborad.history.agent")}
                             </TableCell>
                           </TableRow>
@@ -106,15 +106,28 @@ export default function History() {
                         <TableBody>
                           {data
                             ? data?.history?.map((histor, idx) => (
-                              <TableRow hover tabIndex={-1} key={idx}>
-                                <TableCell align="center" component="th" scope="row">{histor.role}</TableCell>
-                                <TableCell align="center" component="th">{histor.Secretary?.UserName}</TableCell>
-                                <TableCell align="center" component="th">{histor.Secretary?.first_name + " " + histor.Secretary?.last_name}</TableCell>
-                                <TableCell align="center" component="th">{histor.Secretary?.E_mail}</TableCell>
-                                <TableCell align="center" component="th">{histor.createdAt.slice(0, 10)}</TableCell>
-                                <TableCell align="center" component="th">{histor.createdAt.slice(11, 19)}</TableCell>
-                                <TableCell align="center" component="th">{histor.agent}</TableCell>
-                              </TableRow>
+                              (histor.Secretary === null ?
+                                <TableRow hover tabIndex={-1} key={idx}>
+                                  <TableCell align="center" component="th" scope="row">{histor.role}</TableCell>
+                                  <TableCell align="center" component="th">{histor.Manager?.UserName}</TableCell>
+                                  <TableCell align="center" component="th">{histor.Manager?.first_name + " " + histor.Manager?.last_name}</TableCell>
+                                  <TableCell align="center" component="th">{histor.Manager?.E_mail}</TableCell>
+                                  <TableCell align="center" component="th">{histor.createdAt.slice(0, 10)}</TableCell>
+                                  <TableCell align="center" component="th">{histor.createdAt.slice(11, 19)}</TableCell>
+                                  <TableCell align="center" component="th">{histor.agent}</TableCell>
+                                </TableRow>
+                                : histor.Manager === null ?
+                                  <TableRow hover tabIndex={-1} key={idx}>
+                                    <TableCell align="center" component="th" scope="row">{histor.role}</TableCell>
+                                    <TableCell align="center" component="th">{histor.Secretary?.UserName}</TableCell>
+                                    <TableCell align="center" component="th">{histor.Secretary?.first_name + " " + histor.Secretary?.last_name}</TableCell>
+                                    <TableCell align="center" component="th">{histor.Secretary?.E_mail}</TableCell>
+                                    <TableCell align="center" component="th">{histor.createdAt.slice(0, 10)}</TableCell>
+                                    <TableCell align="center" component="th">{histor.createdAt.slice(11, 19)}</TableCell>
+                                    <TableCell align="center" component="th">{histor.agent}</TableCell>
+                                  </TableRow>
+                                  : ""
+                              )
                             ))
                             : ""}
                         </TableBody>
