@@ -318,13 +318,13 @@ export default function Navbar() {
                     aria-describedby={id}
                     type="button"
                     onClick={handleClick}
-                    className="bell"
+                    className="bell-toggler"
                     
                   >
                     <i className="fa-regular fa-bell"></i>
                   </Button>
                   <BasePopup id={id} open={open} anchor={anchor}>
-                    <PopupBody className="d-flex justify-content-center align-items-center me-3">
+                    <PopupBody className="notification-body d-flex justify-content-center align-items-center me-3">
                       <div className="justify-content-center align-items-center me-3">
                         <p className="fs-6">Your Manager Ali Khaled Were Added To A New Inside Meeting</p>
                         <button className="btn accept-button">Accept</button>

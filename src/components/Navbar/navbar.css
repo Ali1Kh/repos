@@ -171,7 +171,7 @@
   .notification-body-toggler  {
     display: none !important;
   }
-  .bell  {
+  .bell-toggler  {
     display: none !important;
   }
 }  
@@ -179,12 +179,13 @@
 @media screen and (min-width: 992px) {
   .notification-body  {
     display: none !important;
+    background-color: red !important;
   }
-  .bell-toggler  {
+  .bell  {
     display: none !important;
   }
 } 
 
-.notification-body{
+.notification-body-toggler{
   margin-right: 50px !important;
 }
