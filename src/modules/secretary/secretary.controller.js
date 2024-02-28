@@ -64,10 +64,21 @@ export const addExistingManager = asyncHandler(async (req, res, next) => {
 });
 
 export const createMeeting = async (req, res, next) => {
-  let isManager = await Manager.findByPk(req.params.manager_id);
+  console.log(req.payload.id);
+  let isManager = await Manager.findByPk(req.params.manager_id, {
+    include: [
+      {
+        model: Secertary,
+        attributes: ["secretary_id"],
+      },
+    ],
+  });
+
   if (!isManager) return next(new Error("Invalid Manager"));
 
-  if (isManager.secretary_id != req.payload.id)
+  if (!isManager.dataValues.Secretaries.find((secretary) => {
+    return secretary.dataValues.secretary_id === req.payload.id;
+  }))
     return next(new Error("You Must Be The Secretary For This Manager"));
 
   // Check Time Exitsss
@@ -108,7 +119,7 @@ export const createMeeting = async (req, res, next) => {
   if (req.body.insidePersons) {
     req.body.insidePersons.map(async (manager) => {
       let isManager = await Manager.findByPk(manager);
-      if (!isManager) return next(new Error("Invalid Manager"));
+      if (!isManager) return next(new Error("Invalid Inside Manager"));
 
       await meeting_Manager.create({
         manager_id: isManager.manager_id,
