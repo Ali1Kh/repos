@@ -88,6 +88,25 @@
     "Comments": "تعليقات",
     "inOrOut": "داخل أو خارج"
   },
+
+  "tableMeetings": {
+    "meetings": "الاجتماعات",
+    "btnShow": "عرض PDF",
+    "btnAddNotes": "إضافة ملاحظات",
+    "table": {
+      "date": "تاريخ الاجتماع",
+      "time": "وقت الاجتماع",
+      "person": "شخص",
+      "guestName": "اسم الضيف",
+      "topic": "الموضوع",
+      "address": "العنوان",
+      "area": "المنطقة",
+      "status": "الحالة",
+      "comments": "تعليقات",
+      "inOrOut": "داخل أو خارج"
+    }
+  },
+
   "MeetingContextMenu": {
     "status": "تعديل الحالة",
     "statusContext": {

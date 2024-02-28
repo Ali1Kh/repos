@@ -130,7 +130,7 @@ export default function Meetings() {
             className="pageHeading mt-4 mb-xxl-4 mb-4 animate__animated animate__zoomIn"
             style={{ userSelect: "none" }}
           >
-            {t("Meetings.meetings")}
+            {t("tableMeetings.meetings")}
           </h2>
           <div className="meetingsConatiner  p-xxl-4" style={{ width: "100%" }}>
             <div
@@ -158,7 +158,7 @@ export default function Meetings() {
                 columns={[
                   {
                     field: "date",
-                    headerName: t("Meetings.table.date"),
+                    headerName: t("tableMeetings.table.date"),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
@@ -166,7 +166,7 @@ export default function Meetings() {
                   },
                   {
                     field: "time",
-                    headerName: t("Meetings.table.time"),
+                    headerName: t("tableMeetings.table.time"),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
@@ -174,7 +174,7 @@ export default function Meetings() {
                   },
                   {
                     field: "person",
-                    headerName: t("Meetings.table.person"),
+                    headerName: t("tableMeetings.table.person"),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
@@ -182,7 +182,7 @@ export default function Meetings() {
                   },
                   {
                     field: "about",
-                    headerName: t("Meetings.table.topic"),
+                    headerName: t("tableMeetings.table.topic"),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
@@ -190,7 +190,7 @@ export default function Meetings() {
                   },
                   {
                     field: "address",
-                    headerName: t("Meetings.table.address"),
+                    headerName: t("tableMeetings.table.address"),
                     headerClassName: "tableColumns ",
                     align: "center",
                     headerAlign: "center",
@@ -198,7 +198,7 @@ export default function Meetings() {
                   },
                   {
                     field: "in_or_out",
-                    headerName: t("Meetings.table.area"),
+                    headerName: t("tableMeetings.table.area"),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
@@ -206,7 +206,7 @@ export default function Meetings() {
                   },
                   {
                     field: "statues",
-                    headerName: t("Meetings.table.status"),
+                    headerName: t("tableMeetings.table.status"),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
@@ -214,7 +214,7 @@ export default function Meetings() {
                   },
                   {
                     field: "notes",
-                    headerName: t("Meetings.table.notes"),
+                    headerName: t("tableMeetings.table.Comments"),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",

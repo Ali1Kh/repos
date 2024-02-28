@@ -20,3 +20,8 @@ button.btn-meeting {
 button.btn-meeting:hover {
     background-color: var(--hover);
 }
+
+.modal {
+    z-index: 9999 !important;
+    background: rgba(33, 36, 40, 0.4);
+}
