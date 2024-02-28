@@ -47,7 +47,8 @@
     "signupheader": "Sign Up",
     "loginHint": "Already Have An Acount ?",
     "login": "Login",
-    "createManagerAccount": "Create Manager Account"
+    "createManagerAccount": "Create Manager Account",
+    "AddExistingAccount":"Add Existing Account"
   },
   "search": "Search",
   "sidebar": {
