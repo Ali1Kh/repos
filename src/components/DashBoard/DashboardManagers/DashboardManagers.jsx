@@ -100,11 +100,11 @@ export default function DashBoardManagers() {
                       <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                           <TableRow>
-                            <TableCell align="center" component="td" className="fw-bold">{t("Dashborad.ManageresAndSecretaries.userName")}</TableCell>
-                            <TableCell align="center" component="td" className="fw-bold">{t("Dashborad.ManageresAndSecretaries.name")}</TableCell>
-                            <TableCell align="center" component="td" className="fw-bold">{t("Dashborad.ManageresAndSecretaries.E_mail")}</TableCell>
-                            <TableCell align="center" component="td" className="fw-bold">{t("Dashborad.ManageresAndSecretaries.Accepted")}</TableCell>
-                            <TableCell align="center" component="td" className="fw-bold">{t("Dashborad.ManageresAndSecretaries.delete")}</TableCell>
+                            <TableCell align="center" className="fw-bold">{t("Dashborad.ManageresAndSecretaries.userName")}</TableCell>
+                            <TableCell align="center" className="fw-bold">{t("Dashborad.ManageresAndSecretaries.name")}</TableCell>
+                            <TableCell align="center" className="fw-bold">{t("Dashborad.ManageresAndSecretaries.E_mail")}</TableCell>
+                            <TableCell align="center" className="fw-bold">{t("Dashborad.ManageresAndSecretaries.Accepted")}</TableCell>
+                            <TableCell align="center" className="fw-bold">{t("Dashborad.ManageresAndSecretaries.delete")}</TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
