@@ -41,7 +41,8 @@
     "button": "إنشاء حساب",
     "loginHint": "لديك حساب بالفعل",
     "login": "تسجيل دخول",
-    "createManagerAccount": "إنشاء حساب المدير"
+    "createManagerAccount": "إنشاء حساب المدير",
+    "AddExistingAccount":"اضافة مدير موجود"
   },
   "sidebar": {
     "home": "الاجتماعات",

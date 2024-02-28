@@ -240,7 +240,7 @@ function CreateManagerAccount() {
                       }}
                       className="cursorPointer"
                     >
-                      Add Existing Account
+                      {t("signup.AddExistingAccount")}
                     </a>
                   </div>
                   <div
@@ -299,8 +299,7 @@ function CreateManagerAccount() {
                     className="Signup-btn d-flex justify-content-center align-items-center mt-3"
                   >
                     <button type="submit">
-                      Add Existing Manager
-                      {/* {t("signup.createManagerAccount")} */}
+                      {t("signup.createManagerAccount")}
                     </button>
                   </div>
                 </Form>
