@@ -6,8 +6,8 @@ import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import $ from "jquery";
 export default function MeetingDetails({ meetingsDetails }) {
-
   const [show, setShow] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -17,16 +17,10 @@ export default function MeetingDetails({ meetingsDetails }) {
 
   const authToken = localStorage.getItem("token");
 
-  function getNotes() {
-    return axios
-      .get("https://meetingss.onrender.com/notes/", {
-        headers: {
-          token: authToken,
-        },
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+  function viewPdf(e) {
+    e.stopPropagation();
+    $(".pdfContainer").css("display", "block");
+    $("body").css("overflow", "hidden");
   }
 
   const postAddNotes = () => {
@@ -54,7 +48,6 @@ export default function MeetingDetails({ meetingsDetails }) {
       .then((response) => {
         if (response.data.success) {
           toast.success("Note Added Successfully");
-          getNotes();
         } else {
           // Handle failure
         }
@@ -63,7 +56,6 @@ export default function MeetingDetails({ meetingsDetails }) {
         console.error("Error:", error);
       });
   };
-
 
   const [t] = useTranslation();
 
@@ -113,16 +105,27 @@ export default function MeetingDetails({ meetingsDetails }) {
                       <span>{t("meetings.time")}</span>
                       <h5 className="mb-3">{meetingsDetails.time}</h5>
                       <div className="d-flex justify-content-center">
-                        <button type="button" class="btn-meeting">{t("meetings.btnShow")}</button>
+                        {meetingsDetails.attachmentLink ? (
+                          <button
+                            type="button"
+                            onClick={viewPdf}
+                            class="btn-meeting"
+                          >
+                            {t("meetings.btnShow")}
+                          </button>
+                        ) : (
+                          ""
+                        )}
+
                         <button
                           type="button"
                           class="btn-meeting"
                           onClick={() => {
                             handleShow();
-                            setContent();
-                            setTitle();
                           }}
-                        >{t("meetings.btnAddNotes")}</button>
+                        >
+                          {t("meetings.btnAddNotes")}
+                        </button>
                       </div>
                     </div>
                   </div>

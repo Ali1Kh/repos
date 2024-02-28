@@ -26,6 +26,7 @@ import DashboardManagers from "./components/DashBoard/DashboardManagers/Dashboar
 import DashboardMeetings from "./components/DashBoard/DashboardMeetings/DashboardMeetings.jsx";
 import DashboardSecertaries from "./components/DashBoard/DashboardSecertaries/DashboardSecertaries.jsx";
 import History from "./components/DashBoard/History/History.jsx";
+import SearchProvider from "./components/context/searchContext.js";
 
 const router = createHashRouter([
   {
@@ -40,7 +41,9 @@ const router = createHashRouter([
         path: "/meetings",
         element: (
           <ProtectedRoutes role={"Manager"}>
-            <HomePage />
+            <SearchProvider>
+              <HomePage />
+            </SearchProvider>
           </ProtectedRoutes>
         ),
       },
@@ -48,7 +51,9 @@ const router = createHashRouter([
         path: "home",
         element: (
           <ProtectedRoutes role={"Manager"}>
-            <HomePage />
+            <SearchProvider>
+              <HomePage />
+            </SearchProvider>
           </ProtectedRoutes>
         ),
       },
@@ -109,7 +114,9 @@ const router = createHashRouter([
             path: "",
             element: (
               <ProtectedRoutes role={"Manager"}>
-                <HomePage />
+                <SearchProvider>
+                  <HomePage />
+                </SearchProvider>
               </ProtectedRoutes>
             ),
           },
@@ -252,7 +259,9 @@ function App() {
       <QueryClientProvider client={client}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <ThemeProvider theme={{}}>
+          <SearchProvider>
             <RouterProvider router={router} />
+          </SearchProvider>
           </ThemeProvider>
         </LocalizationProvider>
         <Toaster toastOptions={{ style: { zIndex: "99999" } }} />

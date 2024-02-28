@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./homePage.css";
 import MeetingDetails from "../manager/meetingDetails/meetingDetails.jsx";
 import { useTranslation } from "react-i18next";
@@ -6,36 +6,10 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { TailSpin } from "react-loader-spinner";
 import $ from "jquery";
-import Meetings from './../secretary/Meeting/meetings/Meetings';
+import Meetings from "./../secretary/Meeting/meetings/Meetings";
+import { searchContext } from "../context/searchContext.js";
 
 export default function HomePage() {
-  const [t] = useTranslation();
-
-  const [data, setData] = useState([]);
-
-
-  let {  isLoading } = useQuery("getMeetings", getMeetings);
-
-  const authToken = localStorage.getItem("token");
-
-  async function getMeetings() {
-
-    if (!authToken) {
-      console.error("Authentication token not found in Local Storage");
-      return;
-    }
-
-    const {data} = await axios.get("https://meetingss.onrender.com/meetings/", {
-      headers: {
-        token: authToken,
-      },
-    });
-
-    if (data.success) {
-      setData(data)
-    }
-  }
-
   let colors = [
     "#FFB399",
     "#FFFFFF99",
@@ -70,25 +44,20 @@ export default function HomePage() {
     "#99E6E6",
     "#666666FF",
   ];
-
   localStorage.setItem("colors", JSON.stringify(colors));
+  const [t] = useTranslation();
 
-  async function search(name) {
-    const {data} = await axios.get(`https://meetingss.onrender.com/meetings?person=${name}`, {
-      headers: {
-        token: authToken
-      }
-    })
-    if (data.success) { 
-      setData(data)
-    }
-  }
+  let { meetings } = useContext(searchContext);
 
-  let searchName=$("#searchName");
-  searchName.keyup(function(){
-      search(searchName.val())
-      // console.log(data);
-  })
+  let isLoading = false;
+ 
+
+  useEffect(() => {
+    $("body").click(() => {
+      $(".pdfContainer").css("display", "none");
+      $("body").css("overflow", "auto");
+    });
+  }, []);
 
   return (
     <>
@@ -119,34 +88,35 @@ export default function HomePage() {
           ) : (
             <div className="row gy-3">
               <>
-                {data
-                  ? data.meetings?.map((meeting, idx) => (
-                    <>
-                      <div
-                        key={idx}
-                        className="inner-parent  col-lg-4 px-lg-4 col-md-12 col-sm-12 mt-4 animate__animated animate__fadeIn animate__slower"
-                        data-aos="fade-up"
-                        data-aos-delay="500"
-                        data-aos-once="true"
-                      >
+                {meetings
+                  ? meetings.meetings?.map((meeting, idx) => (
+                      <>
                         <div
-                          className="inner-card h-100 shadow rounded-4 gap-3 p-4 flex-column"
-                          data-bs-toggle="modal"
-                          data-bs-target={`#meetingModal${meeting.meeting_id}`}
+                          key={idx}
+                          className="inner-parent  col-lg-4 px-lg-4 col-md-12 col-sm-12 mt-4 animate__animated animate__fadeIn animate__slower"
+                          data-aos="fade-up"
+                          data-aos-delay="500"
+                          data-aos-once="true"
                         >
-                          <div className="guest-info d-flex flex-column align-items-center">
-                            <div
-                              className="guest-icon-profile d-flex justify-content-center align-items-center me-3 mb-2 mt-2 ms-3"
-                              style={{ width: "55px", height: "50px" }}
-                            >
+                          <div
+                            className="inner-card h-100 shadow rounded-4 gap-3 p-4 flex-column"
+                            data-bs-toggle="modal"
+                            data-bs-target={`#meetingModal${meeting.meeting_id}`}
+                          >
+                            <div className="guest-info d-flex flex-column align-items-center">
                               <div
-                                className="meetingGuestIcon text-black d-flex justify-content-center align-items-center"
-                                style={{
-                                  backgroundColor: `${colors[
-                                    Math.floor(
-                                      Math.random() * colors.length
-                                    )
-                                    ]
+                                className="guest-icon-profile d-flex justify-content-center align-items-center me-3 mb-2 mt-2 ms-3"
+                                style={{ width: "55px", height: "50px" }}
+                              >
+                                <div
+                                  className="meetingGuestIcon text-black d-flex justify-content-center align-items-center"
+                                  style={{
+                                    backgroundColor: `${
+                                      colors[
+                                        Math.floor(
+                                          Math.random() * colors.length
+                                        )
+                                      ]
                                     }`,
                                   }}
                                 >
@@ -198,12 +168,13 @@ export default function HomePage() {
                           <MeetingDetails meetingsDetails={meeting} />
                         </div>
                         <div
-                          className="pdfContainer d-none rounded-3 pt-5 overflow-auto container position-fixed start-50 translate-middle-x p-2"
+                          className="pdfContainer rounded-3 pt-5 overflow-auto container position-fixed start-50 translate-middle-x p-2"
                           style={{
                             width: "70%",
                             height: "95vh",
                             top: "25px",
                             zIndex: 9999,
+                            display: "none",
                           }}
                         >
                           <i
@@ -218,9 +189,7 @@ export default function HomePage() {
                               <div className="h-100">
                                 <iframe
                                   className="rounded-3"
-                                  src={
-                                    "https://res.cloudinary.com/dqhm8q5ku/image/upload/v1708810740/meetingsApp/attachments/18/ob7pnahntgqodwvxng5y.pdf"
-                                  }
+                                  src={meeting.attachmentLink}
                                   width="100%"
                                   height="100%"
                                 />
