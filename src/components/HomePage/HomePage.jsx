@@ -1,4 +1,4 @@
-import React, { useEffect , useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./homePage.css";
 import MeetingDetails from "../manager/meetingDetails/meetingDetails.jsx";
 import { useTranslation } from "react-i18next";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./newMeeting.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
@@ -24,12 +24,19 @@ const newTheme = (theme) =>
 export default function NewMeeting() {
   let [date, setDate] = useState(null);
   let [time, setTime] = useState(null);
-
+  let [btnLoading, setBtnLoading] = useState(false);
   let [managers, setManagers] = useState([]);
   let [allmanagers, setAllManagers] = useState([]);
   let [insidePersons, setInsidePersons] = useState([]);
+  const autocompleteRef = useRef(null);
 
   async function addMeeting() {
+    handleManagerChange("e", []);
+    setUploadedFiles([]);
+    setDate(null);
+    setTime(null);
+    autocompleteRef.current.clear();
+    return;
     let person = $("#meetPerson").val();
     let topic = $("#meetTopic").val();
     let address = $("#meetAddress").val();
@@ -37,8 +44,8 @@ export default function NewMeeting() {
     let managerSelected = $("#managerSelected").val();
     let area = $('input[name="radio-group"]:checked').val();
 
-    if (area == "Outside") {
-      if (person == "") {
+    if (area === "Outside") {
+      if (person === "") {
         $(".error").removeClass("d-none");
         $(".error").addClass("d-block");
         return;
@@ -89,7 +96,7 @@ export default function NewMeeting() {
       insidePersons,
     };
 
-    if (area != "Inside") {
+    if (area !== "Inside") {
       delete initData.insidePersons;
     }
 
@@ -115,6 +122,9 @@ export default function NewMeeting() {
     }
 
     try {
+      setBtnLoading(true);
+      $(".error").addClass("d-none");
+      $(".error").removeClass("d-block");
       let { data } = await axios.post(
         `https://meetingss.onrender.com/secretary/createMeeting/${managerSelected}`,
         formData,
@@ -122,9 +132,18 @@ export default function NewMeeting() {
       );
       if (data.success) {
         toast.success(data.message);
-        $(".error").addClass("d-none");
-        $(".error").removeClass("d-block");
+        setBtnLoading(false);
+        $("#meetTopic").val("");
+        $("#meetAddress").val("");
+        $("#meetNotes").val("");
+        $("#managerSelected").val("");
+        $("#meetPerson").val("");
+        handleManagerChange([]);
+        setUploadedFiles([]);
+        setDate(null);
+        setTime(null);
       } else {
+        setBtnLoading(false);
         toast.error(data.message);
       }
     } catch (error) {
@@ -187,7 +206,7 @@ export default function NewMeeting() {
           {t("CreateOrUpdateMeeting.createMeeting")}
         </h2>
 
-        <div className="inputsContainer p-0 w-100  p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
+        <div className="inputsContainer p-0   p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
           <div className="calenderPicker row p-0 m-0">
             <div className="col-md-6  inputItem mb-3 px-5">
               <ThemeProvider theme={newTheme}>
@@ -195,6 +214,7 @@ export default function NewMeeting() {
                   format="LL"
                   onChange={(val) => setDate(val)}
                   disablePast
+                  value={date}
                 />
               </ThemeProvider>
             </div>
@@ -207,14 +227,16 @@ export default function NewMeeting() {
                     minutes: renderTimeViewClock,
                     seconds: renderTimeViewClock,
                   }}
+                  value={time}
                 />
               </ThemeProvider>
             </div>
           </div>
           <div>
             {buttonPressed === "Inside" ? (
-              <div className="inputItem mb-3 px-5">
+              <div className="inputItem tagify mb-3 px-5">
                 <Autocomplete
+                  ref={autocompleteRef} 
                   multiple
                   id="tags-filled"
                   onChange={handleManagerChange}
@@ -242,7 +264,7 @@ export default function NewMeeting() {
                     <TextField
                       {...params}
                       placeholder={t("CreateOrUpdateMeeting.person")}
-                      className="tagify"
+                      className=""
                       sx={{
                         // backgroundColor: "var(--main-color) !important",
                         padding: "8px",
@@ -296,9 +318,8 @@ export default function NewMeeting() {
               <div
                 {...getRootProps()}
                 style={{ borderStyle: "dashed" }}
-                className={`dropzone h-100 ${
-                  isDragActive ? "active h-100" : ""
-                }`}
+                className={`dropzone h-100 ${isDragActive ? "active h-100" : ""
+                  }`}
               >
                 <input {...getInputProps()} />
                 {isDragActive ? (
@@ -417,9 +438,19 @@ export default function NewMeeting() {
               All Inputs Are Required!
             </small>
 
-            <button onClick={addMeeting} className="addButton">
-              {t("CreateOrUpdateMeeting.buttonAdd")}
-            </button>
+            {btnLoading ? (
+              <>
+                <button disabled className="addButton">
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </button>
+              </>
+            ) : (
+              <button onClick={addMeeting} className="addButton">
+                {t("CreateOrUpdateMeeting.buttonAdd")}
+              </button>
+            )}
           </div>
         </div>
       </div>

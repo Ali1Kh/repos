@@ -1,7 +1,6 @@
 import React from "react";
 import "./createManagerAccount.css";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -127,7 +126,7 @@ function CreateManagerAccount() {
                         <Field
                           type="text"
                           name="firstName"
-                          className="first-name w-100 form-control"
+                          className="first-name inputItem-man w-100 form-control"
                           placeholder={t("signup.firstName")}
                         />
                         <ErrorMessage
@@ -140,7 +139,7 @@ function CreateManagerAccount() {
                         <Field
                           type="text"
                           name="lastName"
-                          className="last-name w-100 form-control"
+                          className="last-name inputItem-man w-100 form-control"
                           placeholder={t("signup.lastName")}
                         />
                         <ErrorMessage
@@ -153,7 +152,7 @@ function CreateManagerAccount() {
                     <Field
                       type="text"
                       name="userName"
-                      className="user-name mt-3 d-flex justify-content-center form-control"
+                      className="user-name inputItem-man mt-3 d-flex justify-content-center form-control"
                       placeholder={t("signup.userName")}
                     />
                     <ErrorMessage
@@ -164,7 +163,7 @@ function CreateManagerAccount() {
                     <Field
                       type="email"
                       name="email"
-                      className="user-name mt-3 d-flex justify-content-center form-control"
+                      className="user-name inputItem-man mt-3 d-flex justify-content-center form-control"
                       placeholder={t("signup.email")}
                     />
                     <ErrorMessage
@@ -172,20 +171,20 @@ function CreateManagerAccount() {
                       component="label"
                       className="error-label"
                     />
-                    <div className="password-input d-flex">
+                    <div className="password-input inputItem-man d-flex">
                     <Field
                       id= "password" 
                       type="password"
                       name="password"
-                      className="pass-word mt-3 d-flex justify-content-center form-control"
+                      className="pass-word inputItem-man mt-3 d-flex justify-content-center form-control"
                       placeholder={t("signup.password")}
                     />
-                    <button id="eye" className="btn d-flex justify-content-center align-items-center ms-2"
+                    <button id="eye" className="btn btn-eye d-flex justify-content-center align-items-center ms-2"
                       onClick={() => {
                         let password = document.getElementById("password")
                         let eyeicon = document.getElementById("eye-icon")
 
-                        if (password.type == "password") {
+                        if (password.type === "password") {
                           password.type = "text"
                           eyeicon.className = "fa-solid fa-eye"
                         }
@@ -202,12 +201,12 @@ function CreateManagerAccount() {
                       component="label"
                       className="error-label"
                     />
-                    <div className="password-input d-flex">
+                    <div className="password-input inputItem-man d-flex">
                     <Field
                       id= "confirm-password"
                       type="password"
                       name="confirmPassword"
-                      className="pass-word mt-3 d-flex justify-content-center form-control"
+                      className="pass-word inputItem-man mt-3 d-flex justify-content-center form-control"
                       placeholder={t("signup.confirmPassword")}
                     />
                     <button id="eye" className="btn d-flex justify-content-center align-items-center ms-2"

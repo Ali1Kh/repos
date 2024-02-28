@@ -3,6 +3,8 @@
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   padding: 55px 10px !important;
+  width: 80%;
+  margin: 10px 0 40px !important;
 }
 
 .inputItem input,
@@ -73,6 +75,7 @@
   padding: 8px 25px !important;
   /* background-color: var(--cardBgColor) !important; */
 }
+
 .inputItem select option {
   color: black !important;
   /* background-color: var(--cardBgColor) !important; */
@@ -221,5 +224,4 @@
 
 .css-1h51icj-MuiAutocomplete-root .MuiAutocomplete-tag {
   border: 1px solid var(--sec-color) !important;
-  
 }
