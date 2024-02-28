@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect , useState } from "react";
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -17,17 +17,23 @@ export default function History() {
 
   const token = localStorage.getItem("token")
 
-  const { data, isLoading } = useQuery("getDashBoardSecertar", getDashBoardSecertar);
+  const [data, setData] = useState([]);
+
+  const { isLoading } = useQuery("getHistory", getHistory);
 
 
-  function getDashBoardSecertar() {
-    return axios.get("https://meetingss.onrender.com/dashboard/getLoginHistory", {
+  async function getHistory() {
+    const {data} = await axios.get("https://meetingss.onrender.com/dashboard/getLoginHistory", {
       headers: {
         token: token
       }
-
     })
+    if (data.success) {
+      console.log(data);
+        setData(data)
+    }
   }
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -84,10 +90,10 @@ export default function History() {
                         </TableHead>
                         <TableBody>
                           {/* {data
-                            ? data?.data.history?.map((histor, idx) => (
+                            ? data?.history?.map((histor, idx) => (
                               <TableRow hover tabIndex={-1} key={idx}>
                                 <TableCell align="center" component="th" scope="row">{histor.role}</TableCell>
-                                <TableCell align="center" component="th">{histor["Secretary"].UserName}</TableCell>
+                                <TableCell align="center" component="th">{histor.Secretary.UserName}</TableCell>
                                 <TableCell align="center" component="th">{histor["Secretary"].first_name + " " + histor["Secretary"].last_name}</TableCell>
                                 <TableCell align="center" component="th">{histor["Secretary"].E_mail}</TableCell>
                                 <TableCell align="center" component="th">{histor.createdAt}</TableCell>
@@ -100,7 +106,7 @@ export default function History() {
                     <TablePagination
                       rowsPerPageOptions={[5, 10, 25]}
                       component="div"
-                      count={data?.data.meetings?.length}
+                      count={data?.meetings?.length}
                       rowsPerPage={rowsPerPage}
                       page={page}
                       onPageChange={handleChangePage}
