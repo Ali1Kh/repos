@@ -83,10 +83,8 @@ export default function Login() {
       });
   };
 
-
-
-
   const [t] = useTranslation();
+
   return (
     <>
       <div className="main">
@@ -116,7 +114,7 @@ export default function Login() {
                         let password = document.getElementById("password")
                         let eyeicon = document.getElementById("eye-icon")
 
-                        if (password.type === "password") {
+                        if (password.type == "password") {
                           password.type = "text"
                           eyeicon.className = "fa-solid fa-eye"
                         }
