@@ -43,11 +43,12 @@ i.deletAcc {
     border-radius: 10px;
     color: #cac4d0;
     border: 1px solid #7E7EBE;
+    transition: all 0.5s;
 }
 
 i.deletAcc:hover {
-    background-color: #404040;
-    border: 1px solid #7E7EBE;
+    background-color: red;
+    border: 1px solid var(--main-color);
 }
 
 .header-table {

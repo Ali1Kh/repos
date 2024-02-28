@@ -11,13 +11,20 @@
     "meetingStatus":"Status",
     "comments":"Comments"
   },
+  "navInner": {
+    "Home": "Home",
+    "calendar": "Calendar",
+    "meeting": "Meetings",
+    "createMeeting": "Create Meeting"
+  },
   "Login": {
     "loginheader":"Login",
     "email": "Email",
     "password": "Password",
     "button": "Login",
     "signuphint":"Don't Have An Acount ? ",
-    "signup":"Sign Up"
+    "signup":"Sign Up",
+    "forget":"Forget Password ?"
 },
   "signup": {
     "firstName": "First Name",
@@ -62,7 +69,10 @@
     "inside":"Inside Company",
     "outside":"Outside Company",
     "buttonAdd":"ADD MEETING",
-    "buttonUpdate":"Update Meeting"
+    "buttonUpdate":"Update Meeting",
+    "Drag":"Drag and drop file here or click to browse",
+    "nofile":"No File Uploaded",
+    "choose":"Choose Manager"
   },
   "Meetings":{
     "meetings":"Meetings",
@@ -89,7 +99,8 @@
       "userName": "Username",
       "name": "Name" ,
       "E_mail": "Email",
-      "action": "Action"
+      "action": "Action",
+      "acceptBtn": "Accept"
     },
     "ManageresAndSecretaries": {
       "ManageresName":"Manageres",
@@ -101,7 +112,13 @@
       "delete": "Delete"
     },
     "history": {
-      "historyName":"History"
+      "historyName":"History",
+      "role":"Role",
+      "userName":"UserName",
+      "name":"Name",
+      "email":"Email",
+      "createdAt":"CreatedAt",
+      "agent":"Agent"
     },
     "Meetings": {
       "MeetingsName":"Meetings",

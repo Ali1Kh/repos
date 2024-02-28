@@ -47,7 +47,7 @@
   box-shadow: none !important;
 }
 
-.calenderPicker .inputItem > div {
+.calenderPicker .inputItem>div {
   width: 100% !important;
 }
 
@@ -69,6 +69,10 @@
   box-shadow: none !important;
 }
 
+.inputItem select {
+  padding: 8px 25px !important;
+  /* background-color: var(--cardBgColor) !important; */
+}
 .inputItem select option {
   color: black !important;
   /* background-color: var(--cardBgColor) !important; */
@@ -118,13 +122,13 @@
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.radio-button__input:checked + .radio-button__label .radio-button__custom {
+.radio-button__input:checked+.radio-button__label .radio-button__custom {
   transform: translateY(-50%) scale(0.9);
   border: 5px solid var(--sec-color);
   color: var(--sec-color);
 }
 
-.radio-button__input:checked + .radio-button__label {
+.radio-button__input:checked+.radio-button__label {
   color: var(--sec-color);
 }
 
@@ -137,7 +141,7 @@
 /* !Button */
 .addButton {
   --color: var(--sec-color);
-  padding: 8px 12px;
+  padding: 10px 50px;
   background-color: transparent;
   border-radius: 0.3em;
   position: relative;
@@ -192,7 +196,7 @@
 }
 
 /* timePicker */
-.timePicker > div {
+.timePicker>div {
   width: 100% !important;
 }
 
@@ -210,11 +214,12 @@
 }
 
 .dropzone {
-  border: 2px solid var(--sec-color);
+  border: 3px solid var(--sec-color);
   border-radius: 10px;
   height: 60px;
 }
 
 .css-1h51icj-MuiAutocomplete-root .MuiAutocomplete-tag {
   border: 1px solid var(--sec-color) !important;
+  
 }

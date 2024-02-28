@@ -5,8 +5,7 @@
 .MuiFormControl-root {
     border: 2px solid var(--sec-color) !important;
     border-radius: 10px !important;
-    background-color: var(--main-color) !important;
-
+    background-color: var(--inputsBgColor) !important;
 }
 
 .MuiInputBase-input {
