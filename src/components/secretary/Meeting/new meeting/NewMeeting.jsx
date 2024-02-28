@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./newMeeting.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
@@ -24,12 +24,19 @@ const newTheme = (theme) =>
 export default function NewMeeting() {
   let [date, setDate] = useState(null);
   let [time, setTime] = useState(null);
-
+  let [btnLoading, setBtnLoading] = useState(false);
   let [managers, setManagers] = useState([]);
   let [allmanagers, setAllManagers] = useState([]);
   let [insidePersons, setInsidePersons] = useState([]);
+  const autocompleteRef = useRef(null);
 
   async function addMeeting() {
+    handleManagerChange("e", []);
+    setUploadedFiles([]);
+    setDate(null);
+    setTime(null);
+    autocompleteRef.current.clear();
+    return;
     let person = $("#meetPerson").val();
     let topic = $("#meetTopic").val();
     let address = $("#meetAddress").val();
@@ -115,6 +122,9 @@ export default function NewMeeting() {
     }
 
     try {
+      setBtnLoading(true);
+      $(".error").addClass("d-none");
+      $(".error").removeClass("d-block");
       let { data } = await axios.post(
         `https://meetingss.onrender.com/secretary/createMeeting/${managerSelected}`,
         formData,
@@ -122,9 +132,18 @@ export default function NewMeeting() {
       );
       if (data.success) {
         toast.success(data.message);
-        $(".error").addClass("d-none");
-        $(".error").removeClass("d-block");
+        setBtnLoading(false);
+        $("#meetTopic").val("");
+        $("#meetAddress").val("");
+        $("#meetNotes").val("");
+        $("#managerSelected").val("");
+        $("#meetPerson").val("");
+        handleManagerChange([]);
+        setUploadedFiles([]);
+        setDate(null);
+        setTime(null);
       } else {
+        setBtnLoading(false);
         toast.error(data.message);
       }
     } catch (error) {
@@ -195,6 +214,7 @@ export default function NewMeeting() {
                   format="LL"
                   onChange={(val) => setDate(val)}
                   disablePast
+                  value={date}
                 />
               </ThemeProvider>
             </div>
@@ -207,6 +227,7 @@ export default function NewMeeting() {
                     minutes: renderTimeViewClock,
                     seconds: renderTimeViewClock,
                   }}
+                  value={time}
                 />
               </ThemeProvider>
             </div>
@@ -215,6 +236,7 @@ export default function NewMeeting() {
             {buttonPressed === "Inside" ? (
               <div className="inputItem mb-3 px-5">
                 <Autocomplete
+                  ref={autocompleteRef} 
                   multiple
                   id="tags-filled"
                   onChange={handleManagerChange}
@@ -417,9 +439,19 @@ export default function NewMeeting() {
               All Inputs Are Required!
             </small>
 
-            <button onClick={addMeeting} className="addButton">
-              {t("CreateOrUpdateMeeting.buttonAdd")}
-            </button>
+            {btnLoading ? (
+              <>
+                <button disabled className="addButton">
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </button>
+              </>
+            ) : (
+              <button onClick={addMeeting} className="addButton">
+                {t("CreateOrUpdateMeeting.buttonAdd")}
+              </button>
+            )}
           </div>
         </div>
       </div>
