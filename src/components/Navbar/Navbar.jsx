@@ -172,7 +172,7 @@ export default function Navbar() {
                             </svg>
                           </div>
                         </span>
-                        <span>{t("sidebar.home")}</span>
+                        <span>{t("sidebar.meetings")}</span>
                       </Link>
                       <Link
                         className="nav-item animate__animated"

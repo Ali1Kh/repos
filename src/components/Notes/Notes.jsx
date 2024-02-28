@@ -174,7 +174,7 @@ export default function Nots() {
                           <div className="text-black d-flex mt-2 align-items-center">
                             <p>{note.content}</p>
                           </div>
-                          <small className="mt-auto">
+                          <small className="note-createdAt mt-auto">
                             {new Date(note.createdAt).toLocaleDateString(
                               "en-US",
                               {

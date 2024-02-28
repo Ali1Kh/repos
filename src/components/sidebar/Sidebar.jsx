@@ -129,7 +129,7 @@ const Sidebar = () => {
                         </svg>
                       </div>
                     </span>
-                    <span>{t("sidebar.home")}</span>
+                    <span>{t("sidebar.meetings")}</span>
                   </Link>
                   <Link
                     className="sidebarItem animate__animated"
