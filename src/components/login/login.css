@@ -85,6 +85,11 @@
   color: var(--sec-color) !important;
 }
 
+#eye:active {
+  outline: none !important;
+  border: 0 !important;
+}
+
 .role {
   background-color: var(--cardBgColor);
   border: 1px solid var(--sec-color);
