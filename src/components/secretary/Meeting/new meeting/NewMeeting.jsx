@@ -206,7 +206,7 @@ export default function NewMeeting() {
           {t("CreateOrUpdateMeeting.createMeeting")}
         </h2>
 
-        <div className="inputsContainer p-0   p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
+        <div className="ineer py-5 d-flex flex-column justify-content-center align-items">
           <div className="calenderPicker row p-0 m-0">
             <div className="col-md-6  inputItem mb-3 px-5">
               <ThemeProvider theme={newTheme}>
@@ -236,7 +236,7 @@ export default function NewMeeting() {
             {buttonPressed === "Inside" ? (
               <div className="inputItem tagify mb-3 px-5">
                 <Autocomplete
-                  ref={autocompleteRef} 
+                  ref={autocompleteRef}
                   multiple
                   id="tags-filled"
                   onChange={handleManagerChange}
