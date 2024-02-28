@@ -114,8 +114,7 @@
       "delete": "حذف"
     },
     "history": {
-      "historyName": "السجل"
-      "historyName":"السجل",
+      "historyName": "السجل",
       "role":"المسمى الوظيفي",
       "userName":"اسم المستخدم",
       "name":"الاسم",
