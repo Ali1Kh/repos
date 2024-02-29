@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./calender.css";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -48,7 +48,8 @@ export default function Calender() {
     $y: today.getFullYear(),
   });
   let [day, setDay] = useState(weekday[new Date().getDay()]);
-  function monthChanged(month) {
+  function monthChanged(month, year) {
+    console.log(`${year}-${month}-01`);
     setHighlightedDays([20, 25, 1]);
   }
   const [t] = useTranslation();
@@ -82,6 +83,30 @@ export default function Calender() {
     }
   }
 
+  async function getMeetingsDays() {
+    const authToken = localStorage.getItem("token");
+    if (!authToken) {
+      console.error("Authentication token not found in Local Storage");
+      return;
+    }
+
+    let { data } = await axios.get(`https://meetingss.onrender.com/meetings/`, {
+      headers: {
+        token: authToken,
+      },
+    });
+
+    if (data.success) {
+      console.log(
+        data.meetings?.map((meeting) => new Date(meeting.date).getDate())
+      );
+    }
+  }
+
+  useEffect(() => {
+    getMeetingsDays();
+  }, []);
+
   return (
     <div className="main  px-md-2">
       <div className="container p-5 d-flex flex-column justify-content-center align-items-center ">
@@ -100,7 +125,7 @@ export default function Calender() {
                     setDay(weekday[new Date(val).getDay()]);
                     dateChanged(val);
                   }}
-                  onMonthChange={(val) => monthChanged(val.$M + 1)}
+                  onMonthChange={(val) => monthChanged(val.$M + 1, val.$y)}
                   slots={{
                     day: ServerDay,
                   }}

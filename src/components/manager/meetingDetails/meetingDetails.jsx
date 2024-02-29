@@ -12,12 +12,15 @@ export default function MeetingDetails({ meetingsDetails }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
+  const [titleVal, setTitleVal] = useState("");
+
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const authToken = localStorage.getItem("token");
 
-  function viewPdf(e,id) {
+  function viewPdf(e, id) {
     e.stopPropagation();
     $(`#pdfContainer${id}`).css("display", "block");
     $("body").css("overflow", "hidden");
@@ -34,7 +37,7 @@ export default function MeetingDetails({ meetingsDetails }) {
     }
     axios
       .post(
-        "https://meetingss.onrender.com/notes/",
+        "https://meetingss.onrender.com/notes/336",
         {
           title: title,
           content: content,
@@ -108,7 +111,9 @@ export default function MeetingDetails({ meetingsDetails }) {
                         {meetingsDetails.attachmentLink ? (
                           <button
                             type="button"
-                            onClick={(e)=>viewPdf(e,meetingsDetails.meeting_id)}
+                            onClick={(e) =>
+                              viewPdf(e, meetingsDetails.meeting_id)
+                            }
                             class="btn-meeting"
                           >
                             {t("meetings.btnShow")}
@@ -135,7 +140,8 @@ export default function MeetingDetails({ meetingsDetails }) {
           </div>
         </div>
       </div>
-      <Modal show={show} onHide={handleClose} style={{ zIndex: 9999999 }}>
+
+      <Modal show={show} onHide={handleClose} style={{ zIndex: 9998 }}>
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -143,8 +149,8 @@ export default function MeetingDetails({ meetingsDetails }) {
                 type="text"
                 placeholder="Title"
                 autoFocus
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={titleVal}
+                onChange={(e) => {setTitleVal(e.target.value) ; console.log("?");}}
               />
             </Form.Group>
             <Form.Group
@@ -160,6 +166,7 @@ export default function MeetingDetails({ meetingsDetails }) {
               />
             </Form.Group>
           </Form>
+
           <Button
             variant="primary"
             onClick={() => {

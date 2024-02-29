@@ -96,7 +96,7 @@ export default function HomePage() {
                           data-aos-once="true"
                         >
                           <div
-                            className="inner-card h-100 shadow rounded-4 gap-3 p-4 flex-column"
+                            className="inner-card h-100 shadow rounded-4 gap-3 p-3 justify-content-end flex-column"
                             data-bs-toggle="modal"
                             data-bs-target={`#meetingModal${meeting.meeting_id}`}
                           >
@@ -135,7 +135,8 @@ export default function HomePage() {
                                 ""
                               )}
                             </div>
-                            <div className="meeting-info row mt-2">
+
+                            <div className="meeting-info row mt-auto">
                               <div className="meeting-topic col-lg-4 col-md-4">
                                 <p className="text-center m-1 heading">
                                   {t("HomePage.meetingTopic")}
@@ -154,12 +155,12 @@ export default function HomePage() {
                                 </p>
                               </div>
 
-                              <div className="meeting-date col-lg-4 col-md-4">
+                              <div className="meeting-date col-lg-4 col-md-4 p-0">
                                 <p className="text-center m-1 heading">
                                   {t("HomePage.meetingDate")}
                                 </p>
-                                <p className="text-center m-1">
-                                  {meeting.time}
+                                <p className="text-center w-100 m-1 ">
+                                  {meeting.date}
                                 </p>
                               </div>
                             </div>
@@ -206,8 +207,8 @@ export default function HomePage() {
                       className="d-flex flex-column justify-content-center align-items-center text-center"
                       style={{ height: "50vh" }}
                     >
-                  <img src={require("../../image/no-data.png")} alt="" />
-              <h4 className="mt-5">No Meetings Found</h4>
+                      <img src={require("../../image/no-data.png")} alt="" />
+                      <h4 className="mt-5">No Meetings Found</h4>
                     </div>
                   )
                 ) : (
