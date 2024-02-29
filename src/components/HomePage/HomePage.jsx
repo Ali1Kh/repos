@@ -2,13 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import "./homePage.css";
 import MeetingDetails from "../manager/meetingDetails/meetingDetails.jsx";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
-import { useQuery } from "react-query";
 import { TailSpin } from "react-loader-spinner";
 import $ from "jquery";
-import Meetings from "./../secretary/Meeting/meetings/Meetings";
-import { searchContext } from "../context/searchContext.js";
-
+import { useQuery } from "react-query";
+import axios from "axios";
 export default function HomePage() {
   let colors = [
     "#FFB399",
@@ -46,16 +43,38 @@ export default function HomePage() {
   ];
   localStorage.setItem("colors", JSON.stringify(colors));
   const [t] = useTranslation();
+  const [meetings, setMeetings] = useState([]);
+  const authToken = localStorage.getItem("token");
+  let { isLoading } = useQuery("getMeetings", getMeetings);
 
-  let { meetings } = useContext(searchContext);
+  async function getMeetings() {
+    if (!authToken) {
+      console.error("Authentication token not found in Local Storage");
+      return;
+    }
 
-  let isLoading = false;
- 
+    const { data } = await axios.get(
+      "https://meetingss.onrender.com/meetings/",
+      {
+        headers: {
+          token: authToken,
+        },
+      }
+    );
+
+    if (data.success) {
+      setMeetings(data);
+    }
+  }
 
   useEffect(() => {
     $("body").click(() => {
       $(".pdfContainer").css("display", "none");
       $("body").css("overflow", "auto");
+    });
+
+    $("#searchSubmit").click(() => {
+      console.log($("#searchName").val());
     });
   }, []);
 
@@ -168,6 +187,7 @@ export default function HomePage() {
                           <MeetingDetails meetingsDetails={meeting} />
                         </div>
                         <div
+                          id={`pdfContainer${meeting.meeting_id}`}
                           className="pdfContainer rounded-3 pt-5 overflow-auto container position-fixed start-50 translate-middle-x p-2"
                           style={{
                             width: "70%",

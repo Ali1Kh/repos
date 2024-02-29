@@ -93,7 +93,7 @@ export default function History() {
                         <TableBody>
                           {data
                             ? data?.history?.map((histor, idx) => (
-                              (histor.Secretary === null ?
+                              (histor.Secretary === null && histor.Manager !== null ?
                                 <TableRow hover tabIndex={-1} key={idx}>
                                   <TableCell align="center" component="th" scope="row">{histor.role}</TableCell>
                                   <TableCell align="center" component="th">{histor.Manager?.UserName}</TableCell>
@@ -103,7 +103,7 @@ export default function History() {
                                   <TableCell align="center" component="th">{histor.createdAt.slice(11, 19)}</TableCell>
                                   <TableCell align="center" component="th">{histor.agent.slice(0, 12)}</TableCell>
                                 </TableRow>
-                                : histor.Manager === null ?
+                                : histor.Manager === null && histor.Secretary !== null ?
                                   <TableRow hover tabIndex={-1} key={idx}>
                                     <TableCell align="center" component="th" scope="row">{histor.role}</TableCell>
                                     <TableCell align="center" component="th">{histor.Secretary?.UserName}</TableCell>

@@ -31,12 +31,6 @@ export default function NewMeeting() {
   const autocompleteRef = useRef(null);
 
   async function addMeeting() {
-    handleManagerChange("e", []);
-    setUploadedFiles([]);
-    setDate(null);
-    setTime(null);
-    autocompleteRef.current.clear();
-    return;
     let person = $("#meetPerson").val();
     let topic = $("#meetTopic").val();
     let address = $("#meetAddress").val();
@@ -138,7 +132,7 @@ export default function NewMeeting() {
         $("#meetNotes").val("");
         $("#managerSelected").val("");
         $("#meetPerson").val("");
-        handleManagerChange([]);
+        handleManagerChange("e", []);
         setUploadedFiles([]);
         setDate(null);
         setTime(null);
@@ -205,252 +199,254 @@ export default function NewMeeting() {
         >
           {t("CreateOrUpdateMeeting.createMeeting")}
         </h2>
-
-        <div className="ineer py-5 d-flex flex-column justify-content-center align-items">
-          <div className="calenderPicker row p-0 m-0">
-            <div className="col-md-6  inputItem mb-3 px-5">
-              <ThemeProvider theme={newTheme}>
-                <DesktopDatePicker
-                  format="LL"
-                  onChange={(val) => setDate(val)}
-                  disablePast
-                  value={date}
-                />
-              </ThemeProvider>
+        <div className="inputsContainer p-0 p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
+          <div className="ineer py-5 d-flex flex-column justify-content-center align-items">
+            <div className="calenderPicker row p-0 m-0">
+              <div className="col-md-6  inputItem mb-3 px-5">
+                <ThemeProvider theme={newTheme}>
+                  <DesktopDatePicker
+                    format="LL"
+                    onChange={(val) => setDate(val)}
+                    disablePast
+                    value={date}
+                  />
+                </ThemeProvider>
+              </div>
+              <div className="col-md-6  inputItem timePicker mb-3 px-5 ">
+                <ThemeProvider theme={newTheme}>
+                  <TimePicker
+                    onChange={(val) => setTime(val)}
+                    viewRenderers={{
+                      hours: renderTimeViewClock,
+                      minutes: renderTimeViewClock,
+                      seconds: renderTimeViewClock,
+                    }}
+                    value={time}
+                  />
+                </ThemeProvider>
+              </div>
             </div>
-            <div className="col-md-6  inputItem timePicker mb-3 px-5 ">
-              <ThemeProvider theme={newTheme}>
-                <TimePicker
-                  onChange={(val) => setTime(val)}
-                  viewRenderers={{
-                    hours: renderTimeViewClock,
-                    minutes: renderTimeViewClock,
-                    seconds: renderTimeViewClock,
-                  }}
-                  value={time}
-                />
-              </ThemeProvider>
-            </div>
-          </div>
-          <div>
-            {buttonPressed === "Inside" ? (
-              <div className="inputItem tagify mb-3 px-5">
-                <Autocomplete
-                  ref={autocompleteRef}
-                  multiple
-                  id="tags-filled"
-                  onChange={handleManagerChange}
-                  options={allmanagers}
-                  getOptionLabel={(option) =>
-                    option.first_name + " " + option.last_name
-                  }
-                  freeSolo
-                  renderTags={(value, getTagProps) =>
-                    value.map((option, index) => (
-                      <Chip
-                        key={option.manager_id}
-                        variant="outlined"
-                        className="bg-info"
-                        label={
-                          typeof option === "string"
-                            ? option
-                            : option.first_name + " " + option.last_name
-                        }
-                        {...getTagProps({ index })}
+            <div>
+              {buttonPressed === "Inside" ? (
+                <div className="inputItem tagify mb-3 px-5">
+                  <Autocomplete
+                    ref={autocompleteRef}
+                    multiple
+                    id="tags-filled"
+                    onChange={handleManagerChange}
+                    options={allmanagers}
+                    getOptionLabel={(option) =>
+                      option.first_name + " " + option.last_name
+                    }
+                    freeSolo
+                    renderTags={(value, getTagProps) =>
+                      value.map((option, index) => (
+                        <Chip
+                          key={option.manager_id}
+                          variant="outlined"
+                          className="bg-info"
+                          label={
+                            typeof option === "string"
+                              ? option
+                              : option.first_name + " " + option.last_name
+                          }
+                          {...getTagProps({ index })}
+                        />
+                      ))
+                    }
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        placeholder={t("CreateOrUpdateMeeting.person")}
+                        className=""
+                        sx={{
+                          // backgroundColor: "var(--main-color) !important",
+                          padding: "8px",
+                          color: "var(--BlackToWhite)",
+                          border: "2px solid var(--sec-color)",
+                          borderRadius: "8px",
+                        }}
                       />
-                    ))
-                  }
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      placeholder={t("CreateOrUpdateMeeting.person")}
-                      className=""
-                      sx={{
-                        // backgroundColor: "var(--main-color) !important",
-                        padding: "8px",
-                        color: "var(--BlackToWhite)",
-                        border: "2px solid var(--sec-color)",
-                        borderRadius: "8px",
+                    )}
+                  />
+                </div>
+              ) : (
+                <div className="inputItem mb-3 px-5 ">
+                  <input
+                    type="text"
+                    className="form-control py-2"
+                    id="meetPerson"
+                    placeholder={t("CreateOrUpdateMeeting.person")}
+                  />
+                </div>
+              )}
+            </div>
+
+            <div className="inputItem mb-3 px-5">
+              <input
+                type="text"
+                className="form-control py-2"
+                id="meetTopic"
+                placeholder={t("CreateOrUpdateMeeting.topic")}
+              />
+            </div>
+            <div className="inputItem mb-3 px-5">
+              <input
+                type="text"
+                className="form-control py-2"
+                id="meetAddress"
+                placeholder={t("CreateOrUpdateMeeting.address")}
+              />
+            </div>
+            <div className="inputItem mb-3 px-5">
+              <textarea
+                className="form-control py-2"
+                id="meetNotes"
+                rows="4"
+                style={{ maxHeight: "150px" }}
+                placeholder={t("CreateOrUpdateMeeting.notes")}
+              ></textarea>
+            </div>
+            <div className="inputItem  mb-3 px-5 ">
+              <div className="upload-container">
+                <div
+                  {...getRootProps()}
+                  style={{ borderStyle: "dashed" }}
+                  className={`dropzone h-100 ${
+                    isDragActive ? "active h-100" : ""
+                  }`}
+                >
+                  <input {...getInputProps()} />
+                  {isDragActive ? (
+                    <p>Drop the file here</p>
+                  ) : (
+                    <div className="d-flex justify-content-center align-items-center flex-column">
+                      <img
+                        width={"60px"}
+                        height={"60px"}
+                        src={require("../../../../image/cloud-upload-regular-240.png")}
+                        alt=""
+                        srcset=""
+                      />
+                      <p className="p-2 text-center">
+                        {t("CreateOrUpdateMeeting.Drag")}
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                <div className="file-list mt-3">
+                  {uploadedFiles.length > 0 ? (
+                    <div className="d-flex flex-row flex-wrap gap-3">
+                      {uploadedFiles.map((file, index) => (
+                        <div
+                          className="cursorPointer w-fit p-3 py-2 rounded-3 position-relative"
+                          key={index}
+                          style={{
+                            border: "1px solid var(--cardHeadingColor)",
+                          }}
+                        >
+                          <i className="fa-solid fa-file-pdf"></i>{" "}
+                          <span>{file.name}</span>
+                          <div
+                            onClick={(e) => {
+                              setUploadedFiles(
+                                uploadedFiles.filter(
+                                  (fileItem) => fileItem.path !== file.path
+                                )
+                              );
+                            }}
+                            className="deleteFile cursorPointer position-absolute"
+                            style={{ top: "-10px", right: "-10px" }}
+                          >
+                            <i className="fa-regular fa-trash-can"></i>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p>{t("CreateOrUpdateMeeting.nofile")}</p>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="d-md-flex justify-content-between">
+              <div className="inputItem mb-3 px-5 ">
+                <select id="managerSelected" className="py-2 w-auto px-2">
+                  <option value="">{t("CreateOrUpdateMeeting.choose")}</option>
+                  {managers?.map((manager) => (
+                    <>
+                      <option value={manager.manager_id}>
+                        {manager.first_name} {manager.last_name}
+                      </option>
+                    </>
+                  ))}
+                </select>
+              </div>
+              <div className="radios inputItem mb-3 px-5 d-flex   gap-md-2 align-items-center">
+                <div className="radio-buttons-container d-flex flex-md-row flex-column align-items-start">
+                  <div className="radio-button d-flex align-items-center">
+                    <input
+                      name="radio-group"
+                      id="radio2"
+                      className="radio-button__input"
+                      type="radio"
+                      value={"Inside"}
+                      onClick={() => {
+                        setButtonPressed("Inside");
                       }}
                     />
-                  )}
-                />
-              </div>
-            ) : (
-              <div className="inputItem mb-3 px-5 ">
-                <input
-                  type="text"
-                  className="form-control py-2"
-                  id="meetPerson"
-                  placeholder={t("CreateOrUpdateMeeting.person")}
-                />
-              </div>
-            )}
-          </div>
-
-          <div className="inputItem mb-3 px-5">
-            <input
-              type="text"
-              className="form-control py-2"
-              id="meetTopic"
-              placeholder={t("CreateOrUpdateMeeting.topic")}
-            />
-          </div>
-          <div className="inputItem mb-3 px-5">
-            <input
-              type="text"
-              className="form-control py-2"
-              id="meetAddress"
-              placeholder={t("CreateOrUpdateMeeting.address")}
-            />
-          </div>
-          <div className="inputItem mb-3 px-5">
-            <textarea
-              className="form-control py-2"
-              id="meetNotes"
-              rows="4"
-              style={{ maxHeight: "150px" }}
-              placeholder={t("CreateOrUpdateMeeting.notes")}
-            ></textarea>
-          </div>
-          <div className="inputItem  mb-3 px-5 ">
-            <div className="upload-container">
-              <div
-                {...getRootProps()}
-                style={{ borderStyle: "dashed" }}
-                className={`dropzone h-100 ${isDragActive ? "active h-100" : ""
-                  }`}
-              >
-                <input {...getInputProps()} />
-                {isDragActive ? (
-                  <p>Drop the file here</p>
-                ) : (
-                  <div className="d-flex justify-content-center align-items-center flex-column">
-                    <img
-                      width={"60px"}
-                      height={"60px"}
-                      src={require("../../../../image/cloud-upload-regular-240.png")}
-                      alt=""
-                      srcset=""
+                    <label
+                      htmlFor="radio2"
+                      className="radio-button__label BlackToWhite"
+                    >
+                      <span className="radio-button__custom"></span>
+                      {t("CreateOrUpdateMeeting.inside")}
+                    </label>
+                  </div>
+                  <div className="radio-button d-flex align-items-center">
+                    <input
+                      name="radio-group"
+                      id="radio1"
+                      className="radio-button__input"
+                      type="radio"
+                      value={"Outside"}
+                      onClick={() => {
+                        setButtonPressed("Outside");
+                      }}
                     />
-                    <p className="p-2 text-center">
-                      {t("CreateOrUpdateMeeting.Drag")}
-                    </p>
+                    <label
+                      htmlFor="radio1"
+                      className="radio-button__label BlackToWhite"
+                    >
+                      <span className="radio-button__custom"></span>
+                      {t("CreateOrUpdateMeeting.outside")}
+                    </label>
                   </div>
-                )}
-              </div>
-
-              <div className="file-list mt-3">
-                {uploadedFiles.length > 0 ? (
-                  <div className="d-flex flex-row flex-wrap gap-3">
-                    {uploadedFiles.map((file, index) => (
-                      <div
-                        className="cursorPointer w-fit p-3 py-2 rounded-3 position-relative"
-                        key={index}
-                        style={{
-                          border: "1px solid var(--cardHeadingColor)",
-                        }}
-                      >
-                        <i className="fa-solid fa-file-pdf"></i>{" "}
-                        <span>{file.name}</span>
-                        <div
-                          onClick={(e) => {
-                            setUploadedFiles(
-                              uploadedFiles.filter(
-                                (fileItem) => fileItem.path !== file.path
-                              )
-                            );
-                          }}
-                          className="deleteFile cursorPointer position-absolute"
-                          style={{ top: "-10px", right: "-10px" }}
-                        >
-                          <i className="fa-regular fa-trash-can"></i>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p>{t("CreateOrUpdateMeeting.nofile")}</p>
-                )}
-              </div>
-            </div>
-          </div>
-
-          <div className="d-md-flex justify-content-between">
-            <div className="inputItem mb-3 px-5 ">
-              <select id="managerSelected" className="py-2 w-auto px-2">
-                <option value="">{t("CreateOrUpdateMeeting.choose")}</option>
-                {managers?.map((manager) => (
-                  <>
-                    <option value={manager.manager_id}>
-                      {manager.first_name} {manager.last_name}
-                    </option>
-                  </>
-                ))}
-              </select>
-            </div>
-            <div className="radios inputItem mb-3 px-5 d-flex   gap-md-2 align-items-center">
-              <div className="radio-buttons-container d-flex flex-md-row flex-column align-items-start">
-                <div className="radio-button d-flex align-items-center">
-                  <input
-                    name="radio-group"
-                    id="radio2"
-                    className="radio-button__input"
-                    type="radio"
-                    value={"Inside"}
-                    onClick={() => {
-                      setButtonPressed("Inside");
-                    }}
-                  />
-                  <label
-                    htmlFor="radio2"
-                    className="radio-button__label BlackToWhite"
-                  >
-                    <span className="radio-button__custom"></span>
-                    {t("CreateOrUpdateMeeting.inside")}
-                  </label>
-                </div>
-                <div className="radio-button d-flex align-items-center">
-                  <input
-                    name="radio-group"
-                    id="radio1"
-                    className="radio-button__input"
-                    type="radio"
-                    value={"Outside"}
-                    onClick={() => {
-                      setButtonPressed("Outside");
-                    }}
-                  />
-                  <label
-                    htmlFor="radio1"
-                    className="radio-button__label BlackToWhite"
-                  >
-                    <span className="radio-button__custom"></span>
-                    {t("CreateOrUpdateMeeting.outside")}
-                  </label>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="d-flex flex-column w-100 justify-content-center align-items-center ">
-            <small style={{ color: "red" }} className="error d-none mb-3">
-              All Inputs Are Required!
-            </small>
+            <div className="d-flex flex-column w-100 justify-content-center align-items-center ">
+              <small style={{ color: "red" }} className="error d-none mb-3">
+                All Inputs Are Required!
+              </small>
 
-            {btnLoading ? (
-              <>
-                <button disabled className="addButton">
-                  <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                  </div>
+              {btnLoading ? (
+                <>
+                  <button disabled className="addButton">
+                    <div class="spinner-border" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </button>
+                </>
+              ) : (
+                <button onClick={addMeeting} className="addButton">
+                  {t("CreateOrUpdateMeeting.buttonAdd")}
                 </button>
-              </>
-            ) : (
-              <button onClick={addMeeting} className="addButton">
-                {t("CreateOrUpdateMeeting.buttonAdd")}
-              </button>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>

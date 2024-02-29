@@ -20,18 +20,22 @@ export default function Nots() {
 
   const authToken = localStorage.getItem("token");
 
-  let { data, isLoading } = useQuery("getNotes", getNotes);
+  let [data, setData] = useState([]);
 
-  function getNotes() {
-    return axios
-      .get("https://meetingss.onrender.com/notes/", {
+  let { isLoading } = useQuery("getNotes", getNotes);
+
+  async function getNotes() {
+    try {
+      let { data } = await axios.get("https://meetingss.onrender.com/notes/", {
         headers: {
           token: authToken,
         },
-      })
-      .catch((error) => {
-        console.error("Error:", error);
       });
+      handleClose();
+      setData(data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const postAddNotes = () => {
@@ -152,8 +156,8 @@ export default function Nots() {
               </div>
             ) : (
               <>
-                {data?.data.notes.length > 0 ? (
-                  data?.data.notes.map((note, idx) => (
+                {data.notes?.length > 0 ? (
+                  data.notes?.map((note, idx) => (
                     <div
                       key={idx}
                       className="inner-parent col-lg-3 px-lg-3 col-md-12 col-sm-12 mt-4 animate__animated animate__fadeIn animate__slower"

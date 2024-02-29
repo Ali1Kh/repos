@@ -17,9 +17,9 @@ export default function MeetingDetails({ meetingsDetails }) {
 
   const authToken = localStorage.getItem("token");
 
-  function viewPdf(e) {
+  function viewPdf(e,id) {
     e.stopPropagation();
-    $(".pdfContainer").css("display", "block");
+    $(`#pdfContainer${id}`).css("display", "block");
     $("body").css("overflow", "hidden");
   }
 
@@ -108,7 +108,7 @@ export default function MeetingDetails({ meetingsDetails }) {
                         {meetingsDetails.attachmentLink ? (
                           <button
                             type="button"
-                            onClick={viewPdf}
+                            onClick={(e)=>viewPdf(e,meetingsDetails.meeting_id)}
                             class="btn-meeting"
                           >
                             {t("meetings.btnShow")}

@@ -259,9 +259,9 @@ function App() {
       <QueryClientProvider client={client}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <ThemeProvider theme={{}}>
-          <SearchProvider>
-            <RouterProvider router={router} />
-          </SearchProvider>
+            <SearchProvider>
+              <RouterProvider router={router} />
+            </SearchProvider>
           </ThemeProvider>
         </LocalizationProvider>
         <Toaster toastOptions={{ style: { zIndex: "99999" } }} />

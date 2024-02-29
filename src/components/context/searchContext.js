@@ -4,13 +4,12 @@ import axios from "axios";
 export const searchContext = createContext();
 export default function SearchProvider({ children }) {
   const [meetings, setMeetings] = useState([]);
-  //   let { isLoading } = useQuery("getMeetings", getMeetings);
-
-  const authToken = localStorage.getItem("token");
+  //   let { isLoading } = useQuery("getMeetings");
 
   useEffect(() => {
     getMeetings();
   }, []);
+  const authToken = localStorage.getItem("token");
 
   async function getMeetings() {
     if (!authToken) {
@@ -41,15 +40,14 @@ export default function SearchProvider({ children }) {
         },
       }
     );
-    console.log("? > ", data);
+
     if (data.success) {
       setMeetings(data);
-      console.log(">>>>>>>", meetings);
     }
   }
 
   return (
-    <searchContext.Provider value={{ meetings, search }}>
+    <searchContext.Provider value={{ meetings, setMeetings, search }}>
       {children}
     </searchContext.Provider>
   );
