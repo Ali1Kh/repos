@@ -81,10 +81,9 @@ export default function Navbar() {
 
   const [t, il8n] = useTranslation();
 
-  let { search , setMeetings } = useContext(searchContext);
+  let { searchMeet } = useContext(searchContext);
   const handleKeyPress = async (event) => {
-    // setMeetings([])
-  //  await search(event.target.value);
+   await searchMeet(event.target.value);
   };
 
   return (
@@ -296,7 +295,7 @@ export default function Navbar() {
               </div>
               {role ? (
                 role === "Manager" ? (
-                  <li className="d-none nav-item search ms-auto d-flex justify-content-center align-items-center me-3">
+                  <li className="d-non nav-item search ms-auto d-flex justify-content-center align-items-center me-3">
                     <div className="input-group w-100 ps-0 pe-5">
                       <span className="input-group-text" id="basic-addon1">
                         <i className="fa-solid fa-magnifying-glass"></i>
@@ -309,7 +308,6 @@ export default function Navbar() {
                         placeholder={t("search")}
                       />
                     </div>
-                    <button id="searchSubmit" className="">OK</button>
                   </li>
                 ) : (
                   ""

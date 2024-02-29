@@ -6,6 +6,7 @@ import { TailSpin } from "react-loader-spinner";
 import $ from "jquery";
 import { useQuery } from "react-query";
 import axios from "axios";
+import { searchContext } from "../context/searchContext.js";
 export default function HomePage() {
   let colors = [
     "#FFB399",
@@ -43,38 +44,14 @@ export default function HomePage() {
   ];
   localStorage.setItem("colors", JSON.stringify(colors));
   const [t] = useTranslation();
-  const [meetings, setMeetings] = useState([]);
   const authToken = localStorage.getItem("token");
-  let { isLoading } = useQuery("getMeetings", getMeetings);
 
-  async function getMeetings() {
-    if (!authToken) {
-      console.error("Authentication token not found in Local Storage");
-      return;
-    }
-
-    const { data } = await axios.get(
-      "https://meetingss.onrender.com/meetings/",
-      {
-        headers: {
-          token: authToken,
-        },
-      }
-    );
-
-    if (data.success) {
-      setMeetings(data);
-    }
-  }
+  let { meetings, isLoading } = useContext(searchContext);
 
   useEffect(() => {
     $("body").click(() => {
       $(".pdfContainer").css("display", "none");
       $("body").css("overflow", "auto");
-    });
-
-    $("#searchSubmit").click(() => {
-      console.log($("#searchName").val());
     });
   }, []);
 
@@ -107,8 +84,9 @@ export default function HomePage() {
           ) : (
             <div className="row gy-3">
               <>
-                {meetings
-                  ? meetings.meetings?.map((meeting, idx) => (
+                {meetings ? (
+                  meetings.meetings?.length > 0 ? (
+                    meetings.meetings?.map((meeting, idx) => (
                       <>
                         <div
                           key={idx}
@@ -147,11 +125,15 @@ export default function HomePage() {
                                   </span>
                                 </div>
                               </div>
-                              <div className="guest-account text-center d-flex flex-column align-items-center mt-3">
-                                <div className="guest-name flex-column">
-                                  <h4>{meeting.person}</h4>
+                              {meeting.person != "undefined" ? (
+                                <div className="guest-account text-center d-flex flex-column align-items-center mt-3">
+                                  <div className="guest-name flex-column">
+                                    <h4>{meeting.person}</h4>
+                                  </div>
                                 </div>
-                              </div>
+                              ) : (
+                                ""
+                              )}
                             </div>
                             <div className="meeting-info row mt-2">
                               <div className="meeting-topic col-lg-4 col-md-4">
@@ -219,7 +201,18 @@ export default function HomePage() {
                         </div>
                       </>
                     ))
-                  : ""}
+                  ) : (
+                    <div
+                      className="d-flex flex-column justify-content-center align-items-center text-center"
+                      style={{ height: "50vh" }}
+                    >
+                  <img src={require("../../image/no-data.png")} alt="" />
+              <h4 className="mt-5">No Meetings Found</h4>
+                    </div>
+                  )
+                ) : (
+                  ""
+                )}
               </>
             </div>
           )}

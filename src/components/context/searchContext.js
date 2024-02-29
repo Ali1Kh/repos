@@ -4,12 +4,13 @@ import axios from "axios";
 export const searchContext = createContext();
 export default function SearchProvider({ children }) {
   const [meetings, setMeetings] = useState([]);
-  //   let { isLoading } = useQuery("getMeetings");
+    let { isLoading } = useQuery("getMeetings", getMeetings);
+ 
+  const authToken = localStorage.getItem("token");
 
   useEffect(() => {
     getMeetings();
   }, []);
-  const authToken = localStorage.getItem("token");
 
   async function getMeetings() {
     if (!authToken) {
@@ -31,23 +32,21 @@ export default function SearchProvider({ children }) {
     }
   }
 
-  async function search(val) {
+  async function searchMeet(val) {
     const { data } = await axios.get(
-      `https://meetingss.onrender.com/meetings?person=${val}`,
+      `https://meetingss.onrender.com/meetings?about=${val}&address=${val}&person=${val}`,
       {
         headers: {
           token: authToken,
         },
       }
     );
-
     if (data.success) {
       setMeetings(data);
     }
   }
-
   return (
-    <searchContext.Provider value={{ meetings, setMeetings, search }}>
+    <searchContext.Provider value={{ meetings,isLoading, searchMeet }}>
       {children}
     </searchContext.Provider>
   );
