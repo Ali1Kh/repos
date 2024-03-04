@@ -131,7 +131,7 @@ export const rejectManagerAcc = asyncHandler(async (req, res, next) => {
 export const getAllSecretaries = asyncHandler(async (req, res, next) => {
   let secertaries = await Secertary.findAll({
     attributes: {
-      exclude: ["PassWord", "resetCode", "resetCodeVerified", "updatedAt"],
+      exclude: ["PassWord", "resetCode", "resetCodeVerified"],
     },
   });
   return res.json({ success: true, secertaries });
@@ -140,7 +140,7 @@ export const getAllSecretaries = asyncHandler(async (req, res, next) => {
 export const getAllManagers = asyncHandler(async (req, res, next) => {
   let managers = await Manager.findAll({
     attributes: {
-      exclude: ["PassWord", "resetCode", "resetCodeVerified", "updatedAt"],
+      exclude: ["PassWord", "resetCode", "resetCodeVerified"],
     },
   });
   return res.json({ success: true, managers });
