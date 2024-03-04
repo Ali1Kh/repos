@@ -17,6 +17,8 @@ export const Manager = sequelize.define(
     last_name: { type: DataTypes.STRING },
     PassWord: { type: DataTypes.STRING, allowNull: false },
     UserName: DataTypes.STRING,
+    Accepted_Acc: { type: DataTypes.BOOLEAN, defaultValue: null },
+    isDeleted: { type: DataTypes.BOOLEAN, defaultValue: false },
     resetCode: { type: DataTypes.STRING, defaultValue: null },
     resetCodeVerified: { type: DataTypes.BOOLEAN, defaultValue: false },
   },

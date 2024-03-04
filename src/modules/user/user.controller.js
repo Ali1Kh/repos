@@ -56,6 +56,9 @@ export const signIn = asyncHandler(async (req, res, next) => {
     );
     if (!managerPassMatch) return next(new Error("Invalid Password !"));
 
+    if (isManager.isDeleted)
+      return next(new Error("Your Account Is Deleted , Call Admin To Recover It"));
+
     const token = jwt.sign(
       {
         id: isManager.manager_id,
@@ -95,12 +98,16 @@ export const signIn = asyncHandler(async (req, res, next) => {
     );
     if (!secertaryPassMatch) return next(new Error("Invalid Password !"));
 
+    if (isSecertary.isDeleted)
+      return next(new Error("Your Account Is Deleted , Call Admin To Recover It"));
+
     if (isSecertary.Accepted_Acc == false)
       return next(
         new Error(
           "Your Account Is Not Accepted , Contact Admin To Accept Your Account !"
         )
       );
+
 
     const token = jwt.sign(
       {
