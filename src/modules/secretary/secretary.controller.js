@@ -138,9 +138,15 @@ export const createMeeting = async (req, res, next) => {
 };
 
 export const getSecMeetings = async (req, res, next) => {
-  let meetings = await Meetings.findAll({
-    where: { addedBy: req.payload.id },
-  });
+  let meetings = await sequelize.query(
+    `select Meetings.meeting_id,time,date,about,in_or_out,address, notes,person,statues,Meetings.createdAt,Meetings.updatedAt,
+     attachmentId,attachmentLink,attachmentName,
+     Manager.manager_id,CONCAT(first_name, ' ', last_name)  as 'Manager_Name',E_mail as 'Manager_Email',UserName as 'Manager_UserName' from Meetings
+     join meeting_Manager on Meetings.meeting_id = meeting_Manager.meeting_id 
+     join Manager on meeting_Manager.manager_id = Manager.manager_id  
+     where addedBy = ${req.payload.id}`
+  );
+
   return res.json({ success: true, meetings });
 };
 
@@ -153,7 +159,7 @@ export const getSecMeetingsDetails = async (req, res, next) => {
 
 export const getSecManagers = async (req, res, next) => {
   let managers = await Manager.findAll({
-    attributes: ["manager_id", "first_name", "last_name","UserName","E_mail"],
+    attributes: ["manager_id", "first_name", "last_name", "UserName", "E_mail"],
     include: [
       {
         model: Secertary,
