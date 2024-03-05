@@ -28,4 +28,8 @@ Meetings.associate = (models) => {
     foreignKey: "meeting_id",
     sourceKey: "meeting_id",
   });
+  Meetings.hasMany(Note, {
+    foreignKey: "meeting_id",
+    sourceKey: "meeting_id",
+  });
 };

@@ -14,7 +14,6 @@ export const getAllMeetings = asyncHandler(async (req, res, next) => {
      join Manager on meeting_Manager.manager_id = Manager.manager_id`
   );
 
-  return res.json({ success: true, meetings });
   return res.json({ success: true, count: meetings.length, meetings });
 });
 

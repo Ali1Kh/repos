@@ -68,6 +68,11 @@ export const getAllNotes = asyncHandler(async (req, res, next) => {
   const notes = await Note.findAll({
     order: [[sortField, sortOrder]],
     where: whereClause,
+    include: [
+      {
+        model: Meetings,
+      },
+    ],
   });
 
   // const notes = await Note.findAll({
