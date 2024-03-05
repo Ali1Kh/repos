@@ -44,6 +44,7 @@ export default function HomePage() {
     "#99E6E6",
     "#666666FF",
   ];
+
   localStorage.setItem("colors", JSON.stringify(colors));
   const [t] = useTranslation();
 

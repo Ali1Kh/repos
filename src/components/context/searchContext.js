@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import axios from "axios";
 export const searchContext = createContext();
 export default function SearchProvider({ children }) {
+  
   const [meetings, setMeetings] = useState([]);
   //   let { isLoading } = useQuery("getMeetings", getMeetings);
 
