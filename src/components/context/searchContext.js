@@ -19,7 +19,7 @@ export default function SearchProvider({ children }) {
     }
 
     const { data } = await axios.get(
-      "https://meetingss.onrender.com/meetings/",
+      "https://meetingss.onrender.com/meetings?sort=date",
       {
         headers: {
           token: authToken,

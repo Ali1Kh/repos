@@ -28,6 +28,8 @@ export default function NewMeeting() {
   let [managers, setManagers] = useState([]);
   let [allmanagers, setAllManagers] = useState([]);
   let [insidePersons, setInsidePersons] = useState([]);
+  let [insidePersonsNames, setInsidePersonsName] = useState([]);
+
   const autocompleteRef = useRef(null);
 
   async function addMeeting() {
@@ -79,6 +81,7 @@ export default function NewMeeting() {
       });
     }
 
+
     let initData = {
       date: dateInput.split(",")[0].split("/").reverse().join("-"),
       time: timeInput.split(",")[1].split(" ")[1],
@@ -92,6 +95,8 @@ export default function NewMeeting() {
 
     if (area !== "Inside") {
       delete initData.insidePersons;
+    }else{
+      initData.person = insidePersonsNames.join(",");
     }
 
     const flattenObject = (obj, parentKey = "") => {
@@ -185,6 +190,11 @@ export default function NewMeeting() {
       value
         .filter((item) => typeof item === "object")
         .map((manager) => manager.manager_id)
+    );
+    setInsidePersonsName(
+      value
+        .filter((item) => typeof item === "object")
+        .map((manager) => manager.first_name+" "+manager.last_name)
     );
   };
 
