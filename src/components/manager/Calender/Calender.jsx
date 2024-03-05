@@ -176,12 +176,15 @@ export default function Calender() {
                           {convertTo12HourFormat(meet.time)}
                         </p>
                         <a
-                          // data-bs-toggle="modal"
-                          // data-bs-target="#meetingModal"
+                          data-bs-toggle="modal"
+                          data-bs-target={`#meetingModal${meet.meeting_id}`}
                           className="mb-3 cursorPointer"
                         >
                           {t("Calendar.showDetails")}
                         </a>
+                        <div className="details position-absolute">
+                          <MeetingDetails meetingsDetails={meet} />
+                        </div>
                       </div>
                     ))
                   ) : (

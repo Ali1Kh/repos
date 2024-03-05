@@ -48,13 +48,6 @@ export default function HomePage() {
 
   let { meetings, isLoading } = useContext(searchContext);
 
-  useEffect(() => {
-    $("body").click(() => {
-      $(".pdfContainer").css("display", "none");
-      $("body").css("overflow", "auto");
-    });
-  }, []);
-
   return (
     <>
       <div className="main p-4 mt-5">
@@ -168,37 +161,6 @@ export default function HomePage() {
                         </div>
                         <div className="details position-absolute">
                           <MeetingDetails meetingsDetails={meeting} />
-                        </div>
-                        <div
-                          id={`pdfContainer${meeting.meeting_id}`}
-                          className="pdfContainer rounded-3 pt-5 overflow-auto container position-fixed start-50 translate-middle-x p-2"
-                          style={{
-                            width: "70%",
-                            height: "95vh",
-                            top: "25px",
-                            zIndex: 9999,
-                            display: "none",
-                          }}
-                        >
-                          <i
-                            style={{ backgroundColor: "#323639" }}
-                            className="fa fa-xmark rounded-3 me-3 position-absolute top-0 end-0 mb-5 p-2 fs-5 z-3 cursorPointer"
-                          ></i>
-                          <div className="pdfView h-100 w-100">
-                            <div
-                              className="pdfFrame d-"
-                              style={{ width: "100%", height: "100%" }}
-                            >
-                              <div className="h-100">
-                                <iframe
-                                  className="rounded-3"
-                                  src={meeting.attachmentLink}
-                                  width="100%"
-                                  height="100%"
-                                />
-                              </div>
-                            </div>
-                          </div>
                         </div>
                       </>
                     ))

@@ -1,27 +1,45 @@
 .parent h2 {
-    font-family: var(--main-font);
+  font-family: var(--main-font);
 }
 
 .inner {
-    height: 70vh;
-    background-color: var(--sec-color);
+  height: 70vh;
+  background-color: var(--sec-color);
 }
 
 button.btn-meeting {
-    background-color: var(--btnBlackToWhite);
-    color: var(--BlackToWhite);
-    padding: 8px 20px;
-    cursor: pointer;
-    border: 1px solid #7E7EBE;
-    border-radius: 10px;
-    margin: 20px;
+  background-color: var(--btnBlackToWhite);
+  color: var(--BlackToWhite);
+  padding: 8px 20px;
+  cursor: pointer;
+  border: 1px solid #7e7ebe;
+  border-radius: 10px;
+  margin: 20px;
 }
 
 button.btn-meeting:hover {
-    background-color: var(--hover);
+  background-color: var(--hover);
 }
 
-.modal {
-    z-index: 9999 !important;
-    background: rgba(33, 36, 40, 0.4);
+/* .meetingModal {
+  z-index: 99990 !important;
+  background: rgba(33, 36, 40, 0.4);
+} */
+
+.meetingModal.fade {
+  transition: opacity 0.1s linear;
+}
+
+.modal .modal-dialog .modal-content {
+  border-radius: 1rem !important;
+  overflow: hidden;
+  border: none;
+  z-index: 1;
+  background: var(--background-color-1);
+  box-shadow: var(--shadow-1);
+  transition: opacity 400ms, backdrop-filter 400ms;
+}
+
+.modal .modal-dialog {
+  max-width: 900px;
 }
