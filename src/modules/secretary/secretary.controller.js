@@ -146,10 +146,8 @@ export const getSecMeetings = async (req, res, next) => {
      join Manager on meeting_Manager.manager_id = Manager.manager_id  
      where addedBy = ${req.payload.id}  GROUP BY Meetings.meeting_id`, {
       model: Meetings,
-      
      }
   );
-console.log(meetings.length);
   return res.json({ success: true, meetings });
 };
 
