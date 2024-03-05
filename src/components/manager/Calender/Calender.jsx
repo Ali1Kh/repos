@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 
 export default function Calender() {
-  const [highlightedDays, setHighlightedDays] = useState([1, 2, 30]);
+  const [highlightedDays, setHighlightedDays] = useState([]);
   const newTheme = (theme) =>
     createTheme({
       ...theme,
@@ -48,9 +48,15 @@ export default function Calender() {
     $y: today.getFullYear(),
   });
   let [day, setDay] = useState(weekday[new Date().getDay()]);
+
+  function getLastDay(y, m) {
+    return new Date(y, m, 0).getDate();
+  }
   function monthChanged(month, year) {
-    console.log(`${year}-${month}-01`);
-    setHighlightedDays([20, 25, 1]);
+    getMeetingsDays(
+      `${year}-${month}-01`,
+      `${year}-${month}-${getLastDay(year, month)}`
+    );
   }
   const [t] = useTranslation();
 
@@ -83,28 +89,35 @@ export default function Calender() {
     }
   }
 
-  async function getMeetingsDays() {
+  async function getMeetingsDays(startDate, endDate) {
     const authToken = localStorage.getItem("token");
     if (!authToken) {
       console.error("Authentication token not found in Local Storage");
       return;
     }
 
-    let { data } = await axios.get(`https://meetingss.onrender.com/meetings/`, {
-      headers: {
-        token: authToken,
-      },
-    });
-
+    let { data } = await axios.get(
+      `https://meetingss.onrender.com/meetings?date[gte]=${startDate}&date[lte]=${endDate}`,
+      {
+        headers: {
+          token: authToken,
+        },
+      }
+    );
     if (data.success) {
-      console.log(
+      setHighlightedDays(
         data.meetings?.map((meeting) => new Date(meeting.date).getDate())
       );
     }
   }
 
   useEffect(() => {
-    getMeetingsDays();
+    let year = new Date().getFullYear();
+    let month = new Date().getMonth() + 1;
+    getMeetingsDays(
+      `${year}-${month}-01`,
+      `${year}-${month}-${getLastDay(year, month)}`
+    );
   }, []);
 
   return (
