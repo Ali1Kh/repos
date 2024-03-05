@@ -16,7 +16,10 @@ import axios from "axios";
 
 export default function Meetings() {
   let [meetingsRows, setMeetingsRows] = useState([]);
-  const getRowId = (row) => row.meeting_id;
+
+  const getRowId = (row) => {
+    return row.meeting_id;
+  };
 
   async function getSecMeetings() {
     try {
@@ -35,7 +38,7 @@ export default function Meetings() {
   useEffect(() => {
     getSecMeetings();
   }, []);
-  
+
   const [open, setOpen] = useState(false);
   let [selectedId, setSelectId] = useState(null);
   let meetingNavigate = useNavigate();
@@ -162,7 +165,7 @@ export default function Meetings() {
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 125,
+                    width: 120,
                   },
                   {
                     field: "time",
@@ -170,7 +173,7 @@ export default function Meetings() {
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 125,
+                    width: 120,
                   },
                   {
                     field: "person",
@@ -178,7 +181,7 @@ export default function Meetings() {
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 125,
+                    width: 120,
                   },
                   {
                     field: "about",
@@ -186,7 +189,7 @@ export default function Meetings() {
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 125,
+                    width: 120,
                   },
                   {
                     field: "address",
@@ -194,7 +197,7 @@ export default function Meetings() {
                     headerClassName: "tableColumns ",
                     align: "center",
                     headerAlign: "center",
-                    width: 125,
+                    width: 120,
                   },
                   {
                     field: "in_or_out",
@@ -202,7 +205,7 @@ export default function Meetings() {
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 125,
+                    width: 120,
                   },
                   {
                     field: "statues",
@@ -210,7 +213,7 @@ export default function Meetings() {
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 125,
+                    width: 120,
                   },
                   {
                     field: "notes",
@@ -218,7 +221,15 @@ export default function Meetings() {
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 125,
+                    width: 120,
+                  },
+                  {
+                    field: "Manager_Name",
+                    headerName: "Manager",
+                    headerClassName: "tableColumns",
+                    align: "center",
+                    headerAlign: "center",
+                    width: 120,
                   },
                 ]}
                 rows={meetingsRows}
@@ -244,9 +255,9 @@ export default function Meetings() {
                     display: "none",
                   },
                   "& [data-testid='ArrowUpwardIcon'], [data-testid='ArrowDownwardIcon']":
-                  {
-                    display: "none",
-                  },
+                    {
+                      display: "none",
+                    },
                 }}
               />
             </div>

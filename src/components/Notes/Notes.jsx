@@ -7,6 +7,9 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { TailSpin } from "react-loader-spinner";
+import $ from "jquery";
+import { Link } from "react-router-dom";
+import MeetingDetails from "../manager/meetingDetails/meetingDetails";
 
 export default function Nots() {
   const [show, setShow] = useState(false);
@@ -20,18 +23,22 @@ export default function Nots() {
 
   const authToken = localStorage.getItem("token");
 
-  let { data, isLoading } = useQuery("getNotes", getNotes);
+  let [data, setData] = useState([]);
 
-  function getNotes() {
-    return axios
-      .get("https://meetingss.onrender.com/notes/", {
+  let { isLoading } = useQuery("getNotes", getNotes);
+
+  async function getNotes() {
+    try {
+      let { data } = await axios.get("https://meetingss.onrender.com/notes/", {
         headers: {
           token: authToken,
         },
-      })
-      .catch((error) => {
-        console.error("Error:", error);
       });
+      handleClose();
+      setData(data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const postAddNotes = () => {
@@ -152,41 +159,73 @@ export default function Nots() {
               </div>
             ) : (
               <>
-                {data?.data.notes.length > 0 ? (
-                  data?.data.notes.map((note, idx) => (
-                    <div
-                      key={idx}
-                      className="inner-parent col-lg-3 px-lg-3 col-md-12 col-sm-12 mt-4 animate__animated animate__fadeIn animate__slower"
-                      data-aos="fade-up"
-                      data-aos-delay="500"
-                      data-aos-once="true"
-                      onClick={() => {
-                        handleShow();
-                        setContent(note.content);
-                        setTitle(note.title);
-                        setId(note.notes_id);
-                        setType("update");
-                      }}
-                    >
-                      <div className="inner-card-notes h-100 shadow rounded-4 gap-4 p-4 flex-column">
-                        <div className="box d-flex  flex-column h-100">
-                          <h5>{note.title}</h5>
-                          <div className="text-black d-flex mt-2 align-items-center">
-                            <p>{note.content}</p>
+                {data.notes?.length > 0 ? (
+                  data.notes?.map((note, idx) => (
+                    <>
+                      <div
+                        key={idx}
+                        className="inner-parent col-lg-3 px-lg-3 col-md-12 col-sm-12 mt-4 animate__animated animate__fadeIn animate__slower"
+                        data-aos="fade-up"
+                        data-aos-delay="500"
+                        data-aos-once="true"
+                        onClick={() => {
+                          handleShow();
+                          setContent(note.content);
+                          setTitle(note.title);
+                          setId(note.notes_id);
+                          setType("update");
+                        }}
+                      >
+                        <div className="inner-card-notes h-100 shadow rounded-4 gap-4 p-4 flex-column">
+                          <div className="box d-flex  flex-column h-100">
+                            <h5>{note.title}</h5>
+                            <div className="text-black d-flex mt-2 align-items-center">
+                              <p>{note.content}</p>
+                            </div>
+                            <div className="text-black d-flex mt-2 align-items-center">
+                              <a
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                }}
+                                data-bs-toggle="modal"
+                                data-bs-target={`#meetingModal${note.meeting_id}`}
+                                className="mb-3 cursorPointer"
+                              >
+                                {note.meeting_id ? (
+                                  <a> Show Meeting Note</a>
+                                ) : (
+                                  ""
+                                )}
+                              </a>
+                            </div>
+
+                            <small className="note-createdAt mt-auto">
+                              {new Date(note.createdAt).toLocaleDateString(
+                                "en-US",
+                                {
+                                  month: "long",
+                                  day: "numeric",
+                                  year: "numeric",
+                                }
+                              )}
+                            </small>
                           </div>
-                          <small className="note-createdAt mt-auto">
-                            {new Date(note.createdAt).toLocaleDateString(
-                              "en-US",
-                              {
-                                month: "long",
-                                day: "numeric",
-                                year: "numeric",
-                              }
-                            )}
-                          </small>
                         </div>
                       </div>
-                    </div>
+                      {note.meeting_id ? (
+                        <>
+                          {" "}
+                          <div
+                            className="details position-absolute"
+                            style={{ zIndex: 99999999 }}
+                          >
+                            <MeetingDetails meetingsDetails={note.Meeting} />
+                          </div>
+                        </>
+                      ) : (
+                        ""
+                      )}
+                    </>
                   ))
                 ) : (
                   <p className="noContent d-flex justify-content-center align-items-center">

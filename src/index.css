@@ -98,8 +98,7 @@ i {
 }
 
 span i,
-span,
-a {
+span {
   color: var(--BlackWhite) !important;
 }
 

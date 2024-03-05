@@ -41,9 +41,7 @@ const router = createHashRouter([
         path: "/meetings",
         element: (
           <ProtectedRoutes role={"Manager"}>
-            <SearchProvider>
-              <HomePage />
-            </SearchProvider>
+            <HomePage />
           </ProtectedRoutes>
         ),
       },
@@ -51,9 +49,7 @@ const router = createHashRouter([
         path: "home",
         element: (
           <ProtectedRoutes role={"Manager"}>
-            <SearchProvider>
-              <HomePage />
-            </SearchProvider>
+            <HomePage />
           </ProtectedRoutes>
         ),
       },
@@ -114,9 +110,7 @@ const router = createHashRouter([
             path: "",
             element: (
               <ProtectedRoutes role={"Manager"}>
-                <SearchProvider>
-                  <HomePage />
-                </SearchProvider>
+                <HomePage />
               </ProtectedRoutes>
             ),
           },
@@ -256,16 +250,17 @@ function App() {
   const client = new QueryClient();
   return (
     <>
+      {" "}
       <QueryClientProvider client={client}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <ThemeProvider theme={{}}>
-          <SearchProvider>
-            <RouterProvider router={router} />
-          </SearchProvider>
+            <SearchProvider>
+              <RouterProvider router={router} />
+            </SearchProvider>
           </ThemeProvider>
         </LocalizationProvider>
         <Toaster toastOptions={{ style: { zIndex: "99999" } }} />
-      </QueryClientProvider>
+      </QueryClientProvider>{" "}
     </>
   );
 }

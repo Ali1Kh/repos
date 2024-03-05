@@ -2,13 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import "./homePage.css";
 import MeetingDetails from "../manager/meetingDetails/meetingDetails.jsx";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
-import { useQuery } from "react-query";
 import { TailSpin } from "react-loader-spinner";
 import $ from "jquery";
-import Meetings from "./../secretary/Meeting/meetings/Meetings";
+import { useQuery } from "react-query";
+import axios from "axios";
 import { searchContext } from "../context/searchContext.js";
-
 export default function HomePage() {
   let colors = [
     "#FFB399",
@@ -47,18 +45,9 @@ export default function HomePage() {
 
   localStorage.setItem("colors", JSON.stringify(colors));
   const [t] = useTranslation();
+  const authToken = localStorage.getItem("token");
 
-  let { meetings } = useContext(searchContext);
-
-  let isLoading = false;
- 
-
-  useEffect(() => {
-    $("body").click(() => {
-      $(".pdfContainer").css("display", "none");
-      $("body").css("overflow", "auto");
-    });
-  }, []);
+  let { meetings, isLoading } = useContext(searchContext);
 
   return (
     <>
@@ -89,8 +78,9 @@ export default function HomePage() {
           ) : (
             <div className="row gy-3">
               <>
-                {meetings
-                  ? meetings.meetings?.map((meeting, idx) => (
+                {meetings ? (
+                  meetings.meetings?.length > 0 ? (
+                    meetings.meetings?.map((meeting, idx) => (
                       <>
                         <div
                           key={idx}
@@ -100,7 +90,7 @@ export default function HomePage() {
                           data-aos-once="true"
                         >
                           <div
-                            className="inner-card h-100 shadow rounded-4 gap-3 p-4 flex-column"
+                            className="inner-card h-100 shadow rounded-4 gap-3 p-3 justify-content-end flex-column"
                             data-bs-toggle="modal"
                             data-bs-target={`#meetingModal${meeting.meeting_id}`}
                           >
@@ -129,13 +119,18 @@ export default function HomePage() {
                                   </span>
                                 </div>
                               </div>
-                              <div className="guest-account text-center d-flex flex-column align-items-center mt-3">
-                                <div className="guest-name flex-column">
-                                  <h4>{meeting.person}</h4>
+                              {meeting.person != "undefined" ? (
+                                <div className="guest-account text-center d-flex flex-column align-items-center mt-3">
+                                  <div className="guest-name flex-column">
+                                    <h4>{meeting.person}</h4>
+                                  </div>
                                 </div>
-                              </div>
+                              ) : (
+                                ""
+                              )}
                             </div>
-                            <div className="meeting-info row mt-2">
+
+                            <div className="meeting-info row mt-auto">
                               <div className="meeting-topic col-lg-4 col-md-4">
                                 <p className="text-center m-1 heading">
                                   {t("HomePage.meetingTopic")}
@@ -154,12 +149,12 @@ export default function HomePage() {
                                 </p>
                               </div>
 
-                              <div className="meeting-date col-lg-4 col-md-4">
+                              <div className="meeting-date col-lg-4 col-md-4 p-0">
                                 <p className="text-center m-1 heading">
                                   {t("HomePage.meetingDate")}
                                 </p>
-                                <p className="text-center m-1">
-                                  {meeting.time}
+                                <p className="text-center w-100 m-1 ">
+                                  {meeting.date}
                                 </p>
                               </div>
                             </div>
@@ -168,39 +163,20 @@ export default function HomePage() {
                         <div className="details position-absolute">
                           <MeetingDetails meetingsDetails={meeting} />
                         </div>
-                        <div
-                          className="pdfContainer rounded-3 pt-5 overflow-auto container position-fixed start-50 translate-middle-x p-2"
-                          style={{
-                            width: "70%",
-                            height: "95vh",
-                            top: "25px",
-                            zIndex: 9999,
-                            display: "none",
-                          }}
-                        >
-                          <i
-                            style={{ backgroundColor: "#323639" }}
-                            className="fa fa-xmark rounded-3 me-3 position-absolute top-0 end-0 mb-5 p-2 fs-5 z-3 cursorPointer"
-                          ></i>
-                          <div className="pdfView h-100 w-100">
-                            <div
-                              className="pdfFrame d-"
-                              style={{ width: "100%", height: "100%" }}
-                            >
-                              <div className="h-100">
-                                <iframe
-                                  className="rounded-3"
-                                  src={meeting.attachmentLink}
-                                  width="100%"
-                                  height="100%"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
                       </>
                     ))
-                  : ""}
+                  ) : (
+                    <div
+                      className="d-flex flex-column justify-content-center align-items-center text-center"
+                      style={{ height: "50vh" }}
+                    >
+                      <img src={require("../../image/no-data.png")} alt="" />
+                      <h4 className="mt-5">No Meetings Found</h4>
+                    </div>
+                  )
+                ) : (
+                  ""
+                )}
               </>
             </div>
           )}

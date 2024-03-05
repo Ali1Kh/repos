@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./calender.css";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 
 export default function Calender() {
-  const [highlightedDays, setHighlightedDays] = useState([1, 2, 30]);
+  const [highlightedDays, setHighlightedDays] = useState([]);
   const newTheme = (theme) =>
     createTheme({
       ...theme,
@@ -48,8 +48,15 @@ export default function Calender() {
     $y: today.getFullYear(),
   });
   let [day, setDay] = useState(weekday[new Date().getDay()]);
-  function monthChanged(month) {
-    setHighlightedDays([20, 25, 1]);
+
+  function getLastDay(y, m) {
+    return new Date(y, m, 0).getDate();
+  }
+  function monthChanged(month, year) {
+    getMeetingsDays(
+      `${year}-${month}-01`,
+      `${year}-${month}-${getLastDay(year, month)}`
+    );
   }
   const [t] = useTranslation();
 
@@ -82,6 +89,37 @@ export default function Calender() {
     }
   }
 
+  async function getMeetingsDays(startDate, endDate) {
+    const authToken = localStorage.getItem("token");
+    if (!authToken) {
+      console.error("Authentication token not found in Local Storage");
+      return;
+    }
+
+    let { data } = await axios.get(
+      `https://meetingss.onrender.com/meetings?date[gte]=${startDate}&date[lte]=${endDate}`,
+      {
+        headers: {
+          token: authToken,
+        },
+      }
+    );
+    if (data.success) {
+      setHighlightedDays(
+        data.meetings?.map((meeting) => new Date(meeting.date).getDate())
+      );
+    }
+  }
+
+  useEffect(() => {
+    let year = new Date().getFullYear();
+    let month = new Date().getMonth() + 1;
+    getMeetingsDays(
+      `${year}-${month}-01`,
+      `${year}-${month}-${getLastDay(year, month)}`
+    );
+  }, []);
+
   return (
     <div className="main  px-md-2">
       <div className="container p-5 d-flex flex-column justify-content-center align-items-center ">
@@ -100,7 +138,7 @@ export default function Calender() {
                     setDay(weekday[new Date(val).getDay()]);
                     dateChanged(val);
                   }}
-                  onMonthChange={(val) => monthChanged(val.$M + 1)}
+                  onMonthChange={(val) => monthChanged(val.$M + 1, val.$y)}
                   slots={{
                     day: ServerDay,
                   }}
@@ -138,12 +176,15 @@ export default function Calender() {
                           {convertTo12HourFormat(meet.time)}
                         </p>
                         <a
-                          // data-bs-toggle="modal"
-                          // data-bs-target="#meetingModal"
+                          data-bs-toggle="modal"
+                          data-bs-target={`#meetingModal${meet.meeting_id}`}
                           className="mb-3 cursorPointer"
                         >
                           {t("Calendar.showDetails")}
                         </a>
+                        <div className="details position-absolute">
+                          <MeetingDetails meetingsDetails={meet} />
+                        </div>
                       </div>
                     ))
                   ) : (

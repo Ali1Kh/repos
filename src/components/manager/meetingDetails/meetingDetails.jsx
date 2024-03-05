@@ -5,21 +5,25 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import $ from "jquery";
 export default function MeetingDetails({ meetingsDetails }) {
-  const [show, setShow] = useState(false);
+  const [addNoteshow, setAddNoteShow] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [meetingId, setMeetingId] = useState();
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => setAddNoteShow(false);
+  const handleAddMeetingNoteShow = (meetId) => {
+    setAddNoteShow(true);
+    setMeetingId(meetId);
+  };
 
   const authToken = localStorage.getItem("token");
 
-  function viewPdf(e) {
+  function viewPdf(e, id) {
     e.stopPropagation();
-    $(".pdfContainer").css("display", "block");
+    $(`#pdfContainer${id}`).css("display", "block");
     $("body").css("overflow", "hidden");
   }
 
@@ -27,14 +31,14 @@ export default function MeetingDetails({ meetingsDetails }) {
     if (title === "" || content === "") {
       toast.error("Please Fill All Inputs", {
         style: {
-          zIndex: 9999,
+          zIndex: "9989899999",
         },
       });
       return;
     }
     axios
       .post(
-        "https://meetingss.onrender.com/notes/",
+        `https://meetingss.onrender.com/notes/${meetingId}`,
         {
           title: title,
           content: content,
@@ -59,11 +63,19 @@ export default function MeetingDetails({ meetingsDetails }) {
 
   const [t] = useTranslation();
 
+  useEffect(() => {
+    $("body").click(() => {
+      $(".pdfContainer").css("display", "none");
+      $("body").css("overflow", "auto");
+    });
+  }, []);
+
   return (
     <div>
       <div
-        className="modal fade"
+        className="meetingModal modal fade"
         id={`meetingModal${meetingsDetails.meeting_id}`}
+        style={{ zIndex: 99952 }}
       >
         <div
           className="modal-dialog col-md-7 modal-dialog-centered"
@@ -108,7 +120,9 @@ export default function MeetingDetails({ meetingsDetails }) {
                         {meetingsDetails.attachmentLink ? (
                           <button
                             type="button"
-                            onClick={viewPdf}
+                            onClick={(e) =>
+                              viewPdf(e, meetingsDetails.meeting_id)
+                            }
                             class="btn-meeting"
                           >
                             {t("meetings.btnShow")}
@@ -120,8 +134,11 @@ export default function MeetingDetails({ meetingsDetails }) {
                         <button
                           type="button"
                           class="btn-meeting"
+                          data-bs-dismiss="modal"
                           onClick={() => {
-                            handleShow();
+                            handleAddMeetingNoteShow(
+                              meetingsDetails.meeting_id
+                            );
                           }}
                         >
                           {t("meetings.btnAddNotes")}
@@ -135,10 +152,47 @@ export default function MeetingDetails({ meetingsDetails }) {
           </div>
         </div>
       </div>
-      <Modal show={show} onHide={handleClose} style={{ zIndex: 9999999 }}>
+      <div
+        id={`pdfContainer${meetingsDetails.meeting_id}`}
+        className="pdfContainer rounded-3 pt-5 overflow-auto container position-fixed start-50 translate-middle-x p-2"
+        style={{
+          width: "70%",
+          height: "95vh",
+          top: "25px",
+          zIndex: 99999965699,
+          display: "none",
+        }}
+      >
+        <i
+          style={{ backgroundColor: "#323639" }}
+          className="fa fa-xmark rounded-3 me-3 position-absolute top-0 end-0 mb-5 p-2 fs-5 z-3 cursorPointer"
+        ></i>
+        <div className="pdfView h-100 w-100">
+          <div
+            className="pdfFrame d-"
+            style={{ width: "100%", height: "100%" }}
+          >
+            <div className="h-100">
+              <iframe
+                className="rounded-3"
+                src={meetingsDetails.attachmentLink}
+                width="100%"
+                height="100%"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <Modal
+        className="addMeetingNoteModal"
+        show={addNoteshow}
+        onHide={handleClose}
+        style={{ zIndex: 9999 }}
+      >
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput11">
               <Form.Control
                 type="text"
                 placeholder="Title"
@@ -149,7 +203,7 @@ export default function MeetingDetails({ meetingsDetails }) {
             </Form.Group>
             <Form.Group
               className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
+              controlId="exampleForm.ControlTextarea11"
             >
               <Form.Control
                 as="textarea"
@@ -164,6 +218,7 @@ export default function MeetingDetails({ meetingsDetails }) {
             variant="primary"
             onClick={() => {
               postAddNotes();
+              handleClose();
             }}
           >
             Save

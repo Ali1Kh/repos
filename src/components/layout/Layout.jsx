@@ -9,9 +9,7 @@ export default function Layout() {
   return (
     <>
       <div className="layout">
-        <SearchProvider>
           <Navbar />
-        </SearchProvider>
         <div className="layout-main d-flex">
           <div className="sidebar-col">
             <Sidebar />

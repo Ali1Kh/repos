@@ -28,6 +28,8 @@ export default function DashboardMeetings() {
     })
   }
 
+
+
   console.log(data);
   
 
@@ -86,8 +88,8 @@ export default function DashboardMeetings() {
                                 <TableCell align="center" component="th">{meeting.statues}</TableCell>
                                 <TableCell align="center" component="th">{meeting.time}</TableCell>
                                 <TableCell align="center" component="th">{meeting.date}</TableCell>
-                                <TableCell align="center" component="th">
-                                  <button align="center" className='btn btn-danger'>
+                                 <TableCell align="center" component="th">
+                                  <button  align="center" className='btn btn-danger'>
                                     {t("Dashborad.Meetings.Delete")}
                                   </button>
                                 </TableCell>

@@ -4,7 +4,7 @@
 }
 
 .MuiPaper-root {
-    border-radius: 30px !important;
+    border-radius: 8px !important;
     box-shadow: none !important;
     background-color: var(--cardBgColor) !important;
 }

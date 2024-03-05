@@ -95,12 +95,14 @@ export default function UpdateMeeting() {
           .filter('[value="' + data.meetings.in_or_out + '"]')
           .prop("checked", true);
 
-        setUploadedFiles([
-          await createFileObject(
-            data.meetings.attachmentLink,
-            data.meetings.attachmentName
-          ),
-        ]);
+        if (data.meetings.attachmentLink) {
+          setUploadedFiles([
+            await createFileObject(
+              data.meetings.attachmentLink,
+              data.meetings.attachmentName
+            ),
+          ]);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -113,15 +115,26 @@ export default function UpdateMeeting() {
     let address = $("#meetAddress").val();
     let notes = $("#meetNotes").val();
     let area = $('input[name="radio-group"]:checked').val();
-    console.log(uploadedFiles);
+    if (area === "Outside") {
+      if (person === "") {
+        $(".error").removeClass("d-none");
+        $(".error").addClass("d-block");
+        return;
+      }
+    } else {
+      if (insidePersons.length <= 0) {
+        $(".error").removeClass("d-none");
+        $(".error").addClass("d-block");
+        return;
+      }
+    }
     if (
       !date ||
       !time ||
-      person  === "" ||
-      topic   === "" ||
+      topic === "" ||
       address === "" ||
-      notes   === "" ||
-      area    === ""
+      notes === "" ||
+      !area 
     ) {
       $(".error").removeClass("d-none");
       $(".error").addClass("d-block");
@@ -129,7 +142,11 @@ export default function UpdateMeeting() {
     }
     let dateInput, timeInput;
     if (date) {
-      dateInput = new Date(date.$d).toLocaleString("en-GB");
+      dateInput = new Date(date.$d).toLocaleString("en-GB", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      });
     }
     if (time) {
       timeInput = new Date(time.$d).toLocaleString("en-GB", {
@@ -138,14 +155,20 @@ export default function UpdateMeeting() {
     }
 
     let initData = {
-      date: dateInput.split(",")[0],
-      time: timeInput.split(",")[1],
+      date: dateInput.split(",")[0].split("/").reverse().join("-"),
+      time: timeInput.split(",")[1].split(" ")[1],
       person,
       about: topic,
       address,
       notes,
       in_or_out: area,
     };
+
+    
+    if (area !== "Inside") {
+      delete initData.insidePersons;
+    }
+
 
     const flattenObject = (obj, parentKey = "") => {
       return Object.keys(obj).reduce((acc, key) => {
@@ -164,9 +187,10 @@ export default function UpdateMeeting() {
       formData.append(key, value);
     }
 
-    formData.append("attachment", uploadedFiles[0]);
-
-
+   if (uploadedFiles[0]) {
+      formData.append("attachment", uploadedFiles[0]);
+    }
+    
     try {
       let { data } = await axios.post(
         `https://meetingss.onrender.com/secretary/updateMeeting/${id}`,
@@ -176,12 +200,22 @@ export default function UpdateMeeting() {
       if (data.success) {
         toast.success(data.message);
       }
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
   }
 
   const [t] = useTranslation();
+
+  let [insidePersons, setInsidePersons] = useState([]);
+  const handleManagerChange = (event, value) => {
+    setInsidePersons(
+      value
+        .filter((item) => typeof item === "object")
+        .map((manager) => manager.manager_id)
+    );
+  };
 
   return (
     <div className="main">
@@ -197,6 +231,7 @@ export default function UpdateMeeting() {
                 <DesktopDatePicker
                   format="LL"
                   onChange={(val) => setDate(val)}
+                  disablePast
                 />
               </ThemeProvider>
             </div>
@@ -220,16 +255,23 @@ export default function UpdateMeeting() {
                 <Autocomplete
                   multiple
                   id="tags-filled"
-                  options={allmanagers.map(
-                    (option) => option.first_name + " " + option.last_name
-                  )}
+                  onChange={handleManagerChange}
+                  options={allmanagers}
+                  getOptionLabel={(option) =>
+                    option.first_name + " " + option.last_name
+                  }
                   freeSolo
                   renderTags={(value, getTagProps) =>
                     value.map((option, index) => (
                       <Chip
+                        key={option.manager_id}
                         variant="outlined"
                         className="bg-info"
-                        label={option}
+                        label={
+                          typeof option === "string"
+                            ? option
+                            : option.first_name + " " + option.last_name
+                        }
                         {...getTagProps({ index })}
                       />
                     ))
@@ -292,8 +334,9 @@ export default function UpdateMeeting() {
               <div
                 {...getRootProps()}
                 style={{ borderStyle: "dashed" }}
-                className={`dropzone h-100 ${isDragActive ? "active h-100" : ""
-                  }`}
+                className={`dropzone h-100 ${
+                  isDragActive ? "active h-100" : ""
+                }`}
               >
                 <input {...getInputProps()} />
                 {isDragActive ? (
