@@ -1,3 +1,4 @@
+import { sequelize } from "../../../DB/connection.js";
 import { Admin } from "../../../DB/models/admin.model.js";
 import { Manager } from "../../../DB/models/manager.model.js";
 import { Meetings } from "../../../DB/models/meeting.model.js";
