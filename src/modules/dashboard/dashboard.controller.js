@@ -6,7 +6,15 @@ import { Token } from "../../../DB/models/token.model.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
 
 export const getAllMeetings = asyncHandler(async (req, res, next) => {
-  let meetings = await Meetings.findAll();
+  let meetings = await sequelize.query(
+    `select Meetings.meeting_id,time,date,about,in_or_out,address, notes,addedBy,person,statues,Meetings.createdAt,Meetings.updatedAt,
+     attachmentId,attachmentLink,attachmentName,
+     Manager.manager_id,CONCAT(first_name, ' ', last_name)  as 'Manager_Name',E_mail as 'Manager_Email',UserName as 'Manager_UserName' from Meetings
+     join meeting_Manager on Meetings.meeting_id = meeting_Manager.meeting_id 
+     join Manager on meeting_Manager.manager_id = Manager.manager_id`
+  );
+
+  return res.json({ success: true, meetings });
   return res.json({ success: true, count: meetings.length, meetings });
 });
 
