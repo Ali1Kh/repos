@@ -165,11 +165,6 @@
 
 /* .notification-data {} */
 
-.MuiPopup-root {
-  left: -14% !important;
-}
-
-/* media Screen */
 
 .fa-bell{
   color: var(--sec-color) !important;

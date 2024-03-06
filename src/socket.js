@@ -1,2 +1,4 @@
+import { useEffect } from "react";
 import { io } from "socket.io-client";
-export const socket = io("http://localhost:6224");
+export const socket = io("https://meetingss.onrender.com");
+
