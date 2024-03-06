@@ -139,7 +139,7 @@ export const createMeeting = async (req, res, next) => {
 
 export const getSecMeetings = async (req, res, next) => {
   let meetings = await sequelize.query(
-    `select Meetings.meeting_id,time,date,about,in_or_out,address, notes,person,statues,Meetings.createdAt,Meetings.updatedAt,
+    `select Meetings.meeting_id,time,date,about,in_or_out,address, notes,person,statues,addedBy,Meetings.createdAt,Meetings.updatedAt,
      attachmentId,attachmentLink,attachmentName,
      Manager.manager_id,CONCAT(first_name, ' ', last_name)  as 'Manager_Name',E_mail as 'Manager_Email',UserName as 'Manager_UserName' from Meetings
      join meeting_Manager on Meetings.meeting_id = meeting_Manager.meeting_id 
