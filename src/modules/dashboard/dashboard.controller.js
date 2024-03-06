@@ -21,6 +21,19 @@ export const getAllMeetings = asyncHandler(async (req, res, next) => {
   return res.json({ success: true, count: meetings.length, meetings });
 });
 
+export const deleteMeeting = asyncHandler(async (req, res, next) => {
+  let isMeeting = await Meetings.findOne({
+    where: { meeting_id: req.params.meeting_id },
+  });
+  if (!isMeeting) return next(new Error("Meeting Not Found !"));
+
+  isMeeting.destroy();
+  return res.json({
+    success: true,
+    message: "Meeting Deleted Successfully",
+  });
+});
+
 export const getNotAcceptedSec = asyncHandler(async (req, res, next) => {
   let secertaries = await Secertary.findAll({
     where: { Accepted_Acc: false },

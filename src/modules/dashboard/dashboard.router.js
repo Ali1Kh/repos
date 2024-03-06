@@ -105,6 +105,14 @@ router.delete(
   dashboardController.deleteSecretary
 );
 
+router.delete(
+  "/deleteMeeting/:meeting_id",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  validation(dashboardSchemas.deleteMeetingSchema),
+  dashboardController.deleteMeeting
+);
+
 router.get(
   "/getLoginHistory",
   isAuthenticated,

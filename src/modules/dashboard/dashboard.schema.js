@@ -17,6 +17,12 @@ export const acceptManagerSchema = joi
 export const deleteManagerAccSchema = joi
   .object({
     manager_id: joi.number().required(),
-  })
-  .required();
+})
+.required();
+
+export const deleteMeetingSchema = joi
+  .object({
+    meeting_id: joi.number().required(),
+})
+.required();
 
