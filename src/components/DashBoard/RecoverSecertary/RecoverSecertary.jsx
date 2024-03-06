@@ -129,7 +129,7 @@ const Recover = () => {
                                 </TableCell>
                                 
                                 <TableCell align="center" className="fw-bold">
-                                  {t("Dashborad.Acceptacne.accept")}
+                                  {t("Dashborad.recover.recoverName")}
                                 </TableCell>
                               </TableRow>
                             </TableHead>
