@@ -1,0 +1,77 @@
+/* h2 {
+    color: var(--BlackToWhite);
+}
+
+
+
+table.table-striped {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #262626 !important;
+    border-radius: 10px;
+}
+
+table th,
+table td {
+    border: none;
+    padding: 8px;
+    text-align: left;
+    color: var(--BlackToWhite);
+}
+*/
+button.accept-button {
+    background-color: var(--btnBlackToWhite);
+    color: var(--BlackToWhite);
+    width: 80%;
+    padding: 8px 20px;
+    cursor: pointer;
+    border: 1px solid var(--sec-color);
+}
+
+button.accept-button:hover {
+    background-color: var(--hover);
+    border: 1px solid var(--sec-color);
+}
+
+i.deletAcc {
+    margin: 10px;
+    font-size: 20px;
+    padding: 8px 10px;
+    background-color: var(--btnBlackToWhite);
+    border-radius: 10px;
+    color: var(--BlackToWhite);
+    border: 1px solid var(--sec-color);
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+i.deletAcc:hover {
+    background-color: red;
+    border: 1px solid var(--main-color) !important;
+}
+
+.header-table {
+    padding: 20px;
+}
+
+.table {
+    background-color: var(--table-color);
+    border-radius: 8px;
+    margin: 10px;
+    padding: 20px;
+    box-shadow: var(--shadow-4);
+}
+
+.table .col {
+    padding: 10px;
+}
+
+.table .col h6 {
+    color: var(--BlackToWhite);
+
+}
+
+.row .col {
+    color: var(--BlackToWhite);
+}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Acceptance.css";
+import "./SecertariesAcceptance.css";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { TailSpin } from "react-loader-spinner";
@@ -17,7 +17,7 @@ const Acceptance = () => {
   const token = localStorage.getItem("token");
   const [data, setData] = useState([]);
 
-  const getNotAcceptedAccounts = async () => {
+  const getNotAcceptedSecertaries = async () => {
     try {
       const response = await axios.get(
         "https://meetingss.onrender.com/dashboard/getNotAcceptedSec",
@@ -34,32 +34,56 @@ const Acceptance = () => {
     }
   };
 
-  const { isLoading } = useQuery("getAcceptAccount", getNotAcceptedAccounts);
+  const AcceptSecertary = async(secretary_id) => {
+    try {
+            const response = await axios.post(
+              `https://meetingss.onrender.com/dashboard/acceptAcc/${secretary_id}`,
+              {},
+              {
+                headers: {
+                  token: token,
+                },
+              }
+            );
+            if (response.data.success) {
+              toast.success("Accepted");
+              getNotAcceptedSecertaries();
+            }
+            else{
+              console.log("oo",response);
+              toast.error("Something went Wrong");
+            }
+          } catch (error) {
+            console.error("Error:", error);
+          }
+  };
 
-  async function acceptAccount(id) {
+  const { isLoading } = useQuery("getNotAcceptedSecertaries", getNotAcceptedSecertaries);
+
+  // async function acceptAccount(id) {
+  //   try {
+  //     const response = await axios.post(
+  //       `https://meetingss.onrender.com/dashboard/acceptAcc/${id}`,
+  //       {},
+  //       {
+  //         headers: {
+  //           token: token,
+  //         },
+  //       }
+  //     );
+  //     if (response.data.success) {
+  //       toast.success("Accepted");
+  //       getNotAcceptedAccounts();
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // }
+
+  const rejectSecertaryAccount = async (secretary_id) => {
     try {
       const response = await axios.post(
-        `https://meetingss.onrender.com/dashboard/acceptAcc/${id}`,
-        {},
-        {
-          headers: {
-            token: token,
-          },
-        }
-      );
-      if (response.data.success) {
-        toast.success("Accepted");
-        getNotAcceptedAccounts();
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  }
-
-  const rejectAccount = async (id) => {
-    try {
-      const response = await axios.post(
-        `https://meetingss.onrender.com/dashboard/rejectAcc/${id}`,
+        `https://meetingss.onrender.com/dashboard/rejectAcc/${secretary_id}`,
         {},
         {
           headers: {
@@ -71,7 +95,7 @@ const Acceptance = () => {
 
       if (response.data.success) {
         toast.success("Removed");
-        getNotAcceptedAccounts();
+        getNotAcceptedSecertaries();
       } else {
         // Handle failure
       }
@@ -87,7 +111,7 @@ const Acceptance = () => {
       <div className="main">
         <div className="container mt-5">
           <h1 className="container d-flex flex-column align-items-center justify-content-center p-4 fw-bold">
-            {t("Dashborad.Acceptacne.AcceptacneName")}
+            {t("Dashborad.Acceptacne.AcceptacneSec")}
           </h1>
           {isLoading ? (
             <div
@@ -154,7 +178,7 @@ const Acceptance = () => {
                                   <i
                                     className="fa-solid fa-trash deletAcc"
                                     onClick={() => {
-                                      rejectAccount(secretary.secretary_id);
+                                      rejectSecertaryAccount(secretary.secretary_id);
                                     }}
                                   ></i>
                                 </TableCell>
@@ -162,7 +186,7 @@ const Acceptance = () => {
                                   <button
                                     className="btn accept-button"
                                     onClick={() => {
-                                      acceptAccount(secretary.secretary_id);
+                                      AcceptSecertary(secretary.secretary_id);
                                     }}
                                   >
                                     {t("Dashborad.Acceptacne.accept")}

@@ -39,6 +39,7 @@ const Sidebar = () => {
     $(".sidebarItem").eq(2).addClass("animate__fadeInUp animate__delay-250ms");
     $(".sidebarItem").eq(3).addClass("animate__fadeInUp animate__delay-300ms");
     $(".sidebarItem").eq(4).addClass("animate__fadeInUp animate__delay-350ms");
+    
     // $(".sidebarItem")
     //   .eq(5)
     //   .addClass("animate__slideInLeft animate__delay-400ms");
@@ -227,12 +228,39 @@ const Sidebar = () => {
                   </Link>
                   <Link
                     className="sidebarItem animate__animated"
-                    to={"/dashboard/Acceptance"}
+                    to={"/dashboard/SecertariesAcceptance"}
                   >
                     <span className="d-inline-flex  text-center justify-content-center">
                       <i class="fa-regular fa-thumbs-up"></i>
                     </span>
-                    <span>{t("Dashborad.Acceptacne.AcceptacneName")}</span>
+                    <span>{t("Dashborad.Acceptacne.AcceptacneSec")}</span>
+                  </Link>
+                  <Link
+                    className="sidebarItem animate__animated"
+                    to={"/dashboard/ManagerAcceptance"}
+                  >
+                    <span className="d-inline-flex  text-center justify-content-center">
+                      <i class="fa-regular fa-thumbs-up"></i>
+                    </span>
+                    <span>{t("Dashborad.Acceptacne.AcceptacneManager")}</span>
+                  </Link>
+                  <Link
+                    className="sidebarItem animate__animated"
+                    to={"/dashboard/recoverSecertary"}
+                  >
+                    <span className="d-inline-flex  text-center justify-content-center">
+                      <i className="fa-solid fa-trash-arrow-up"></i>
+                    </span>
+                    <span>{t("Dashborad.recover.recoverSec")}</span>
+                  </Link>
+                  <Link
+                    className="sidebarItem animate__animated"
+                    to={"/dashboard/recoverManager"}
+                  >
+                    <span className="d-inline-flex  text-center justify-content-center">
+                      <i className="fa-solid fa-trash-arrow-up"></i>
+                    </span>
+                    <span>{t("Dashborad.recover.recoverManager")}</span>
                   </Link>
                   <Link
                     className="sidebarItem animate__animated"
@@ -414,10 +442,34 @@ const Sidebar = () => {
                   </Link>
                   <Link
                     className="sidebarItem animate__animated"
-                    to={"/dashboard/Acceptance"}
+                    to={"/dashboard/SecertariesAcceptance"}
                   >
                     <span className="d-inline-flex  text-center justify-content-center">
                       <i class="fa-regular fa-thumbs-up"></i>
+                    </span>
+                  </Link>
+                  <Link
+                    className="sidebarItem animate__animated"
+                    to={"/dashboard/ManagerAcceptance"}
+                  >
+                    <span className="d-inline-flex  text-center justify-content-center">
+                      <i class="fa-regular fa-thumbs-up"></i>
+                    </span>
+                  </Link>
+                  <Link
+                    className="sidebarItem animate__animated"
+                    to={"/dashboard/recoverSecertary"}
+                  >
+                    <span className="d-inline-flex  text-center justify-content-center">
+                      <i class="fa-solid fa-trash-arrow-up"></i>
+                    </span>
+                  </Link>
+                  <Link
+                    className="sidebarItem animate__animated"
+                    to={"/dashboard/recoverManager"}
+                  >
+                    <span className="d-inline-flex  text-center justify-content-center">
+                      <i class="fa-solid fa-trash-arrow-up"></i>
                     </span>
                   </Link>
                   <Link

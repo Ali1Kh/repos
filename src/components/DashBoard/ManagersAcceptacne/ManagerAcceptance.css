@@ -30,7 +30,7 @@ button.accept-button {
 }
 
 button.accept-button:hover {
-    background-color: var(--btnBlackToWhite);
+    background-color: var(--hover);
     border: 1px solid var(--sec-color);
 }
 
@@ -43,6 +43,7 @@ i.deletAcc {
     color: var(--BlackToWhite);
     border: 1px solid var(--sec-color);
     transition: all 0.5s;
+    cursor: pointer;
 }
 
 i.deletAcc:hover {
