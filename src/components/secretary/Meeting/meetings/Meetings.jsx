@@ -138,7 +138,7 @@ export default function Meetings() {
           <div className="meetingsConatiner  p-xxl-4" style={{ width: "100%" }}>
             <div
               className="meetings d-flex justify-content-center"
-              style={{ height: 550, width: "100%" }}
+              style={{ height: 500, width: "100%" }}
             >
               <DataGrid
                 slotProps={{
@@ -215,14 +215,14 @@ export default function Meetings() {
                     headerAlign: "center",
                     width: 120,
                   },
-                  {
-                    field: "notes",
-                    headerName: t("tableMeetings.table.Comments"),
-                    headerClassName: "tableColumns",
-                    align: "center",
-                    headerAlign: "center",
-                    width: 120,
-                  },
+                  // {
+                  //   field: "notes",
+                  //   headerName: t("tableMeetings.table.Comments"),
+                  //   headerClassName: "tableColumns",
+                  //   align: "center",
+                  //   headerAlign: "center",
+                  //   width: 120,
+                  // },
                   {
                     field: "Manager_Name",
                     headerName: "Manager",
@@ -255,9 +255,9 @@ export default function Meetings() {
                     display: "none",
                   },
                   "& [data-testid='ArrowUpwardIcon'], [data-testid='ArrowDownwardIcon']":
-                    {
-                      display: "none",
-                    },
+                  {
+                    display: "none",
+                  },
                 }}
               />
             </div>
