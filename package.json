@@ -43,6 +43,7 @@
     "react-router-dom": "^6.21.0",
     "react-scripts": "5.0.1",
     "react-spinners": "^0.13.8",
+    "socket.io-client": "^4.7.4",
     "styled-components": "^6.1.2",
     "tagify": "^0.1.1",
     "web-vitals": "^2.1.4",

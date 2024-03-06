@@ -31,6 +31,26 @@ import SearchProvider from "./components/context/searchContext.js";
 import RecoverSecertary from './components/DashBoard/RecoverSecertary/RecoverSecertary.jsx';
 import RecoverManager from './components/DashBoard/RecoverManager/RecoverManager.jsx';
 
+
+function App() {
+  const client = new QueryClient();
+  return (
+    <>
+      {" "}
+      <QueryClientProvider client={client}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <ThemeProvider theme={{}}>
+            <SearchProvider>
+              <RouterProvider router={router} />
+            </SearchProvider>
+          </ThemeProvider>
+        </LocalizationProvider>
+        <Toaster toastOptions={{ style: { zIndex: "99999" } }} />
+      </QueryClientProvider>{" "}
+    </>
+  );
+}
+
 const router = createHashRouter([
   {
     path: "/",
@@ -273,23 +293,5 @@ const router = createHashRouter([
     element: <NotFound />,
   },
 ]);
-function App() {
-  const client = new QueryClient();
-  return (
-    <>
-      {" "}
-      <QueryClientProvider client={client}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <ThemeProvider theme={{}}>
-            <SearchProvider>
-              <RouterProvider router={router} />
-            </SearchProvider>
-          </ThemeProvider>
-        </LocalizationProvider>
-        <Toaster toastOptions={{ style: { zIndex: "99999" } }} />
-      </QueryClientProvider>{" "}
-    </>
-  );
-}
 
 export default App;
