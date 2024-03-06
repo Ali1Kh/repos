@@ -30,7 +30,7 @@ button.accept-button {
 }
 
 button.accept-button:hover {
-    background-color: var(--btnBlackToWhite);
+    background-color: var(--hover);
     border: 1px solid var(--sec-color);
 }
 

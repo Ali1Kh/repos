@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Acceptance.css";
+import "./ManagerAcceptance.css";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { TailSpin } from "react-loader-spinner";
@@ -17,10 +17,10 @@ const Acceptance = () => {
   const token = localStorage.getItem("token");
   const [data, setData] = useState([]);
 
-  const getNotAcceptedAccounts = async () => {
+  const getNotAcceptedManagers = async () => {
     try {
       const response = await axios.get(
-        "https://meetingss.onrender.com/dashboard/getNotAcceptedSec",
+        "https://meetingss.onrender.com/dashboard/getNotAcceptedManagers",
         {
           headers: {
             token: token,
@@ -34,12 +34,55 @@ const Acceptance = () => {
     }
   };
 
-  const { isLoading } = useQuery("getAcceptAccount", getNotAcceptedAccounts);
+  const AcceptManager = async(manager_id) => {
+    try {
+            const response = await axios.post(
+              `https://meetingss.onrender.com/dashboard/acceptManagerAcc/${manager_id}`,
+              {},
+              {
+                headers: {
+                  token: token,
+                },
+              }
+            );
+            if (response.data.success) {
+              toast.success("Accepted");
+              getNotAcceptedManagers();
+            }
+            else{
+              toast.error("Something went Wrong");
+            }
+          } catch (error) {
+            console.error("Error:", error);
+          }
+  };
 
-  async function acceptAccount(id) {
+  const { isLoading } = useQuery("getNotAcceptedManagers", getNotAcceptedManagers);
+
+  // async function acceptAccount(id) {
+  //   try {
+  //     const response = await axios.post(
+  //       `https://meetingss.onrender.com/dashboard/acceptAcc/${id}`,
+  //       {},
+  //       {
+  //         headers: {
+  //           token: token,
+  //         },
+  //       }
+  //     );
+  //     if (response.data.success) {
+  //       toast.success("Accepted");
+  //       getNotAcceptedAccounts();
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // }
+
+  const rejectManagerAccount = async (manager_id) => {
     try {
       const response = await axios.post(
-        `https://meetingss.onrender.com/dashboard/acceptAcc/${id}`,
+        `https://meetingss.onrender.com/dashboard/rejectAcc/${manager_id}`,
         {},
         {
           headers: {
@@ -47,31 +90,11 @@ const Acceptance = () => {
           },
         }
       );
-      if (response.data.success) {
-        toast.success("Accepted");
-        getNotAcceptedAccounts();
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  }
-
-  const rejectAccount = async (id) => {
-    try {
-      const response = await axios.post(
-        `https://meetingss.onrender.com/dashboard/rejectAcc/${id}`,
-        {},
-        {
-          headers: {
-            token: token,
-          },
-        }
-      );
-      console.log(response);
+      console.log("ww",response);
 
       if (response.data.success) {
         toast.success("Removed");
-        getNotAcceptedAccounts();
+        getNotAcceptedManagers();
       } else {
         // Handle failure
       }
@@ -108,8 +131,8 @@ const Acceptance = () => {
           ) : (
             <div className="row gy-3">
               {data ? (
-                data.secertaries?.length > 0 ? (
-                  data.secertaries?.map((secretary, idx) => (
+                data.managers?.length > 0 ? (
+                  data.managers?.map((manager, idx) => (
                     <div>
                       <Paper sx={{ width: "100%", overflow: "hidden" }}>
                         <TableContainer sx={{ maxHeight: 500 }}>
@@ -140,21 +163,21 @@ const Acceptance = () => {
                                   component="th"
                                   scope="row"
                                 >
-                                  {secretary.UserName}
+                                  {manager.UserName}
                                 </TableCell>
                                 <TableCell align="center" component="th">
-                                  {secretary.first_name +
+                                  {manager.first_name +
                                     " " +
-                                    secretary.last_name}
+                                    manager.last_name}
                                 </TableCell>
                                 <TableCell align="center" component="th">
-                                  {secretary.E_mail}
+                                  {manager.E_mail}
                                 </TableCell>
                                 <TableCell align="right" component="th">
                                   <i
                                     className="fa-solid fa-trash deletAcc"
                                     onClick={() => {
-                                      rejectAccount(secretary.secretary_id);
+                                      rejectManagerAccount(manager.manager_id);
                                     }}
                                   ></i>
                                 </TableCell>
@@ -162,7 +185,7 @@ const Acceptance = () => {
                                   <button
                                     className="btn accept-button"
                                     onClick={() => {
-                                      acceptAccount(secretary.secretary_id);
+                                      AcceptManager(manager.manager_id);
                                     }}
                                   >
                                     {t("Dashborad.Acceptacne.accept")}

@@ -126,6 +126,8 @@
   },
   "Dashborad": {
     "Acceptacne": {
+      "AcceptacneSec": "Accept Secretary",
+      "AcceptacneManager": "Accept Manager",
       "AcceptacneName": "Acceptacne",
       "userName": "Username",
       "name": "Name",
@@ -162,6 +164,11 @@
       "time": "Time",
       "date": "Date",
       "Delete": "Delete"
+    },
+    "recover": {
+      "recoverManager": "Recover Manager",
+      "recoverSec": "Recover Secretary",
+      "recoverName": "Recover"
     }
   }
 }

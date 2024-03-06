@@ -227,12 +227,39 @@ const Sidebar = () => {
                   </Link>
                   <Link
                     className="sidebarItem animate__animated"
-                    to={"/dashboard/Acceptance"}
+                    to={"/dashboard/SecertariesAcceptance"}
                   >
                     <span className="d-inline-flex  text-center justify-content-center">
                       <i class="fa-regular fa-thumbs-up"></i>
                     </span>
-                    <span>{t("Dashborad.Acceptacne.AcceptacneName")}</span>
+                    <span>{t("Dashborad.Acceptacne.AcceptacneSec")}</span>
+                  </Link>
+                  <Link
+                    className="sidebarItem animate__animated"
+                    to={"/dashboard/ManagerAcceptance"}
+                  >
+                    <span className="d-inline-flex  text-center justify-content-center">
+                      <i class="fa-regular fa-thumbs-up"></i>
+                    </span>
+                    <span>{t("Dashborad.Acceptacne.AcceptacneManager")}</span>
+                  </Link>
+                  <Link
+                    className="sidebarItem animate__animated"
+                    to={"/dashboard/recoverSecertary"}
+                  >
+                    <span className="d-inline-flex  text-center justify-content-center">
+                      <i className="fa-solid fa-trash-arrow-up"></i>
+                    </span>
+                    <span>{t("Dashborad.recover.recoverSec")}</span>
+                  </Link>
+                  <Link
+                    className="sidebarItem animate__animated"
+                    to={"/dashboard/recoverManager"}
+                  >
+                    <span className="d-inline-flex  text-center justify-content-center">
+                      <i className="fa-solid fa-trash-arrow-up"></i>
+                    </span>
+                    <span>{t("Dashborad.recover.recoverManager")}</span>
                   </Link>
                   <Link
                     className="sidebarItem animate__animated"

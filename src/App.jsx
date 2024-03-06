@@ -17,7 +17,8 @@ import { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import CreateManagerAccount from "./components/secretary/Meeting/create manager account/CreateManagerAccount";
 import ProtectedRoutes from "./components/Protected Routes/ProtectedRoutes.jsx";
-import Acceptance from "./components/DashBoard/Acceptance/Acceptance.jsx";
+import SecertariesAcceptance from "./components/DashBoard/SecertariesAcceptance/SecertariesAcceptance.jsx";
+import ManagerAcceptance from "./components/DashBoard/ManagersAcceptacne/ManagerAcceptance.jsx";
 import ForgotPassword from "./components/forgot password/forgot password/ForgotPassword.jsx";
 import CheckYourEmail from "./components/forgot password/check your email/CheckYourEmail.jsx";
 import ResetPassword from "./components/forgot password/Reset password/ResetPassword.jsx";
@@ -27,6 +28,8 @@ import DashboardMeetings from "./components/DashBoard/DashboardMeetings/Dashboar
 import DashboardSecertaries from "./components/DashBoard/DashboardSecertaries/DashboardSecertaries.jsx";
 import History from "./components/DashBoard/History/History.jsx";
 import SearchProvider from "./components/context/searchContext.js";
+import RecoverSecertary from './components/DashBoard/RecoverSecertary/RecoverSecertary.jsx';
+import RecoverManager from './components/DashBoard/RecoverManager/RecoverManager.jsx';
 
 const router = createHashRouter([
   {
@@ -176,10 +179,34 @@ const router = createHashRouter([
             ),
           },
           {
-            path: "Acceptance",
+            path: "SecertariesAcceptance",
             element: (
               <ProtectedRoutes role={"Admin"}>
-                <Acceptance />
+                <SecertariesAcceptance />
+              </ProtectedRoutes>
+            ),
+          },
+          {
+            path: "ManagerAcceptance",
+            element: (
+              <ProtectedRoutes role={"Admin"}>
+                <ManagerAcceptance />
+              </ProtectedRoutes>
+            ),
+          },
+          {
+            path: "recoverSecertary",
+            element: (
+              <ProtectedRoutes role={"Admin"}>
+                <RecoverSecertary />
+              </ProtectedRoutes>
+            ),
+          },
+          {
+            path: "recoverManager",
+            element: (
+              <ProtectedRoutes role={"Admin"}>
+                <RecoverManager />
               </ProtectedRoutes>
             ),
           },

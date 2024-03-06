@@ -120,6 +120,8 @@
   },
   "Dashborad": {
     "Acceptacne": {
+      "AcceptacneSec": "قبول سكرتير",
+      "AcceptacneManager": "قبول مدير",
       "AcceptacneName": "القبول",
       "userName": "اسم المستخدم",
       "name": "الاسم",
@@ -156,6 +158,11 @@
       "time": "الوقت",
       "date": "التاريخ",
       "Delete": "حذف"
+    },
+    "recover": {
+      "recoverManager": "استعادة مدير محذوف",
+      "recoverSec": "استعادة سكرتير محذوف",
+      "recoverName": "استعادة"
     }
   }
 }
