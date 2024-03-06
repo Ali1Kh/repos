@@ -37,16 +37,27 @@ export const signUp = asyncHandler(async (req, res, next) => {
 // signIn
 export const signIn = asyncHandler(async (req, res, next) => {
   if (req.body.role == "Manager") {
-    const isManager = await Manager.findOne({
-      where: { E_mail: req.body.E_mail },
-    });
-    if (!isManager) return next(new Error("Email Is Invalid"));
+    let isManager;
+    if (req.body.E_mail) {
+      isManager = await Manager.findOne({
+        where: { E_mail: req.body.E_mail },
+      });
+      if (!isManager) return next(new Error("Email Is Invalid"));
+    } else if (req.body.UserName) {
+      isManager = await Manager.findOne({
+        where: { UserName: req.body.UserName },
+      });
+      if (!isManager) return next(new Error("UserName Is Invalid"));
+    }
 
     const managerPassMatch = bcryptjs.compareSync(
       req.body.PassWord,
       isManager.PassWord
     );
     if (!managerPassMatch) return next(new Error("Invalid Password !"));
+
+    if (isManager.isDeleted)
+      return next(new Error("Your Account Is Deleted , Call Admin To Recover It"));
 
     const token = jwt.sign(
       {
@@ -67,16 +78,36 @@ export const signIn = asyncHandler(async (req, res, next) => {
 
     return res.json({ success: true, message: "Welcome Manager !", token });
   } else if (req.body.role == "Secertary") {
-    const isSecertary = await Secertary.findOne({
-      where: { E_mail: req.body.E_mail },
-    });
-    if (!isSecertary) return next(new Error("Email is Invalid !"));
+    let isSecertary;
+
+    if (req.body.E_mail) {
+      isSecertary = await Secertary.findOne({
+        where: { E_mail: req.body.E_mail },
+      });
+      if (!isSecertary) return next(new Error("Email is Invalid !"));
+    } else if (req.body.UserName) {
+      isSecertary = await Secertary.findOne({
+        where: { UserName: req.body.UserName },
+      });
+      if (!isSecertary) return next(new Error("Username is Invalid !"));
+    }
 
     const secertaryPassMatch = bcryptjs.compareSync(
       req.body.PassWord,
       isSecertary.PassWord
     );
     if (!secertaryPassMatch) return next(new Error("Invalid Password !"));
+
+    if (isSecertary.isDeleted)
+      return next(new Error("Your Account Is Deleted , Call Admin To Recover It"));
+
+    if (isSecertary.Accepted_Acc == false)
+      return next(
+        new Error(
+          "Your Account Is Not Accepted , Contact Admin To Accept Your Account !"
+        )
+      );
+
 
     const token = jwt.sign(
       {
@@ -96,7 +127,7 @@ export const signIn = asyncHandler(async (req, res, next) => {
     });
 
     return res.json({ success: true, message: "Welcome Secertary !", token });
-  }else if (req.body.role == "Admin") {
+  } else if (req.body.role == "Admin") {
     const isAdmin = await Admin.findOne({
       where: { E_mail: req.body.E_mail },
     });
@@ -110,7 +141,7 @@ export const signIn = asyncHandler(async (req, res, next) => {
 
     const token = jwt.sign(
       {
-        id: isAdmin.secretary_id,
+        id: isAdmin.Admin_id,
         E_mail: isAdmin.E_mail,
         username: isAdmin.UserName,
         role: "Admin",

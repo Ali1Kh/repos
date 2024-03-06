@@ -1,9 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "./../connection.js";
-import { Token } from "./token.model.js";
 import { Meetings } from "./meeting.model.js";
-import { meeting_Manager } from "./meeting_Manager.model.js";
-import { Manager } from "./manager.model.js";
 
 export const Note = sequelize.define(
   "notes",
@@ -25,3 +22,5 @@ export const Note = sequelize.define(
     freezeTableName: true,
   }
 );
+
+Note.hasOne(Meetings, { foreignKey: "meeting_id", sourceKey: "meeting_id" });

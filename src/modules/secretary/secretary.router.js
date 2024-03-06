@@ -20,6 +20,14 @@ router.post(
 );
 
 router.post(
+  "/addExistingManager/",
+  isAuthenticated,
+  isAuthorized("Secertary"),
+  validation(secretarySchema.addExistingManagerSchema),
+  secretaryController.addExistingManager
+);
+
+router.post(
   "/createMeeting/:manager_id",
   isAuthenticated,
   isAuthorized("Secertary"),
@@ -70,6 +78,14 @@ router.post(
   uploadFiles().single("attachment"),
   validation(secretarySchema.updateMeetingSchema),
   asyncHandler(secretaryController.updateMeeting)
+);
+
+router.post(
+  "/changeStatus/:meetingId",
+  isAuthenticated,
+  isAuthorized("Secertary"),
+  validation(secretarySchema.changeStatusSchema),
+  asyncHandler(secretaryController.changeStatus)
 );
 
 router.delete(

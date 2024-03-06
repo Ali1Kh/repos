@@ -6,8 +6,17 @@ export const acceptAccSchema = joi
   })
   .required();
 
+  
+export const acceptManagerSchema = joi
+.object({
+  manager_id: joi.number().required(),
+})
+.required();
+
+
 export const deleteManagerAccSchema = joi
   .object({
     manager_id: joi.number().required(),
   })
   .required();
+

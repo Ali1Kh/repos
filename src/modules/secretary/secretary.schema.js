@@ -10,11 +10,11 @@ export const createMeetingSchema = joi
     date: joi.date().greater(Date.now()).required(),
     notes: joi.string().required(),
     in_or_out: joi.string().valid("Inside", "Outside").required(),
-    insidePersons: joi.array().when('in_or_out', {
-      is: 'Inside',
+    insidePersons: joi.array().when("in_or_out", {
+      is: "Inside",
       then: joi.array(),
-      otherwise: joi.array().forbidden()
-    })
+      otherwise: joi.array().forbidden(),
+    }),
   })
   .required();
 
@@ -27,6 +27,12 @@ export const createManagerAccountSchema = joi.object({
   confirmPassword: joi.string().valid(joi.ref("PassWord")).required(),
 });
 
+export const addExistingManagerSchema = joi
+  .object({
+    E_mail: joi.string().email().required(),
+  })
+  .required();
+
 export const updateMeetingSchema = joi
   .object({
     meetingId: joi.number().required(),
@@ -37,6 +43,13 @@ export const updateMeetingSchema = joi
     date: joi.date().required(),
     notes: joi.string().required(),
     in_or_out: joi.string().valid("Inside", "Outside").required(),
+  })
+  .required();
+
+export const changeStatusSchema = joi
+  .object({
+    meetingId: joi.number().required(),
+    status: joi.string().valid("Done", "Not Done").required(),
   })
   .required();
 

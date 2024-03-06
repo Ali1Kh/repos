@@ -2,7 +2,7 @@ import { Manager } from "../../../DB/models/manager.model.js";
 import { Meetings } from "../../../DB/models/meeting.model.js";
 import { Note } from "../../../DB/models/notes.model.js";
 import { asyncHandler } from "./../../utils/asyncHandler.js";
-
+import { Op } from "sequelize";
 export const createNote = asyncHandler(async (req, res, next) => {
   await Note.create({
     ...req.body,
@@ -42,8 +42,43 @@ export const updateNote = asyncHandler(async (req, res, next) => {
 export const getAllNotes = asyncHandler(async (req, res, next) => {
   const isManager = await Manager.findByPk(req.payload.id);
   if (!isManager) return next(new Error("Manager Not Found!"));
-  const notes = await Note.findAll({ where: { manager_id: req.payload.id } });
-  return res.json({ success: true, notes });
+
+  const sortParam = req.query.sort || "createdAt";
+  const sortOrder = sortParam.startsWith("-") ? "DESC" : "ASC";
+  const sortField = sortParam.replace(/^-/, "");
+
+  const whereClause = {
+    manager_id: req.payload.id,
+  };
+
+  if (req.query.title || req.query.content) {
+    whereClause[Op.or] = [];
+  }
+
+  if (req.query.title) {
+    whereClause[Op.or].push({ title: { [Op.like]: `%${req.query.title}%` } });
+  }
+
+  if (req.query.content) {
+    whereClause[Op.or].push({
+      content: { [Op.like]: `%${req.query.content}%` },
+    });
+  }
+
+  const notes = await Note.findAll({
+    order: [[sortField, sortOrder]],
+    where: whereClause,
+    include: [
+      {
+        model: Meetings,
+      },
+    ],
+  });
+
+  // const notes = await Note.findAll({
+  //   where: { manager_id: req.payload.id },
+  // });
+  return res.json({ success: true, count: notes.length, notes });
 });
 
 export const deleteNote = asyncHandler(async (req, res, next) => {

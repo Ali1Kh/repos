@@ -43,6 +43,7 @@ router.get(
   "/",
   isAuthenticated,
   isAuthorized("Manager"),
+  validation(NoteSchemas.getNotesSchema),
   noteController.getAllNotes
 );
 

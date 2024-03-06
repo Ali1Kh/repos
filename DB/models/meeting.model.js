@@ -24,14 +24,12 @@ export const Meetings = sequelize.define("Meetings", {
 });
 
 Meetings.associate = (models) => {
-  Meetings.belongsToMany(Manager, {
-    through: meeting_Manager,
+  Meetings.hasMany(meeting_Manager, {
     foreignKey: "meeting_id",
+    sourceKey: "meeting_id",
   });
-
-  Meetings.hasMany(models.meeting_Manager, { foreignKey: "meeting_id" });
-  
-  Meetings.hasOne(models.Note, { foreignKey: "meeting_id" });
-  Note.belongsTo(Meetings, { foreignKey: "meeting_id" });
-
+  Meetings.hasMany(Note, {
+    foreignKey: "meeting_id",
+    sourceKey: "meeting_id",
+  });
 };

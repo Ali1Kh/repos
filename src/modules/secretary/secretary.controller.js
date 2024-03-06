@@ -7,14 +7,10 @@ import { meeting_Manager } from "../../../DB/models/meeting_Manager.model.js";
 import cloudinary from "../../utils/cloud.js";
 import { Op } from "sequelize";
 import { sequelize } from "../../../DB/connection.js";
+import { Manager_Secretary } from "../../../DB/models/Manager_Secretary.model.js";
 
 //createManagerAccount
 export const createManagerAccount = asyncHandler(async (req, res, next) => {
-  const isSecretariesEmail = await Secertary.findOne({
-    where: { E_mail: req.body.E_mail },
-  });
-  if (isSecretariesEmail) return next(new Error("Email Already Existed!"));
-
   const isManager = await Manager.findOne({
     where: { E_mail: req.body.E_mail },
   });
@@ -29,20 +25,62 @@ export const createManagerAccount = asyncHandler(async (req, res, next) => {
     parseInt(process.env.SALT_ROUND)
   );
 
-  await Manager.create({
+  let manager = await Manager.create({
     ...req.body,
     PassWord: managerhashPass,
-    secretary_id: req.payload.id,
   });
+
+  await manager.addSecretaries(req.payload.id);
 
   return res.json({ success: true, message: "Manager Created Successfully" });
 });
 
+export const addExistingManager = asyncHandler(async (req, res, next) => {
+  const isManager = await Manager.findOne({
+    where: { E_mail: req.body.E_mail },
+  });
+  if (!isManager) return next(new Error("Manager Not Found"));
+
+  const isMyManager = await Manager.findOne({
+    where: { E_mail: req.body.E_mail },
+    include: [
+      {
+        model: Secertary,
+        attributes: [],
+        where: {
+          secretary_id: req.payload.id,
+        },
+      },
+    ],
+  });
+  if (isMyManager)
+    return next(new Error("You Are Already Secretary  For This Manager"));
+
+  await isManager.addSecretaries(req.payload.id);
+
+  return res.json({
+    success: true,
+    message: "Manager Added Successfully To Your Account",
+  });
+});
+
 export const createMeeting = async (req, res, next) => {
-  let isManager = await Manager.findByPk(req.params.manager_id);
+  let isManager = await Manager.findByPk(req.params.manager_id, {
+    include: [
+      {
+        model: Secertary,
+        attributes: ["secretary_id"],
+      },
+    ],
+  });
+
   if (!isManager) return next(new Error("Invalid Manager"));
 
-  if (isManager.secretary_id != req.payload.id)
+  if (
+    !isManager.dataValues.Secretaries.find((secretary) => {
+      return secretary.dataValues.secretary_id === req.payload.id;
+    })
+  )
     return next(new Error("You Must Be The Secretary For This Manager"));
 
   // Check Time Exitsss
@@ -83,7 +121,7 @@ export const createMeeting = async (req, res, next) => {
   if (req.body.insidePersons) {
     req.body.insidePersons.map(async (manager) => {
       let isManager = await Manager.findByPk(manager);
-      if (!isManager) return next(new Error("Invalid Manager"));
+      if (!isManager) return next(new Error("Invalid Inside Manager"));
 
       await meeting_Manager.create({
         manager_id: isManager.manager_id,
@@ -100,9 +138,16 @@ export const createMeeting = async (req, res, next) => {
 };
 
 export const getSecMeetings = async (req, res, next) => {
-  let meetings = await Meetings.findAll({
-    where: { addedBy: req.payload.id },
-  });
+  let meetings = await sequelize.query(
+    `select Meetings.meeting_id,time,date,about,in_or_out,address, notes,person,statues,addedBy,Meetings.createdAt,Meetings.updatedAt,
+     attachmentId,attachmentLink,attachmentName,
+     Manager.manager_id,CONCAT(first_name, ' ', last_name)  as 'Manager_Name',E_mail as 'Manager_Email',UserName as 'Manager_UserName' from Meetings
+     join meeting_Manager on Meetings.meeting_id = meeting_Manager.meeting_id 
+     join Manager on meeting_Manager.manager_id = Manager.manager_id  
+     where addedBy = ${req.payload.id}  GROUP BY Meetings.meeting_id`, {
+      model: Meetings,
+     }
+  );
   return res.json({ success: true, meetings });
 };
 
@@ -115,17 +160,25 @@ export const getSecMeetingsDetails = async (req, res, next) => {
 
 export const getSecManagers = async (req, res, next) => {
   let managers = await Manager.findAll({
-    attributes: ["manager_id", "first_name", "last_name"],
-    where: { secretary_id: req.payload.id },
+    attributes: ["manager_id", "first_name", "last_name", "UserName", "E_mail"],
+    include: [
+      {
+        model: Secertary,
+        attributes: [],
+        where: {
+          secretary_id: req.payload.id,
+        },
+      },
+    ],
   });
   return res.json({ success: true, managers });
 };
 
 export const getSecDetails = async (req, res, next) => {
-  let secertary = await Secertary.findByPk(req.payload.id,{
-    attributes:{
-      exclude:["PassWord","resetCodeVerified","resetCode"]
-    }
+  let secertary = await Secertary.findByPk(req.payload.id, {
+    attributes: {
+      exclude: ["PassWord", "resetCodeVerified", "resetCode"],
+    },
   });
   return res.json({ success: true, secertary });
 };
@@ -161,6 +214,25 @@ export const updateMeeting = async (req, res, next) => {
   });
 
   return res.json({ success: true, message: "Meeting Updated Successfully" });
+};
+
+export const changeStatus = async (req, res, next) => {
+  let isMeeting = await Meetings.findOne({
+    where: { meeting_id: req.params.meetingId },
+  });
+  if (!isMeeting) return next(new Error("Meeting Not Found"));
+
+  if (isMeeting.dataValues.addedBy != req.payload.id)
+    return next(new Error("You Don't have permissions"));
+
+  isMeeting.update({
+    statues: req.body.status,
+  });
+
+  return res.json({
+    success: true,
+    message: "Meeting Status Changed Successfully",
+  });
 };
 
 export const deleteMeeting = async (req, res, next) => {

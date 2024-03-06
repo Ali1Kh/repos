@@ -17,7 +17,28 @@ router.get(
   "/getNotAcceptedSec",
   isAuthenticated,
   isAuthorized("Admin"),
-  dashboardController.getNotAccepted
+  dashboardController.getNotAcceptedSec
+);
+
+router.get(
+  "/getNotAcceptedManagers",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  dashboardController.getNotAcceptedManageres
+);
+
+router.get(
+  "/getDeletedManageres",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  dashboardController.getDeletedManagers
+);
+
+router.get(
+  "/getDeletedSecretaries",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  dashboardController.getDeletedSecretaries
 );
 
 router.post(
@@ -25,28 +46,47 @@ router.post(
   isAuthenticated,
   isAuthorized("Admin"),
   validation(dashboardSchemas.acceptAccSchema),
-  dashboardController.acceptAcc
+  dashboardController.acceptSecAcc
 );
 
-router.get(
-  "/getAllSecretaries",
+router.post(
+  "/rejectAcc/:secretary_id",
   isAuthenticated,
   isAuthorized("Admin"),
-  dashboardController.getAllSecretaries
+  validation(dashboardSchemas.acceptAccSchema),
+  dashboardController.rejectSecAcc
 );
 
-router.get(
-  "/getAllManagers",
+router.post(
+  "/acceptManagerAcc/:manager_id",
   isAuthenticated,
   isAuthorized("Admin"),
-  dashboardController.getAllManagers
+  validation(dashboardSchemas.acceptManagerSchema),
+  dashboardController.acceptManagerAcc
 );
 
-router.get(
-  "/getLoginHistory",
+router.post(
+  "/rejectManagerAcc/:manager_id",
   isAuthenticated,
   isAuthorized("Admin"),
-  dashboardController.getLoginHistory
+  validation(dashboardSchemas.acceptManagerSchema),
+  dashboardController.rejectManagerAcc
+);
+
+router.post(
+  "/recoverManager/:manager_id",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  validation(dashboardSchemas.acceptManagerSchema),
+  dashboardController.recoverManagerAcc
+);
+
+router.post(
+  "/recoverSec/:secretary_id",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  validation(dashboardSchemas.acceptAccSchema),
+  dashboardController.recoverSecAcc
 );
 
 router.delete(
@@ -63,6 +103,35 @@ router.delete(
   isAuthorized("Admin"),
   validation(dashboardSchemas.acceptAccSchema),
   dashboardController.deleteSecretary
+);
+
+router.get(
+  "/getLoginHistory",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  dashboardController.getLoginHistory
+);
+
+router.get(
+  "/getAdminDetails",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  dashboardController.getAdminDetails
+);
+
+
+router.get(
+  "/getAllSecretaries",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  dashboardController.getAllSecretaries
+);
+
+router.get(
+  "/getAllManagers",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  dashboardController.getAllManagers
 );
 
 export default router;
