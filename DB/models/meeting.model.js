@@ -2,6 +2,7 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "./../connection.js";
 import { meeting_Manager } from "./meeting_Manager.model.js";
 import { Note } from "./notes.model.js";
+import { Notifications } from "./notifications.model.js";
 
 export const Meetings = sequelize.define("Meetings", {
   meeting_id: {
@@ -29,6 +30,10 @@ Meetings.associate = (models) => {
     sourceKey: "meeting_id",
   });
   Meetings.hasMany(Note, {
+    foreignKey: "meeting_id",
+    sourceKey: "meeting_id",
+  });
+  Meetings.hasMany(Notifications, {
     foreignKey: "meeting_id",
     sourceKey: "meeting_id",
   });

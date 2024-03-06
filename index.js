@@ -7,16 +7,47 @@ import meetingsRouter from "./src/modules/meatings/meetings.router.js";
 import noteRouter from "./src/modules/note/note.router.js";
 import dashboardRouter from "./src/modules/dashboard/dashboard.router.js";
 import managerRouter from "./src/modules/manager/manager.router.js";
-
+import { Server } from "socket.io";
 import cors from "cors";
 import { Manager } from "./DB/models/manager.model.js";
 import { Secertary } from "./DB/models/secertary.model.js";
-import { Manager_Secretary } from "./DB/models/Manager_Secretary.model.js";
+import { createServer } from "node:http";
+import { Token } from "./DB/models/token.model.js";
+import jwt from "jsonwebtoken";
+import { Notifications } from "./DB/models/notifications.model.js";
+import { verifyToken } from "./src/utils/verifyToken.js";
 
 dotenv.config();
+const port = process.env.PORT;
 
 const app = express();
-const port = process.env.PORT;
+const server = createServer(app);
+export const io = new Server(server, {
+  cors: {
+    origin: "*",
+  },
+});
+
+io.on("connection", async (socket) => {
+
+  socket.on("updateSocketId", async (data) => {
+    let payload = await verifyToken(data.token);
+    await Manager.update(
+      { socketId: socket.id },
+      { where: { manager_id: payload.id } }
+    );
+  });
+
+  socket.on("getNotifications", async (data) => {
+    let payload = await verifyToken(data.token);
+
+    let notifications = await Notifications.findAll({
+      where: { manager_id: payload.id },
+    });
+
+    socket.emit("notifications", notifications);
+  });
+});
 
 app.use(cors());
 app.use(express.json());
@@ -69,6 +100,6 @@ app.use((error, req, res, next) => {
   });
 });
 
-app.listen(port, () => console.log("App is running at port :", port));
+server.listen(port, () => console.log("App is running at port :", port));
 
 export default app;

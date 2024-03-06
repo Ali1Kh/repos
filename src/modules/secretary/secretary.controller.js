@@ -8,6 +8,8 @@ import cloudinary from "../../utils/cloud.js";
 import { Op } from "sequelize";
 import { sequelize } from "../../../DB/connection.js";
 import { Manager_Secretary } from "../../../DB/models/Manager_Secretary.model.js";
+import { io } from "../../../index.js";
+import { Notifications } from "../../../DB/models/notifications.model.js";
 
 //createManagerAccount
 export const createManagerAccount = asyncHandler(async (req, res, next) => {
@@ -134,6 +136,14 @@ export const createMeeting = async (req, res, next) => {
     meeting_id: meeting.dataValues.meeting_id,
   });
 
+  const notification = await Notifications.create({
+    manager_id: isManager.manager_id,
+    message: "New Meeting Added To You Acccount With " + req.body.person,
+    meeting_id: meeting.dataValues.meeting_id,
+  });
+
+  io.to(isManager.socketId).emit("newNotification", notification);
+
   return res.json({ success: true, message: "Meeting created Successfully" });
 };
 
@@ -144,9 +154,10 @@ export const getSecMeetings = async (req, res, next) => {
      Manager.manager_id,CONCAT(first_name, ' ', last_name)  as 'Manager_Name',E_mail as 'Manager_Email',UserName as 'Manager_UserName' from Meetings
      join meeting_Manager on Meetings.meeting_id = meeting_Manager.meeting_id 
      join Manager on meeting_Manager.manager_id = Manager.manager_id  
-     where addedBy = ${req.payload.id}  GROUP BY Meetings.meeting_id`, {
+     where addedBy = ${req.payload.id}  GROUP BY Meetings.meeting_id`,
+    {
       model: Meetings,
-     }
+    }
   );
   return res.json({ success: true, meetings });
 };
