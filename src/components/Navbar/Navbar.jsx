@@ -75,6 +75,7 @@ export default function Navbar() {
   let { searchMeet } = useContext(searchContext);
   const handleKeyPress = async (event) => {
     await searchMeet(event.target.value);
+    await searchMeet(event.target.value);
   };
 
   return (
@@ -87,7 +88,7 @@ export default function Navbar() {
           >
             <img className="nav-logo" src={logo}></img>
             {location.pathname.split("/")[1] === "login" ||
-            location.pathname.split("/")[1] === "signup" ? (
+              location.pathname.split("/")[1] === "signup" ? (
               <h5 className=" mb-0">Meeting Managment</h5>
             ) : (
               ""
@@ -235,9 +236,7 @@ export default function Navbar() {
                         <span className="d-inline-flex text-center justify-content-center">
                           <i className="fa-solid fa-users"></i>
                         </span>
-                        <span>
-                          {t("Dashborad.ManageresAndSecretaries.ManageresName")}
-                        </span>
+                        <span>{t("Dashborad.ManageresAndSecretaries.ManageresName")}</span>
                       </Link>
                       <Link
                         className="nav-item animate__animated"
@@ -246,20 +245,43 @@ export default function Navbar() {
                         <span className="d-inline-flex text-center justify-content-center">
                           <i className="fa-solid fa-chalkboard-user"></i>
                         </span>
-                        <span>
-                          {t(
-                            "Dashborad.ManageresAndSecretaries.SecretariesName"
-                          )}
-                        </span>
+                        <span>{t("Dashborad.ManageresAndSecretaries.SecretariesName")}</span>
                       </Link>
                       <Link
                         className="nav-item animate__animated"
-                        to={"/dashboard/Acceptance"}
+                        to={"/dashboard/SecertariesAcceptance"}
                       >
                         <span className="d-inline-flex  text-center justify-content-center">
                           <i class="fa-regular fa-thumbs-up"></i>
                         </span>
-                        <span>{t("Dashborad.Acceptacne.AcceptacneName")}</span>
+                        <span>{t("Dashborad.Acceptacne.AcceptacneSec")}</span>
+                      </Link>
+                      <Link
+                        className="nav-item animate__animated"
+                        to={"/dashboard/ManagerAcceptance"}
+                      >
+                        <span className="d-inline-flex  text-center justify-content-center">
+                          <i class="fa-regular fa-thumbs-up"></i>
+                        </span>
+                        <span>{t("Dashborad.Acceptacne.AcceptacneManager")}</span>
+                      </Link>
+                      <Link
+                        className="nav-item animate__animated"
+                        to={"/dashboard/recoverSecertary"}
+                      >
+                        <span className="d-inline-flex  text-center justify-content-center">
+                          <i className="fa-solid fa-trash-arrow-up"></i>
+                        </span>
+                        <span>{t("Dashborad.recover.recoverSec")}</span>
+                      </Link>
+                      <Link
+                        className="nav-item animate__animated"
+                        to={"/dashboard/recoverManager"}
+                      >
+                        <span className="d-inline-flex  text-center justify-content-center">
+                          <i className="fa-solid fa-trash-arrow-up"></i>
+                        </span>
+                        <span>{t("Dashborad.recover.recoverManager")}</span>
                       </Link>
                       <Link
                         className="nav-item animate__animated"
@@ -367,6 +389,7 @@ export default function Navbar() {
                         <input
                           type="radio"
                           name="radio"
+                          defaultChecked
                           onClick={() => {
                             il8n.changeLanguage("ar");
                           }}
@@ -384,3 +407,6 @@ export default function Navbar() {
     </>
   );
 }
+
+
+

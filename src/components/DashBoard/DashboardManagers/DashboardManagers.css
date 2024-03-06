@@ -29,3 +29,7 @@ table th {
 .nav {
   background-color: var(--cardBgColor);
 }
+
+.MuiTableCell-root {
+  color: var(--BlackToWhite) !important;
+}

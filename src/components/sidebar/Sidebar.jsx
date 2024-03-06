@@ -39,7 +39,7 @@ const Sidebar = () => {
     $(".sidebarItem").eq(2).addClass("animate__fadeInUp animate__delay-250ms");
     $(".sidebarItem").eq(3).addClass("animate__fadeInUp animate__delay-300ms");
     $(".sidebarItem").eq(4).addClass("animate__fadeInUp animate__delay-350ms");
-    
+
     // $(".sidebarItem")
     //   .eq(5)
     //   .addClass("animate__slideInLeft animate__delay-400ms");
@@ -280,8 +280,8 @@ const Sidebar = () => {
             )}
           </div>
           <div className="setting-side mt-auto mb-3">
-            <div className="account border-top d-flex justify-content-center align-items-center gap-3 px-3 py-2">
-              <div className="accImage text-black d-flex justify-content-center align-items-center bg-info">
+            <div className="account d-flex justify-content-center align-items-center gap-3 px-3 py-2">
+              <div className="accImage text-black d-flex justify-content-center align-items-center bg-primary">
                 <span className="m-0 p-0">
                   {username?.split("")[0].toUpperCase()}
                 </span>

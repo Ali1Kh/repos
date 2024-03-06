@@ -40,7 +40,8 @@
 
 .header-side a,
 .setting-side a {
-  margin: 5px 35px;
+  max-width: 85%;
+  margin: 5px 10px 5px 20px;
   padding: 8px;
   font-size: 15px;
   cursor: pointer;
@@ -103,21 +104,30 @@
 }
 
 /*  */
+
+.setting-side .account {
+  border-top: 1px solid rgb(255, 255, 255, 0.3);
+}
+
 .accImage {
-  width: 30px;
-  height: 30px;
-  font-size: 18px;
+  width: 28px !important;
+  height: 28px !important;
+  font-size: 14px;
   border-radius: 100vh !important;
   user-select: none;
 }
 
 .accInfo .email {
-  font-size: 14px;
+  font-size: 12px;
+}
+
+.accInfo .username {
+  font-size: 16px;
 }
 
 .accMore {
-  width: 35px;
-  height: 35px;
+  width: 20px !important;
+  height: 20px !important;
   border-radius: 100vh;
   transition: all 0ms;
 }

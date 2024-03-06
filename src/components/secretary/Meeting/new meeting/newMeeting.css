@@ -2,9 +2,8 @@
   background-color: var(--cardBgColor);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   border-radius: 10px;
-  padding: 55px 10px !important;
   width: 85%;
-  margin: 10px 0 40px !important;
+  margin: 10px 0 25px 0 !important;
 }
 
 .inputItem input,

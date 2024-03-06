@@ -126,8 +126,6 @@
   transition: 0.5s ease !important;
 }
 
-.darkmodeContainer {}
-
 .darkmodeContainer label:hover {
   cursor: pointer !important;
   background-color: var(--sec-color) !important;
