@@ -28,6 +28,26 @@ import DashboardSecertaries from "./components/DashBoard/DashboardSecertaries/Da
 import History from "./components/DashBoard/History/History.jsx";
 import SearchProvider from "./components/context/searchContext.js";
 
+
+function App() {
+  const client = new QueryClient();
+  return (
+    <>
+      {" "}
+      <QueryClientProvider client={client}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <ThemeProvider theme={{}}>
+            <SearchProvider>
+              <RouterProvider router={router} />
+            </SearchProvider>
+          </ThemeProvider>
+        </LocalizationProvider>
+        <Toaster toastOptions={{ style: { zIndex: "99999" } }} />
+      </QueryClientProvider>{" "}
+    </>
+  );
+}
+
 const router = createHashRouter([
   {
     path: "/",
@@ -246,23 +266,5 @@ const router = createHashRouter([
     element: <NotFound />,
   },
 ]);
-function App() {
-  const client = new QueryClient();
-  return (
-    <>
-      {" "}
-      <QueryClientProvider client={client}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <ThemeProvider theme={{}}>
-            <SearchProvider>
-              <RouterProvider router={router} />
-            </SearchProvider>
-          </ThemeProvider>
-        </LocalizationProvider>
-        <Toaster toastOptions={{ style: { zIndex: "99999" } }} />
-      </QueryClientProvider>{" "}
-    </>
-  );
-}
 
 export default App;
