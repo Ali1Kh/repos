@@ -9,7 +9,7 @@ export default function Layout() {
   return (
     <>
       <div className="layout">
-          <Navbar />
+        <Navbar />
         <div className="layout-main d-flex">
           <div className="sidebar-col">
             <Sidebar />

@@ -17,12 +17,12 @@ const resources = {
 
 i18n
     .use(LanguageDetector)
-    .use(initReactI18next) 
+    .use(initReactI18next)
     .init({
         resources,
-        lng: "en", 
+        lng: "ar",
         interpolation: {
-            escapeValue: false 
+            escapeValue: false
         },
         react: {
             useSuspense: false

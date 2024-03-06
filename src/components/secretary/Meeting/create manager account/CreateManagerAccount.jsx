@@ -165,6 +165,7 @@ function CreateManagerAccount() {
                       name="email"
                       className="user-name inputItem-man mt-3 d-flex justify-content-center form-control"
                       placeholder={t("signup.email")}
+                      values
                     />
                     <ErrorMessage
                       name="email"
