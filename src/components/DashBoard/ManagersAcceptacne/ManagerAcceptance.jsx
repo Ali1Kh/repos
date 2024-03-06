@@ -28,6 +28,7 @@ const Acceptance = () => {
         }
       );
       setData(response.data);
+      console.log("res", response);
       return response.data;
     } catch (error) {
       console.error("Error:", error);
@@ -82,7 +83,7 @@ const Acceptance = () => {
   const rejectManagerAccount = async (manager_id) => {
     try {
       const response = await axios.post(
-        `https://meetingss.onrender.com/dashboard/rejectAcc/${manager_id}`,
+        `https://meetingss.onrender.com/dashboard/rejectManagerAcc/${manager_id}`,
         {},
         {
           headers: {
@@ -90,13 +91,11 @@ const Acceptance = () => {
           },
         }
       );
-      console.log("ww",response);
-
       if (response.data.success) {
         toast.success("Removed");
         getNotAcceptedManagers();
       } else {
-        // Handle failure
+        toast.error("Something went Wrong");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -110,7 +109,7 @@ const Acceptance = () => {
       <div className="main">
         <div className="container mt-5">
           <h1 className="container d-flex flex-column align-items-center justify-content-center p-4 fw-bold">
-            {t("Dashborad.Acceptacne.AcceptacneName")}
+            {t("Dashborad.Acceptacne.AcceptacneManager")}
           </h1>
           {isLoading ? (
             <div
@@ -131,8 +130,8 @@ const Acceptance = () => {
           ) : (
             <div className="row gy-3">
               {data ? (
-                data.managers?.length > 0 ? (
-                  data.managers?.map((manager, idx) => (
+                data.maangers?.length > 0 ? (
+                  data.maangers?.map((manager, idx) => (
                     <div>
                       <Paper sx={{ width: "100%", overflow: "hidden" }}>
                         <TableContainer sx={{ maxHeight: 500 }}>
