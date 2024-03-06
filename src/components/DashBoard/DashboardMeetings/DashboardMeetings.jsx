@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,27 +11,64 @@ import { useQuery } from "react-query";
 import { TailSpin } from "react-loader-spinner";
 import "./DashboardMeetings.css"
 import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
+import { error } from "jquery";
 
 
 export default function DashboardMeetings() {
 
   const token = localStorage.getItem("token")
+  const [data, setData] = useState([]);
 
-  const { data, isLoading } = useQuery("getDashBoardSecertar", getDashBoardSecertar);
+  async function getDashBoardSecertar() {
+    // return axios.get("https://meetingss.onrender.com/dashboard/getAllMeetings", {
+    //   headers: {
+    //     token: token
+    //   }
 
-  function getDashBoardSecertar() {
-    return axios.get("https://meetingss.onrender.com/dashboard/getAllMeetings", {
-      headers: {
-        token: token
-      }
-
-    })
+    // })
+    try {
+      const response = await axios.get(
+        "https://meetingss.onrender.com/dashboard/getAllMeetings",
+        {
+          headers: {
+            token: token,
+          },
+        }
+      );
+      console.log("res", response);
+      setData(response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error:", error);
+    }
   }
 
+  const { isLoading } = useQuery("getDashBoardSecertar", getDashBoardSecertar);
 
+  const deleteMeeting = async (meeting_id) => {
+    try {
+      const response = await axios.delete(
+        `https://meetingss.onrender.com/dashboard/deleteMeeting/${meeting_id}`,
+        {},
+        {
+          headers: {
+            token: token,
+          },
+        }
+      );
 
-  console.log(data);
-  
+      if (response.data.success) {
+        toast.success(response.data.message);
+        getDashBoardSecertar();
+      } else {
+        toast.error("Something went Wrong",error);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
 
   const [t] = useTranslation();
 
@@ -79,7 +116,7 @@ export default function DashboardMeetings() {
                         </TableHead>
                         <TableBody>
                           {data
-                            ? data.data.meetings?.map((meeting, idx) => (
+                            ? data.meetings?.map((meeting, idx) => (
                               <TableRow hover tabIndex={-1} key={idx}>
                                 <TableCell align="center" component="th">{meeting.person}</TableCell>
                                 <TableCell align="center" component="th">{meeting.about}</TableCell>
@@ -89,7 +126,10 @@ export default function DashboardMeetings() {
                                 <TableCell align="center" component="th">{meeting.time}</TableCell>
                                 <TableCell align="center" component="th">{meeting.date}</TableCell>
                                  <TableCell align="center" component="th">
-                                  <button  align="center" className='btn btn-danger'>
+                                  <button  align="center" className='btn btn-danger' 
+                                  onClick={() => 
+                                  deleteMeeting(meeting.meeting_id)
+                                  }>
                                     {t("Dashborad.Meetings.Delete")}
                                   </button>
                                 </TableCell>
