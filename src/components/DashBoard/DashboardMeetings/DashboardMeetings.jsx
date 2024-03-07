@@ -12,7 +12,6 @@ import { TailSpin } from "react-loader-spinner";
 import "./DashboardMeetings.css"
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
-import { error } from "jquery";
 
 
 export default function DashboardMeetings() {
@@ -21,12 +20,6 @@ export default function DashboardMeetings() {
   const [data, setData] = useState([]);
 
   async function getAllMeetings() {
-    // return axios.get("https://meetingss.onrender.com/dashboard/getAllMeetings", {
-    //   headers: {
-    //     token: token
-    //   }
-
-    // })
     try {
       const response = await axios.get(
         "https://meetingss.onrender.com/dashboard/getAllMeetings",
@@ -36,7 +29,6 @@ export default function DashboardMeetings() {
           },
         }
       );
-      console.log("res", response);
       setData(response.data);
       return response.data;
     } catch (error) {
@@ -50,10 +42,11 @@ export default function DashboardMeetings() {
     try {
       const response = await axios.delete(
         `https://meetingss.onrender.com/dashboard/deleteMeeting/${meeting_id}`,
+        {},
         {
           headers: {
             token: token,
-          },
+          }
         }
       );
 
@@ -61,7 +54,7 @@ export default function DashboardMeetings() {
         toast.success(response.data.message);
         getAllMeetings();
       } else {
-        toast.error("Something went Wrong", error);
+        toast.error("Something went Wrong",error);
       }
     } catch (error) {
       console.error("Error:", error);
