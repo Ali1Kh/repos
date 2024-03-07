@@ -5,18 +5,41 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import $ from "jquery";
 import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
 import { useTranslation } from "react-i18next";
-import { styled } from "@mui/system";
 import { jwtDecode } from "jwt-decode";
-import axios from "axios";
 import { searchContext } from "../context/searchContext";
+import Notifications from "../manager/notifications/Notifications";
 
 export default function Navbar() {
   const location = useLocation();
 
   const navigate = useNavigate();
 
+  let [username, setUsername] = useState();
+  let [email, setEmail] = useState();
+  let [role, setRole] = useState();
 
   useEffect(() => {
+    if (localStorage.getItem("token")) {
+      const { username, E_mail, role } = jwtDecode(
+        localStorage.getItem("token")
+      );
+      setUsername(username);
+      setRole(role);
+      setEmail(E_mail);
+    }
+  }, []);
+
+  useEffect(() => {
+    // ?Active
+    $(".navbarItem").click((e) => {
+      $("#navbarSupportedContent").addClass("collapsing", () => {
+        $(".navbar-toggler").addClass("collapsed");
+        $("#navbarSupportedContent").removeClass("show");
+      });
+      $(".navbarItem.active").removeClass("active");
+      $(e.target).parents(".navbarItem").addClass("active");
+    });
+
     // ?Active
     $(".nav-item").click((e) => {
       $(".nav-item.active").removeClass("active");
@@ -46,45 +69,13 @@ export default function Navbar() {
     });
   });
 
-  const autoLogoutAfterTime = () => {
-    setTimeout(() => {
-      localStorage.removeItem("token");
-    }, 2000);
-  };
-
-  let [username, setUsername] = useState();
-  let [email, setEmail] = useState();
-  let [role, setRole] = useState();
-
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      const { username, E_mail, role } = jwtDecode(
-        localStorage.getItem("token")
-      );
-      setUsername(username);
-      setRole(role);
-      setEmail(E_mail);
-    }
-  }, []);
-
-  useEffect(() => {
-    // ?Active
-    $(".navbarItem").click((e) => {
-      $("#navbarSupportedContent").addClass("collapsing", () => {
-        $(".navbar-toggler").addClass("collapsed");
-        $("#navbarSupportedContent").removeClass("show");
-      });
-      $(".navbarItem.active").removeClass("active");
-      $(e.target).parents(".navbarItem").addClass("active");
-    });
-  });
-
   const token = localStorage.getItem("token");
 
   const [t, il8n] = useTranslation();
 
   let { searchMeet } = useContext(searchContext);
   const handleKeyPress = async (event) => {
+    await searchMeet(event.target.value);
     await searchMeet(event.target.value);
   };
 
@@ -105,25 +96,19 @@ export default function Navbar() {
             )}
           </a>
           <div className="d-flex">
-            {/* <div>
-              <Button
-                aria-describedby={id}
-                type="button"
-                onClick={handleClick}
-                className="mt-1 me-2 bell"
-              >
-                <i className="fa-regular fa-bell"></i>
-              </Button>
-              <BasePopup id={id} open={open} anchor={anchor} >
-                <PopupBody className="notification-body-toggler d-flex mt-4">
-                  <div className="justify-content-center align-items-center me-3">
-                    <p className="fs-6">Your Manager Ali Khaled Were Added To A New Inside Meeting</p>
-                    <button className="btn accept-button">Accept</button>
-                    <i className="fa-solid fa-trash deletAcc"></i>
-                  </div>
-                </PopupBody>
-              </BasePopup>
-            </div> */}
+            <div>
+            {/* {role ? (
+                  role === "Manager" ? (
+                    <>
+                      <Notifications />
+                    </>
+                  ) : (
+                    <></>
+                  )
+                ) : (
+                  <></>
+                )} */}
+            </div>
             <button
               className="navbar-toggler border-0 animate__animated animate__fadeInRight"
               type="button"
@@ -340,9 +325,25 @@ export default function Navbar() {
               )}
 
               <li className="nav-item all ms-md-auto d-flex justify-content-center align-items-center me-3">
-                <div>
-                  
-                </div>
+                {/* <div>
+                  <Button
+                    aria-describedby={id}
+                    type="button"
+                    onClick={handleClick}
+                    className="bell-toggler"
+                  >
+                    <i className="fa-regular fa-bell"></i>
+                  </Button>
+                  <BasePopup id={id} open={open} anchor={anchor}>
+                    <PopupBody className="notification-body d-flex justify-content-center align-items-center me-3">
+                      <div className="justify-content-center align-items-center me-3">
+                        <p className="fs-6">Your Manager Ali Khaled Were Added To A New Inside Meeting</p>
+                        <button className="btn accept-button">Accept</button>
+                        <i className="fa-solid fa-trash deletAcc"></i>
+                      </div>
+                    </PopupBody>
+                  </BasePopup>
+                </div> */}
                 <div className="darkmodeContainer h-100 d-flex justify-content-center align-items-center px-3">
                   <label className="toggle" htmlFor="switch">
                     <input
