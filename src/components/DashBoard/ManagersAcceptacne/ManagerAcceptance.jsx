@@ -35,27 +35,27 @@ const Acceptance = () => {
     }
   };
 
-  const AcceptManager = async(manager_id) => {
+  const AcceptManager = async (manager_id) => {
     try {
-            const response = await axios.post(
-              `https://meetingss.onrender.com/dashboard/acceptManagerAcc/${manager_id}`,
-              {},
-              {
-                headers: {
-                  token: token,
-                },
-              }
-            );
-            if (response.data.success) {
-              toast.success("Accepted");
-              getNotAcceptedManagers();
-            }
-            else{
-              toast.error("Something went Wrong");
-            }
-          } catch (error) {
-            console.error("Error:", error);
-          }
+      const response = await axios.post(
+        `https://meetingss.onrender.com/dashboard/acceptManagerAcc/${manager_id}`,
+        {},
+        {
+          headers: {
+            token: token,
+          },
+        }
+      );
+      if (response.data.success) {
+        toast.success("Accepted");
+        getNotAcceptedManagers();
+      }
+      else {
+        toast.error("Something went Wrong");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const { isLoading } = useQuery("getNotAcceptedManagers", getNotAcceptedManagers);

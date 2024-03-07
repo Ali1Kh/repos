@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -20,7 +20,7 @@ export default function DashboardMeetings() {
   const token = localStorage.getItem("token")
   const [data, setData] = useState([]);
 
-  async function getDashBoardSecertar() {
+  async function getAllMeetings() {
     // return axios.get("https://meetingss.onrender.com/dashboard/getAllMeetings", {
     //   headers: {
     //     token: token
@@ -44,13 +44,12 @@ export default function DashboardMeetings() {
     }
   }
 
-  const { isLoading } = useQuery("getDashBoardSecertar", getDashBoardSecertar);
+  const { isLoading } = useQuery("getAllMeetings", getAllMeetings);
 
   const deleteMeeting = async (meeting_id) => {
     try {
       const response = await axios.delete(
         `https://meetingss.onrender.com/dashboard/deleteMeeting/${meeting_id}`,
-        {},
         {
           headers: {
             token: token,
@@ -60,9 +59,9 @@ export default function DashboardMeetings() {
 
       if (response.data.success) {
         toast.success(response.data.message);
-        getDashBoardSecertar();
+        getAllMeetings();
       } else {
-        toast.error("Something went Wrong",error);
+        toast.error("Something went Wrong", error);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -125,11 +124,11 @@ export default function DashboardMeetings() {
                                 <TableCell align="center" component="th">{meeting.statues}</TableCell>
                                 <TableCell align="center" component="th">{meeting.time}</TableCell>
                                 <TableCell align="center" component="th">{meeting.date}</TableCell>
-                                 <TableCell align="center" component="th">
-                                  <button  align="center" className='btn btn-danger' 
-                                  onClick={() => 
-                                  deleteMeeting(meeting.meeting_id)
-                                  }>
+                                <TableCell align="center" component="th">
+                                  <button align="center" className='btn btn-danger'
+                                    onClick={() =>
+                                      deleteMeeting(meeting.meeting_id)
+                                    }>
                                     {t("Dashborad.Meetings.Delete")}
                                   </button>
                                 </TableCell>
@@ -138,7 +137,7 @@ export default function DashboardMeetings() {
                         </TableBody>
                       </Table>
                     </TableContainer>
-                    
+
                   </Paper>
                 </div>
               </div>
