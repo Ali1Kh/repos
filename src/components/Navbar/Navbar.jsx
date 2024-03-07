@@ -3,6 +3,7 @@ import logo from "../../image/Logo.png";
 import "./navbar.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import $ from "jquery";
+import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
 import { useTranslation } from "react-i18next";
 import { styled } from "@mui/system";
 import { jwtDecode } from "jwt-decode";
@@ -13,6 +14,7 @@ export default function Navbar() {
   const location = useLocation();
 
   const navigate = useNavigate();
+
 
   useEffect(() => {
     // ?Active
@@ -338,25 +340,9 @@ export default function Navbar() {
               )}
 
               <li className="nav-item all ms-md-auto d-flex justify-content-center align-items-center me-3">
-                {/* <div>
-                  <Button
-                    aria-describedby={id}
-                    type="button"
-                    onClick={handleClick}
-                    className="bell-toggler"
-                  >
-                    <i className="fa-regular fa-bell"></i>
-                  </Button>
-                  <BasePopup id={id} open={open} anchor={anchor}>
-                    <PopupBody className="notification-body d-flex justify-content-center align-items-center me-3">
-                      <div className="justify-content-center align-items-center me-3">
-                        <p className="fs-6">Your Manager Ali Khaled Were Added To A New Inside Meeting</p>
-                        <button className="btn accept-button">Accept</button>
-                        <i className="fa-solid fa-trash deletAcc"></i>
-                      </div>
-                    </PopupBody>
-                  </BasePopup>
-                </div> */}
+                <div>
+                  
+                </div>
                 <div className="darkmodeContainer h-100 d-flex justify-content-center align-items-center px-3">
                   <label className="toggle" htmlFor="switch">
                     <input
