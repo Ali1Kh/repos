@@ -38,28 +38,6 @@ export default function DashboardMeetings() {
 
   const { isLoading } = useQuery("getAllMeetings", getAllMeetings);
 
-  const deleteMeeting = async (meeting_id) => {
-    try {
-      const response = await axios.delete(
-        `https://meetingss.onrender.com/dashboard/deleteMeeting/${meeting_id}`,
-        {},
-        {
-          headers: {
-            token: token,
-          }
-        }
-      );
-
-      if (response.data.success) {
-        toast.success(response.data.message);
-        getAllMeetings();
-      } else {
-        toast.error("Something went Wrong",error);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
 
 
   const [t] = useTranslation();
@@ -103,7 +81,6 @@ export default function DashboardMeetings() {
                             <TableCell align="center" className="fw-bold text-white">{t("Dashborad.Meetings.status")}</TableCell>
                             <TableCell align="center" className="fw-bold text-white">{t("Dashborad.Meetings.time")}</TableCell>
                             <TableCell align="center" className="fw-bold text-white">{t("Dashborad.Meetings.date")}</TableCell>
-                            <TableCell align="center" className="fw-bold text-white">{t("Dashborad.Meetings.Delete")}</TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
@@ -117,14 +94,6 @@ export default function DashboardMeetings() {
                                 <TableCell align="center" component="th">{meeting.statues}</TableCell>
                                 <TableCell align="center" component="th">{meeting.time}</TableCell>
                                 <TableCell align="center" component="th">{meeting.date}</TableCell>
-                                <TableCell align="center" component="th">
-                                  <button align="center" className='btn btn-danger'
-                                    onClick={() =>
-                                      deleteMeeting(meeting.meeting_id)
-                                    }>
-                                    {t("Dashborad.Meetings.Delete")}
-                                  </button>
-                                </TableCell>
                               </TableRow>
                             )) : ""}
                         </TableBody>
