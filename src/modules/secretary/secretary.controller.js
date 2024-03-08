@@ -233,8 +233,23 @@ export const changeStatus = async (req, res, next) => {
   });
   if (!isMeeting) return next(new Error("Meeting Not Found"));
 
-  if (isMeeting.dataValues.addedBy != req.payload.id)
-    return next(new Error("You Don't have permissions"));
+  if (req.payload.role == "Manager") {
+    let isMeetingManager = await meeting_Manager.findOne({
+      where: {
+        manager_id: req.payload.id,
+        meeting_id: req.params.meetingId,
+      },
+    });
+    console.log(isMeetingManager);
+    if (!isMeetingManager) {
+      return next(new Error("You Don't have Permissions"));
+    }
+  }
+
+  if (req.payload.role == "Secertary") {
+    if (isMeeting.dataValues.addedBy != req.payload.id)
+      return next(new Error("You Don't have permissions"));
+  }
 
   isMeeting.update({
     statues: req.body.status,

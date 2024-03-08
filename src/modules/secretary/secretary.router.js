@@ -83,7 +83,7 @@ router.post(
 router.post(
   "/changeStatus/:meetingId",
   isAuthenticated,
-  isAuthorized("Secertary"),
+  isAuthorized("Secertary", "Manager"),
   validation(secretarySchema.changeStatusSchema),
   asyncHandler(secretaryController.changeStatus)
 );
