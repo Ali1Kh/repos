@@ -6,9 +6,9 @@ import { meeting_Manager } from "../../../DB/models/meeting_Manager.model.js";
 export const getManagerMeeting = async (req, res, next) => {
   let whereClause = "1=1";
   const replacements = {};
-  const sortParam = req.query.sort || 'createdAt';
-  const sortOrder = sortParam.startsWith('-') ? 'DESC' : 'ASC';
-  const sortField = sortParam.replace(/^-/, '');
+  const sortParam = req.query.sort || "createdAt";
+  const sortOrder = sortParam.startsWith("-") ? "DESC" : "ASC";
+  const sortField = sortParam.replace(/^-/, "");
 
   if (req.query.date?.eq) {
     whereClause += " AND date = :dateEq";
@@ -35,23 +35,37 @@ export const getManagerMeeting = async (req, res, next) => {
     replacements.in_or_out = req.query.in_or_out;
   }
 
+  if (req.query?.createdAt) {
+    whereClause += " AND DATE(createdAt) = :createdAt";
+    replacements.createdAt = req.query.createdAt;
+  }
+
+  if (req.query?.updatedAt) {
+    whereClause += " AND DATE(updatedAt) = :updatedAt";
+    replacements.updatedAt = req.query.updatedAt;
+  }
+
+  if (req.query?.isUpdated == "true") {
+    whereClause += " AND createdAt != updatedAt";
+  }
+
   const conditions = [];
 
   if (req.query?.person) {
     conditions.push("person LIKE :person");
     replacements.person = `%${req.query.person}%`;
   }
-  
+
   if (req.query?.about) {
     conditions.push("about LIKE :about");
     replacements.about = `%${req.query.about}%`;
   }
-  
+
   if (req.query?.address) {
     conditions.push("address LIKE :address");
     replacements.address = `%${req.query.address}%`;
   }
-  
+
   if (conditions.length > 0) {
     whereClause += " AND (" + conditions.join(" OR ") + ")";
   }

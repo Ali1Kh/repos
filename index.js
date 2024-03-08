@@ -29,7 +29,6 @@ export const io = new Server(server, {
 });
 
 io.on("connection", async (socket) => {
-
   socket.on("updateSocketId", async (data) => {
     let payload = await verifyToken(data.token);
     await Manager.update(
