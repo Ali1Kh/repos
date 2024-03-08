@@ -48,7 +48,31 @@ export const getManagerMeetingSchema = joi.object({
   about: joi.string(),
   address: joi.string(),
   sort: joi.string(),
-  createdAt: joi.date(),
-  updatedAt: joi.date(),
+  createdAt: joi
+  .object({
+    eq: joi.date().when(joi.object({ lte: joi.exist(), gte: joi.exist() }), {
+      then: joi.forbidden(),
+    }),
+    lte: joi.date().when("eq", { is: joi.exist(), then: joi.forbidden() }),
+    gte: joi.date().when("eq", { is: joi.exist(), then: joi.forbidden() }),
+  })
+  .or("eq", "lte", "gte")
+  .messages({
+    "any.unknown":
+      "Equal To Created At Is Not Allowed While Lte And Gte Is Allowed",
+  }),
+  updatedAt: joi
+  .object({
+    eq: joi.date().when(joi.object({ lte: joi.exist(), gte: joi.exist() }), {
+      then: joi.forbidden(),
+    }),
+    lte: joi.date().when("eq", { is: joi.exist(), then: joi.forbidden() }),
+    gte: joi.date().when("eq", { is: joi.exist(), then: joi.forbidden() }),
+  })
+  .or("eq", "lte", "gte")
+  .messages({
+    "any.unknown":
+      "Equal To Updated At Is Not Allowed While Lte And Gte Is Allowed",
+  }),
   isUpdated: joi.boolean(),
 });

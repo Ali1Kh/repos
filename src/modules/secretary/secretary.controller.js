@@ -240,7 +240,6 @@ export const changeStatus = async (req, res, next) => {
         meeting_id: req.params.meetingId,
       },
     });
-    console.log(isMeetingManager);
     if (!isMeetingManager) {
       return next(new Error("You Don't have Permissions"));
     }
