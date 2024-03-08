@@ -76,3 +76,7 @@ export const getManagerMeetingSchema = joi.object({
   }),
   isUpdated: joi.boolean(),
 });
+
+export const getMeetingDetailsSchema = joi.object({
+  meetingId: joi.number().required(),
+});

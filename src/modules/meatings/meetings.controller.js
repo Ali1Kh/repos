@@ -133,3 +133,11 @@ export const getManagerMeetingDetails = async (req, res, next) => {
 
   return res.json({ success: true, meetings });
 };
+
+export const getMeetingManagers = async (req, res, next) => {
+  let meetingManagers = await meeting_Manager.findAll({
+    where: { manager_id: req.payload.id },
+  });
+
+  return res.json({ success: true, meetingManagers });
+};

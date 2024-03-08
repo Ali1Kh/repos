@@ -17,11 +17,18 @@ router.get(
 );
 
 router.get(
+  "/getMeetingManagers/",
+  isAuthenticated,
+  isAuthorized("Manager"),
+  asyncHandler(meetingsController.getMeetingManagers)
+);
+
+router.get(
   "/:meetingId",
   isAuthenticated,
   isAuthorized("Manager"),
+  validation(meetingsSchema.getMeetingDetailsSchema),
   asyncHandler(meetingsController.getManagerMeetingDetails)
 );
-
 
 export default router;
