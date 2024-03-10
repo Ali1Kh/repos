@@ -135,9 +135,10 @@ export const getManagerMeetingDetails = async (req, res, next) => {
 };
 
 export const getMeetingManagers = async (req, res, next) => {
-  let meetingManagers = await meeting_Manager.findAll({
-    where: { manager_id: req.payload.id },
-  });
+  let meetingManagers = await sequelize.query(
+    `select id,manager_id,meeting_Manager.meeting_id from meeting_Manager join Meetings on meeting_Manager.meeting_id = Meetings.meeting_id where manager_id = ${req.payload.id} and Meetings.date > NOW()`,
+    { model: meeting_Manager }
+  );
 
   return res.json({ success: true, meetingManagers });
 };
