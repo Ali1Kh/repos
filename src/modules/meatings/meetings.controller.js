@@ -36,33 +36,33 @@ export const getManagerMeeting = async (req, res, next) => {
   }
 
   if (req.query.createdAt?.eq) {
-    whereClause += " AND DATE(createdAt) = :createdAtEq";
+    whereClause += " AND createdAt = :createdAtEq";
     replacements.createdAtEq = req.query.createdAt.eq;
   }
 
   if (req.query.createdAt?.gte) {
-    whereClause += " AND DATE(createdAt) >= :createdAtGte";
+    whereClause += " AND createdAt >= :createdAtGte";
     replacements.createdAtGte = req.query.createdAt.gte;
   }
 
   if (req.query.createdAt?.lte) {
-    whereClause += " AND DATE(createdAt) <= :createdAtLte";
+    whereClause += " AND (createdAt) <= :createdAtLte";
     replacements.createdAtLte = req.query.createdAt.lte;
   }
 
   //
   if (req.query.updatedAt?.eq) {
-    whereClause += " AND DATE(updatedAt) = :updatedAtEq";
+    whereClause += " AND(updatedAt) = :updatedAtEq";
     replacements.updatedAtEq = req.query.updatedAt.eq;
   }
 
   if (req.query.updatedAt?.gte) {
-    whereClause += " AND DATE(updatedAt) >= :updatedAtGte";
+    whereClause += " AND (updatedAt) >= :updatedAtGte";
     replacements.updatedAtGte = req.query.updatedAt.gte;
   }
 
   if (req.query.updatedAt?.lte) {
-    whereClause += " AND DATE(updatedAt) <= :updatedAtLte";
+    whereClause += " AND (updatedAt) <= :updatedAtLte";
     replacements.updatedAtLte = req.query.updatedAt.lte;
   }
 
