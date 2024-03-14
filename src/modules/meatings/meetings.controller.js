@@ -110,7 +110,7 @@ export const getManagerMeeting = async (req, res, next) => {
     `
   SELECT * FROM Meetings
   JOIN meeting_Manager ON Meetings.meeting_id = meeting_Manager.meeting_id
-  WHERE meeting_Manager.manager_id = ${req.payload.id}  AND ${whereClause} Meetings.isDeleted = 0 ORDER BY ${sortField} ${sortOrder};
+  WHERE meeting_Manager.manager_id = ${req.payload.id}  AND ${whereClause} and Meetings.isDeleted = 0 ORDER BY ${sortField} ${sortOrder};
   `,
     {
       replacements: { ...replacements },
