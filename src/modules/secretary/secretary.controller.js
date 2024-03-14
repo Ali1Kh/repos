@@ -154,7 +154,7 @@ export const getSecMeetings = async (req, res, next) => {
      Manager.manager_id,CONCAT(first_name, ' ', last_name)  as 'Manager_Name',E_mail as 'Manager_Email',UserName as 'Manager_UserName' from Meetings
      join meeting_Manager on Meetings.meeting_id = meeting_Manager.meeting_id 
      join Manager on meeting_Manager.manager_id = Manager.manager_id  
-     where addedBy = ${req.payload.id}  GROUP BY Meetings.meeting_id`,
+     where addedBy = ${req.payload.id} and Meetings.isDeleted = 0  GROUP BY Meetings.meeting_id`,
     {
       model: Meetings,
     }
@@ -164,7 +164,11 @@ export const getSecMeetings = async (req, res, next) => {
 
 export const getSecMeetingsDetails = async (req, res, next) => {
   let meetings = await Meetings.findOne({
-    where: { addedBy: req.payload.id, meeting_id: req.params.meetingId },
+    where: {
+      addedBy: req.payload.id,
+      meeting_id: req.params.meetingId,
+      isDeleted: 0,
+    },
   });
   return res.json({ success: true, meetings });
 };
@@ -268,6 +272,11 @@ export const deleteMeeting = async (req, res, next) => {
 
   if (isMeeting.dataValues.addedBy != req.payload.id)
     return next(new Error("You Don't have permissions"));
-  isMeeting.destroy();
+
+  if (isMeeting.dataValues.isDeleted) {
+    return next(new Error("Meeting Already Deleted"));
+  }
+  isMeeting.isDeleted = 1;
+  await isMeeting.save();
   return res.json({ success: true, message: "Meeting Deleted Successfully" });
 };

@@ -13,6 +13,7 @@ export const getAllMeetings = asyncHandler(async (req, res, next) => {
      Manager.manager_id,CONCAT(first_name, ' ', last_name)  as 'Manager_Name',E_mail as 'Manager_Email',UserName as 'Manager_UserName' from Meetings
      join meeting_Manager on Meetings.meeting_id = meeting_Manager.meeting_id 
      join Manager on meeting_Manager.manager_id = Manager.manager_id  
+     where Meetings.isDeleted = 0 
       GROUP BY Meetings.meeting_id`,
     {
       model: Meetings,
@@ -27,11 +28,23 @@ export const deleteMeeting = asyncHandler(async (req, res, next) => {
   });
   if (!isMeeting) return next(new Error("Meeting Not Found !"));
 
-  isMeeting.destroy();
+  if (isMeeting.dataValues.isDeleted) {
+    return next(new Error("Meeting Already Deleted"));
+  }
+  isMeeting.isDeleted = 1;
+  await isMeeting.save();
+
   return res.json({
     success: true,
     message: "Meeting Deleted Successfully",
   });
+});
+
+export const getDeletedMeetings = asyncHandler(async (req, res, next) => {
+  let meetings = await Meetings.findAll({
+    where: { isDeleted: 1 },
+  });
+  return res.json({ success: true, count: meetings.length, meetings });
 });
 
 export const getNotAcceptedSec = asyncHandler(async (req, res, next) => {

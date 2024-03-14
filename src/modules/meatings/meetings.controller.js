@@ -110,7 +110,7 @@ export const getManagerMeeting = async (req, res, next) => {
     `
   SELECT * FROM Meetings
   JOIN meeting_Manager ON Meetings.meeting_id = meeting_Manager.meeting_id
-  WHERE meeting_Manager.manager_id = ${req.payload.id}  AND ${whereClause} ORDER BY ${sortField} ${sortOrder};
+  WHERE meeting_Manager.manager_id = ${req.payload.id}  AND ${whereClause} Meetings.isDeleted = 0 ORDER BY ${sortField} ${sortOrder};
   `,
     {
       replacements: { ...replacements },
@@ -126,7 +126,7 @@ export const getManagerMeetingDetails = async (req, res, next) => {
     `
   SELECT * FROM Meetings
   JOIN meeting_Manager ON Meetings.meeting_id = meeting_Manager.meeting_id
-  WHERE meeting_Manager.manager_id = ${req.payload.id} and meeting_Manager.meeting_id = ${req.params.meetingId};
+  WHERE meeting_Manager.manager_id = ${req.payload.id} and meeting_Manager.meeting_id = ${req.params.meetingId} and Meetings.isDeleted = 0;
   `,
     { model: Meetings }
   );
@@ -142,7 +142,7 @@ export const getMeetingManagers = async (req, res, next) => {
       year: "numeric",
       month: "2-digit",
       day: "2-digit",
-    })}'`,
+    })}' and  Meetings.isDeleted = 0 `,
     { model: meeting_Manager }
   );
   return res.json({ success: true, meetingManagers });

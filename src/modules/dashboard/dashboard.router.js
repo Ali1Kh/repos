@@ -142,4 +142,11 @@ router.get(
   dashboardController.getAllManagers
 );
 
+router.get(
+  "/getDeletedMeetings",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  dashboardController.getDeletedMeetings  
+)
+
 export default router;
