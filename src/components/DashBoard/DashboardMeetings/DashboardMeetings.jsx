@@ -38,8 +38,6 @@ export default function DashboardMeetings() {
 
   const { isLoading } = useQuery("getAllMeetings", getAllMeetings);
 
-
-
   const [t] = useTranslation();
 
   return <>
