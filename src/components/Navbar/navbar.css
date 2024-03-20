@@ -74,7 +74,7 @@
   width: 1px !important;
 }
 
-.langBtn .mydict input[type="radio"]:checked+span {
+.langBtn .mydict input[type="radio"]:checked + span {
   box-shadow: 0 0 0 0.0625em var(--sec-color) !important;
   background-color: var(--sec-color) !important;
   z-index: 1 !important;
@@ -130,7 +130,6 @@
   cursor: pointer !important;
   background-color: var(--sec-color) !important;
   border: 3px solid var(--sec-color);
-
 }
 
 .switchIcon:hover {
@@ -163,9 +162,12 @@
 
 /* .notification-data {} */
 
-
-.fa-bell{
+.bell-toggler i {
   color: var(--sec-color) !important;
+}
+
+.bell-toggler:hover i{
+  color: black !important;
 }
 
 @media screen and (max-width: 991px) {
@@ -187,4 +189,3 @@
     display: none !important;
   }
 }
-

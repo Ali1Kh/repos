@@ -3,6 +3,7 @@ import { socket } from "../../../socket";
 import { useEffect, useState } from "react";
 import { Popper } from "@mui/base/Popper";
 import { styled, css } from "@mui/system";
+import Notifier from "react-desktop-notification";
 
 export default function Notifications() {
   const [anchor, setAnchor] = React.useState(null);
@@ -18,12 +19,24 @@ export default function Notifications() {
     // socket.disconnect();
     // socket.connect();
 
+    if (!("Notification" in window)) {
+      console.log("Browser does not support desktop notification");
+    } else {
+      Notification.requestPermission();
+    }
+
     socket.emit("updateSocketId", { token: localStorage.getItem("token") });
     socket.emit("getNotifications", { token: localStorage.getItem("token") });
     socket.on("notifications", (data) => {
       setNotifications(data);
     });
     socket.on("newNotification", (data) => {
+      Notifier.start(
+        "Meeting Management",
+        data.message,
+        "/home",
+        "../../../image/Logo.png"
+      );
       notifications.push(data);
       setNotifications(notifications);
     });
@@ -41,23 +54,39 @@ export default function Notifications() {
           <i className="fa-regular fa-bell"></i>
           <span
             className="position-absolute  translate-middle badge rounded-pill p-1"
-            style={{ backgroundColor: "red" , top:"-5px" , left: "100%" , fontSize:"12px"}}
+            style={{
+              backgroundColor: "red",
+              top: "-5px",
+              left: "100%",
+              fontSize: "12px",
+            }}
           >
             {notifications.length}
           </span>
         </Button>
 
-        <Popper id={id} open={open} anchorEl={anchor} style={{ zIndex: 9999 }}>
+        <Popper
+          id={id}
+          open={open}
+          anchorEl={anchor}
+          style={{ zIndex: 9999}}
+        >
           <StyledPopperDiv
-            className="overflow-y-scroll"
+            className="overflow-y-scroll bg-white"
             style={{ maxHeight: "300px" }}
           >
             {" "}
             <ul className="list-unstyled">
               {notifications.map((notification) => {
                 return (
-                  <li className="border-bottom text-decoration-none mb-2 py-2">
+                  <li
+                    className="text-black p-2 rounded-1 text-decoration-none mb-2 py-2"
+                    style={{ backgroundColor: "#f3f4f6" }}
+                  >
                     {notification.message}
+                    <div>
+                      {new Date(notification.createdAt).toLocaleString()}
+                    </div>
                   </li>
                 );
               })}
