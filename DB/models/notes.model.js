@@ -8,6 +8,7 @@ export const Note = sequelize.define(
     notes_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
     },
     title: { type: DataTypes.STRING, allowNull: false },
     content: { type: DataTypes.STRING },
