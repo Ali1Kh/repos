@@ -42,6 +42,7 @@ io.on("connection", async (socket) => {
 
     let notifications = await Notifications.findAll({
       where: { manager_id: payload.id },
+      order: [["createdAt", "DESC"]],
     });
 
     socket.emit("notifications", notifications);
