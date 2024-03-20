@@ -41,9 +41,20 @@ export const deleteMeeting = asyncHandler(async (req, res, next) => {
 });
 
 export const getDeletedMeetings = asyncHandler(async (req, res, next) => {
-  let meetings = await Meetings.findAll({
-    where: { isDeleted: 1 },
-  });
+  let meetings = await sequelize.query(
+    `select Meetings.meeting_id,time,date,about,in_or_out,address, notes,person,statues,addedBy,Meetings.createdAt,Meetings.updatedAt,
+     attachmentId,attachmentLink,attachmentName,
+     Manager.manager_id,CONCAT(Manager.first_name, ' ', Manager.last_name)  as 'Manager_Name',Manager.E_mail as 'Manager_Email',Manager.UserName as 'Manager_UserName',
+     Secretary.secretary_id,CONCAT(Secretary.first_name, ' ', Secretary.last_name)  as 'Secertary_Name',Secretary.E_mail as 'Secertary_Email',Secretary.UserName as 'Secertary_UserName'
+     from Meetings
+     join meeting_Manager on Meetings.meeting_id = meeting_Manager.meeting_id 
+     join Manager on meeting_Manager.manager_id = Manager.manager_id  
+     join Secretary on Meetings.addedBy = Secretary.secretary_id
+     where Meetings.isDeleted = 1  GROUP BY Meetings.meeting_id`,
+    {
+      model: Meetings,
+    }
+  );
   return res.json({ success: true, count: meetings.length, meetings });
 });
 
