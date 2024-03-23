@@ -55,7 +55,7 @@ export default function Nots() {
         "https://meetingss.onrender.com/notes/",
         {
           title: title,
-          content: content,
+          content: `[{"insert":"${content}\\n"}]`,
         },
         {
           headers: {
@@ -133,6 +133,34 @@ export default function Nots() {
       });
   };
 
+  function convertNote(note) {
+    let convertedNote = JSON.parse(note.replaceAll("\n", "")).map(
+      (item, index) => {
+        const { insert, attributes } = item;
+        let styles = {};
+        if (attributes) {
+          if (attributes.bold) {
+            styles.fontWeight = "bold";
+          }
+          if (attributes.italic) {
+            styles.fontStyle = "italic";
+          }
+          if (attributes.color) {
+            styles.color = attributes.color;
+          }
+        }
+
+        return (
+          <span key={index} style={styles}>
+            {insert}
+          </span>
+        );
+      }
+    );
+
+    return convertedNote;
+  }
+
   return (
     <>
       <div className="main">
@@ -170,7 +198,7 @@ export default function Nots() {
                         data-aos-once="true"
                         onClick={() => {
                           handleShow();
-                          setContent(note.content);
+                          setContent($("#note" + note.notes_id).text());
                           setTitle(note.title);
                           setId(note.notes_id);
                           setType("update");
@@ -179,8 +207,10 @@ export default function Nots() {
                         <div className="inner-card-notes h-100 shadow rounded-4 gap-4 p-4 flex-column">
                           <div className="box d-flex  flex-column h-100">
                             <h5>{note.title}</h5>
-                            <div className="text-black d-flex mt-2 align-items-center">
-                              <p>{note.content}</p>
+                            <div className="text-black d-flex mt-2 align-items-center  overflow-hidden">
+                              <p id={`note${note.notes_id}`}>
+                                {convertNote(note.content)}
+                              </p>
                             </div>
                             <div className="text-black d-flex mt-2 align-items-center">
                               <a

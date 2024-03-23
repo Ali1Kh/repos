@@ -41,7 +41,7 @@ export default function MeetingDetails({ meetingsDetails }) {
         `https://meetingss.onrender.com/notes/${meetingId}`,
         {
           title: title,
-          content: content,
+          content: `[{"insert":"${content}\\n"}]`,
         },
         {
           headers: {
