@@ -3,10 +3,9 @@ import { useQuery } from "react-query";
 import axios from "axios";
 export const searchContext = createContext();
 export default function SearchProvider({ children }) {
-  
   const [meetings, setMeetings] = useState([]);
-    let { isLoading } = useQuery("getMeetings", getMeetings);
- 
+  let { isLoading } = useQuery("getMeetings", getMeetings);
+
   const authToken = localStorage.getItem("token");
 
   useEffect(() => {
@@ -18,9 +17,11 @@ export default function SearchProvider({ children }) {
       console.error("Authentication token not found in Local Storage");
       return;
     }
-
+    console.log(new Date().toISOString().split("T")[0]);
     const { data } = await axios.get(
-      "https://meetingss.onrender.com/meetings?sort=date",
+      `https://meetingss.onrender.com/meetings?date[gte]=${
+        new Date().toISOString().split("T")[0]
+      }&sort=date`,
       {
         headers: {
           token: authToken,
@@ -47,7 +48,7 @@ export default function SearchProvider({ children }) {
     }
   }
   return (
-    <searchContext.Provider value={{ meetings,isLoading, searchMeet }}>
+    <searchContext.Provider value={{ meetings, isLoading, searchMeet }}>
       {children}
     </searchContext.Provider>
   );
