@@ -90,7 +90,7 @@ export default function HomePage() {
                           data-aos-once="true"
                         >
                           <div
-                            className="inner-card h-100 shadow rounded-4 gap-3 p-3 justify-content-end flex-column"
+                            className="inner-card h-100 shadow rounded-2 gap-3 p-3 justify-content-end flex-column"
                             data-bs-toggle="modal"
                             data-bs-target={`#meetingModal${meeting.meeting_id}`}
                           >

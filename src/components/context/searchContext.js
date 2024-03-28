@@ -17,7 +17,6 @@ export default function SearchProvider({ children }) {
       console.error("Authentication token not found in Local Storage");
       return;
     }
-    console.log(new Date().toISOString().split("T")[0]);
     const { data } = await axios.get(
       `https://meetingss.onrender.com/meetings?date[gte]=${
         new Date().toISOString().split("T")[0]

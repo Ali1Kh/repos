@@ -19,7 +19,7 @@ export default function Calender() {
           styleOverrides: {
             root: {
               color: "#343A46",
-              borderRadius: 20,
+              borderRadius: 10,
               borderWidth: 1,
               borderColor: "#343A46",
               border: "0px solid",
@@ -126,7 +126,7 @@ export default function Calender() {
         <h2 className="mb-5 animate__animated animate__zoomIn BlackToWhite">
           {t("Calendar.calendar")}
         </h2>
-        <div className="calenderCard shadow rounded-4 p-sm-4">
+        <div className="calenderCard shadow rounded-3 p-sm-4">
           <div className="row my-3 gy-3">
             <div className="col-lg-6 p-4 h-100">
               <ThemeProvider theme={newTheme}>

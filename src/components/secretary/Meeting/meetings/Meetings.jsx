@@ -239,7 +239,7 @@ export default function Meetings() {
                   maxHeight: "550px",
                   padding: "10px",
                   maxWidth: "fit-content",
-                  borderRadius: "15px",
+                  borderRadius: "3px",
 
                   "& .MuiDataGrid-cell": {
                     color: "var(--BlackToWhite)",
@@ -259,6 +259,7 @@ export default function Meetings() {
                     display: "none",
                   },
                 }}
+
               />
             </div>
           </div>

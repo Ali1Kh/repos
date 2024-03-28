@@ -29,11 +29,14 @@ export default function Nots() {
 
   async function getNotes() {
     try {
-      let { data } = await axios.get("https://meetingss.onrender.com/notes/", {
-        headers: {
-          token: authToken,
-        },
-      });
+      let { data } = await axios.get(
+        "https://meetingss.onrender.com/notes?sort=-updatedAt",
+        {
+          headers: {
+            token: authToken,
+          },
+        }
+      );
       handleClose();
       setData(data);
     } catch (error) {
@@ -90,7 +93,7 @@ export default function Nots() {
         `https://meetingss.onrender.com/notes/${id}`,
         {
           title: title,
-          content: content,
+          content: `[{"insert":"${content}\\n"}]`,
         },
         {
           headers: {
@@ -204,8 +207,8 @@ export default function Nots() {
                           setType("update");
                         }}
                       >
-                        <div className="inner-card-notes h-100 shadow rounded-4 gap-4 p-4 flex-column">
-                          <div className="box d-flex  flex-column h-100">
+                        <div className="inner-card-notes h-100 shadow rounded-2 gap-4 p-4 flex-column">
+                          <div className="box overflow-hidden d-flex  flex-column h-100">
                             <h5>{note.title}</h5>
                             <div className="text-black d-flex mt-2 align-items-center  overflow-hidden">
                               <p id={`note${note.notes_id}`}>
