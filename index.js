@@ -28,13 +28,15 @@ export const io = new Server(server, {
   },
 });
 
+try {
 io.on("connection", async (socket) => {
   socket.on("updateSocketId", async (data) => {
-    let payload = await verifyToken(data.token);
-    await Manager.update(
-      { socketId: socket.id },
-      { where: { manager_id: payload.id } }
-    );
+    verifyToken(data.token).then(async (payload) => {
+      await Manager.update(
+        { socketId: socket.id },
+        { where: { manager_id: payload.id } }
+      );
+    })
   });
 
   socket.on("getNotifications", async (data) => {
@@ -48,7 +50,9 @@ io.on("connection", async (socket) => {
     socket.emit("notifications", notifications);
   });
 });
-
+} catch (error) {
+  console.log(error);
+}
 app.use(cors());
 app.use(express.json());
 
