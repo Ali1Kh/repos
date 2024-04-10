@@ -31,6 +31,9 @@ export const io = new Server(server, {
 try {
   io.on("connection", async (socket) => {
     socket.on("updateSocketId", async (data) => {
+      if (!data.token) {
+        return new Error("Token Is Required");
+      }
       verifyToken(data.token).then(async (payload) => {
         await Manager.update(
           { socketId: socket.id },
