@@ -29,27 +29,27 @@ export const io = new Server(server, {
 });
 
 try {
-io.on("connection", async (socket) => {
-  socket.on("updateSocketId", async (data) => {
-    verifyToken(data.token).then(async (payload) => {
-      await Manager.update(
-        { socketId: socket.id },
-        { where: { manager_id: payload?.id } }
-      );
-    })
-  });
-
-  socket.on("getNotifications", async (data) => {
-    let payload = await verifyToken(data.token);
-
-    let notifications = await Notifications.findAll({
-      where: { manager_id: payload?.id },
-      order: [["createdAt", "DESC"]],
+  io.on("connection", async (socket) => {
+    socket.on("updateSocketId", async (data) => {
+      verifyToken(data.token).then(async (payload) => {
+        await Manager.update(
+          { socketId: socket.id },
+          { where: { manager_id: payload?.id } }
+        );
+      });
     });
 
-    socket.emit("notifications", notifications);
+    socket.on("getNotifications", async (data) => {
+      verifyToken(data.token).then(async (payload) => {
+        let notifications = await Notifications.findAll({
+          where: { manager_id: payload?.id },
+          order: [["createdAt", "DESC"]],
+        });
+
+        socket.emit("notifications", notifications);
+      });
+    });
   });
-});
 } catch (error) {
   console.log(error);
 }
