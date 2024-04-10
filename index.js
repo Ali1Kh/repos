@@ -34,7 +34,7 @@ io.on("connection", async (socket) => {
     verifyToken(data.token).then(async (payload) => {
       await Manager.update(
         { socketId: socket.id },
-        { where: { manager_id: payload.id } }
+        { where: { manager_id: payload?.id } }
       );
     })
   });
@@ -43,7 +43,7 @@ io.on("connection", async (socket) => {
     let payload = await verifyToken(data.token);
 
     let notifications = await Notifications.findAll({
-      where: { manager_id: payload.id },
+      where: { manager_id: payload?.id },
       order: [["createdAt", "DESC"]],
     });
 
