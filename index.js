@@ -16,7 +16,7 @@ import { Token } from "./DB/models/token.model.js";
 import jwt from "jsonwebtoken";
 import { Notifications } from "./DB/models/notifications.model.js";
 import { verifyToken } from "./src/utils/verifyToken.js";
-
+ 
 dotenv.config();
 const port = process.env.PORT;
 
