@@ -5,7 +5,7 @@ import { asyncHandler } from "../../utils/asyncHandler.js";
 import bcryptjs from "bcryptjs";
 import { meeting_Manager } from "../../../DB/models/meeting_Manager.model.js";
 import cloudinary from "../../utils/cloud.js";
-import { Op } from "sequelize";
+import { Op, or } from "sequelize";
 import { sequelize } from "../../../DB/connection.js";
 import { Manager_Secretary } from "../../../DB/models/Manager_Secretary.model.js";
 import { io } from "../../../index.js";
@@ -182,6 +182,8 @@ export const getSecManagers = async (req, res, next) => {
         attributes: [],
         where: {
           secretary_id: req.payload.id,
+          isDeleted: 0,
+          Accepted_Acc: { [Op.or]: [true, null] },
         },
       },
     ],
