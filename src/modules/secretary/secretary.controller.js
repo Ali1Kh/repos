@@ -182,7 +182,7 @@ export const getSecManagers = async (req, res, next) => {
         attributes: [],
         where: {
           secretary_id: req.payload.id,
-          isDeleted: 0,
+          isDeleted: false,
           Accepted_Acc: { [Op.or]: [true, null] },
         },
       },
