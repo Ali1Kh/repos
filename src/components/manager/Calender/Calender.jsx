@@ -72,7 +72,7 @@ export default function Calender() {
     }
 
     let { data } = await axios.get(
-      `https://meetingss.onrender.com/meetings/?date[eq]=${
+      `${process.env.REACT_APP_APIHOST}/meetings/?date[eq]=${
         new Date(`${vDate.$y}-${vDate.$M + 1}-${vDate.$D + 1}`)
           .toISOString()
           .split("T")[0]
@@ -97,7 +97,7 @@ export default function Calender() {
     }
 
     let { data } = await axios.get(
-      `https://meetingss.onrender.com/meetings?date[gte]=${startDate}&date[lte]=${endDate}`,
+      `${process.env.REACT_APP_APIHOST}/meetings?date[gte]=${startDate}&date[lte]=${endDate}`,
       {
         headers: {
           token: authToken,

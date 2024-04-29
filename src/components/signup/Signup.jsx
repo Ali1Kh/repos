@@ -41,7 +41,7 @@ export default function Signup() {
     };
 
     axios
-      .post("https://meetingss.onrender.com/auth/signup", formData)
+      .post(`${process.env.REACT_APP_APIHOST}/auth/signup`, formData)
       .then((response) => {
         console.log(response.data);
         if (response.data.success) {

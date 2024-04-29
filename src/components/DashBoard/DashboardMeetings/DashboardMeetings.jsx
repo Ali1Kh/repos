@@ -22,7 +22,7 @@ export default function DashboardMeetings() {
   async function getAllMeetings() {
     try {
       const response = await axios.get(
-        "https://meetingss.onrender.com/dashboard/getAllMeetings",
+        `${process.env.REACT_APP_APIHOST}/dashboard/getAllMeetings`,
         {
           headers: {
             token: token,

@@ -24,7 +24,7 @@ export default function Meetings() {
   async function getSecMeetings() {
     try {
       let { data } = await axios.get(
-        `https://meetingss.onrender.com/secretary/getSecMeetings`,
+        `${process.env.REACT_APP_APIHOST}/secretary/getSecMeetings`,
         { headers: { token: localStorage.getItem("token") } }
       );
       if (data.success) {
@@ -76,7 +76,7 @@ export default function Meetings() {
   }
   async function deleteMeeting(id) {
     let { data } = await axios.delete(
-      `https://meetingss.onrender.com/secretary/deleteMeeting/${id}`,
+      `${process.env.REACT_APP_APIHOST}/secretary/deleteMeeting/${id}`,
       { headers: { token: localStorage.getItem("token") } }
     );
 
@@ -141,6 +141,7 @@ export default function Meetings() {
               style={{ height: 500, width: "100%" }}
             >
               <DataGrid
+                
                 slotProps={{
                   row: {
                     onContextMenu: (e) => {

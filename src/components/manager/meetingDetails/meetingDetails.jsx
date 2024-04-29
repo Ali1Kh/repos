@@ -38,7 +38,7 @@ export default function MeetingDetails({ meetingsDetails }) {
     }
     axios
       .post(
-        `https://meetingss.onrender.com/notes/${meetingId}`,
+        `${process.env.REACT_APP_APIHOST}/notes/${meetingId}`,
         {
           title: title,
           content: `[{"insert":"${content}\\n"}]`,

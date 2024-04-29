@@ -23,7 +23,7 @@ export default function DashBoardManagers() {
   const { isLoading } = useQuery("getDashBoardManager", getDashBoardManager);
 
   async function getDashBoardManager() {
-    const { data } = await axios.get("https://meetingss.onrender.com/dashboard/getAllManagers", {
+    const { data } = await axios.get(`${process.env.REACT_APP_APIHOST}/dashboard/getAllManagers`, {
       headers: {
         token: token
       }
@@ -35,7 +35,7 @@ export default function DashBoardManagers() {
 
   const DeleteManager = async () => {
     await axios
-      .delete(`https://meetingss.onrender.com/dashboard/deleteManager/${id}`, {
+      .delete(`${process.env.REACT_APP_APIHOST}/dashboard/deleteManager/${id}`, {
         headers: {
           token: token,
         },

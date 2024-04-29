@@ -18,7 +18,7 @@ export default function SearchProvider({ children }) {
       return;
     }
     const { data } = await axios.get(
-      `https://meetingss.onrender.com/meetings?date[gte]=${
+      `${process.env.REACT_APP_APIHOST}/meetings?date[gte]=${
         new Date().toISOString().split("T")[0]
       }&sort=date`,
       {
@@ -35,7 +35,7 @@ export default function SearchProvider({ children }) {
 
   async function searchMeet(val) {
     const { data } = await axios.get(
-      `https://meetingss.onrender.com/meetings?about=${val}&address=${val}&person=${val}`,
+      `${process.env.REACT_APP_APIHOST}/meetings?about=${val}&address=${val}&person=${val}`,
       {
         headers: {
           token: authToken,

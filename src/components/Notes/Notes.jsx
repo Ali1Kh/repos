@@ -30,7 +30,7 @@ export default function Nots() {
   async function getNotes() {
     try {
       let { data } = await axios.get(
-        "https://meetingss.onrender.com/notes?sort=-updatedAt",
+        `${process.env.REACT_APP_APIHOST}/notes?sort=-updatedAt`,
         {
           headers: {
             token: authToken,
@@ -55,7 +55,7 @@ export default function Nots() {
     }
     axios
       .post(
-        "https://meetingss.onrender.com/notes/",
+        `${process.env.REACT_APP_APIHOST}/notes/`,
         {
           title: title,
           content: `[{"insert":"${content}\\n"}]`,
@@ -90,7 +90,7 @@ export default function Nots() {
 
     axios
       .patch(
-        `https://meetingss.onrender.com/notes/${id}`,
+        `${process.env.REACT_APP_APIHOST}/notes/${id}`,
         {
           title: title,
           content: `[{"insert":"${content}\\n"}]`,
@@ -117,7 +117,7 @@ export default function Nots() {
 
   const DeleteNotes = () => {
     axios
-      .delete(`https://meetingss.onrender.com/notes/${id}`, {
+      .delete(`${process.env.REACT_APP_APIHOST}/notes/${id}`, {
         headers: {
           token: authToken,
         },

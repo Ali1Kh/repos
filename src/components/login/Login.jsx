@@ -61,7 +61,7 @@ export default function Login() {
     }
 
     axios
-      .post("https://meetingss.onrender.com/auth/login", formData)
+      .post(`${process.env.REACT_APP_APIHOST}/auth/login`, formData)
       .then((response) => {
         console.log(response);
         const token = response.data.token;

@@ -20,7 +20,7 @@ const Recover = () => {
   const getDeletedSecertaries = async () => {
     try {
       const response = await axios.get(
-        "https://meetingss.onrender.com/dashboard/getDeletedSecretaries",
+        `${process.env.REACT_APP_APIHOST}/dashboard/getDeletedSecretaries`,
         {
           headers: {
             token: token,
@@ -39,7 +39,7 @@ const Recover = () => {
   const RecoverSecertary = async(secretary_id) => {
     try {
             const response = await axios.post(
-              `https://meetingss.onrender.com/dashboard/recoverSec/${secretary_id}`,
+              `${process.env.REACT_APP_APIHOST}/dashboard/recoverSec/${secretary_id}`,
               {},
               {
                 headers: {
@@ -65,7 +65,7 @@ const Recover = () => {
   // async function acceptAccount(id) {
   //   try {
   //     const response = await axios.post(
-  //       `https://meetingss.onrender.com/dashboard/acceptAcc/${id}`,
+  //       `${process.env.REACT_APP_APIHOST}/dashboard/acceptAcc/${id}`,
   //       {},
   //       {
   //         headers: {

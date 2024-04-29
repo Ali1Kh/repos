@@ -51,7 +51,7 @@ function CreateManagerAccount() {
       };
 
       const response = await axios.post(
-        "https://meetingss.onrender.com/secretary/create-manager",
+        `${process.env.REACT_APP_APIHOST}/secretary/create-manager`,
         formData,
         { headers }
       );
@@ -79,7 +79,7 @@ function CreateManagerAccount() {
       };
 
       const response = await axios.post(
-        "https://meetingss.onrender.com/secretary/addExistingManager",
+        `${process.env.REACT_APP_APIHOST}/secretary/addExistingManager`,
         formData,
         { headers }
       );
