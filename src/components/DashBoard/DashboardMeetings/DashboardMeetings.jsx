@@ -11,8 +11,6 @@ import { useQuery } from "react-query";
 import { TailSpin } from "react-loader-spinner";
 import "./DashboardMeetings.css"
 import { useTranslation } from "react-i18next";
-import toast from "react-hot-toast";
-
 
 export default function DashboardMeetings() {
 
