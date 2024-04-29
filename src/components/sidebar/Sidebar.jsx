@@ -250,6 +250,15 @@ const Sidebar = () => {
                   </Link>
                   <Link
                     className="sidebarItem animate__animated"
+                    to={"/dashboard/AcceptSecretaryForManager"}
+                  >
+                    <span className="d-inline-flex  text-center justify-content-center">
+                      <i class="fa-regular fa-thumbs-up"></i>
+                    </span>
+                    <span>{t("Dashborad.Acceptacne.AcceptSecretaryForManager")}</span>
+                  </Link>
+                  <Link
+                    className="sidebarItem animate__animated"
                     to={"/dashboard/recoverSecertary"}
                   >
                     <span className="d-inline-flex  text-center justify-content-center">
@@ -460,6 +469,16 @@ const Sidebar = () => {
                       <i class="fa-regular fa-thumbs-up"></i>
                     </span>
                   </Link>
+
+                  <Link
+                    className="sidebarItem animate__animated"
+                    to={"/dashboard/AcceptSecretaryForManager"}
+                  >
+                    <span className="d-inline-flex  text-center justify-content-center">
+                      <i class="fa-regular fa-thumbs-up"></i>
+                    </span>
+                  </Link>
+
                   <Link
                     className="sidebarItem animate__animated"
                     to={"/dashboard/recoverSecertary"}

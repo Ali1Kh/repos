@@ -42,7 +42,7 @@
     "loginHint": "لديك حساب بالفعل",
     "login": "تسجيل دخول",
     "createManagerAccount": "إنشاء حساب المدير",
-    "AddExistingAccount":"اضافة مدير موجود"
+    "AddExistingAccount": "اضافة مدير موجود"
   },
   "sidebar": {
     "home": "الاجتماعات",
@@ -123,6 +123,7 @@
       "AcceptacneSec": "قبول سكرتير",
       "AcceptacneManager": "قبول مدير",
       "AcceptacneName": "القبول",
+      "AcceptSecretaryForManager": "طلبات سكرتير",
       "userName": "اسم المستخدم",
       "name": "الاسم",
       "E_mail": "البريد الإلكتروني",
