@@ -32,6 +32,7 @@ import RecoverSecertary from "./components/DashBoard/RecoverSecertary/RecoverSec
 import RecoverManager from "./components/DashBoard/RecoverManager/RecoverManager.jsx";
 import i18n from "./i18n";
 import $ from "jquery";
+import AcceptSecretaryForManager from "./components/DashBoard/AcceptSecretaryForManager/AcceptSecretaryForManager.jsx";
 
 function App() {
   const client = new QueryClient();
@@ -217,6 +218,14 @@ const router = createBrowserRouter([
             element: (
               <ProtectedRoutes role={"Admin"}>
                 <ManagerAcceptance />
+              </ProtectedRoutes>
+            ),
+          },
+          {
+            path: "AcceptSecretaryForManager",
+            element: (
+              <ProtectedRoutes role={"Admin"}>
+                <AcceptSecretaryForManager />
               </ProtectedRoutes>
             ),
           },
