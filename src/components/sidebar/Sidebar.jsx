@@ -301,7 +301,6 @@ const Sidebar = () => {
               <div className="accMore position-relative cursorPointer d-flex justify-content-center align-items-center ms-auto">
                 <i className="fa-solid fa-ellipsis-vertical "></i>
                 <div className="moreContext">
-                  <div className="item">Settings</div>
                   <div onClick={autoLogoutAfterTime} className="item logout">
                     Logout
                   </div>
@@ -495,7 +494,9 @@ const Sidebar = () => {
 
           <div className="setting-side mx-4 mt-auto mb-3">
             <div className="accImage text-black d-flex justify-content-center align-items-center bg-info">
-              <span className="m-0 p-0">A</span>
+              <span className="m-0 p-0">
+                {username?.split("")[0].toUpperCase()}
+              </span>
             </div>
           </div>
         </div>
