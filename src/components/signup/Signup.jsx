@@ -43,7 +43,6 @@ export default function Signup() {
     axios
       .post(`${process.env.REACT_APP_APIHOST}/auth/signup`, formData)
       .then((response) => {
-        console.log(response.data);
         if (response.data.success) {
           toast.success(response.data.message);
           navigate("/login");

@@ -3,9 +3,6 @@ import "./homePage.css";
 import MeetingDetails from "../manager/meetingDetails/meetingDetails.jsx";
 import { useTranslation } from "react-i18next";
 import { TailSpin } from "react-loader-spinner";
-import $ from "jquery";
-import { useQuery } from "react-query";
-import axios from "axios";
 import { searchContext } from "../context/searchContext.js";
 export default function HomePage() {
   let colors = [
@@ -45,7 +42,6 @@ export default function HomePage() {
 
   localStorage.setItem("colors", JSON.stringify(colors));
   const [t] = useTranslation();
-  const authToken = localStorage.getItem("token");
 
   let { meetings, isLoading, getMeetings } = useContext(searchContext);
 

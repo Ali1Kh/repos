@@ -33,7 +33,6 @@ export default function ForgotPassword() {
         role: role,
       })
       .then((response) => {
-        console.log(response.data);
         if (response.data.success) {
           sessionStorage.setItem("E_mail", email);
           sessionStorage.setItem("role", role);

@@ -263,17 +263,6 @@ export default function Navbar() {
                       </Link>
                       <Link
                         className="nav-item animate__animated"
-                        to={"/dashboard/AcceptSecretaryForManager"}
-                      >
-                        <span className="d-inline-flex  text-center justify-content-center">
-                          <i class="fa-regular fa-thumbs-up"></i>
-                        </span>
-                        <span>
-                          {t("Dashborad.Acceptacne.AcceptSecretaryForManager")}
-                        </span>
-                      </Link>
-                      <Link
-                        className="nav-item animate__animated"
                         to={"/dashboard/recoverSecertary"}
                       >
                         <span className="d-inline-flex  text-center justify-content-center">

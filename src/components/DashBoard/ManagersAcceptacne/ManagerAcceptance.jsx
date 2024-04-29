@@ -28,7 +28,6 @@ const Acceptance = () => {
         }
       );
       setData(response.data);
-      console.log("res", response);
       return response.data;
     } catch (error) {
       console.error("Error:", error);

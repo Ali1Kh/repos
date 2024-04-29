@@ -122,7 +122,6 @@ export default function Meetings() {
     setOpen(false);
   }
   function updateMeeting(rows) {
-    console.log(rows);
     meetingNavigate("updateMeeting/" + selectedId);
   }
   // Holding Row

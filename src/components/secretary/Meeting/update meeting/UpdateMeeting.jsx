@@ -200,7 +200,6 @@ export default function UpdateMeeting() {
       if (data.success) {
         toast.success(data.message);
       }
-      console.log(data);
     } catch (error) {
       console.log(error);
     }

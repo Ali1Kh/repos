@@ -28,7 +28,6 @@ export default function History() {
       }
     );
     if (data.success) {
-      console.log(data.history[0]);
       setData(data);
     }
   }

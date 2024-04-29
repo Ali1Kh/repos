@@ -28,7 +28,6 @@ const Recover = () => {
         }
       );
       setData(response.data);
-      console.log("res",response.data);
 
       return response.data;
     } catch (error) {
@@ -52,7 +51,6 @@ const Recover = () => {
               getDeletedSecertaries();
             }
             else{
-                console.log("pp",response);
               toast.error("Something went Wrong");
             }
           } catch (error) {
