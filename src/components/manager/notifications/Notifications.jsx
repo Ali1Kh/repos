@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Popper } from "@mui/base/Popper";
 import { styled, css } from "@mui/system";
 import Notifier from "react-desktop-notification";
+import "./Notifications.css";
 
 export default function Notifications() {
   const [anchor, setAnchor] = React.useState(null);
@@ -69,10 +70,10 @@ export default function Notifications() {
           id={id}
           open={open}
           anchorEl={anchor}
-          style={{ zIndex: 9999}}
+          style={{ zIndex: 9999 }}
         >
           <StyledPopperDiv
-            className="overflow-y-scroll bg-white"
+            className="overflow-y-scroll popperDiv"
             style={{ maxHeight: "300px" }}
           >
             {" "}
