@@ -190,25 +190,29 @@ export const getSecMeetingsDetails = async (req, res, next) => {
 };
 
 export const getSecManagers = async (req, res, next) => {
-  let managers = await Manager.findAll({
-    where: {
-      isDeleted: false,
-      Accepted_Acc: { [Op.or]: [true, null] },
-    },
-    attributes: ["manager_id", "first_name", "last_name", "UserName", "E_mail"],
-    include: [
-      {
-        model: Secertary,
-        attributes: [],
-        where: {
-          secretary_id: req.payload.id,
-          isDeleted: false,
-          Accepted_Acc: { [Op.or]: [true, null] },
-        },
-      },
-    ],
-  });
-  return res.json({ success: true, managers });
+  let managers = await sequelize.query(
+    `select Manager.manager_id,Manager.first_name,Manager.last_name,E_mail as 'Manager_Email', 
+    UserName from Manager `
+  );
+
+  // Manager.findAll({
+  //   where: {
+  //     isDeleted: false,
+  //     Accepted_Acc: { [Op.or]: [true, null] },
+  //   },
+  //   attributes: ["manager_id", "first_name", "last_name", "UserName", "E_mail"],
+  //   include: [
+  //     {
+  //       model: Manager_Secretary,
+  //       attributes: [],
+  //       where: {
+  //         secretary_id: req.payload.id,
+  //         isAccepted: 1,
+  //       },
+  //     },
+  //   ],
+  // });
+  return res.json({ success: true, count: managers.length, managers });
 };
 
 export const getSecDetails = async (req, res, next) => {
@@ -245,9 +249,9 @@ export const updateMeeting = async (req, res, next) => {
 
   isMeeting.update({
     ...req.body,
-    attachmentLink: upload?.secure_url,
-    attachmentId: upload?.public_id,
-    attachmentName: req.file?.originalname,
+    attachmentLink: upload?upload.secure_url:null,
+    attachmentId: upload?upload.public_id:null,
+    attachmentName: req.file?req.file.originalname:null,
   });
 
   return res.json({ success: true, message: "Meeting Updated Successfully" });

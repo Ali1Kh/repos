@@ -16,5 +16,4 @@ export const Manager_Secretary = sequelize.define("Manager_Secretary", {
 });
 
 Manager_Secretary.belongsTo(Secertary, { foreignKey: "secretary_id" });
-
 Manager_Secretary.belongsTo(Manager, { foreignKey: "manager_id" });
