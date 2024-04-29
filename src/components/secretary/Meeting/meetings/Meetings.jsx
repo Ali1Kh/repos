@@ -34,6 +34,29 @@ export default function Meetings() {
       console.log(error);
     }
   }
+  const ChangeMeetingStatus = async (secretary_id, status) => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_APIHOST}/secretary/changeStatus/${secretary_id}`,
+        {
+          status: status
+        },
+        {
+          headers: {
+            token: localStorage.getItem("token"),
+          },
+        }
+      );
+      if (response.data.success) {
+        console.log(response.data.success);
+      }
+      else {
+        console.log(response.data.success);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   useEffect(() => {
     getSecMeetings();
@@ -141,7 +164,7 @@ export default function Meetings() {
               style={{ height: 500, width: "100%" }}
             >
               <DataGrid
-                
+
                 slotProps={{
                   row: {
                     onContextMenu: (e) => {
@@ -282,23 +305,23 @@ export default function Meetings() {
             <div
               className="item"
               onClick={() => {
-                console.log("Done", selectedId);
+                ChangeMeetingStatus(selectedId, "Done");
               }}
             >
               {t("MeetingContextMenu.statusContext.done")}
             </div>
-            <div
+            {/* <div
               className="item"
               onClick={() => {
                 console.log("Cancelled", selectedId);
               }}
             >
               {t("MeetingContextMenu.statusContext.changedate")}
-            </div>
+            </div> */}
             <div
               className="item"
               onClick={() => {
-                console.log("Cancelled", selectedId);
+                ChangeMeetingStatus(selectedId, "Not Done");
               }}
             >
               {t("MeetingContextMenu.statusContext.cancel")}
