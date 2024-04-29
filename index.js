@@ -33,9 +33,12 @@ try {
         return new Error("Token Is Required");
       }
       verifyToken(data.token).then(async (payload) => {
+        if (!payload.id) {
+          return;
+        }
         await Manager.update(
           { socketId: socket.id },
-          { where: { manager_id: payload?.id } }
+          { where: { manager_id: payload.id } }
         );
       });
     });

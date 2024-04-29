@@ -49,6 +49,7 @@ router.get(
   isAuthorized("Secertary"),
   asyncHandler(secretaryController.getSecManagers)
 );
+
 router.get(
   "/getAllManagers",
   isAuthenticated,
