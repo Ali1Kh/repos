@@ -14,7 +14,7 @@ import { Secertary } from "./DB/models/secertary.model.js";
 import { createServer } from "node:http";
 import { Notifications } from "./DB/models/notifications.model.js";
 import { verifyToken } from "./src/utils/verifyToken.js";
- 
+
 dotenv.config();
 const port = process.env.PORT;
 
@@ -45,11 +45,13 @@ try {
 
     socket.on("getNotifications", async (data) => {
       verifyToken(data.token).then(async (payload) => {
+        if (!payload.id) {
+          return;
+        }
         let notifications = await Notifications.findAll({
           where: { manager_id: payload?.id },
           order: [["createdAt", "DESC"]],
         });
-
         socket.emit("notifications", notifications);
       });
     });
