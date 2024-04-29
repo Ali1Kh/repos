@@ -74,7 +74,7 @@
   width: 1px !important;
 }
 
-.langBtn .mydict input[type="radio"]:checked + span {
+.langBtn .mydict input[type="radio"]:checked+span {
   box-shadow: 0 0 0 0.0625em var(--sec-color) !important;
   background-color: var(--sec-color) !important;
   z-index: 1 !important;
@@ -166,8 +166,18 @@
   color: var(--sec-color) !important;
 }
 
-.bell-toggler:hover i{
+.bell-toggler:hover i {
   color: black !important;
+}
+
+/*! logout btn */
+
+.logout-nav .btn {
+  border: 1px solid var(--sec-color) !important;
+}
+
+.logout-nav .btn i {
+  color: var(--sec-color) !important;
 }
 
 @media screen and (max-width: 991px) {
@@ -177,6 +187,13 @@
 
   .bell-toggler {
     display: none !important;
+  }
+}
+
+@media screen and (min-width: 952px) {
+  .logout-nav {
+    display: none !important;
+
   }
 }
 

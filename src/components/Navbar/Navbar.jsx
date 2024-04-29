@@ -89,7 +89,7 @@ export default function Navbar() {
           >
             <img className="nav-logo" src={logo}></img>
             {location.pathname.split("/")[1] === "login" ||
-            location.pathname.split("/")[1] === "signup" ? (
+              location.pathname.split("/")[1] === "signup" ? (
               <h5 className=" mb-0">Meeting Managment</h5>
             ) : (
               ""
@@ -401,6 +401,17 @@ export default function Navbar() {
                       </label>
                     </div>
                   </div>
+                </div>
+                <div className="logout-nav h-100 d-flex justify-content-center align-items-center px-3">
+                  <button
+                    className="btn"
+                    onClick={() => {
+                      localStorage.clear();
+                      navigate("/login");
+                    }}
+                  >
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                  </button>
                 </div>
               </li>
             </ul>
