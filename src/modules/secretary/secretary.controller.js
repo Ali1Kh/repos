@@ -216,7 +216,7 @@ export const getSecDetails = async (req, res, next) => {
 
 export const getAllManagers = async (req, res, next) => {
   let managers = await Manager.findAll({
-    attributes: ["manager_id", "first_name", "last_name"],
+    attributes: ["manager_id", "first_name", "last_name","UserName"],
     where: { isDeleted: 0 },
   });
   return res.json({ success: true, managers });
