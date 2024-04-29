@@ -115,7 +115,7 @@ export default function HomePage() {
                               :{" "}
                               <p className="mb-0">
                                 {" "}
-                                {meeting.notes.slice(0, 30) + "..."}
+                                {meeting.notes.slice(0, 8) + "..."}
                               </p>
                             </div>
                           </div>
