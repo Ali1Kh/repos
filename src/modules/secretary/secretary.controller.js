@@ -191,8 +191,13 @@ export const getSecMeetingsDetails = async (req, res, next) => {
 
 export const getSecManagers = async (req, res, next) => {
   let managers = await sequelize.query(
-    `select Manager.manager_id,Manager.first_name,Manager.last_name,E_mail as 'Manager_Email', 
-    UserName from Manager `
+    `select Manager.manager_id,Manager.first_name,Manager.last_name,E_mail as 'Manager_Email',UserName from Manager 
+    join Manager_Secretaries on Manager.manager_id = Manager_Secretaries.manager_id
+    where Manager_Secretaries.secretary_id = ${req.payload.id} and Manager_Secretaries.isAccepted = 1 and Manager.isDeleted = 0
+    `
+    , {
+      model: Manager
+    }
   );
 
   // Manager.findAll({
