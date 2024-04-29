@@ -33,9 +33,8 @@ try {
         return new Error("Token Is Required");
       }
       verifyToken(data.token).then(async (payload) => {
-        if (!payload.id) {
-          return;
-        }
+        if (!payload) return;
+
         await Manager.update(
           { socketId: socket.id },
           { where: { manager_id: payload.id } }
@@ -45,7 +44,7 @@ try {
 
     socket.on("getNotifications", async (data) => {
       verifyToken(data.token).then(async (payload) => {
-        if (!payload.id) {
+        if (!payload) {
           return;
         }
         let notifications = await Notifications.findAll({
