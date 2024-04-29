@@ -215,7 +215,9 @@ const Sidebar = () => {
                     <span className="d-inline-flex text-center justify-content-center">
                       <i className="fa-solid fa-users"></i>
                     </span>
-                    <span>{t("Dashborad.ManageresAndSecretaries.ManageresName")}</span>
+                    <span>
+                      {t("Dashborad.ManageresAndSecretaries.ManageresName")}
+                    </span>
                   </Link>
                   <Link
                     className="sidebarItem animate__animated"
@@ -224,7 +226,9 @@ const Sidebar = () => {
                     <span className="d-inline-flex text-center justify-content-center">
                       <i className="fa-solid fa-chalkboard-user"></i>
                     </span>
-                    <span>{t("Dashborad.ManageresAndSecretaries.SecretariesName")}</span>
+                    <span>
+                      {t("Dashborad.ManageresAndSecretaries.SecretariesName")}
+                    </span>
                   </Link>
                   <Link
                     className="sidebarItem animate__animated"

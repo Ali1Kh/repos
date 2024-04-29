@@ -28,12 +28,18 @@ import DashboardMeetings from "./components/DashBoard/DashboardMeetings/Dashboar
 import DashboardSecertaries from "./components/DashBoard/DashboardSecertaries/DashboardSecertaries.jsx";
 import History from "./components/DashBoard/History/History.jsx";
 import SearchProvider from "./components/context/searchContext.js";
-import RecoverSecertary from './components/DashBoard/RecoverSecertary/RecoverSecertary.jsx';
-import RecoverManager from './components/DashBoard/RecoverManager/RecoverManager.jsx';
-
+import RecoverSecertary from "./components/DashBoard/RecoverSecertary/RecoverSecertary.jsx";
+import RecoverManager from "./components/DashBoard/RecoverManager/RecoverManager.jsx";
+import i18n from "./i18n";
+import $ from "jquery";
 
 function App() {
   const client = new QueryClient();
+
+  // document.body.dir = i18n.dir();
+  // $("html").attr("dir", i18n.dir());
+  $("html").attr("lang", i18n.language);
+
   return (
     <>
       {" "}
@@ -53,7 +59,7 @@ function App() {
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "",
     element: (
       <ProtectedRoutes>
         <Layout />
@@ -69,7 +75,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "home",
+        path: "/home",
         element: (
           <ProtectedRoutes role={"Manager"}>
             <HomePage />

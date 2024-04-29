@@ -379,8 +379,10 @@ export default function Navbar() {
                         <input
                           type="radio"
                           name="radio"
+                          defaultChecked={il8n.language === "en"}
                           onClick={() => {
                             il8n.changeLanguage("en");
+                            $("html").attr("lang", "en");
                           }}
                         />
                         <span>EN</span>
@@ -389,9 +391,10 @@ export default function Navbar() {
                         <input
                           type="radio"
                           name="radio"
-                          defaultChecked
+                          defaultChecked={il8n.language === "ar"}
                           onClick={() => {
                             il8n.changeLanguage("ar");
+                            $("html").attr("lang", "ar");
                           }}
                         />
                         <span>AR</span>
