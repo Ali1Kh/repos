@@ -1,6 +1,7 @@
 import { sequelize } from "../../../DB/connection.js";
 import { Admin } from "../../../DB/models/admin.model.js";
 import { Manager } from "../../../DB/models/manager.model.js";
+import { Manager_Secretary } from "../../../DB/models/Manager_Secretary.model.js";
 import { Meetings } from "../../../DB/models/meeting.model.js";
 import { Secertary } from "../../../DB/models/secertary.model.js";
 import { Token } from "../../../DB/models/token.model.js";
@@ -175,6 +176,76 @@ export const rejectManagerAcc = asyncHandler(async (req, res, next) => {
     message: "Account Rejected Successfully",
   });
 });
+
+export const acceptSecToManager = asyncHandler(async (req, res, next) => {
+  let isAccount = await Manager_Secretary.findOne({
+    where: { id: req.params.secManagerId },
+  });
+  if (!isAccount) return next(new Error("Secretary Manager Not Found"));
+  if (isAccount.isAccepted == true)
+    return next(new Error("Secretary Manager Already Accepted"));
+  isAccount.isAccepted = true;
+  await isAccount.save();
+  return res.json({
+    success: true,
+    message: "Secretary Manager Request Accepted Successfully",
+  });
+});
+
+export const rejectSecToManager = asyncHandler(async (req, res, next) => {
+  let isAccount = await Manager_Secretary.findOne({
+    where: { id: req.params.secManagerId },
+  });
+  if (!isAccount) return next(new Error("Secretary Manager Not Found"));
+  if (isAccount.isAccepted == true)
+    return next(new Error("Secretary Manager Already Accepted"));
+
+  isAccount.destroy();
+  return res.json({
+    success: true,
+    message: "Secretary Manager Request Rejected Successfully",
+  });
+});
+
+export const getNotAcceptesSecToManager = asyncHandler(
+  async (req, res, next) => {
+    let secertary_managers = await Manager_Secretary.findAll({
+      where: { isAccepted: 0 },
+      attributes: {
+        include: ["id"],
+      },
+      include: [
+        {
+          model: Secertary,
+          attributes: {
+            exclude: [
+              "PassWord",
+              "resetCode",
+              "resetCodeVerified",
+              "Accepted_Acc",
+            ],
+          },
+        },
+        {
+          model: Manager,
+          attributes: {
+            exclude: [
+              "PassWord",
+              "resetCode",
+              "resetCodeVerified",
+              "Accepted_Acc",
+            ],
+          },
+        },
+      ],
+    });
+    return res.json({
+      success: true,
+      count: secertary_managers.length,
+      secertary_managers,
+    });
+  }
+);
 
 export const getAllSecretaries = asyncHandler(async (req, res, next) => {
   let secertaries = await Secertary.findAll({

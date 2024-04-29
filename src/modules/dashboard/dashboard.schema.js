@@ -12,6 +12,11 @@ export const acceptManagerSchema = joi
   manager_id: joi.number().required(),
 })
 .required();
+export const secManagerIdReqSchema = joi
+.object({
+  secManagerId: joi.number().required(),
+})
+.required();
 
 
 export const deleteManagerAccSchema = joi

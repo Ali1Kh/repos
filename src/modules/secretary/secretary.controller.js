@@ -60,6 +60,16 @@ export const addExistingManager = asyncHandler(async (req, res, next) => {
 
   await isManager.addSecretaries(req.payload.id);
 
+  await Manager_Secretary.update(
+    { isAccepted: 0 },
+    {
+      where: {
+        manager_id: isManager.dataValues.manager_id,
+        secretary_id: req.payload.id,
+      },
+    }
+  );
+
   return res.json({
     success: true,
     message: "Manager Added Successfully To Your Account",

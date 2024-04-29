@@ -12,8 +12,6 @@ import cors from "cors";
 import { Manager } from "./DB/models/manager.model.js";
 import { Secertary } from "./DB/models/secertary.model.js";
 import { createServer } from "node:http";
-import { Token } from "./DB/models/token.model.js";
-import jwt from "jsonwebtoken";
 import { Notifications } from "./DB/models/notifications.model.js";
 import { verifyToken } from "./src/utils/verifyToken.js";
  
