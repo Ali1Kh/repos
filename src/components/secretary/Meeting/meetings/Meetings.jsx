@@ -13,9 +13,12 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 export default function Meetings() {
   let [meetingsRows, setMeetingsRows] = useState([]);
+
+  let payload = jwtDecode(localStorage.getItem("token"));
 
   const getRowId = (row) => {
     return row.meeting_id;
@@ -39,7 +42,7 @@ export default function Meetings() {
       const response = await axios.post(
         `${process.env.REACT_APP_APIHOST}/secretary/changeStatus/${secretary_id}`,
         {
-          status: status
+          status: status,
         },
         {
           headers: {
@@ -49,8 +52,7 @@ export default function Meetings() {
       );
       if (response.data.success) {
         console.log(response.data.success);
-      }
-      else {
+      } else {
         console.log(response.data.success);
       }
     } catch (error) {
@@ -163,7 +165,6 @@ export default function Meetings() {
               style={{ height: 500, width: "100%" }}
             >
               <DataGrid
-
                 slotProps={{
                   row: {
                     onContextMenu: (e) => {
@@ -204,7 +205,7 @@ export default function Meetings() {
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 120,
+                    width: 90,
                   },
                   {
                     field: "about",
@@ -228,7 +229,7 @@ export default function Meetings() {
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 120,
+                    width: 90,
                   },
                   {
                     field: "statues",
@@ -236,16 +237,9 @@ export default function Meetings() {
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 120,
+                    width: 90,
                   },
-                  // {
-                  //   field: "notes",
-                  //   headerName: t("tableMeetings.table.Comments"),
-                  //   headerClassName: "tableColumns",
-                  //   align: "center",
-                  //   headerAlign: "center",
-                  //   width: 120,
-                  // },
+
                   {
                     field: "Manager_Name",
                     headerName: "Manager",
@@ -253,6 +247,20 @@ export default function Meetings() {
                     align: "center",
                     headerAlign: "center",
                     width: 120,
+                  },
+                  {
+                    field: "Secertary_Name",
+                    headerName: "AddedBy",
+                    headerClassName: "tableColumns",
+                    align: "center",
+                    headerAlign: "center",
+                    width: 120,
+                    valueGetter: (params) =>
+                      params.row?.addedBy == payload.id
+                        ? "You"
+                        : params.row?.Secertary_Name +
+                          " " +
+                          params.row?.Secertary_LastName,
                   },
                 ]}
                 rows={meetingsRows}
@@ -278,11 +286,10 @@ export default function Meetings() {
                     display: "none",
                   },
                   "& [data-testid='ArrowUpwardIcon'], [data-testid='ArrowDownwardIcon']":
-                  {
-                    display: "none",
-                  },
+                    {
+                      display: "none",
+                    },
                 }}
-
               />
             </div>
           </div>
