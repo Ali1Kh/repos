@@ -1,0 +1,10 @@
+.list-unstyled .text-black {
+    border: 2px solid var(--sec-color) !important;
+    background-color: #303055 !important;
+    color: white !important;
+}
+
+.MuiPopper-root,
+.popperDiv {
+    background-color: var(--sideBarColor) !important;
+}
