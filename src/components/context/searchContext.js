@@ -8,10 +8,6 @@ export default function SearchProvider({ children }) {
 
   const authToken = localStorage.getItem("token");
 
-  useEffect(() => {
-    getMeetings();
-  }, []);
-
   async function getMeetings() {
     if (!authToken) {
       console.error("Authentication token not found in Local Storage");
@@ -47,7 +43,9 @@ export default function SearchProvider({ children }) {
     }
   }
   return (
-    <searchContext.Provider value={{ meetings, isLoading, searchMeet }}>
+    <searchContext.Provider
+      value={{ meetings, isLoading, searchMeet, getMeetings }}
+    >
       {children}
     </searchContext.Provider>
   );

@@ -47,7 +47,11 @@ export default function HomePage() {
   const [t] = useTranslation();
   const authToken = localStorage.getItem("token");
 
-  let { meetings, isLoading } = useContext(searchContext);
+  let { meetings, isLoading, getMeetings } = useContext(searchContext);
+
+  useEffect(() => {
+    getMeetings();
+  }, []);
 
   return (
     <>
