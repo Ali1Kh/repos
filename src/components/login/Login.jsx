@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 
 export default function Login() {
-
   const navigate = useNavigate();
 
   const validateEmail = (email) => {
@@ -63,7 +62,6 @@ export default function Login() {
     axios
       .post(`${process.env.REACT_APP_APIHOST}/auth/login`, formData)
       .then((response) => {
-        console.log(response);
         const token = response.data.token;
         if (response.data.success === true) {
           localStorage.setItem("token", token);
@@ -109,20 +107,22 @@ export default function Login() {
                       className="pass-word mt-3 d-flex justify-content-center form-control"
                       placeholder={t("Login.password")}
                     />
-                    <button id="eye" className="btn btn-eye d-flex justify-content-center align-items-center ms-2"
+                    <button
+                      id="eye"
+                      className="btn btn-eye d-flex justify-content-center align-items-center ms-2"
                       onClick={() => {
-                        let password = document.getElementById("password")
-                        let eyeicon = document.getElementById("eye-icon")
+                        let password = document.getElementById("password");
+                        let eyeicon = document.getElementById("eye-icon");
 
                         if (password.type == "password") {
-                          password.type = "text"
-                          eyeicon.className = "fa-solid fa-eye"
+                          password.type = "text";
+                          eyeicon.className = "fa-solid fa-eye";
+                        } else {
+                          password.type = "password";
+                          eyeicon.className = "fa-solid fa-eye-slash";
                         }
-                        else {
-                          password.type = "password"
-                          eyeicon.className = "fa-solid fa-eye-slash"
-                        }
-                      }}>
+                      }}
+                    >
                       <i id="eye-icon" class="fa-solid fa-eye-slash"></i>
                     </button>
                   </div>

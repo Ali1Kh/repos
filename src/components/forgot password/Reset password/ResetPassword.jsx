@@ -40,7 +40,6 @@ export default function ResetPassword() {
                 role: role,
             })
             .then((response) => {
-                console.log(response.data);
                 if (response.data.success) {
                     toast.success("Password reset successful");
                     navigateUpdatePass("/Login");

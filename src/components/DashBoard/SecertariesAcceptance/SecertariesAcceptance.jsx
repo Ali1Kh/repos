@@ -50,7 +50,6 @@ const Acceptance = () => {
               getNotAcceptedSecertaries();
             }
             else{
-              console.log("oo",response);
               toast.error("Something went Wrong");
             }
           } catch (error) {
@@ -91,7 +90,6 @@ const Acceptance = () => {
           },
         }
       );
-      console.log(response);
 
       if (response.data.success) {
         toast.success("Removed");

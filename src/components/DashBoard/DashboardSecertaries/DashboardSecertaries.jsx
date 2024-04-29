@@ -46,7 +46,6 @@ export default function DashboardSecertaries() {
           toast.success("Secertary Deleted Successfully");
           getDashBoardSecertar()
         } else {
-          console.log(response.data);
           toast.error("Something went Wrong!");
         }
       })

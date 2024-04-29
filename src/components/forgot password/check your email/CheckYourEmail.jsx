@@ -26,7 +26,6 @@ export default function CheckYourEmail() {
         role: role,
       })
       .then((response) => {
-        console.log(response.data);
         if (response.data.success) {
           navigateUpdatePass("/ResetPassword");
         } else {
@@ -46,7 +45,6 @@ export default function CheckYourEmail() {
         role: role
       })
       .then((response) => {
-        console.log(response.data);
         if (response.data.success) {
           toast.success("Code Resend Successfully");
         } else {

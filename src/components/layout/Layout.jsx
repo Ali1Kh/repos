@@ -12,7 +12,6 @@ export default function Layout() {
     if (location.pathname === "/") {
       if (localStorage.getItem("token")) {
         const { role } = jwtDecode(localStorage.getItem("token"));
-        console.log(role);
         if (role === "Manager") {
           window.location.href = "/home";
         } else if (role === "Secertary") {

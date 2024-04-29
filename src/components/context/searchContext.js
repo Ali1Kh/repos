@@ -4,28 +4,24 @@ import axios from "axios";
 export const searchContext = createContext();
 export default function SearchProvider({ children }) {
   const [meetings, setMeetings] = useState([]);
-  let { isLoading } = useQuery("getMeetings", getMeetings);
-
-  const authToken = localStorage.getItem("token");
+  let [isLoading, setIsLoading] = useState(true);
 
   async function getMeetings() {
-    if (!authToken) {
-      console.error("Authentication token not found in Local Storage");
-      return;
-    }
+ 
     const { data } = await axios.get(
       `${process.env.REACT_APP_APIHOST}/meetings?date[gte]=${
         new Date().toISOString().split("T")[0]
       }&sort=date`,
       {
         headers: {
-          token: authToken,
+          token: localStorage.getItem("token"),
         },
       }
     );
 
     if (data.success) {
       setMeetings(data);
+      setIsLoading(false);
     }
   }
 
@@ -34,7 +30,7 @@ export default function SearchProvider({ children }) {
       `${process.env.REACT_APP_APIHOST}/meetings?about=${val}&address=${val}&person=${val}`,
       {
         headers: {
-          token: authToken,
+          token: localStorage.getItem("token"),
         },
       }
     );

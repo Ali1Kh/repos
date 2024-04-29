@@ -59,7 +59,7 @@ const Sidebar = () => {
 
     $(".logout").click((e) => {
       localStorage.removeItem("token");
-      navigate("/login");
+      window.location.reload();
     });
   });
 

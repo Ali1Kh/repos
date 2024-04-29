@@ -28,7 +28,6 @@ const Recover = () => {
         }
       );
       setData(response.data);
-      console.log("res",response.data);
 
       return response.data;
     } catch (error) {
