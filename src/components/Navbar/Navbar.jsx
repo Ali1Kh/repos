@@ -65,7 +65,7 @@ export default function Navbar() {
 
     $(".logout").click((e) => {
       localStorage.removeItem("token");
-      window.location.reload();
+      navigate("/login");
     });
   });
 
@@ -259,17 +259,6 @@ export default function Navbar() {
                         </span>
                         <span>
                           {t("Dashborad.Acceptacne.AcceptacneManager")}
-                        </span>
-                      </Link>
-                      <Link
-                        className="nav-item animate__animated"
-                        to={"/dashboard/AcceptSecretaryForManager"}
-                      >
-                        <span className="d-inline-flex  text-center justify-content-center">
-                          <i class="fa-regular fa-thumbs-up"></i>
-                        </span>
-                        <span>
-                          {t("Dashborad.Acceptacne.AcceptSecretaryForManager")}
                         </span>
                       </Link>
                       <Link

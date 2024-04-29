@@ -59,7 +59,7 @@ const Sidebar = () => {
 
     $(".logout").click((e) => {
       localStorage.removeItem("token");
-      window.location.reload();
+      navigate("/login");
     });
   });
 
@@ -247,15 +247,6 @@ const Sidebar = () => {
                       <i class="fa-regular fa-thumbs-up"></i>
                     </span>
                     <span>{t("Dashborad.Acceptacne.AcceptacneManager")}</span>
-                  </Link>
-                  <Link
-                    className="sidebarItem animate__animated"
-                    to={"/dashboard/AcceptSecretaryForManager"}
-                  >
-                    <span className="d-inline-flex  text-center justify-content-center">
-                      <i class="fa-regular fa-thumbs-up"></i>
-                    </span>
-                    <span>{t("Dashborad.Acceptacne.AcceptSecretaryForManager")}</span>
                   </Link>
                   <Link
                     className="sidebarItem animate__animated"
@@ -468,16 +459,6 @@ const Sidebar = () => {
                       <i class="fa-regular fa-thumbs-up"></i>
                     </span>
                   </Link>
-
-                  <Link
-                    className="sidebarItem animate__animated"
-                    to={"/dashboard/AcceptSecretaryForManager"}
-                  >
-                    <span className="d-inline-flex  text-center justify-content-center">
-                      <i class="fa-regular fa-thumbs-up"></i>
-                    </span>
-                  </Link>
-
                   <Link
                     className="sidebarItem animate__animated"
                     to={"/dashboard/recoverSecertary"}
