@@ -180,7 +180,7 @@ function CreateManagerAccount() {
                         className="pass-word inputItem-man mt-3 d-flex justify-content-center form-control"
                         placeholder={t("signup.password")}
                       />
-                      <button id="eye" className="btn btn-eye d-flex justify-content-center align-items-center ms-2"
+                      <div id="eye" className="btn btn-eye d-flex justify-content-center align-items-center ms-2"
                         onClick={() => {
                           let password = document.getElementById("password")
                           let eyeicon = document.getElementById("eye-icon")
@@ -194,7 +194,7 @@ function CreateManagerAccount() {
                           }
                         }}>
                         <i id="eye-icon" class="fa-solid fa-eye-slash"></i>
-                      </button>
+                      </div>
                       <ErrorMessage
                         name="password"
                         component="label"
@@ -209,7 +209,7 @@ function CreateManagerAccount() {
                         className="pass-word inputItem-man mt-3 d-flex justify-content-center form-control"
                         placeholder={t("signup.confirmPassword")}
                       />
-                      <button id="eye" className="btn d-flex justify-content-center align-items-center ms-2"
+                      <div id="eye" className="btn d-flex justify-content-center align-items-center ms-2"
                         onClick={() => {
                           let password = document.getElementById("confirm-password")
                           let eyeiconconfirm = document.getElementById("eye-icon-confirm")
@@ -223,7 +223,7 @@ function CreateManagerAccount() {
                           }
                         }}>
                         <i id="eye-icon-confirm" class="fa-solid fa-eye-slash"></i>
-                      </button>
+                      </div>
                       <ErrorMessage
                         name="confirmPassword"
                         component="label"

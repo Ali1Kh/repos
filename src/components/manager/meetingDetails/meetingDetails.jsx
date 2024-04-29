@@ -96,26 +96,32 @@ export default function MeetingDetails({ meetingsDetails }) {
                 <div className="row g-md-5">
                   <div className="col-md-6">
                     <div className="col-ineer">
-                      <span>{t("meetings.guestName")}</span>
-                      <h5 className="mb-3">{meetingsDetails.person}</h5>
-                      <span className="fw-normal">{t("meetings.topic")}</span>
-                      <h5 className="mb-3">{meetingsDetails.about}</h5>
-                      <span>{t("meetings.status")}</span>
-                      <h5 className="mb-3">{meetingsDetails.statues}</h5>
-                      <span>{t("meetings.Comments")}</span>
-                      <h5 className="mb-3">{meetingsDetails.notes}</h5>
+                      <span className="text-black">
+                        {t("meetings.guestName")}:
+                      </span>
+                      <h5 className="mb-3 fw-light mt-1 ps-1">{meetingsDetails.person}</h5>
+                      <span className="fw-normal text-black">
+                        {t("meetings.topic")}:
+                      </span>
+                      <h5 className="mb-3 fw-light mt-1 ps-1">{meetingsDetails.about}</h5>
+                      <span className="text-black">{t("meetings.status")}:</span>
+                      <h5 className="mb-3 fw-light mt-1 ps-1">{meetingsDetails.statues}</h5>
+                      <span className="text-black">
+                        {t("meetings.Comments")}:
+                      </span>
+                      <h5 className="mb-3 fw-light mt-1 ps-1">{meetingsDetails.notes}</h5>
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="col-ineer">
-                      <span>{t("meetings.address")}</span>
-                      <h5 className="mb-3">{meetingsDetails.address}</h5>
-                      <span>{t("meetings.inOrOut")}</span>
-                      <h5 className="mb-3">{meetingsDetails.in_or_out}</h5>
-                      <span>{t("meetings.date")}</span>
-                      <h5 className="mb-3">{meetingsDetails.date}</h5>
-                      <span>{t("meetings.time")}</span>
-                      <h5 className="mb-3">{meetingsDetails.time}</h5>
+                      <span className="text-black">{t("meetings.address")}:</span>
+                      <h5 className="mb-3 fw-light mt-1 ps-1">{meetingsDetails.address}</h5>
+                      <span className="text-black">{t("meetings.inOrOut")}:</span>
+                      <h5 className="mb-3 fw-light mt-1 ps-1">{meetingsDetails.in_or_out}</h5>
+                      <span className="text-black">{t("meetings.date")}:</span>
+                      <h5 className="mb-3 fw-light mt-1 ps-1">{meetingsDetails.date}</h5>
+                      <span className="text-black">{t("meetings.time")}:</span>
+                      <h5 className="mb-3 fw-light mt-1 ps-1">{meetingsDetails.time}</h5>
                       <div className="d-flex justify-content-center">
                         {meetingsDetails.attachmentLink ? (
                           <button
