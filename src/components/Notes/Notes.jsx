@@ -29,11 +29,14 @@ export default function Nots() {
 
   async function getNotes() {
     try {
-      let { data } = await axios.get("https://meetingss.onrender.com/notes/", {
-        headers: {
-          token: authToken,
-        },
-      });
+      let { data } = await axios.get(
+        `${process.env.REACT_APP_APIHOST}/notes?sort=-updatedAt`,
+        {
+          headers: {
+            token: authToken,
+          },
+        }
+      );
       handleClose();
       setData(data);
     } catch (error) {
@@ -52,10 +55,10 @@ export default function Nots() {
     }
     axios
       .post(
-        "https://meetingss.onrender.com/notes/",
+        `${process.env.REACT_APP_APIHOST}/notes/`,
         {
           title: title,
-          content: content,
+          content: `[{"insert":"${content}\\n"}]`,
         },
         {
           headers: {
@@ -87,10 +90,10 @@ export default function Nots() {
 
     axios
       .patch(
-        `https://meetingss.onrender.com/notes/${id}`,
+        `${process.env.REACT_APP_APIHOST}/notes/${id}`,
         {
           title: title,
-          content: content,
+          content: `[{"insert":"${content}\\n"}]`,
         },
         {
           headers: {
@@ -114,7 +117,7 @@ export default function Nots() {
 
   const DeleteNotes = () => {
     axios
-      .delete(`https://meetingss.onrender.com/notes/${id}`, {
+      .delete(`${process.env.REACT_APP_APIHOST}/notes/${id}`, {
         headers: {
           token: authToken,
         },
@@ -132,6 +135,34 @@ export default function Nots() {
         console.error("Error:", error);
       });
   };
+
+  function convertNote(note) {
+    let convertedNote = JSON.parse(note.replaceAll("\n", "")).map(
+      (item, index) => {
+        const { insert, attributes } = item;
+        let styles = {};
+        if (attributes) {
+          if (attributes.bold) {
+            styles.fontWeight = "bold";
+          }
+          if (attributes.italic) {
+            styles.fontStyle = "italic";
+          }
+          if (attributes.color) {
+            styles.color = attributes.color;
+          }
+        }
+
+        return (
+          <span key={index} style={styles}>
+            {insert}
+          </span>
+        );
+      }
+    );
+
+    return convertedNote;
+  }
 
   return (
     <>
@@ -170,17 +201,19 @@ export default function Nots() {
                         data-aos-once="true"
                         onClick={() => {
                           handleShow();
-                          setContent(note.content);
+                          setContent($("#note" + note.notes_id).text());
                           setTitle(note.title);
                           setId(note.notes_id);
                           setType("update");
                         }}
                       >
-                        <div className="inner-card-notes h-100 shadow rounded-4 gap-4 p-4 flex-column">
-                          <div className="box d-flex  flex-column h-100">
+                        <div className="inner-card-notes h-100 shadow rounded-2 gap-4 p-4 flex-column">
+                          <div className="box overflow-hidden d-flex  flex-column h-100">
                             <h5>{note.title}</h5>
-                            <div className="text-black d-flex mt-2 align-items-center">
-                              <p>{note.content}</p>
+                            <div className="text-black d-flex mt-2 align-items-center  overflow-hidden">
+                              <p id={`note${note.notes_id}`}>
+                                {convertNote(note.content)}
+                              </p>
                             </div>
                             <div className="text-black d-flex mt-2 align-items-center">
                               <a

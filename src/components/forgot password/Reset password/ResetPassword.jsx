@@ -33,7 +33,7 @@ export default function ResetPassword() {
 
     const resetPassword = ({ password, confirmPassword }) => {
         axios
-            .post("https://meetingss.onrender.com/auth/forget-password", {
+            .post(`${process.env.REACT_APP_APIHOST}/auth/forget-password`, {
                 E_mail: email,
                 PassWord: password,
                 confirmPassword: confirmPassword,

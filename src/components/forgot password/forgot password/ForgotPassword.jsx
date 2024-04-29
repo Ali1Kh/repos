@@ -28,7 +28,7 @@ export default function ForgotPassword() {
       }
     }
     axios
-      .post("https://meetingss.onrender.com/auth/send-forget-code", {
+      .post(`${process.env.REACT_APP_APIHOST}/auth/send-forget-code`, {
         E_mail: email,
         role: role,
       })

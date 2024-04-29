@@ -20,7 +20,7 @@ const Acceptance = () => {
   const getNotAcceptedManagers = async () => {
     try {
       const response = await axios.get(
-        "https://meetingss.onrender.com/dashboard/getNotAcceptedManagers",
+        `${process.env.REACT_APP_APIHOST}/dashboard/getNotAcceptedManagers`,
         {
           headers: {
             token: token,
@@ -38,7 +38,7 @@ const Acceptance = () => {
   const AcceptManager = async (manager_id) => {
     try {
       const response = await axios.post(
-        `https://meetingss.onrender.com/dashboard/acceptManagerAcc/${manager_id}`,
+        `${process.env.REACT_APP_APIHOST}/dashboard/acceptManagerAcc/${manager_id}`,
         {},
         {
           headers: {
@@ -63,7 +63,7 @@ const Acceptance = () => {
   // async function acceptAccount(id) {
   //   try {
   //     const response = await axios.post(
-  //       `https://meetingss.onrender.com/dashboard/acceptAcc/${id}`,
+  //       `${process.env.REACT_APP_APIHOST}/dashboard/acceptAcc/${id}`,
   //       {},
   //       {
   //         headers: {
@@ -83,7 +83,7 @@ const Acceptance = () => {
   const rejectManagerAccount = async (manager_id) => {
     try {
       const response = await axios.post(
-        `https://meetingss.onrender.com/dashboard/rejectManagerAcc/${manager_id}`,
+        `${process.env.REACT_APP_APIHOST}/dashboard/rejectManagerAcc/${manager_id}`,
         {},
         {
           headers: {

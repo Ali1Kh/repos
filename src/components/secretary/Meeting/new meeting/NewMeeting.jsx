@@ -125,7 +125,7 @@ export default function NewMeeting() {
       $(".error").addClass("d-none");
       $(".error").removeClass("d-block");
       let { data } = await axios.post(
-        `https://meetingss.onrender.com/secretary/createMeeting/${managerSelected}`,
+        `${process.env.REACT_APP_APIHOST}/secretary/createMeeting/${managerSelected}`,
         formData,
         { headers: { token: localStorage.getItem("token") } }
       );
@@ -152,7 +152,7 @@ export default function NewMeeting() {
 
   async function getSecManagers() {
     let { data } = await axios.get(
-      "https://meetingss.onrender.com/secretary/getSecManagers",
+      `${process.env.REACT_APP_APIHOST}/secretary/getSecManagers`,
       { headers: { token: localStorage.getItem("token") } }
     );
     setManagers(data.managers);
@@ -160,7 +160,7 @@ export default function NewMeeting() {
 
   async function getAllManagers() {
     let { data } = await axios.get(
-      "https://meetingss.onrender.com/secretary/getAllManagers",
+      `${process.env.REACT_APP_APIHOST}/secretary/getAllManagers`,
       { headers: { token: localStorage.getItem("token") } }
     );
     setAllManagers(data.managers);

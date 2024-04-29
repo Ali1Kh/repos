@@ -30,7 +30,7 @@ export default function UpdateMeeting() {
   let [allmanagers, setAllManagers] = useState([]);
   async function getSecManagers() {
     let { data } = await axios.get(
-      "https://meetingss.onrender.com/secretary/getSecManagers",
+      `${process.env.REACT_APP_APIHOST}/secretary/getSecManagers`,
       { headers: { token: localStorage.getItem("token") } }
     );
     setManagers(data.managers);
@@ -38,7 +38,7 @@ export default function UpdateMeeting() {
 
   async function getAllManagers() {
     let { data } = await axios.get(
-      "https://meetingss.onrender.com/secretary/getAllManagers",
+      `${process.env.REACT_APP_APIHOST}/secretary/getAllManagers`,
       { headers: { token: localStorage.getItem("token") } }
     );
     setAllManagers(data.managers);
@@ -83,7 +83,7 @@ export default function UpdateMeeting() {
   async function getMeetingDetails() {
     try {
       let { data } = await axios.get(
-        `https://meetingss.onrender.com/secretary/getSecMeetings/${id}`,
+        `${process.env.REACT_APP_APIHOST}/secretary/getSecMeetings/${id}`,
         { headers: { token: localStorage.getItem("token") } }
       );
       if (data.success) {
@@ -193,7 +193,7 @@ export default function UpdateMeeting() {
     
     try {
       let { data } = await axios.post(
-        `https://meetingss.onrender.com/secretary/updateMeeting/${id}`,
+        `${process.env.REACT_APP_APIHOST}/secretary/updateMeeting/${id}`,
         formData,
         { headers: { token: localStorage.getItem("token") } }
       );

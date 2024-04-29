@@ -20,7 +20,7 @@ export default function CheckYourEmail() {
 
 
     axios
-      .post("https://meetingss.onrender.com/auth/verifyResetCode", {
+      .post(`${process.env.REACT_APP_APIHOST}/auth/verifyResetCode`, {
         E_mail: email,
         code: code,
         role: role,
@@ -41,7 +41,7 @@ export default function CheckYourEmail() {
 
   const postSendAgain = () => {
     axios
-      .post("https://meetingss.onrender.com/auth/send-forget-code", {
+      .post(`${process.env.REACT_APP_APIHOST}/auth/send-forget-code`, {
         E_mail: email,
         role: role
       })

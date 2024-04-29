@@ -3,10 +3,9 @@ import { useQuery } from "react-query";
 import axios from "axios";
 export const searchContext = createContext();
 export default function SearchProvider({ children }) {
-  
   const [meetings, setMeetings] = useState([]);
-    let { isLoading } = useQuery("getMeetings", getMeetings);
- 
+  let { isLoading } = useQuery("getMeetings", getMeetings);
+
   const authToken = localStorage.getItem("token");
 
   useEffect(() => {
@@ -18,9 +17,10 @@ export default function SearchProvider({ children }) {
       console.error("Authentication token not found in Local Storage");
       return;
     }
-
     const { data } = await axios.get(
-      "https://meetingss.onrender.com/meetings?sort=date",
+      `${process.env.REACT_APP_APIHOST}/meetings?date[gte]=${
+        new Date().toISOString().split("T")[0]
+      }&sort=date`,
       {
         headers: {
           token: authToken,
@@ -35,7 +35,7 @@ export default function SearchProvider({ children }) {
 
   async function searchMeet(val) {
     const { data } = await axios.get(
-      `https://meetingss.onrender.com/meetings?about=${val}&address=${val}&person=${val}`,
+      `${process.env.REACT_APP_APIHOST}/meetings?about=${val}&address=${val}&person=${val}`,
       {
         headers: {
           token: authToken,
@@ -47,7 +47,7 @@ export default function SearchProvider({ children }) {
     }
   }
   return (
-    <searchContext.Provider value={{ meetings,isLoading, searchMeet }}>
+    <searchContext.Provider value={{ meetings, isLoading, searchMeet }}>
       {children}
     </searchContext.Provider>
   );
