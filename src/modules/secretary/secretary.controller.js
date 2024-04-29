@@ -163,13 +163,15 @@ export const getSecMeetings = async (req, res, next) => {
      Secretary.first_name as 'Secertary_Name',Secretary.last_name as 'Secertary_LastName',
      Secretary.E_mail as 'Secertary_Email',
      Meetings.createdAt,Meetings.updatedAt,attachmentId,attachmentLink,attachmentName,
-     Manager.manager_id,CONCAT(Manager.first_name, ' ', Manager.last_name)  as 'Manager_Name',Manager.E_mail as 'Manager_Email',
+     Manager.manager_id,CONCAT(Manager.first_name, ' ', Manager.last_name)  as 'Manager_Name',
+     Manager.E_mail as 'Manager_Email',
      Manager.UserName as 'Manager_UserName' from Meetings
      join meeting_Manager on Meetings.meeting_id = meeting_Manager.meeting_id 
      join Manager on meeting_Manager.manager_id = Manager.manager_id  
      join Manager_Secretaries on meeting_Manager.manager_id = Manager_Secretaries.manager_id
-     join Secretary on Manager_Secretaries.secretary_id = Secretary.secretary_id
-     where Manager_Secretaries.secretary_id = ${req.payload.id} and Manager_Secretaries.isAccepted = 1 and Meetings.isDeleted = 0 
+     join Secretary on addedBy = Secretary.secretary_id
+     where Manager_Secretaries.secretary_id = ${req.payload.id} and 
+     Manager_Secretaries.isAccepted = 1 and Meetings.isDeleted = 0 
       GROUP BY Meetings.meeting_id`,
     {
       model: Meetings,
@@ -200,23 +202,6 @@ export const getSecManagers = async (req, res, next) => {
     }
   );
 
-  // Manager.findAll({
-  //   where: {
-  //     isDeleted: false,
-  //     Accepted_Acc: { [Op.or]: [true, null] },
-  //   },
-  //   attributes: ["manager_id", "first_name", "last_name", "UserName", "E_mail"],
-  //   include: [
-  //     {
-  //       model: Manager_Secretary,
-  //       attributes: [],
-  //       where: {
-  //         secretary_id: req.payload.id,
-  //         isAccepted: 1,
-  //       },
-  //     },
-  //   ],
-  // });
   return res.json({ success: true, count: managers.length, managers });
 };
 
