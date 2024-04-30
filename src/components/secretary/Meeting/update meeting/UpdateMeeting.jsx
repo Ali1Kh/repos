@@ -196,7 +196,6 @@ export default function UpdateMeeting() {
     if (uploadedFiles[0]) {
       formData.append("attachment", uploadedFiles[0]);
     }
-    
 
     try {
       let { data } = await axios.post(
@@ -207,7 +206,7 @@ export default function UpdateMeeting() {
       console.log(data);
       if (data.success) {
         toast.success(data.message);
-      }else{
+      } else {
         toast.error("Something went wrong");
       }
     } catch (error) {
@@ -235,14 +234,18 @@ export default function UpdateMeeting() {
 
   return (
     <div className="main">
-      <div className="container d-flex flex-column align-items-center justify-content-center p-xxl-4">
-        <h2 className="mt-4 mb-xxl-5 mb-3" style={{ userSelect: "none" }}>
+      <div className="container  d-flex flex-column align-items-center justify-content-center p-xxl-4">
+        <h2
+          className="mt-4 animate__animated animate__zoomIn"
+          style={{ userSelect: "none" }}
+        >
           {t("CreateOrUpdateMeeting.updateMeeting")}
         </h2>
 
-        <div className="inputsContainer p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
-          <div className="calenderPicker row p-0 m-0">
-            <div className="col-md-6  inputItem mb-3 px-5">
+        <div className="inputsContainer p-3 p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
+          <div className="calenderPicker row px-5 m-0">
+            <div className="col-md-6 ps-0">
+            <div className="inputItem timePicker mb-3">
               <ThemeProvider theme={newTheme}>
                 <DesktopDatePicker
                   format="LL"
@@ -250,18 +253,41 @@ export default function UpdateMeeting() {
                   disablePast
                 />
               </ThemeProvider>
+              </div>
             </div>
-            <div className="col-md-6  inputItem timePicker mb-3 px-5 ">
-              <ThemeProvider theme={newTheme}>
-                <TimePicker
-                  onChange={(val) => setTime(val)}
-                  viewRenderers={{
-                    hours: renderTimeViewClock,
-                    minutes: renderTimeViewClock,
-                    seconds: renderTimeViewClock,
-                  }}
+            <div className="col-md-6 pe-0">
+              <div className="inputItem timePicker mb-3 ">
+                <ThemeProvider theme={newTheme}>
+                  <TimePicker
+                    onChange={(val) => setTime(val)}
+                    viewRenderers={{
+                      hours: renderTimeViewClock,
+                      minutes: renderTimeViewClock,
+                      seconds: renderTimeViewClock,
+                    }}
+                  />
+                </ThemeProvider>
+              </div>
+            </div>
+            <div className="col-md-6 ps-0">
+              <div className="inputItem mb-3 ">
+                <input
+                  type="text"
+                  className="form-control py-2 rounded-3"
+                  id="meetTopic"
+                  placeholder={t("CreateOrUpdateMeeting.topic")}
                 />
-              </ThemeProvider>
+              </div>
+            </div>
+            <div className="col-md-6 pe-0">
+              <div className="inputItem  mb-3  ">
+                <input
+                  type="text"
+                  className="form-control py-2 rounded-3"
+                  id="meetAddress"
+                  placeholder={t("CreateOrUpdateMeeting.address")}
+                />
+              </div>
             </div>
           </div>
 
@@ -321,26 +347,10 @@ export default function UpdateMeeting() {
           </div>
 
           <div className="inputItem mb-3 px-5">
-            <input
-              type="text"
-              className="form-control py-2 rounded-3"
-              id="meetTopic"
-              placeholder={t("CreateOrUpdateMeeting.topic")}
-            />
-          </div>
-          <div className="inputItem mb-3 px-5">
-            <input
-              type="text"
-              className="form-control py-2 rounded-3"
-              id="meetAddress"
-              placeholder={t("CreateOrUpdateMeeting.address")}
-            />
-          </div>
-          <div className="inputItem mb-3 px-5">
             <textarea
               className="form-control py-2 rounded-3"
               id="meetNotes"
-              rows="4"
+              rows="2"
               style={{ maxHeight: "150px" }}
               placeholder={t("CreateOrUpdateMeeting.notes")}
             ></textarea>
