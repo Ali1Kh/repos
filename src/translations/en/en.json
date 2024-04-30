@@ -96,7 +96,8 @@
       "status": "Status",
       "manager": "Manager",
       "Comments": "Comments",
-      "inOrOut": "In Or Out side"
+      "inOrOut": "In Or Out side",
+      "addedBy": "Added By"
     }
   },
 

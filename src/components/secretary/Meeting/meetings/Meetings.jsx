@@ -250,7 +250,7 @@ export default function Meetings() {
                   },
                   {
                     field: "Secertary_Name",
-                    headerName: "AddedBy",
+                    headerName: t("tableMeetings.table.addedBy"),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
