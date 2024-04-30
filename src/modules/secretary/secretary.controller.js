@@ -253,19 +253,17 @@ export const updateMeeting = async (req, res, next) => {
     }
   }
 
-  if (!req.body.insidePersons) {
-    await meeting_Manager.destroy({
-      where: {
-        meeting_id: req.params.meetingId,
-        manager_id: {
-          [Op.and]: [
-            { [Op.notIn]: req.body.insidePersons || [] },
-            { [Op.ne]: isMeeting.dataValues.meetingOwner },
-          ],
-        },
+  await meeting_Manager.destroy({
+    where: {
+      meeting_id: req.params.meetingId,
+      manager_id: {
+        [Op.and]: [
+          { [Op.notIn]: req.body.insidePersons || [] },
+          { [Op.ne]: isMeeting.dataValues.meetingOwner },
+        ],
       },
-    });
-  }
+    },
+  });
 
   return res.json({ success: true, message: "Meeting Updated Successfully" });
 };
