@@ -278,7 +278,7 @@ export const getSecMeetings = async (req, res, next) => {
      Manager.E_mail as 'Manager_Email',
      Manager.UserName as 'Manager_UserName' from Meetings
      join meeting_Manager on Meetings.meeting_id = meeting_Manager.meeting_id 
-     join Manager on meeting_Manager.manager_id = Manager.manager_id  
+     join Manager on Meetings.meetingOwner = Manager.manager_id  
      join Manager_Secretaries on meeting_Manager.manager_id = Manager_Secretaries.manager_id
      join Secretary on addedBy = Secretary.secretary_id
      where Manager_Secretaries.secretary_id = ${req.payload.id} and 
