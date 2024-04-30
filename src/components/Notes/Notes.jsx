@@ -10,6 +10,7 @@ import { TailSpin } from "react-loader-spinner";
 import $ from "jquery";
 import { Link } from "react-router-dom";
 import MeetingDetails from "../manager/meetingDetails/meetingDetails";
+import { useTranslation } from "react-i18next";
 
 export default function Nots() {
   const [show, setShow] = useState(false);
@@ -17,6 +18,7 @@ export default function Nots() {
   const [content, setContent] = useState("");
   const [type, setType] = useState();
   const [id, setId] = useState("");
+  let { t } = useTranslation();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -148,13 +150,13 @@ export default function Nots() {
           if (attributes.italic) {
             styles.fontStyle = "italic";
           }
-          if (attributes.color) {
-            styles.color = attributes.color;
-          }
+          // if (attributes.color) {
+          //   styles.color = attributes.color;
+          // }
         }
 
         return (
-          <span key={index} style={styles}>
+          <span className="BlackToWhite" key={index} style={styles}>
             {insert}
           </span>
         );
@@ -169,7 +171,7 @@ export default function Nots() {
       <div className="main">
         <div className="container mt-5">
           <h1 className="container d-flex flex-column align-items-center justify-content-center p-4">
-            Notes
+            {t("sidebar.Nots")}
           </h1>
           <div className="row gy-3 p-5 pt-0">
             {isLoading ? (
@@ -209,9 +211,14 @@ export default function Nots() {
                       >
                         <div className="inner-card-notes h-100 shadow rounded-2 gap-4 p-4 flex-column">
                           <div className="box overflow-hidden d-flex  flex-column h-100">
-                            <h5>{note.title}</h5>
-                            <div className="text-black d-flex mt-2 align-items-center  overflow-hidden">
-                              <p id={`note${note.notes_id}`}>
+                            <h5 className="rethink-sans text-capitalize text-black">
+                              {note.title}
+                            </h5>
+                            <div className=" d-flex mt-2 align-items-center  overflow-hidden">
+                              <p
+                                className="text-secondary"
+                                id={`note${note.notes_id}`}
+                              >
                                 {convertNote(note.content)}
                               </p>
                             </div>
@@ -270,7 +277,7 @@ export default function Nots() {
           </div>
         </div>
         <div
-          className="note-icon"
+          className="note-icon cursorPointer shadow"
           onClick={() => {
             handleShow();
             setType("new");

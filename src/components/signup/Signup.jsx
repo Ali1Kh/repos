@@ -7,15 +7,9 @@ import * as Yup from "yup";
 import axios from "axios";
 import toast from "react-hot-toast";
 const SignupSchema = Yup.object().shape({
-  userName: Yup.string()
-    .required("Username is required")
-    .matches(/^[a-zA-Z0-9]+$/, "Invalid username"),
-  firstName: Yup.string()
-    .required("First name is required")
-    .matches(/^[A-Za-z]+$/, "Invalid first name"),
-  lastName: Yup.string()
-    .required("Last name is required")
-    .matches(/^[A-Za-z]+$/, "Invalid last name"),
+  userName: Yup.string().required("Username is required"),
+  firstName: Yup.string().required("First name is required"),
+  lastName: Yup.string().required("Last name is required"),
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
@@ -40,6 +34,8 @@ export default function Signup() {
       confirmPassword: values.confirmPassword,
     };
 
+    console.log(formData);
+
     axios
       .post(`${process.env.REACT_APP_APIHOST}/auth/signup`, formData)
       .then((response) => {
@@ -47,7 +43,8 @@ export default function Signup() {
           toast.success(response.data.message);
           navigate("/login");
         } else {
-          setErrorMessage(response.data.message);
+          console.log(response.data);
+          setErrorMessage("Something went wrong. Please try again.");
         }
       })
       .catch((error) => {
@@ -76,6 +73,7 @@ export default function Signup() {
                   confirmPassword: "",
                 }}
                 validationSchema={SignupSchema}
+                onSubmit={handleSignup}
               >
                 <Form className="ineer shadow p-5">
                   <div className="form text-start">
@@ -211,7 +209,7 @@ export default function Signup() {
                     id="btn"
                     className="Signup-btn d-flex justify-content-center align-items-center mt-3"
                   >
-                    <button type="button" onClick={handleSignup}>{t("signup.signupheader")}</button>
+                    <button type="submit">{t("signup.signupheader")}</button>
                   </div>
                 </Form>
               </Formik>

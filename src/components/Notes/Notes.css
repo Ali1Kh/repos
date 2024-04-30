@@ -1,115 +1,98 @@
-.text-black h2 {
-    color: var(--sec-color);
-}
 
 .note-icon {
-    background-color: var(--cardBgColor);
-    display: inline-block;
-    border-radius: 50%;
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    box-shadow: var(--shadow-4);
+  background-color: var(--cardBgColor);
+  display: inline-block;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  box-shadow: var(--shadow-4);
 }
 
 @keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
+  0% {
+    transform: scale(1);
+  }
 
-    50% {
-        transform: scale(1.1);
-    }
+  50% {
+    transform: scale(1.1);
+  }
 
-    100% {
-        transform: scale(1);
-    }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .note-icon:hover {
-    width: 80px;
-    height: 80px;
-    background-color: var(--cardBgColor);
-    transition: transform 0.3s ease;
-
-    &:hover {
-        animation: pulse 1s infinite;
-    }
+  width: 80px;
+  height: 80px;
+  background-color: var(--cardBgColor);
+  transition: transform 0.3s ease;
+  &:hover {
+    animation: pulse 1s infinite;
+  }
 }
 
 .note-icon i {
-    font-size: 40px;
-    color: var(--sec-color);
-    padding: 20px;
+  font-size: 40px;
+  color: var(--BlackToWhite);
+  padding: 20px;
 }
 
 .inner-parent {
-    transition: all 500ms;
+  transition: all 500ms;
 }
 
 .inner-parent:hover {
-    scale: 1.03;
+  scale: 1.03;
 }
 
 .star-icon {
-    transition: all 500ms;
+  transition: all 500ms;
 }
 
 .star-icon:hover {
-    scale: 1.03;
+  scale: 1.03;
 }
 
-.modal-title,
-.form-label {
-    color: var(--sec-color);
-}
+
 
 .modal-body .form-control {
-    background-color: var(--cardBgColor) !important;
-    border-radius: 10px !important;
-    border: 1px solid var(--sec-color) !important;
-    color: var(--BlackToWhite) !important;
+  background-color: var(--cardBgColor) !important;
+  border-radius: 10px !important;
+  border: 1px solid var(--sec-color) !important;
+  color: var(--BlackToWhite) !important;
 }
 
 .modal-body .form-control::placeholder {
-    color: rgb(202, 196, 208, 0.6) !important;
+  color: rgb(202, 196, 208, 0.6) !important;
 }
 
 .btn.btn-primary {
-    background-color: var(--sec-color) !important;
-    border: 1px solid var(--sec-color) !important;
-    color: var(--BlackToWhite) !important;
-    margin: 10px !important;
-    padding: 8px 30px !important;
-    transition: 500ms;
+  background-color: var(--sec-color) !important;
+  border: 1px solid var(--sec-color) !important;
+  color: var(--BlackToWhite) !important;
+  margin: 10px !important;
+  padding: 8px 30px !important;
+  transition: 500ms;
 }
 
 .btn.btn-primary:hover {
-    background-color: darkslateblue !important;
-    border: 1px solid darkslateblue !important;
+  background-color: darkslateblue !important;
+  border: 1px solid darkslateblue !important;
 }
 
-.btn.btn-danger {
-    color: var(--BlackToWhite) !important;
-}
+
 
 .noContent {
-    font-size: 40px;
-    margin-top: 10rem !important;
+  font-size: 40px;
+  margin-top: 10rem !important;
 }
 
 .inner-card-notes {
-    cursor: pointer;
-    background-color: var(--cardBgColor);
-}
-
-.inner-card-notes h5,
-.note-createdAt {
-    color: var(--sec-color) !important;
+  cursor: pointer;
+  background-color: var(--cardBgColor);
 }
 
 
 
-.fa-notes-medical {
-    color: var(--sec-color) !important;
-}
