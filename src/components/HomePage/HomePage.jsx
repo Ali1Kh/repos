@@ -3,51 +3,25 @@ import "./homePage.css";
 import MeetingDetails from "../manager/meetingDetails/meetingDetails.jsx";
 import { useTranslation } from "react-i18next";
 import { TailSpin } from "react-loader-spinner";
-import $ from "jquery";
-import { useQuery } from "react-query";
-import axios from "axios";
 import { searchContext } from "../context/searchContext.js";
 export default function HomePage() {
-  let colors = [
-    "#FFB399",
-    "#FFFFFF99",
-    "#00B3E6",
-    "#E6B333",
-    "#3366E6",
-    "#999966",
-    "#B34D4D",
-    "#80B300",
-    "#809900",
-    "#E6B3B3",
-    "#6680B3",
-    "#66991A",
-    "#66994D",
-    "#B366CC",
-    "#4D8000",
-    "#B33300",
-    "#CC80CC",
-    "#6666664D",
-    "#4DB3FF",
-    "#1AB399",
-    "#33991A",
-    "#CC9999",
-    "#B3B31A",
-    "#00E680",
-    "#4D8066",
-    "#809980",
-    "#E6FF80",
-    "#CCCC00",
-    "#4D80CC",
-    "#4DB380",
-    "#99E6E6",
-    "#666666FF",
+  const daysNames = [
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
   ];
 
-  localStorage.setItem("colors", JSON.stringify(colors));
   const [t] = useTranslation();
-  const authToken = localStorage.getItem("token");
 
-  let { meetings, isLoading } = useContext(searchContext);
+  let { meetings, isLoading, getMeetings } = useContext(searchContext);
+
+  useEffect(() => {
+    getMeetings();
+  }, []);
 
   return (
     <>
@@ -90,73 +64,59 @@ export default function HomePage() {
                           data-aos-once="true"
                         >
                           <div
-                            className="inner-card h-100 shadow rounded-4 gap-3 p-3 justify-content-end flex-column"
+                            className="inner-card h-100 shadow rounded-2 gap-3 p-3 justify-content-end flex-column"
                             data-bs-toggle="modal"
                             data-bs-target={`#meetingModal${meeting.meeting_id}`}
                           >
-                            <div className="guest-info d-flex flex-column align-items-center">
-                              <div
-                                className="guest-icon-profile d-flex justify-content-center align-items-center me-3 mb-2 mt-2 ms-3"
-                                style={{ width: "55px", height: "50px" }}
-                              >
-                                <div
-                                  className="meetingGuestIcon text-black d-flex justify-content-center align-items-center"
-                                  style={{
-                                    backgroundColor: `${
-                                      colors[
-                                        Math.floor(
-                                          Math.random() * colors.length
-                                        )
-                                      ]
-                                    }`,
-                                  }}
-                                >
-                                  <span className="m-0 p-0 ">
-                                    {meeting.person
-                                      .toUpperCase()
-                                      .split("")
-                                      .slice(0, 1)}
-                                  </span>
-                                </div>
+                            <div className="meetingHeader d-flex gap-2 align-items-center">
+                              <div className="headerIcon mb-auto mt-2">
+                                <img
+                                  src={require(`../../image/days/${
+                                    daysNames[new Date(meeting.date).getDay()]
+                                  }.png`)}
+                                  width={45}
+                                  alt=""
+                                />
                               </div>
-                              {meeting.person != "undefined" ? (
-                                <div className="guest-account text-center d-flex flex-column align-items-center mt-3">
-                                  <div className="guest-name flex-column">
-                                    <h4>{meeting.person}</h4>
-                                  </div>
-                                </div>
-                              ) : (
-                                ""
-                              )}
+                              <div className="headerCotent p-2">
+                                <h5 className="rethink-sans  text-capitalize m-0 mb-2">
+                                  {meeting.about}
+                                </h5>
+                                <p className="fw-normal rethink-sans small text-secondary mb-1">
+                                  <i className="fa-regular fa-clock me-1 text-secondary"></i>
+                                  {new Date(
+                                    "2024-10-10 " + meeting.time
+                                  ).toLocaleTimeString("en-EG", {
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                  })}
+                                </p>
+                                <p className="fw-normal rethink-sans small text-secondary">
+                                  <i className="fa-regular fa-calendar me-2 text-secondary"></i>
+                                  {new Date(meeting.date).toLocaleDateString(
+                                    "en-EG",
+                                    {
+                                      day: "numeric",
+                                      month: "short",
+                                      year: "numeric",
+                                    }
+                                  )}
+                                </p>
+                              </div>
                             </div>
 
-                            <div className="meeting-info row mt-auto">
-                              <div className="meeting-topic col-lg-4 col-md-4">
-                                <p className="text-center m-1 heading">
-                                  {t("HomePage.meetingTopic")}
-                                </p>
-                                <p className="text-center m-1">
-                                  {meeting.about}
-                                </p>
-                              </div>
-
-                              <div className="meeting-time col-lg-4 col-md-4">
-                                <p className="text-center m-1 heading">
-                                  {t("HomePage.meetingTime")}
-                                </p>
-                                <p className="text-center m-1">
-                                  {meeting.time}
-                                </p>
-                              </div>
-
-                              <div className="meeting-date col-lg-4 col-md-4 p-0">
-                                <p className="text-center m-1 heading">
-                                  {t("HomePage.meetingDate")}
-                                </p>
-                                <p className="text-center w-100 m-1 ">
-                                  {meeting.date}
-                                </p>
-                              </div>
+                            <div
+                              className="meetingNotes  d-flex gap-1 px-3 py-1"
+                              style={{ maxWidth: "100%" }}
+                            >
+                              <span className="rethink-sans text-secondary">
+                                {t("meetings.Comments")}
+                              </span>
+                              :{" "}
+                              <p className="mb-0">
+                                {" "}
+                                {meeting.notes.slice(0, 8) + "..."}
+                              </p>
                             </div>
                           </div>
                         </div>

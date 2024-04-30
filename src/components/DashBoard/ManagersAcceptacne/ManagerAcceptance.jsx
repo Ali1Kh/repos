@@ -20,7 +20,7 @@ const Acceptance = () => {
   const getNotAcceptedManagers = async () => {
     try {
       const response = await axios.get(
-        "https://meetingss.onrender.com/dashboard/getNotAcceptedManagers",
+        `${process.env.REACT_APP_APIHOST}/dashboard/getNotAcceptedManagers`,
         {
           headers: {
             token: token,
@@ -28,34 +28,33 @@ const Acceptance = () => {
         }
       );
       setData(response.data);
-      console.log("res", response);
       return response.data;
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
-  const AcceptManager = async(manager_id) => {
+  const AcceptManager = async (manager_id) => {
     try {
-            const response = await axios.post(
-              `https://meetingss.onrender.com/dashboard/acceptManagerAcc/${manager_id}`,
-              {},
-              {
-                headers: {
-                  token: token,
-                },
-              }
-            );
-            if (response.data.success) {
-              toast.success("Accepted");
-              getNotAcceptedManagers();
-            }
-            else{
-              toast.error("Something went Wrong");
-            }
-          } catch (error) {
-            console.error("Error:", error);
-          }
+      const response = await axios.post(
+        `${process.env.REACT_APP_APIHOST}/dashboard/acceptManagerAcc/${manager_id}`,
+        {},
+        {
+          headers: {
+            token: token,
+          },
+        }
+      );
+      if (response.data.success) {
+        toast.success("Accepted");
+        getNotAcceptedManagers();
+      }
+      else {
+        toast.error("Something went Wrong");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const { isLoading } = useQuery("getNotAcceptedManagers", getNotAcceptedManagers);
@@ -63,7 +62,7 @@ const Acceptance = () => {
   // async function acceptAccount(id) {
   //   try {
   //     const response = await axios.post(
-  //       `https://meetingss.onrender.com/dashboard/acceptAcc/${id}`,
+  //       `${process.env.REACT_APP_APIHOST}/dashboard/acceptAcc/${id}`,
   //       {},
   //       {
   //         headers: {
@@ -83,7 +82,7 @@ const Acceptance = () => {
   const rejectManagerAccount = async (manager_id) => {
     try {
       const response = await axios.post(
-        `https://meetingss.onrender.com/dashboard/rejectManagerAcc/${manager_id}`,
+        `${process.env.REACT_APP_APIHOST}/dashboard/rejectManagerAcc/${manager_id}`,
         {},
         {
           headers: {

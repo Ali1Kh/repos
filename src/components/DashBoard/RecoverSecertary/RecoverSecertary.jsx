@@ -20,7 +20,7 @@ const Recover = () => {
   const getDeletedSecertaries = async () => {
     try {
       const response = await axios.get(
-        "https://meetingss.onrender.com/dashboard/getDeletedSecretaries",
+        `${process.env.REACT_APP_APIHOST}/dashboard/getDeletedSecretaries`,
         {
           headers: {
             token: token,
@@ -28,7 +28,6 @@ const Recover = () => {
         }
       );
       setData(response.data);
-      console.log("res",response.data);
 
       return response.data;
     } catch (error) {
@@ -39,7 +38,7 @@ const Recover = () => {
   const RecoverSecertary = async(secretary_id) => {
     try {
             const response = await axios.post(
-              `https://meetingss.onrender.com/dashboard/recoverSec/${secretary_id}`,
+              `${process.env.REACT_APP_APIHOST}/dashboard/recoverSec/${secretary_id}`,
               {},
               {
                 headers: {
@@ -52,7 +51,6 @@ const Recover = () => {
               getDeletedSecertaries();
             }
             else{
-                console.log("pp",response);
               toast.error("Something went Wrong");
             }
           } catch (error) {
@@ -65,7 +63,7 @@ const Recover = () => {
   // async function acceptAccount(id) {
   //   try {
   //     const response = await axios.post(
-  //       `https://meetingss.onrender.com/dashboard/acceptAcc/${id}`,
+  //       `${process.env.REACT_APP_APIHOST}/dashboard/acceptAcc/${id}`,
   //       {},
   //       {
   //         headers: {

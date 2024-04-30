@@ -41,14 +41,13 @@ export default function Signup() {
     };
 
     axios
-      .post("https://meetingss.onrender.com/auth/signup", formData)
+      .post(`${process.env.REACT_APP_APIHOST}/auth/signup`, formData)
       .then((response) => {
-        console.log(response.data);
         if (response.data.success) {
           toast.success(response.data.message);
           navigate("/login");
-        }else{
-          setErrorMessage(response.data.message)
+        } else {
+          setErrorMessage(response.data.message);
         }
       })
       .catch((error) => {
@@ -77,7 +76,6 @@ export default function Signup() {
                   confirmPassword: "",
                 }}
                 validationSchema={SignupSchema}
-                onSubmit={handleSignup}
               >
                 <Form className="ineer shadow p-5">
                   <div className="form text-start">
@@ -132,29 +130,31 @@ export default function Signup() {
                       className="error-label"
                     />
                     <div className="password-input d-flex mt-3">
-                    <Field
-                      id = "password"
-                      type="password"
-                      name="password"
-                      className="pass-word mt-3 d-flex justify-content-center form-control"
-                      placeholder={t("signup.password")}
-                    />
-                    <button id="eye" className="btn btn-eye d-flex justify-content-center align-items-center ms-2"
-                      onClick={() => {
-                        let password = document.getElementById("password")
-                        let eyeicon = document.getElementById("eye-icon")
+                      <Field
+                        id="password"
+                        type="password"
+                        name="password"
+                        className="pass-word mt-3 d-flex justify-content-center form-control"
+                        placeholder={t("signup.password")}
+                      />
+                      <div
+                        id="eye"
+                        className="btn btn-eye d-flex justify-content-center align-items-center ms-2"
+                        onClick={() => {
+                          let password = document.getElementById("password");
+                          let eyeicon = document.getElementById("eye-icon");
 
-                        if (password.type === "password") {
-                          password.type = "text"
-                          eyeicon.className = "fa-solid fa-eye"
-                        }
-                        else {
-                          password.type = "password"
-                          eyeicon.className = "fa-solid fa-eye-slash"
-                        }
-                      }}>
-                      <i id="eye-icon" class="fa-solid fa-eye-slash"></i>
-                    </button>
+                          if (password.type === "password") {
+                            password.type = "text";
+                            eyeicon.className = "fa-solid fa-eye";
+                          } else {
+                            password.type = "password";
+                            eyeicon.className = "fa-solid fa-eye-slash";
+                          }
+                        }}
+                      >
+                        <i id="eye-icon" class="fa-solid fa-eye-slash"></i>
+                      </div>
                     </div>
                     <ErrorMessage
                       name="password"
@@ -162,29 +162,36 @@ export default function Signup() {
                       className="error-label"
                     />
                     <div className="password-input d-flex mt-3">
-                    <Field
-                      id = "confirm-password"
-                      type="password"
-                      name="confirmPassword"
-                      className="pass-word mt-3 d-flex justify-content-center form-control"
-                      placeholder={t("signup.confirmPassword")}
-                    />
-                    <button id="eye" className="btn d-flex justify-content-center align-items-center ms-2"
-                      onClick={() => {
-                        let password = document.getElementById("confirm-password")
-                        let eyeiconconfirm = document.getElementById("eye-icon-confirm")
+                      <Field
+                        id="confirm-password"
+                        type="password"
+                        name="confirmPassword"
+                        className="pass-word mt-3 d-flex justify-content-center form-control"
+                        placeholder={t("signup.confirmPassword")}
+                      />
+                      <div
+                        id="eye"
+                        className="btn d-flex justify-content-center align-items-center ms-2"
+                        onClick={() => {
+                          let password =
+                            document.getElementById("confirm-password");
+                          let eyeiconconfirm =
+                            document.getElementById("eye-icon-confirm");
 
-                        if (password.type === "password") {
-                          password.type = "text"
-                          eyeiconconfirm.className = "fa-solid fa-eye"
-                        }
-                        else {
-                          password.type = "password"
-                          eyeiconconfirm.className = "fa-solid fa-eye-slash"
-                        }
-                      }}>
-                      <i id="eye-icon-confirm" class="fa-solid fa-eye-slash"></i>
-                    </button>
+                          if (password.type === "password") {
+                            password.type = "text";
+                            eyeiconconfirm.className = "fa-solid fa-eye";
+                          } else {
+                            password.type = "password";
+                            eyeiconconfirm.className = "fa-solid fa-eye-slash";
+                          }
+                        }}
+                      >
+                        <i
+                          id="eye-icon-confirm"
+                          class="fa-solid fa-eye-slash"
+                        ></i>
+                      </div>
                     </div>
                     <ErrorMessage
                       name="confirmPassword"
@@ -202,10 +209,9 @@ export default function Signup() {
                   <small className="text-danger">{errorMessage}</small>
                   <div
                     id="btn"
-                    type="submit"
                     className="Signup-btn d-flex justify-content-center align-items-center mt-3"
                   >
-                    <button type="submit">{t("signup.signupheader")}</button>
+                    <button type="button" onClick={handleSignup}>{t("signup.signupheader")}</button>
                   </div>
                 </Form>
               </Formik>

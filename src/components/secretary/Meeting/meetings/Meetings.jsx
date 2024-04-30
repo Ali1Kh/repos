@@ -13,9 +13,12 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 export default function Meetings() {
   let [meetingsRows, setMeetingsRows] = useState([]);
+
+  let payload = jwtDecode(localStorage.getItem("token"));
 
   const getRowId = (row) => {
     return row.meeting_id;
@@ -24,7 +27,7 @@ export default function Meetings() {
   async function getSecMeetings() {
     try {
       let { data } = await axios.get(
-        `https://meetingss.onrender.com/secretary/getSecMeetings`,
+        `${process.env.REACT_APP_APIHOST}/secretary/getSecMeetings`,
         { headers: { token: localStorage.getItem("token") } }
       );
       if (data.success) {
@@ -34,6 +37,28 @@ export default function Meetings() {
       console.log(error);
     }
   }
+  const ChangeMeetingStatus = async (secretary_id, status) => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_APIHOST}/secretary/changeStatus/${secretary_id}`,
+        {
+          status: status,
+        },
+        {
+          headers: {
+            token: localStorage.getItem("token"),
+          },
+        }
+      );
+      if (response.data.success) {
+        console.log(response.data.success);
+      } else {
+        console.log(response.data.success);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   useEffect(() => {
     getSecMeetings();
@@ -76,7 +101,7 @@ export default function Meetings() {
   }
   async function deleteMeeting(id) {
     let { data } = await axios.delete(
-      `https://meetingss.onrender.com/secretary/deleteMeeting/${id}`,
+      `${process.env.REACT_APP_APIHOST}/secretary/deleteMeeting/${id}`,
       { headers: { token: localStorage.getItem("token") } }
     );
 
@@ -99,7 +124,6 @@ export default function Meetings() {
     setOpen(false);
   }
   function updateMeeting(rows) {
-    console.log(rows);
     meetingNavigate("updateMeeting/" + selectedId);
   }
   // Holding Row
@@ -181,7 +205,7 @@ export default function Meetings() {
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 120,
+                    width: 90,
                   },
                   {
                     field: "about",
@@ -205,7 +229,7 @@ export default function Meetings() {
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 120,
+                    width: 90,
                   },
                   {
                     field: "statues",
@@ -213,16 +237,9 @@ export default function Meetings() {
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",
-                    width: 120,
+                    width: 90,
                   },
-                  // {
-                  //   field: "notes",
-                  //   headerName: t("tableMeetings.table.Comments"),
-                  //   headerClassName: "tableColumns",
-                  //   align: "center",
-                  //   headerAlign: "center",
-                  //   width: 120,
-                  // },
+
                   {
                     field: "Manager_Name",
                     headerName: t("tableMeetings.table.manager"),
@@ -230,6 +247,20 @@ export default function Meetings() {
                     align: "center",
                     headerAlign: "center",
                     width: 120,
+                  },
+                  {
+                    field: "Secertary_Name",
+                    headerName: "AddedBy",
+                    headerClassName: "tableColumns",
+                    align: "center",
+                    headerAlign: "center",
+                    width: 120,
+                    valueGetter: (params) =>
+                      params.row?.addedBy == payload.id
+                        ? "You"
+                        : params.row?.Secertary_Name +
+                          " " +
+                          params.row?.Secertary_LastName,
                   },
                 ]}
                 rows={meetingsRows}
@@ -239,7 +270,7 @@ export default function Meetings() {
                   maxHeight: "550px",
                   padding: "10px",
                   maxWidth: "fit-content",
-                  borderRadius: "15px",
+                  borderRadius: "3px",
 
                   "& .MuiDataGrid-cell": {
                     color: "var(--BlackToWhite)",
@@ -255,9 +286,9 @@ export default function Meetings() {
                     display: "none",
                   },
                   "& [data-testid='ArrowUpwardIcon'], [data-testid='ArrowDownwardIcon']":
-                  {
-                    display: "none",
-                  },
+                    {
+                      display: "none",
+                    },
                 }}
               />
             </div>
@@ -280,23 +311,23 @@ export default function Meetings() {
             <div
               className="item"
               onClick={() => {
-                console.log("Done", selectedId);
+                ChangeMeetingStatus(selectedId, "Done");
               }}
             >
               {t("MeetingContextMenu.statusContext.done")}
             </div>
-            <div
+            {/* <div
               className="item"
               onClick={() => {
                 console.log("Cancelled", selectedId);
               }}
             >
               {t("MeetingContextMenu.statusContext.changedate")}
-            </div>
+            </div> */}
             <div
               className="item"
               onClick={() => {
-                console.log("Cancelled", selectedId);
+                ChangeMeetingStatus(selectedId, "Not Done");
               }}
             >
               {t("MeetingContextMenu.statusContext.cancel")}

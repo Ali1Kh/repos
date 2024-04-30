@@ -35,7 +35,7 @@ button.btn-meeting:hover {
   overflow: hidden;
   border: none;
   z-index: 1;
-  background: var(--background-color-1);
+  background: var(--cardBgColor);
   box-shadow: var(--shadow-1);
   transition: opacity 400ms, backdrop-filter 400ms;
 }

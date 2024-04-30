@@ -130,7 +130,6 @@
   cursor: pointer !important;
   background-color: var(--sec-color) !important;
   border: 3px solid var(--sec-color);
-
 }
 
 .switchIcon:hover {
@@ -163,8 +162,21 @@
 
 /* .notification-data {} */
 
+.bell-toggler i {
+  color: var(--sec-color) !important;
+}
 
-.fa-bell{
+.bell-toggler:hover i {
+  color: black !important;
+}
+
+/*! logout btn */
+
+.logout-nav .btn {
+  border: 1px solid var(--sec-color) !important;
+}
+
+.logout-nav .btn i {
   color: var(--sec-color) !important;
 }
 
@@ -178,6 +190,13 @@
   }
 }
 
+@media screen and (min-width: 952px) {
+  .logout-nav {
+    display: none !important;
+
+  }
+}
+
 @media screen and (min-width: 992px) {
   .notification-body {
     display: none !important;
@@ -187,4 +206,3 @@
     display: none !important;
   }
 }
-

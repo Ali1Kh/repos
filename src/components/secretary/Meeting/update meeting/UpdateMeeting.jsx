@@ -28,9 +28,10 @@ export default function UpdateMeeting() {
 
   let [managers, setManagers] = useState([]);
   let [allmanagers, setAllManagers] = useState([]);
+
   async function getSecManagers() {
     let { data } = await axios.get(
-      "https://meetingss.onrender.com/secretary/getSecManagers",
+      `${process.env.REACT_APP_APIHOST}/secretary/getSecManagers`,
       { headers: { token: localStorage.getItem("token") } }
     );
     setManagers(data.managers);
@@ -38,7 +39,7 @@ export default function UpdateMeeting() {
 
   async function getAllManagers() {
     let { data } = await axios.get(
-      "https://meetingss.onrender.com/secretary/getAllManagers",
+      `${process.env.REACT_APP_APIHOST}/secretary/getAllManagers`,
       { headers: { token: localStorage.getItem("token") } }
     );
     setAllManagers(data.managers);
@@ -83,7 +84,7 @@ export default function UpdateMeeting() {
   async function getMeetingDetails() {
     try {
       let { data } = await axios.get(
-        `https://meetingss.onrender.com/secretary/getSecMeetings/${id}`,
+        `${process.env.REACT_APP_APIHOST}/secretary/getSecMeetings/${id}`,
         { headers: { token: localStorage.getItem("token") } }
       );
       if (data.success) {
@@ -114,6 +115,7 @@ export default function UpdateMeeting() {
     let topic = $("#meetTopic").val();
     let address = $("#meetAddress").val();
     let notes = $("#meetNotes").val();
+    let managerSelected = $("#managerSelected").val();
     let area = $('input[name="radio-group"]:checked').val();
     if (area === "Outside") {
       if (person === "") {
@@ -134,7 +136,8 @@ export default function UpdateMeeting() {
       topic === "" ||
       address === "" ||
       notes === "" ||
-      !area 
+      !area ||
+      managerSelected === ""
     ) {
       $(".error").removeClass("d-none");
       $(".error").addClass("d-block");
@@ -162,13 +165,16 @@ export default function UpdateMeeting() {
       address,
       notes,
       in_or_out: area,
+      insidePersons,
     };
 
-    
     if (area !== "Inside") {
       delete initData.insidePersons;
+    } else {
+      initData.person = insidePersonsNames.join(",");
     }
 
+    console.log(insidePersonsNames);
 
     const flattenObject = (obj, parentKey = "") => {
       return Object.keys(obj).reduce((acc, key) => {
@@ -187,20 +193,22 @@ export default function UpdateMeeting() {
       formData.append(key, value);
     }
 
-   if (uploadedFiles[0]) {
+    if (uploadedFiles[0]) {
       formData.append("attachment", uploadedFiles[0]);
     }
-    
+
     try {
       let { data } = await axios.post(
-        `https://meetingss.onrender.com/secretary/updateMeeting/${id}`,
+        `${process.env.REACT_APP_APIHOST}/secretary/updateMeeting/${id}`,
         formData,
         { headers: { token: localStorage.getItem("token") } }
       );
+      console.log(data);
       if (data.success) {
         toast.success(data.message);
+      } else {
+        toast.error("Something went wrong");
       }
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -209,24 +217,35 @@ export default function UpdateMeeting() {
   const [t] = useTranslation();
 
   let [insidePersons, setInsidePersons] = useState([]);
+  let [insidePersonsNames, setInsidePersonsName] = useState([]);
+
   const handleManagerChange = (event, value) => {
     setInsidePersons(
       value
         .filter((item) => typeof item === "object")
         .map((manager) => manager.manager_id)
     );
+    setInsidePersonsName(
+      value
+        .filter((item) => typeof item === "object")
+        .map((manager) => manager.first_name + " " + manager.last_name)
+    );
   };
 
   return (
     <div className="main">
-      <div className="container d-flex flex-column align-items-center justify-content-center p-xxl-4">
-        <h2 className="mt-4 mb-xxl-5 mb-3" style={{ userSelect: "none" }}>
+      <div className="container  d-flex flex-column align-items-center justify-content-center p-xxl-4">
+        <h2
+          className="mt-4 animate__animated animate__zoomIn"
+          style={{ userSelect: "none" }}
+        >
           {t("CreateOrUpdateMeeting.updateMeeting")}
         </h2>
 
-        <div className="inputsContainer p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
-          <div className="calenderPicker row p-0 m-0">
-            <div className="col-md-6  inputItem mb-3 px-5">
+        <div className="inputsContainer p-3 p-md-4 mb-0 pb-0 d-flex flex-column justify-content-center align-items gap-1">
+          <div className="calenderPicker row px-5 m-0">
+            <div className="col-md-6 ps-0">
+            <div className="inputItem timePicker mb-3">
               <ThemeProvider theme={newTheme}>
                 <DesktopDatePicker
                   format="LL"
@@ -234,18 +253,41 @@ export default function UpdateMeeting() {
                   disablePast
                 />
               </ThemeProvider>
+              </div>
             </div>
-            <div className="col-md-6  inputItem timePicker mb-3 px-5 ">
-              <ThemeProvider theme={newTheme}>
-                <TimePicker
-                  onChange={(val) => setTime(val)}
-                  viewRenderers={{
-                    hours: renderTimeViewClock,
-                    minutes: renderTimeViewClock,
-                    seconds: renderTimeViewClock,
-                  }}
+            <div className="col-md-6 pe-0">
+              <div className="inputItem timePicker mb-3 ">
+                <ThemeProvider theme={newTheme}>
+                  <TimePicker
+                    onChange={(val) => setTime(val)}
+                    viewRenderers={{
+                      hours: renderTimeViewClock,
+                      minutes: renderTimeViewClock,
+                      seconds: renderTimeViewClock,
+                    }}
+                  />
+                </ThemeProvider>
+              </div>
+            </div>
+            <div className="col-md-6 ps-0">
+              <div className="inputItem mb-3 ">
+                <input
+                  type="text"
+                  className="form-control py-2 rounded-3"
+                  id="meetTopic"
+                  placeholder={t("CreateOrUpdateMeeting.topic")}
                 />
-              </ThemeProvider>
+              </div>
+            </div>
+            <div className="col-md-6 pe-0">
+              <div className="inputItem  mb-3  ">
+                <input
+                  type="text"
+                  className="form-control py-2 rounded-3"
+                  id="meetAddress"
+                  placeholder={t("CreateOrUpdateMeeting.address")}
+                />
+              </div>
             </div>
           </div>
 
@@ -305,26 +347,10 @@ export default function UpdateMeeting() {
           </div>
 
           <div className="inputItem mb-3 px-5">
-            <input
-              type="text"
-              className="form-control py-2 rounded-3"
-              id="meetTopic"
-              placeholder={t("CreateOrUpdateMeeting.topic")}
-            />
-          </div>
-          <div className="inputItem mb-3 px-5">
-            <input
-              type="text"
-              className="form-control py-2 rounded-3"
-              id="meetAddress"
-              placeholder={t("CreateOrUpdateMeeting.address")}
-            />
-          </div>
-          <div className="inputItem mb-3 px-5">
             <textarea
               className="form-control py-2 rounded-3"
               id="meetNotes"
-              rows="4"
+              rows="2"
               style={{ maxHeight: "150px" }}
               placeholder={t("CreateOrUpdateMeeting.notes")}
             ></textarea>

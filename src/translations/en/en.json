@@ -48,7 +48,7 @@
     "loginHint": "Already Have An Acount ?",
     "login": "Login",
     "createManagerAccount": "Create Manager Account",
-    "AddExistingAccount":"Add Existing Account"
+    "AddExistingAccount": "Add Existing Account"
   },
   "search": "Search",
   "sidebar": {
@@ -130,6 +130,7 @@
       "AcceptacneSec": "Accept Secretary",
       "AcceptacneManager": "Accept Manager",
       "AcceptacneName": "Acceptacne",
+      "AcceptSecretaryForManager": "Secretaries Requests",
       "userName": "Username",
       "name": "Name",
       "E_mail": "Email",
@@ -137,7 +138,7 @@
       "accept": "Accept"
     },
     "ManageresAndSecretaries": {
-      "ManageresName": "Manageres",
+      "ManageresName": "Managers",
       "SecretariesName": "Secretaries",
       "userName": "Username",
       "name": "Name",

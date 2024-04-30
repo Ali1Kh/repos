@@ -39,13 +39,10 @@ const Sidebar = () => {
     $(".sidebarItem").eq(2).addClass("animate__fadeInUp animate__delay-250ms");
     $(".sidebarItem").eq(3).addClass("animate__fadeInUp animate__delay-300ms");
     $(".sidebarItem").eq(4).addClass("animate__fadeInUp animate__delay-350ms");
-
-    // $(".sidebarItem")
-    //   .eq(5)
-    //   .addClass("animate__slideInLeft animate__delay-400ms");
-    // $(".sidebarItem")
-    //   .eq(6)
-    //   .addClass("animate__slideInLeft animate__delay-450ms");
+    $(".sidebarItem").eq(5).addClass("animate__fadeInUp animate__delay-400ms");
+    $(".sidebarItem").eq(6).addClass("animate__fadeInUp animate__delay-450ms");
+    $(".sidebarItem").eq(7).addClass("animate__fadeInUp animate__delay-450ms");
+    $(".sidebarItem").eq(8).addClass("animate__fadeInUp animate__delay-450ms");
     // ?Context
 
     $(".accMore").click((e) => {
@@ -215,7 +212,9 @@ const Sidebar = () => {
                     <span className="d-inline-flex text-center justify-content-center">
                       <i className="fa-solid fa-users"></i>
                     </span>
-                    <span>{t("Dashborad.ManageresAndSecretaries.ManageresName")}</span>
+                    <span>
+                      {t("Dashborad.ManageresAndSecretaries.ManageresName")}
+                    </span>
                   </Link>
                   <Link
                     className="sidebarItem animate__animated"
@@ -224,14 +223,16 @@ const Sidebar = () => {
                     <span className="d-inline-flex text-center justify-content-center">
                       <i className="fa-solid fa-chalkboard-user"></i>
                     </span>
-                    <span>{t("Dashborad.ManageresAndSecretaries.SecretariesName")}</span>
+                    <span>
+                      {t("Dashborad.ManageresAndSecretaries.SecretariesName")}
+                    </span>
                   </Link>
                   <Link
                     className="sidebarItem animate__animated"
                     to={"/dashboard/SecertariesAcceptance"}
                   >
                     <span className="d-inline-flex  text-center justify-content-center">
-                      <i class="fa-regular fa-thumbs-up"></i>
+                      <i class="fa fa-check-to-slot"></i>
                     </span>
                     <span>{t("Dashborad.Acceptacne.AcceptacneSec")}</span>
                   </Link>
@@ -240,16 +241,27 @@ const Sidebar = () => {
                     to={"/dashboard/ManagerAcceptance"}
                   >
                     <span className="d-inline-flex  text-center justify-content-center">
-                      <i class="fa-regular fa-thumbs-up"></i>
+                      <i class="fa fa-square-check"></i>
                     </span>
                     <span>{t("Dashborad.Acceptacne.AcceptacneManager")}</span>
+                  </Link>
+                  <Link
+                    className="sidebarItem animate__animated"
+                    to={"/dashboard/AcceptSecretaryForManager"}
+                  >
+                    <span className="d-inline-flex  text-center justify-content-center">
+                      <i class="fa fa-bullhorn"></i>
+                    </span>
+                    <span>
+                      {t("Dashborad.Acceptacne.AcceptSecretaryForManager")}
+                    </span>
                   </Link>
                   <Link
                     className="sidebarItem animate__animated"
                     to={"/dashboard/recoverSecertary"}
                   >
                     <span className="d-inline-flex  text-center justify-content-center">
-                      <i className="fa-solid fa-trash-arrow-up"></i>
+                      <i className="fa-solid fa-recycle"></i>
                     </span>
                     <span>{t("Dashborad.recover.recoverSec")}</span>
                   </Link>
@@ -258,7 +270,7 @@ const Sidebar = () => {
                     to={"/dashboard/recoverManager"}
                   >
                     <span className="d-inline-flex  text-center justify-content-center">
-                      <i className="fa-solid fa-trash-arrow-up"></i>
+                      <i className="fa-solid fa-recycle"></i>
                     </span>
                     <span>{t("Dashborad.recover.recoverManager")}</span>
                   </Link>
@@ -297,7 +309,6 @@ const Sidebar = () => {
               <div className="accMore position-relative cursorPointer d-flex justify-content-center align-items-center ms-auto">
                 <i className="fa-solid fa-ellipsis-vertical "></i>
                 <div className="moreContext">
-                  <div className="item">Settings</div>
                   <div onClick={autoLogoutAfterTime} className="item logout">
                     Logout
                   </div>
@@ -491,7 +502,9 @@ const Sidebar = () => {
 
           <div className="setting-side mx-4 mt-auto mb-3">
             <div className="accImage text-black d-flex justify-content-center align-items-center bg-info">
-              <span className="m-0 p-0">A</span>
+              <span className="m-0 p-0">
+                {username?.split("")[0].toUpperCase()}
+              </span>
             </div>
           </div>
         </div>

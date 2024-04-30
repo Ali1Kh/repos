@@ -3,7 +3,7 @@ import logo from "../../image/Logo.png";
 import "./navbar.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import $ from "jquery";
-import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
+import { Unstable_Popup as BasePopup } from "@mui/base/Unstable_Popup";
 import { useTranslation } from "react-i18next";
 import { jwtDecode } from "jwt-decode";
 import { searchContext } from "../context/searchContext";
@@ -90,25 +90,12 @@ export default function Navbar() {
             <img className="nav-logo" src={logo}></img>
             {location.pathname.split("/")[1] === "login" ||
               location.pathname.split("/")[1] === "signup" ? (
-              <h5 className=" mb-0">Meeting Managment</h5>
+              <h5 className="text-white mb-0">Meeting Managment</h5>
             ) : (
               ""
             )}
           </a>
           <div className="d-flex">
-            <div>
-            {/* {role ? (
-                  role === "Manager" ? (
-                    <>
-                      <Notifications />
-                    </>
-                  ) : (
-                    <></>
-                  )
-                ) : (
-                  <></>
-                )} */}
-            </div>
             <button
               className="navbar-toggler border-0 animate__animated animate__fadeInRight"
               type="button"
@@ -237,7 +224,9 @@ export default function Navbar() {
                         <span className="d-inline-flex text-center justify-content-center">
                           <i className="fa-solid fa-users"></i>
                         </span>
-                        <span>{t("Dashborad.ManageresAndSecretaries.ManageresName")}</span>
+                        <span>
+                          {t("Dashborad.ManageresAndSecretaries.ManageresName")}
+                        </span>
                       </Link>
                       <Link
                         className="nav-item animate__animated"
@@ -246,7 +235,11 @@ export default function Navbar() {
                         <span className="d-inline-flex text-center justify-content-center">
                           <i className="fa-solid fa-chalkboard-user"></i>
                         </span>
-                        <span>{t("Dashborad.ManageresAndSecretaries.SecretariesName")}</span>
+                        <span>
+                          {t(
+                            "Dashborad.ManageresAndSecretaries.SecretariesName"
+                          )}
+                        </span>
                       </Link>
                       <Link
                         className="nav-item animate__animated"
@@ -264,7 +257,9 @@ export default function Navbar() {
                         <span className="d-inline-flex  text-center justify-content-center">
                           <i class="fa-regular fa-thumbs-up"></i>
                         </span>
-                        <span>{t("Dashborad.Acceptacne.AcceptacneManager")}</span>
+                        <span>
+                          {t("Dashborad.Acceptacne.AcceptacneManager")}
+                        </span>
                       </Link>
                       <Link
                         className="nav-item animate__animated"
@@ -303,20 +298,22 @@ export default function Navbar() {
               </div>
               {role ? (
                 role === "Manager" ? (
-                  <li className="d-non nav-item search ms-auto d-flex justify-content-center align-items-center me-3">
-                    <div className="input-group w-100 ps-0 pe-5">
-                      <span className="input-group-text" id="basic-addon1">
-                        <i className="fa-solid fa-magnifying-glass"></i>
-                      </span>
-                      <input
-                        type="search"
-                        className="form-control ps-0 pe-5 searchInput py-2 text-white"
-                        id="searchName"
-                        onChange={handleKeyPress}
-                        placeholder={t("search")}
-                      />
-                    </div>
-                  </li>
+                  <>
+                    <li className="d-non nav-item search ms-auto d-flex justify-content-center align-items-center me-3">
+                      <div className="input-group w-100 ps-0 pe-5">
+                        <span className="input-group-text" id="basic-addon1">
+                          <i className="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                        <input
+                          type="search"
+                          className="form-control ps-0 pe-5 searchInput py-2 text-white"
+                          id="searchName"
+                          onChange={handleKeyPress}
+                          placeholder={t("search")}
+                        />
+                      </div>
+                    </li>
+                  </>
                 ) : (
                   ""
                 )
@@ -325,32 +322,33 @@ export default function Navbar() {
               )}
 
               <li className="nav-item all ms-md-auto d-flex justify-content-center align-items-center me-3">
-                {/* <div>
-                  <Button
-                    aria-describedby={id}
-                    type="button"
-                    onClick={handleClick}
-                    className="bell-toggler"
-                  >
-                    <i className="fa-regular fa-bell"></i>
-                  </Button>
-                  <BasePopup id={id} open={open} anchor={anchor}>
-                    <PopupBody className="notification-body d-flex justify-content-center align-items-center me-3">
-                      <div className="justify-content-center align-items-center me-3">
-                        <p className="fs-6">Your Manager Ali Khaled Were Added To A New Inside Meeting</p>
-                        <button className="btn accept-button">Accept</button>
-                        <i className="fa-solid fa-trash deletAcc"></i>
-                      </div>
-                    </PopupBody>
-                  </BasePopup>
-                </div> */}
+                <div>
+                  {role ? (
+                    role === "Manager" ? (
+                      <>
+                        <Notifications />
+                      </>
+                    ) : (
+                      <></>
+                    )
+                  ) : (
+                    <></>
+                  )}
+                </div>
                 <div className="darkmodeContainer h-100 d-flex justify-content-center align-items-center px-3">
                   <label className="toggle" htmlFor="switch">
                     <input
                       id="switch"
                       className="input"
                       type="checkbox"
-                      defaultChecked
+                      onClick={(e)=>{
+                          if (e.target.checked) {
+                            localStorage.setItem("theme", "light");
+                          }else{
+                            localStorage.setItem("theme", "dark");
+                          }
+                      }}
+                      defaultChecked={localStorage.getItem("theme") === "light"}
                     />
                     <div className="switchIcon icon--moon">
                       <svg
@@ -388,8 +386,10 @@ export default function Navbar() {
                         <input
                           type="radio"
                           name="radio"
+                          defaultChecked={il8n.language === "en"}
                           onClick={() => {
                             il8n.changeLanguage("en");
+                            $("html").attr("lang", "en");
                           }}
                         />
                         <span>EN</span>
@@ -398,15 +398,27 @@ export default function Navbar() {
                         <input
                           type="radio"
                           name="radio"
-                          defaultChecked
+                          defaultChecked={il8n.language === "ar"}
                           onClick={() => {
                             il8n.changeLanguage("ar");
+                            $("html").attr("lang", "ar");
                           }}
                         />
                         <span>AR</span>
                       </label>
                     </div>
                   </div>
+                </div>
+                <div className="logout-nav h-100 d-flex justify-content-center align-items-center px-3">
+                  <button
+                    className="btn"
+                    onClick={() => {
+                      localStorage.clear();
+                      navigate("/login");
+                    }}
+                  >
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                  </button>
                 </div>
               </li>
             </ul>
@@ -416,6 +428,3 @@ export default function Navbar() {
     </>
   );
 }
-
-
-

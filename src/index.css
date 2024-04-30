@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap");
+
 :root:has(#switch:checked) {
   --black-color: #262a2e;
   --background-color-1: linear-gradient(145deg, #1e2024, #23272b);
@@ -12,9 +14,11 @@
   --main-font: Poppins;
   --mutedColor: rgb(135, 136, 149);
   --hoverColor: rgba(23, 145, 186, 0.3);
-  --bgMainColor: linear-gradient(180deg,
-      rgba(37, 50, 57, 1) 0%,
-      rgba(39, 42, 55, 1) 92%);
+  --bgMainColor: linear-gradient(
+    180deg,
+    rgba(37, 50, 57, 1) 0%,
+    rgba(39, 42, 55, 1) 92%
+  );
   --BlackToWhite: #e5e0eb;
   --BlackWhite: #e5e0eb;
   --btnBlackToWhite: #212428;
@@ -49,7 +53,7 @@
   --sideBarColor: #111926;
   --BlackToWhite: #222529;
   --cardBgColor: #ecf0ef;
-  --calander: #343A46;
+  --calander: #343a46;
   --headercardBgColor: #40444e;
   --cardHeadingColor: #7e7ebe;
   --hover: #ecf0ef;
@@ -102,7 +106,6 @@ span {
   color: var(--BlackWhite) !important;
 }
 
-
 .cursorPointer {
   cursor: pointer;
 }
@@ -111,12 +114,16 @@ span {
   width: fit-content !important;
 }
 
-.navbar .collapse.navbar-collapse .nav-item:not(.nav-item.all, .nav-item.search) {
+.navbar
+  .collapse.navbar-collapse
+  .nav-item:not(.nav-item.all, .nav-item.search) {
   display: none !important;
 }
 
 @media screen and (950px > width) {
-  .navbar .collapse.navbar-collapse .nav-item:not(.nav-item.all, .nav-item.search) {
+  .navbar
+    .collapse.navbar-collapse
+    .nav-item:not(.nav-item.all, .nav-item.search) {
     display: block !important;
   }
 
@@ -186,4 +193,20 @@ span {
   width: 150px;
   padding: 5px;
   margin-block: 5px;
+}
+
+.rethink-sans {
+  font-family: "Rethink Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px transparent;
 }

@@ -20,7 +20,7 @@ const Acceptance = () => {
   const getNotAcceptedSecertaries = async () => {
     try {
       const response = await axios.get(
-        "https://meetingss.onrender.com/dashboard/getNotAcceptedSec",
+        `${process.env.REACT_APP_APIHOST}/dashboard/getNotAcceptedSec`,
         {
           headers: {
             token: token,
@@ -37,7 +37,7 @@ const Acceptance = () => {
   const AcceptSecertary = async(secretary_id) => {
     try {
             const response = await axios.post(
-              `https://meetingss.onrender.com/dashboard/acceptAcc/${secretary_id}`,
+              `${process.env.REACT_APP_APIHOST}/dashboard/acceptAcc/${secretary_id}`,
               {},
               {
                 headers: {
@@ -50,7 +50,6 @@ const Acceptance = () => {
               getNotAcceptedSecertaries();
             }
             else{
-              console.log("oo",response);
               toast.error("Something went Wrong");
             }
           } catch (error) {
@@ -63,7 +62,7 @@ const Acceptance = () => {
   // async function acceptAccount(id) {
   //   try {
   //     const response = await axios.post(
-  //       `https://meetingss.onrender.com/dashboard/acceptAcc/${id}`,
+  //       `${process.env.REACT_APP_APIHOST}/dashboard/acceptAcc/${id}`,
   //       {},
   //       {
   //         headers: {
@@ -83,7 +82,7 @@ const Acceptance = () => {
   const rejectSecertaryAccount = async (secretary_id) => {
     try {
       const response = await axios.post(
-        `https://meetingss.onrender.com/dashboard/rejectAcc/${secretary_id}`,
+        `${process.env.REACT_APP_APIHOST}/dashboard/rejectAcc/${secretary_id}`,
         {},
         {
           headers: {
@@ -91,7 +90,6 @@ const Acceptance = () => {
           },
         }
       );
-      console.log(response);
 
       if (response.data.success) {
         toast.success("Removed");

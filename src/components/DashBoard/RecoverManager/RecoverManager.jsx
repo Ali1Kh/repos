@@ -20,7 +20,7 @@ const Recover = () => {
   const getDeletedManageres = async () => {
     try {
       const response = await axios.get(
-        "https://meetingss.onrender.com/dashboard/getDeletedManageres",
+        `${process.env.REACT_APP_APIHOST}/dashboard/getDeletedManageres`,
         {
           headers: {
             token: token,
@@ -28,7 +28,6 @@ const Recover = () => {
         }
       );
       setData(response.data);
-      console.log("res",response.data);
 
       return response.data;
     } catch (error) {
@@ -39,7 +38,7 @@ const Recover = () => {
   const RecoverSecertary = async(manager_id) => {
     try {
             const response = await axios.post(
-              `https://meetingss.onrender.com/dashboard/recoverManager/${manager_id}`,
+              `${process.env.REACT_APP_APIHOST}/dashboard/recoverManager/${manager_id}`,
               {},
               {
                 headers: {
@@ -64,7 +63,7 @@ const Recover = () => {
   // async function acceptAccount(id) {
   //   try {
   //     const response = await axios.post(
-  //       `https://meetingss.onrender.com/dashboard/acceptAcc/${id}`,
+  //       `${process.env.REACT_APP_APIHOST}/dashboard/acceptAcc/${id}`,
   //       {},
   //       {
   //         headers: {

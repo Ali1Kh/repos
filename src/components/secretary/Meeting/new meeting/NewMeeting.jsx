@@ -81,7 +81,6 @@ export default function NewMeeting() {
       });
     }
 
-
     let initData = {
       date: dateInput.split(",")[0].split("/").reverse().join("-"),
       time: timeInput.split(",")[1].split(" ")[1],
@@ -125,7 +124,7 @@ export default function NewMeeting() {
       $(".error").addClass("d-none");
       $(".error").removeClass("d-block");
       let { data } = await axios.post(
-        `https://meetingss.onrender.com/secretary/createMeeting/${managerSelected}`,
+        `${process.env.REACT_APP_APIHOST}/secretary/createMeeting/${managerSelected}`,
         formData,
         { headers: { token: localStorage.getItem("token") } }
       );
@@ -152,7 +151,7 @@ export default function NewMeeting() {
 
   async function getSecManagers() {
     let { data } = await axios.get(
-      "https://meetingss.onrender.com/secretary/getSecManagers",
+      `${process.env.REACT_APP_APIHOST}/secretary/getSecManagers`,
       { headers: { token: localStorage.getItem("token") } }
     );
     setManagers(data.managers);
@@ -160,7 +159,7 @@ export default function NewMeeting() {
 
   async function getAllManagers() {
     let { data } = await axios.get(
-      "https://meetingss.onrender.com/secretary/getAllManagers",
+      `${process.env.REACT_APP_APIHOST}/secretary/getAllManagers`,
       { headers: { token: localStorage.getItem("token") } }
     );
     setAllManagers(data.managers);
@@ -202,40 +201,65 @@ export default function NewMeeting() {
 
   return (
     <div className="main">
-      <div className="container d-flex flex-column align-items-center justify-content-center p-xxl-4">
+      <div className="container d-flex flex-column align-items-center justify-content-center">
         <h2
-          className="mt-4 mb-xxl-5 mb-3 BlackToWhite"
+          className="mt-5 BlackToWhite animate__animated animate__zoomIn "
           style={{ userSelect: "none" }}
         >
           {t("CreateOrUpdateMeeting.createMeeting")}
         </h2>
         <div className="inputsContainer p-0 p-md-2  pb-0 d-flex flex-column justify-content-center align-items gap-1">
           <div className="ineer py-5 d-flex flex-column justify-content-center align-items">
-            <div className="calenderPicker row p-0 m-0">
-              <div className="col-md-6  inputItem mb-3 px-5">
-                <ThemeProvider theme={newTheme}>
-                  <DesktopDatePicker
-                    format="LL"
-                    onChange={(val) => setDate(val)}
-                    disablePast
-                    value={date}
-                  />
-                </ThemeProvider>
+            <div className="calenderPicker row px-5 m-0">
+              <div className="col-md-6 ps-0">
+                <div className="inputItem mb-3">
+                  <ThemeProvider theme={newTheme}>
+                    <DesktopDatePicker
+                      format="LL"
+                      onChange={(val) => setDate(val)}
+                      disablePast
+                      value={date}
+                    />
+                  </ThemeProvider>
+                </div>
               </div>
-              <div className="col-md-6  inputItem timePicker mb-3 px-5 ">
-                <ThemeProvider theme={newTheme}>
-                  <TimePicker
-                    onChange={(val) => setTime(val)}
-                    viewRenderers={{
-                      hours: renderTimeViewClock,
-                      minutes: renderTimeViewClock,
-                      seconds: renderTimeViewClock,
-                    }}
-                    value={time}
+              <div className="col-md-6 pe-0">
+                <div className="inputItem timePicker mb-3 ">
+                  <ThemeProvider theme={newTheme}>
+                    <TimePicker
+                      onChange={(val) => setTime(val)}
+                      viewRenderers={{
+                        hours: renderTimeViewClock,
+                        minutes: renderTimeViewClock,
+                        seconds: renderTimeViewClock,
+                      }}
+                      value={time}
+                    />
+                  </ThemeProvider>
+                </div>
+              </div>
+              <div className="col-md-6 ps-0">
+                <div className="inputItem mb-3 ">
+                  <input
+                    type="text"
+                    className="form-control py-2"
+                    id="meetTopic"
+                    placeholder={t("CreateOrUpdateMeeting.topic")}
                   />
-                </ThemeProvider>
+                </div>
+              </div>
+              <div className="col-md-6 pe-0">
+                <div className="inputItem mb-3 ">
+                  <input
+                    type="text"
+                    className="form-control py-2"
+                    id="meetAddress"
+                    placeholder={t("CreateOrUpdateMeeting.address")}
+                  />
+                </div>
               </div>
             </div>
+
             <div>
               {buttonPressed === "Inside" ? (
                 <div className="inputItem tagify mb-3 px-5">
@@ -293,26 +317,10 @@ export default function NewMeeting() {
             </div>
 
             <div className="inputItem mb-3 px-5">
-              <input
-                type="text"
-                className="form-control py-2"
-                id="meetTopic"
-                placeholder={t("CreateOrUpdateMeeting.topic")}
-              />
-            </div>
-            <div className="inputItem mb-3 px-5">
-              <input
-                type="text"
-                className="form-control py-2"
-                id="meetAddress"
-                placeholder={t("CreateOrUpdateMeeting.address")}
-              />
-            </div>
-            <div className="inputItem mb-3 px-5">
               <textarea
                 className="form-control py-2"
                 id="meetNotes"
-                rows="4"
+                rows="2"
                 style={{ maxHeight: "150px" }}
                 placeholder={t("CreateOrUpdateMeeting.notes")}
               ></textarea>
@@ -322,8 +330,9 @@ export default function NewMeeting() {
                 <div
                   {...getRootProps()}
                   style={{ borderStyle: "dashed" }}
-                  className={`dropzone h-100 ${isDragActive ? "active h-100" : ""
-                    }`}
+                  className={`dropzone h-100 ${
+                    isDragActive ? "active h-100" : ""
+                  }`}
                 >
                   <input {...getInputProps()} />
                   {isDragActive ? (

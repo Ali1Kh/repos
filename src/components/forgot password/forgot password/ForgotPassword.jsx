@@ -28,12 +28,11 @@ export default function ForgotPassword() {
       }
     }
     axios
-      .post("https://meetingss.onrender.com/auth/send-forget-code", {
+      .post(`${process.env.REACT_APP_APIHOST}/auth/send-forget-code`, {
         E_mail: email,
         role: role,
       })
       .then((response) => {
-        console.log(response.data);
         if (response.data.success) {
           sessionStorage.setItem("E_mail", email);
           sessionStorage.setItem("role", role);
@@ -66,7 +65,7 @@ export default function ForgotPassword() {
           <p className="d-flex flex-column align-items-center justify-content-center pb-3">
             Enter Your Details To Receive A Reset Link
           </p>
-          <form onSubmit={postEmail}>
+          <form >
             <div className="row table table-squ d-flex align-items-center justify-content-center m-auto">
               <input
                 className="email-inp"
@@ -87,7 +86,7 @@ export default function ForgotPassword() {
                 <option value="Manager">{t("signup.manager")}</option>
                 <option value="Secertary">{t("signup.sec")}</option>
               </Form.Select>
-              <button type="submit" className="btn-forgot">
+              <button type="button" className="btn-forgot" onClick={postEmail}>
                 Send
               </button>
               <Link to={"/signup"} className="back d-flex align-items-center">

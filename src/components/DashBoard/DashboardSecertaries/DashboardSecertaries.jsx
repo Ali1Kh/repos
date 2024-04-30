@@ -24,7 +24,7 @@ export default function DashboardSecertaries() {
   const { isLoading } = useQuery("getDashBoardSecertar", getDashBoardSecertar);
 
   async function getDashBoardSecertar() {
-    const { data } = await axios.get("https://meetingss.onrender.com/dashboard/getAllSecretaries", {
+    const { data } = await axios.get(`${process.env.REACT_APP_APIHOST}/dashboard/getAllSecretaries`, {
       headers: {
         token: token
       }
@@ -36,7 +36,7 @@ export default function DashboardSecertaries() {
 
   const DeleteSecertary = async (id) => {
     await axios
-      .delete(`https://meetingss.onrender.com/dashboard/deleteSecretary/${id}`, {
+      .delete(`${process.env.REACT_APP_APIHOST}/dashboard/deleteSecretary/${id}`, {
         headers: {
           token: token,
         },
@@ -46,7 +46,6 @@ export default function DashboardSecertaries() {
           toast.success("Secertary Deleted Successfully");
           getDashBoardSecertar()
         } else {
-          console.log(response.data);
           toast.error("Something went Wrong!");
         }
       })

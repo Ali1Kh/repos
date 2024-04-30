@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,8 +11,6 @@ import { useQuery } from "react-query";
 import { TailSpin } from "react-loader-spinner";
 import "./DashboardMeetings.css"
 import { useTranslation } from "react-i18next";
-import toast from "react-hot-toast";
-
 
 export default function DashboardMeetings() {
 
@@ -22,7 +20,7 @@ export default function DashboardMeetings() {
   async function getAllMeetings() {
     try {
       const response = await axios.get(
-        "https://meetingss.onrender.com/dashboard/getAllMeetings",
+        `${process.env.REACT_APP_APIHOST}/dashboard/getAllMeetings`,
         {
           headers: {
             token: token,
@@ -37,30 +35,6 @@ export default function DashboardMeetings() {
   }
 
   const { isLoading } = useQuery("getAllMeetings", getAllMeetings);
-
-  const deleteMeeting = async (meeting_id) => {
-    try {
-      const response = await axios.delete(
-        `https://meetingss.onrender.com/dashboard/deleteMeeting/${meeting_id}`,
-        
-        {
-          headers: {
-            token: token,
-          }
-        }
-      );
-
-      if (response.data.success) {
-        toast.success(response.data.message);
-        getAllMeetings();
-      } else {
-        toast.error("Something went Wrong");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
 
   const [t] = useTranslation();
 
@@ -103,7 +77,6 @@ export default function DashboardMeetings() {
                             <TableCell align="center" className="fw-bold text-white">{t("Dashborad.Meetings.status")}</TableCell>
                             <TableCell align="center" className="fw-bold text-white">{t("Dashborad.Meetings.time")}</TableCell>
                             <TableCell align="center" className="fw-bold text-white">{t("Dashborad.Meetings.date")}</TableCell>
-                            <TableCell align="center" className="fw-bold text-white">{t("Dashborad.Meetings.Delete")}</TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
@@ -117,20 +90,12 @@ export default function DashboardMeetings() {
                                 <TableCell align="center" component="th">{meeting.statues}</TableCell>
                                 <TableCell align="center" component="th">{meeting.time}</TableCell>
                                 <TableCell align="center" component="th">{meeting.date}</TableCell>
-                                 <TableCell align="center" component="th">
-                                  <button  align="center" className='btn btn-danger' 
-                                  onClick={() => 
-                                  deleteMeeting(meeting.meeting_id)
-                                  }>
-                                    {t("Dashborad.Meetings.Delete")}
-                                  </button>
-                                </TableCell>
                               </TableRow>
                             )) : ""}
                         </TableBody>
                       </Table>
                     </TableContainer>
-                    
+
                   </Paper>
                 </div>
               </div>

@@ -33,14 +33,13 @@ export default function ResetPassword() {
 
     const resetPassword = ({ password, confirmPassword }) => {
         axios
-            .post("https://meetingss.onrender.com/auth/forget-password", {
+            .post(`${process.env.REACT_APP_APIHOST}/auth/forget-password`, {
                 E_mail: email,
                 PassWord: password,
                 confirmPassword: confirmPassword,
                 role: role,
             })
             .then((response) => {
-                console.log(response.data);
                 if (response.data.success) {
                     toast.success("Password reset successful");
                     navigateUpdatePass("/Login");
