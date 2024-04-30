@@ -14,7 +14,7 @@ export default function Login() {
   };
 
   const validateUsername = (email) => {
-    const usernameRegex = /^[a-zA-Z][a-zA-Z0-9]{3,30}$/;
+    const usernameRegex = /^.{3,30}$/;
     return usernameRegex.test(email);
   };
 

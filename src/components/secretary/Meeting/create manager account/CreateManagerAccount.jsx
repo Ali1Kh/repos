@@ -8,14 +8,11 @@ import toast from "react-hot-toast";
 import $ from "jquery";
 const SignupSchema = Yup.object().shape({
   userName: Yup.string()
-    .required("Username is required")
-    .matches(/^[a-zA-Z0-9]+$/, "Invalid username"),
+    .required("Username is required"),
   firstName: Yup.string()
-    .required("First name is required")
-    .matches(/^[A-Za-z]+$/, "Invalid first name"),
+    .required("First name is required"),
   lastName: Yup.string()
-    .required("Last name is required")
-    .matches(/^[A-Za-z]+$/, "Invalid last name"),
+    .required("Last name is required"),
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
@@ -180,27 +177,29 @@ function CreateManagerAccount() {
                         className="pass-word inputItem-man mt-3 d-flex justify-content-center form-control"
                         placeholder={t("signup.password")}
                       />
-                      <div id="eye" className="btn btn-eye d-flex justify-content-center align-items-center ms-2"
+                      <div
+                        id="eye"
+                        className="btn btn-eye d-flex justify-content-center align-items-center ms-2"
                         onClick={() => {
-                          let password = document.getElementById("password")
-                          let eyeicon = document.getElementById("eye-icon")
+                          let password = document.getElementById("password");
+                          let eyeicon = document.getElementById("eye-icon");
                           if (password.type === "password") {
-                            password.type = "text"
-                            eyeicon.className = "fa-solid fa-eye"
+                            password.type = "text";
+                            eyeicon.className = "fa-solid fa-eye";
+                          } else {
+                            password.type = "password";
+                            eyeicon.className = "fa-solid fa-eye-slash";
                           }
-                          else {
-                            password.type = "password"
-                            eyeicon.className = "fa-solid fa-eye-slash"
-                          }
-                        }}>
+                        }}
+                      >
                         <i id="eye-icon" class="fa-solid fa-eye-slash"></i>
                       </div>
+                    </div>
                       <ErrorMessage
                         name="password"
                         component="label"
                         className="error-label"
                       />
-                    </div>
                     <div className="password-input inputItem-man d-flex">
                       <Field
                         id="confirm-password"
@@ -209,28 +208,34 @@ function CreateManagerAccount() {
                         className="pass-word inputItem-man mt-3 d-flex justify-content-center form-control"
                         placeholder={t("signup.confirmPassword")}
                       />
-                      <div id="eye" className="btn d-flex justify-content-center align-items-center ms-2"
+                      <div
+                        id="eye"
+                        className="btn d-flex justify-content-center align-items-center ms-2"
                         onClick={() => {
-                          let password = document.getElementById("confirm-password")
-                          let eyeiconconfirm = document.getElementById("eye-icon-confirm")
+                          let password =
+                            document.getElementById("confirm-password");
+                          let eyeiconconfirm =
+                            document.getElementById("eye-icon-confirm");
                           if (password.type === "password") {
-                            password.type = "text"
-                            eyeiconconfirm.className = "fa-solid fa-eye"
+                            password.type = "text";
+                            eyeiconconfirm.className = "fa-solid fa-eye";
+                          } else {
+                            password.type = "password";
+                            eyeiconconfirm.className = "fa-solid fa-eye-slash";
                           }
-                          else {
-                            password.type = "password"
-                            eyeiconconfirm.className = "fa-solid fa-eye-slash"
-                          }
-                        }}>
-                        <i id="eye-icon-confirm" class="fa-solid fa-eye-slash"></i>
+                        }}
+                      >
+                        <i
+                          id="eye-icon-confirm"
+                          class="fa-solid fa-eye-slash"
+                        ></i>
                       </div>
+                    </div>
                       <ErrorMessage
                         name="confirmPassword"
                         component="label"
                         className="error-label"
                       />
-                    </div>
-
                   </div>
                   <div className="addExistingButton w-100 text-start ms-2 mt-2">
                     <a

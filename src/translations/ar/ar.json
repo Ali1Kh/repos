@@ -103,7 +103,7 @@
       "address": "العنوان",
       "area": "المنطقة",
       "status": "الحالة",
-      "manager":"المدير",
+      "manager": "المدير",
       "comments": "تعليقات",
       "inOrOut": "داخل أو خارج"
     }
@@ -160,6 +160,14 @@
       "time": "الوقت",
       "date": "التاريخ",
       "Delete": "حذف"
+    },
+    "secertary_manager": {
+      "title":"طلبات السكرتير لأدارة أجتماعات مدير",
+      "SecretaryName": "أسم السكرتير",
+      "SecretaryEmail": "ايميل السكرتير",
+      "ManagerName": "أسم المدير",
+      "ManagerEmail": "ايميل المدير",
+      "requestedAt": "موعد الطلب"
     },
     "recover": {
       "recoverManager": "استعادة مدير محذوف",

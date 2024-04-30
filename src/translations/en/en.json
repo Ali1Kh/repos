@@ -94,7 +94,7 @@
       "address": "Address",
       "area": "Area",
       "status": "Status",
-      "manager":"Manager",
+      "manager": "Manager",
       "Comments": "Comments",
       "inOrOut": "In Or Out side"
     }
@@ -166,6 +166,14 @@
       "time": "Time",
       "date": "Date",
       "Delete": "Delete"
+    },
+    "secertary_manager": {
+      "title":"Secertaries Requests To Manage Manager Meetings",
+      "SecretaryName": "Secretary Name",
+      "SecretaryEmail": "Secretary Email",
+      "ManagerName": "Manager Name",
+      "ManagerEmail": "Manager Email",
+      "requestedAt": "Requested At"
     },
     "recover": {
       "recoverManager": "Recover Manager",

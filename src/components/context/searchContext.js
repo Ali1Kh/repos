@@ -22,6 +22,8 @@ export default function SearchProvider({ children }) {
     if (data.success) {
       setMeetings(data);
       setIsLoading(false);
+    }else{
+      setIsLoading(false);
     }
   }
 
