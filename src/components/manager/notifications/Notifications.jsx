@@ -5,6 +5,7 @@ import { Popper } from "@mui/base/Popper";
 import { styled, css } from "@mui/system";
 import Notifier from "react-desktop-notification";
 import "./Notifications.css";
+import axios from "axios";
 
 export default function Notifications() {
   const [anchor, setAnchor] = React.useState(null);
@@ -43,6 +44,24 @@ export default function Notifications() {
     });
   }, []);
 
+  async function markAsRead(id) {
+    try {
+      let { data } = await axios.post(
+        `${process.env.REACT_APP_APIHOST}/manager/markNotificationAsRead/${id}`,
+        {},
+        {
+          headers: {
+            token: localStorage.getItem("token"),
+          },
+        }
+      );
+
+      if (data.success) {
+        socket.emit("getNotifications", { token: localStorage.getItem("token") });
+      }
+    } catch (error) {}
+  }
+
   return (
     <>
       <div>
@@ -76,15 +95,22 @@ export default function Notifications() {
               {notifications.map((notification) => {
                 return (
                   <li
-                    className="text-black p-2 rounded-1 text-decoration-none mb-3 py-2"
+                    className="text-black p-2 d-flex rounded-1 text-decoration-none mb-3 py-2"
                     style={{ backgroundColor: "#f3f4f6" }}
                   >
-                    {notification.message}
                     <div>
-                      {new Date(notification.createdAt).toLocaleString()}
+                      {notification.message}
+                      <div>
+                        {new Date(notification.createdAt).toLocaleString()}
+                      </div>
                     </div>
-                    <div className="markAsRead w-100 text-end">
-                      <i className="fa-solid fa-check-double"></i>
+                    <div className="markAsRead p-3 text-end">
+                      <i
+                        onClick={() => {
+                          markAsRead(notification.notificationId);
+                        }}
+                        className="fa-solid  fa-check-double"
+                      ></i>
                     </div>
                   </li>
                 );

@@ -39,13 +39,10 @@ const Sidebar = () => {
     $(".sidebarItem").eq(2).addClass("animate__fadeInUp animate__delay-250ms");
     $(".sidebarItem").eq(3).addClass("animate__fadeInUp animate__delay-300ms");
     $(".sidebarItem").eq(4).addClass("animate__fadeInUp animate__delay-350ms");
-
-    // $(".sidebarItem")
-    //   .eq(5)
-    //   .addClass("animate__slideInLeft animate__delay-400ms");
-    // $(".sidebarItem")
-    //   .eq(6)
-    //   .addClass("animate__slideInLeft animate__delay-450ms");
+    $(".sidebarItem").eq(5).addClass("animate__fadeInUp animate__delay-400ms");
+    $(".sidebarItem").eq(6).addClass("animate__fadeInUp animate__delay-450ms");
+    $(".sidebarItem").eq(7).addClass("animate__fadeInUp animate__delay-450ms");
+    $(".sidebarItem").eq(8).addClass("animate__fadeInUp animate__delay-450ms");
     // ?Context
 
     $(".accMore").click((e) => {

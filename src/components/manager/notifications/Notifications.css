@@ -1,7 +1,10 @@
 .list-unstyled .text-black {
-    border-bottom: 1px solid  !important;
-    background-color: var(--cardBgColor) !important;
-    color: white !important;
-    /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.33) !important; */
+  border-bottom: 1px solid !important;
+  background-color: var(--cardBgColor) !important;
+  color: white !important;
+  /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.33) !important; */
 }
 
+.markAsRead i:hover {
+  color: var(--sec-color) !important;
+}
