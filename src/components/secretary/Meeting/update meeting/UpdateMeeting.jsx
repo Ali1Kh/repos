@@ -28,6 +28,7 @@ export default function UpdateMeeting() {
 
   let [managers, setManagers] = useState([]);
   let [allmanagers, setAllManagers] = useState([]);
+
   async function getSecManagers() {
     let { data } = await axios.get(
       `${process.env.REACT_APP_APIHOST}/secretary/getSecManagers`,
@@ -114,6 +115,7 @@ export default function UpdateMeeting() {
     let topic = $("#meetTopic").val();
     let address = $("#meetAddress").val();
     let notes = $("#meetNotes").val();
+    let managerSelected = $("#managerSelected").val();
     let area = $('input[name="radio-group"]:checked').val();
     if (area === "Outside") {
       if (person === "") {
@@ -134,7 +136,8 @@ export default function UpdateMeeting() {
       topic === "" ||
       address === "" ||
       notes === "" ||
-      !area 
+      !area ||
+      managerSelected === ""
     ) {
       $(".error").removeClass("d-none");
       $(".error").addClass("d-block");
@@ -162,13 +165,16 @@ export default function UpdateMeeting() {
       address,
       notes,
       in_or_out: area,
+      insidePersons,
     };
 
-    
     if (area !== "Inside") {
       delete initData.insidePersons;
+    } else {
+      initData.person = insidePersonsNames.join(",");
     }
 
+    console.log(insidePersonsNames);
 
     const flattenObject = (obj, parentKey = "") => {
       return Object.keys(obj).reduce((acc, key) => {
@@ -187,18 +193,22 @@ export default function UpdateMeeting() {
       formData.append(key, value);
     }
 
-   if (uploadedFiles[0]) {
+    if (uploadedFiles[0]) {
       formData.append("attachment", uploadedFiles[0]);
     }
     
+
     try {
       let { data } = await axios.post(
         `${process.env.REACT_APP_APIHOST}/secretary/updateMeeting/${id}`,
         formData,
         { headers: { token: localStorage.getItem("token") } }
       );
+      console.log(data);
       if (data.success) {
         toast.success(data.message);
+      }else{
+        toast.error("Something went wrong");
       }
     } catch (error) {
       console.log(error);
@@ -208,11 +218,18 @@ export default function UpdateMeeting() {
   const [t] = useTranslation();
 
   let [insidePersons, setInsidePersons] = useState([]);
+  let [insidePersonsNames, setInsidePersonsName] = useState([]);
+
   const handleManagerChange = (event, value) => {
     setInsidePersons(
       value
         .filter((item) => typeof item === "object")
         .map((manager) => manager.manager_id)
+    );
+    setInsidePersonsName(
+      value
+        .filter((item) => typeof item === "object")
+        .map((manager) => manager.first_name + " " + manager.last_name)
     );
   };
 
