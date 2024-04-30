@@ -225,7 +225,7 @@ export default function Meetings() {
                   // },
                   {
                     field: "Manager_Name",
-                    headerName: "Manager",
+                    headerName: t("tableMeetings.table.manager"),
                     headerClassName: "tableColumns",
                     align: "center",
                     headerAlign: "center",

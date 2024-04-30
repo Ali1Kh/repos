@@ -94,6 +94,7 @@
       "address": "Address",
       "area": "Area",
       "status": "Status",
+      "manager":"Manager",
       "Comments": "Comments",
       "inOrOut": "In Or Out side"
     }
