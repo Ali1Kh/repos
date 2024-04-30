@@ -270,7 +270,7 @@ export default function NewMeeting() {
                         placeholder={t("CreateOrUpdateMeeting.person")}
                         className=""
                         sx={{
-                          // backgroundColor: "var(--main-color) !important",
+                          backgroundColor: "var(--main-color) !important",
                           padding: "8px",
                           color: "var(--BlackToWhite)",
                           border: "2px solid var(--sec-color)",
