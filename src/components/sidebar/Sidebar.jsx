@@ -235,7 +235,7 @@ const Sidebar = () => {
                     to={"/dashboard/SecertariesAcceptance"}
                   >
                     <span className="d-inline-flex  text-center justify-content-center">
-                      <i class="fa-regular fa-thumbs-up"></i>
+                      <i class="fa fa-check-to-slot"></i>
                     </span>
                     <span>{t("Dashborad.Acceptacne.AcceptacneSec")}</span>
                   </Link>
@@ -244,16 +244,27 @@ const Sidebar = () => {
                     to={"/dashboard/ManagerAcceptance"}
                   >
                     <span className="d-inline-flex  text-center justify-content-center">
-                      <i class="fa-regular fa-thumbs-up"></i>
+                      <i class="fa fa-square-check"></i>
                     </span>
                     <span>{t("Dashborad.Acceptacne.AcceptacneManager")}</span>
+                  </Link>
+                  <Link
+                    className="nav-item animate__animated"
+                    to={"/dashboard/AcceptSecretaryForManager"}
+                  >
+                    <span className="d-inline-flex  text-center justify-content-center">
+                      <i class="fa fa-bullhorn"></i>
+                    </span>
+                    <span>
+                      {t("Dashborad.Acceptacne.AcceptSecretaryForManager")}
+                    </span>
                   </Link>
                   <Link
                     className="sidebarItem animate__animated"
                     to={"/dashboard/recoverSecertary"}
                   >
                     <span className="d-inline-flex  text-center justify-content-center">
-                      <i className="fa-solid fa-trash-arrow-up"></i>
+                      <i className="fa-solid fa-recycle"></i>
                     </span>
                     <span>{t("Dashborad.recover.recoverSec")}</span>
                   </Link>
@@ -262,7 +273,7 @@ const Sidebar = () => {
                     to={"/dashboard/recoverManager"}
                   >
                     <span className="d-inline-flex  text-center justify-content-center">
-                      <i className="fa-solid fa-trash-arrow-up"></i>
+                      <i className="fa-solid fa-recycle"></i>
                     </span>
                     <span>{t("Dashborad.recover.recoverManager")}</span>
                   </Link>
