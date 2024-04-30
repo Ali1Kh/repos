@@ -100,7 +100,22 @@
       "addedBy": "Added By"
     }
   },
-
+  "forgetPass": {
+    "forgetPass": "Forget Password",
+    "checkurEmail": "Check Your Email",
+    "codeSentToUrEmail": "Code Sent To Your Email",
+    "verify": "Verify",
+    "sendAgain": "Send Again",
+    "backToLogin": "Back To Login",
+    "resetYourPasssword": "Reset Your Password",
+    "pleaseEnterNewPassword": "Please Enter New Password",
+    "done": "Done",
+    "newpass": "New Password",
+    "confirmPass": "Confirm Password",
+    "enterDetailsToReciveACode": "Enter Details To Recive A Code",
+    "email": "Your Email",
+    "send": "Send"
+  },
   "meetings": {
     "meetingDetails": "Meeting Details",
     "btnShow": "Show PDF",
@@ -169,7 +184,7 @@
       "Delete": "Delete"
     },
     "secertary_manager": {
-      "title":"Secertaries Requests To Manage Manager Meetings",
+      "title": "Secertaries Requests To Manage Manager Meetings",
       "SecretaryName": "Secretary Name",
       "SecretaryEmail": "Secretary Email",
       "ManagerName": "Manager Name",

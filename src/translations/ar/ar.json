@@ -89,6 +89,22 @@
     "Comments": "تعليقات",
     "inOrOut": "داخل أو خارج"
   },
+  "forgetPass": {
+    "forgetPass": "نسيت كلمة المرور",
+    "checkurEmail": "تحقق من بريدك الإلكتروني",
+    "codeSentToUrEmail": "تم إرسال رمز إليك عبر البريد الإلكتروني",
+    "verify": "التحقق",
+    "sendAgain": "إعادة الإرسال",
+    "backToLogin": "العودة لتسجيل الدخول",
+    "resetYourPasssword": "إعادة تعيين كلمة المرور",
+    "pleaseEnterNewPassword": "الرجاء إدخال كلمة مرور جديدة",
+    "done": "تأكيد",
+    "newpass": "كلمة المرور الجديدة",
+    "confirmPass": "تأكيد كلمة المرور",
+    "enterDetailsToReciveACode": "أدخل تفاصيلك لتلقي رمز",
+    "email": "بريدك الإلكتروني",
+    "send": "إرسال"
+  },
 
   "tableMeetings": {
     "meetings": "الاجتماعات",
@@ -105,7 +121,7 @@
       "status": "الحالة",
       "manager": "المدير",
       "comments": "تعليقات",
-      "addedBy":"الاضافة بواسطة",
+      "addedBy": "الاضافة بواسطة",
       "inOrOut": "داخل أو خارج"
     }
   },
@@ -163,7 +179,7 @@
       "Delete": "حذف"
     },
     "secertary_manager": {
-      "title":"طلبات السكرتير لأدارة أجتماعات مدير",
+      "title": "طلبات السكرتير لأدارة أجتماعات مدير",
       "SecretaryName": "أسم السكرتير",
       "SecretaryEmail": "ايميل السكرتير",
       "ManagerName": "أسم المدير",

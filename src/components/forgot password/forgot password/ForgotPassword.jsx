@@ -60,16 +60,19 @@ export default function ForgotPassword() {
       <div className="main">
         <div className="container mt-5">
           <h1 className="container d-flex flex-column align-items-center justify-content-center pb-2">
-            Forget password?
+            {t("forgetPass.forgetPass")}
           </h1>
           <p className="d-flex flex-column align-items-center justify-content-center pb-3">
-            Enter Your Details To Receive A Reset Link
+            {t("forgetPass.enterDetailsToReciveACode")}
           </p>
-          <form >
-            <div className="row table table-squ d-flex align-items-center justify-content-center m-auto">
+          <form>
+            <div
+              style={{ backgroundColor: "var(--cardBgColor)" }}
+              className="row table table-squ d-flex align-items-center justify-content-center m-auto"
+            >
               <input
                 className="email-inp"
-                placeholder="@ Your Email"
+                placeholder={t("forgetPass.email")}
                 value={email}
                 onChange={handleEmailChange}
               />
@@ -77,6 +80,7 @@ export default function ForgotPassword() {
                 id="role"
                 aria-label="Role"
                 className="role forgot mt-3"
+                style={{ backgroundColor: "var(--cardBgColor)" }}
                 value={role}
                 onChange={handleRoleChange}
               >
@@ -87,11 +91,11 @@ export default function ForgotPassword() {
                 <option value="Secertary">{t("signup.sec")}</option>
               </Form.Select>
               <button type="button" className="btn-forgot" onClick={postEmail}>
-                Send
+                {t("forgetPass.send")}
               </button>
-              <Link to={"/signup"} className="back d-flex align-items-center">
+              <Link to={"/login"} className="back d-flex align-items-center">
                 <i className="fa-solid fa-chevron-left"></i>
-                <p>Back to Sign In</p>
+                <p>{t("forgetPass.backToLogin")}</p>
               </Link>
             </div>
           </form>

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "./checkYourEmail.css";
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import toast from 'react-hot-toast';
-import { MuiOtpInput } from 'mui-one-time-password-input';
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
+import { MuiOtpInput } from "mui-one-time-password-input";
 
 export default function CheckYourEmail() {
-
   const [code, setCode] = useState("");
   const navigateUpdatePass = useNavigate();
   const email = sessionStorage.getItem("E_mail");
@@ -17,8 +17,6 @@ export default function CheckYourEmail() {
   };
 
   async function resetCode() {
-
-
     axios
       .post(`${process.env.REACT_APP_APIHOST}/auth/verifyResetCode`, {
         E_mail: email,
@@ -35,14 +33,13 @@ export default function CheckYourEmail() {
       .catch((error) => {
         console.error("Error:", error);
       });
-
   }
 
   const postSendAgain = () => {
     axios
       .post(`${process.env.REACT_APP_APIHOST}/auth/send-forget-code`, {
         E_mail: email,
-        role: role
+        role: role,
       })
       .then((response) => {
         if (response.data.success) {
@@ -54,7 +51,7 @@ export default function CheckYourEmail() {
       .catch((error) => {
         console.error("Error:", error);
       });
-  }
+  };
 
   function validateChar(value) {
     if (!value.match(/^\d$/)) {
@@ -63,15 +60,23 @@ export default function CheckYourEmail() {
     }
     return value.match(/^\d$/);
   }
+  let { t } = useTranslation();
 
   return (
     <div>
-      <div className='main'>
-        <div className='container mt-5'>
-          <h1 className='container d-flex flex-column align-items-center justify-content-center p-4'>Check your Email</h1>
-          <p className='d-flex flex-column align-items-center justify-content-center'>We've the code your Email</p>
-          <div className='row check table table-squ d-flex align-items-center justify-content-center m-auto'>
-            <div className='mb-3 d-flex align-items-center justify-content-center'>
+      <div className="main">
+        <div className="container mt-5">
+          <h1 className="container d-flex flex-column align-items-center justify-content-center p-4">
+            {t("forgetPass.checkurEmail")}
+          </h1>
+          <p className="d-flex flex-column align-items-center justify-content-center">
+            {t("forgetPass.codeSentToUrEmail")}
+          </p>
+          <div
+            style={{ backgroundColor: "var(--cardBgColor)" }}
+            className="row check table table-squ d-flex align-items-center justify-content-center m-auto"
+          >
+            <div className="mb-3 d-flex align-items-center justify-content-center">
               <MuiOtpInput
                 TextFieldsProps={{ size: "small" }}
                 value={code}
@@ -85,15 +90,22 @@ export default function CheckYourEmail() {
               disabled={code.length === 6 ? false : true}
               onClick={resetCode}
               className="btn-forgot"
-            >Verify</button>
-            <button onClick={postSendAgain} className='btn-forgot-out'>Send again</button>
-            <Link to={'/signup'} className='back d-flex align-items-center justify-content-center'>
+            >
+              {t("forgetPass.verify")}
+            </button>
+            <button onClick={postSendAgain} className="btn-forgot-out">
+              {t("forgetPass.sendAgain")}
+            </button>
+            <Link
+              to={"/signup"}
+              className="back d-flex align-items-center justify-content-center"
+            >
               <i className="fa-solid fa-chevron-left"></i>
-              <p>Back to Sign In</p>
+              <p> {t("forgetPass.backToLogin")}</p>
             </Link>
           </div>
         </div>
       </div>
-    </div >
-  )
+    </div>
+  );
 }
