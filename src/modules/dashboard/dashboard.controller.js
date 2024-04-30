@@ -9,11 +9,14 @@ import { asyncHandler } from "../../utils/asyncHandler.js";
 
 export const getAllMeetings = asyncHandler(async (req, res, next) => {
   let meetings = await sequelize.query(
-    `select Meetings.meeting_id,time,date,about,in_or_out,address, notes,person,statues,addedBy,Meetings.createdAt,Meetings.updatedAt,
+    `select Meetings.meeting_id,time,date,about,in_or_out,address, notes,person,statues,addedBy,
+    Secretary.first_name as 'Secertary_Name',Secretary.last_name as 'Secertary_LastName',
+    Secretary.E_mail as 'Secertary_Email',Meetings.createdAt,Meetings.updatedAt,
      attachmentId,attachmentLink,attachmentName,
-     Manager.manager_id,CONCAT(first_name, ' ', last_name)  as 'Manager_Name',E_mail as 'Manager_Email',UserName as 'Manager_UserName' from Meetings
+     Manager.manager_id,CONCAT(Manager.first_name, ' ', Manager.last_name)  as 'Manager_Name',Manager.E_mail as 'Manager_Email',Manager.UserName as 'Manager_UserName' from Meetings
      join meeting_Manager on Meetings.meeting_id = meeting_Manager.meeting_id 
      join Manager on meeting_Manager.manager_id = Manager.manager_id  
+     join Secretary on addedBy = Secretary.secretary_id
      where Meetings.isDeleted = 0 
       GROUP BY Meetings.meeting_id`,
     {
