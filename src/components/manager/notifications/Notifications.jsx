@@ -66,27 +66,25 @@ export default function Notifications() {
           </span>
         </Button>
 
-        <Popper
-          id={id}
-          open={open}
-          anchorEl={anchor}
-          style={{ zIndex: 9999 }}
-        >
+        <Popper id={id} open={open} anchorEl={anchor} style={{ zIndex: 9999 }}>
           <StyledPopperDiv
             className="overflow-y-scroll popperDiv"
-            style={{ maxHeight: "300px" }}
+            style={{ maxHeight: "500px" }}
           >
             {" "}
             <ul className="list-unstyled">
               {notifications.map((notification) => {
                 return (
                   <li
-                    className="text-black p-2 rounded-1 text-decoration-none mb-2 py-2"
+                    className="text-black p-2 rounded-1 text-decoration-none mb-3 py-2"
                     style={{ backgroundColor: "#f3f4f6" }}
                   >
                     {notification.message}
                     <div>
                       {new Date(notification.createdAt).toLocaleString()}
+                    </div>
+                    <div className="markAsRead w-100 text-end">
+                      <i className="fa-solid fa-check-double"></i>
                     </div>
                   </li>
                 );
@@ -103,7 +101,7 @@ const StyledPopperDiv = styled("div")(
   ({ theme }) => css`
     background-color: var(--main-color);
     border-radius: 8px;
-    border: 1px solid var(--sec-color);
+    // border: 1px solid ;
     box-shadow: ${theme.palette.mode === "dark"
       ? `0px 4px 8px rgb(0 0 0 / 0.7)`
       : `0px 4px 8px rgb(0 0 0 / 0.1)`};

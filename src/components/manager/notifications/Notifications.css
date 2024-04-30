@@ -1,10 +1,7 @@
 .list-unstyled .text-black {
-    border: 2px solid var(--sec-color) !important;
-    background-color: #303055 !important;
+    border-bottom: 1px solid  !important;
+    background-color: var(--cardBgColor) !important;
     color: white !important;
+    /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.33) !important; */
 }
 
-.MuiPopper-root,
-.popperDiv {
-    background-color: var(--sideBarColor) !important;
-}

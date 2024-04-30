@@ -249,7 +249,7 @@ const Sidebar = () => {
                     <span>{t("Dashborad.Acceptacne.AcceptacneManager")}</span>
                   </Link>
                   <Link
-                    className="nav-item animate__animated"
+                    className="sidebarItem animate__animated"
                     to={"/dashboard/AcceptSecretaryForManager"}
                   >
                     <span className="d-inline-flex  text-center justify-content-center">
