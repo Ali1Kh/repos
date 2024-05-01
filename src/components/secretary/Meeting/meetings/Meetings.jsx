@@ -51,9 +51,9 @@ export default function Meetings() {
         }
       );
       if (response.data.success) {
-        console.log(response.data.success);
+        toast.success("Status Changed Successfully");
       } else {
-        console.log(response.data.success);
+       toast.error("Something went Wrong");
       }
     } catch (error) {
       console.error("Error:", error);

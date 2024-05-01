@@ -174,7 +174,6 @@ export default function UpdateMeeting() {
       initData.person = insidePersonsNames.join(",");
     }
 
-    console.log(insidePersonsNames);
 
     const flattenObject = (obj, parentKey = "") => {
       return Object.keys(obj).reduce((acc, key) => {
@@ -203,7 +202,6 @@ export default function UpdateMeeting() {
         formData,
         { headers: { token: localStorage.getItem("token") } }
       );
-      console.log(data);
       if (data.success) {
         toast.success(data.message);
       } else {

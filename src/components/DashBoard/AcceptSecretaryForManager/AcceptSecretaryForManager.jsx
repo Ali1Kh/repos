@@ -50,7 +50,6 @@ export default function AcceptSecretaryForManager() {
         toast.success("Accepted");
         getNotAcceptesSecToManager();
       } else {
-        console.log("oo", response);
         toast.error("Something went Wrong");
       }
     } catch (error) {
@@ -74,7 +73,6 @@ export default function AcceptSecretaryForManager() {
           },
         }
       );
-      console.log(response);
 
       if (response.data.success) {
         toast.success("Removed");

@@ -34,8 +34,6 @@ export default function Signup() {
       confirmPassword: values.confirmPassword,
     };
 
-    console.log(formData);
-
     axios
       .post(`${process.env.REACT_APP_APIHOST}/auth/signup`, formData)
       .then((response) => {
@@ -43,7 +41,6 @@ export default function Signup() {
           toast.success(response.data.message);
           navigate("/login");
         } else {
-          console.log(response.data);
           setErrorMessage("Something went wrong. Please try again.");
         }
       })
