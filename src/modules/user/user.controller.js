@@ -354,7 +354,6 @@ export const forgetPassword = asyncHandler(async (req, res, next) => {
     });
     if (!isSecertary) return next(new Error("Incorrect Email"));
 
-    console.log(isSecertary.dataValues.resetCodeVerified);
     if (!isSecertary.dataValues.resetCodeVerified)
       return next(new Error("Verify Rest Code First"));
 
