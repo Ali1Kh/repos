@@ -2,7 +2,6 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "./../connection.js";
 import { Token } from "./token.model.js";
 import { Note } from "./notes.model.js";
-import { Manager_Secretary } from "./Manager_Secretary.model.js";
 
 export const Manager = sequelize.define(
   "Manager",

@@ -135,14 +135,12 @@ export const getManagerMeetingDetails = async (req, res, next) => {
 };
 
 export const getMeetingManagers = async (req, res, next) => {
+  let today = new Date();
+  today.setUTCHours(today.getUTCHours() + 2);
   let meetingManagers = await sequelize.query(
     `select id,manager_id,meeting_Manager.meeting_id from meeting_Manager join Meetings on meeting_Manager.meeting_id = Meetings.meeting_id where manager_id = ${
       req.payload.id
-    } and Meetings.date >= '${new Date().toLocaleDateString("en-CA", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    })}' and  Meetings.isDeleted = 0 `,
+    } and Meetings.date >= '${today.toISOString().split("T")[0]}' and  Meetings.isDeleted = 0 `,
     { model: meeting_Manager }
   );
   return res.json({ success: true, meetingManagers });

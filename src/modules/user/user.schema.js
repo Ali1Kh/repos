@@ -12,7 +12,7 @@ export const signUpSchema = joi
     E_mail: joi.string().email().required(),
     PassWord: joi
       .string()
-      .pattern(new RegExp("^[a-zA-Z0-9]{8,30}$"))
+      .pattern(new RegExp("^.{8,30}$"))
       .required(),
     confirmPassword: joi.string().valid(joi.ref("PassWord")).required(),
   })
@@ -53,7 +53,7 @@ export const forgetPassSchema = joi
     E_mail: joi.string().email().required(),
     PassWord: joi
       .string()
-      .pattern(new RegExp("^[a-zA-Z0-9]{8,30}$"))
+      .pattern(new RegExp("^.{8,30}$"))
       .required(),
     confirmPassword: joi
       .string()

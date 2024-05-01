@@ -23,6 +23,7 @@ export const Meetings = sequelize.define("Meetings", {
   attachmentLink: { type: DataTypes.STRING },
   attachmentName: { type: DataTypes.STRING },
   isDeleted: { type: DataTypes.BOOLEAN, defaultValue: false },
+  meetingOwner: {  type: DataTypes.INTEGER,},
 });
 
 Meetings.associate = (models) => {

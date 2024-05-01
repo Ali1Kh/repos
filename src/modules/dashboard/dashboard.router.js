@@ -113,6 +113,31 @@ router.delete(
   dashboardController.deleteMeeting
 );
 
+
+router.get(
+  "/getNotAcceptesSecToManager",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  dashboardController.getNotAcceptesSecToManager
+);
+
+router.post(
+  "/acceptSecToManager/:secManagerId",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  validation(dashboardSchemas.secManagerIdReqSchema),
+  dashboardController.acceptSecToManager
+);
+
+router.post(
+  "/rejectSecToManager/:secManagerId",
+  isAuthenticated,
+  isAuthorized("Admin"),
+  validation(dashboardSchemas.secManagerIdReqSchema),
+  dashboardController.rejectSecToManager
+);
+
+
 router.get(
   "/getLoginHistory",
   isAuthenticated,

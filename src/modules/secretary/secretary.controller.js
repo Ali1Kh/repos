@@ -5,7 +5,7 @@ import { asyncHandler } from "../../utils/asyncHandler.js";
 import bcryptjs from "bcryptjs";
 import { meeting_Manager } from "../../../DB/models/meeting_Manager.model.js";
 import cloudinary from "../../utils/cloud.js";
-import { Op } from "sequelize";
+import { Op, or } from "sequelize";
 import { sequelize } from "../../../DB/connection.js";
 import { Manager_Secretary } from "../../../DB/models/Manager_Secretary.model.js";
 import { io } from "../../../index.js";
@@ -60,6 +60,16 @@ export const addExistingManager = asyncHandler(async (req, res, next) => {
 
   await isManager.addSecretaries(req.payload.id);
 
+  await Manager_Secretary.update(
+    { isAccepted: 0 },
+    {
+      where: {
+        manager_id: isManager.dataValues.manager_id,
+        secretary_id: req.payload.id,
+      },
+    }
+  );
+
   return res.json({
     success: true,
     message: "Manager Added Successfully To Your Account",
@@ -111,10 +121,25 @@ export const createMeeting = async (req, res, next) => {
     });
   }
 
+  if (req.body.insidePersons) {
+    let invalidManagers = false;
+    for (let i = 0; i < req.body.insidePersons.length; i++) {
+      let isManager = await Manager.findByPk(req.body.insidePersons[i]);
+      if (!isManager) {
+        invalidManagers = true;
+        break;
+      }
+    }
+    if (invalidManagers) {
+      return next(new Error("Invalid Inside Manager"));
+    }
+  }
+
   let meeting = await Meetings.create({
     ...req.body,
     statues: "not done",
     addedBy: req.payload.id,
+    meetingOwner: isManager.manager_id,
     attachmentLink: upload?.secure_url,
     attachmentId: upload?.public_id,
     attachmentName: req.file?.originalname,
@@ -147,14 +172,118 @@ export const createMeeting = async (req, res, next) => {
   return res.json({ success: true, message: "Meeting created Successfully" });
 };
 
+export const updateMeeting = async (req, res, next) => {
+  let isMeeting = await Meetings.findOne({
+    where: { meeting_id: req.params.meetingId },
+  });
+  if (!isMeeting) return next(new Error("Meeting Not Found"));
+
+  if (isMeeting.dataValues.addedBy != req.payload.id)
+    return next(new Error("You Don't have permissions"));
+
+  if (req.body.insidePersons) {
+    let invalidManagers = false;
+    for (let i = 0; i < req.body.insidePersons.length; i++) {
+      let isManager = await Manager.findByPk(req.body.insidePersons[i]);
+      if (!isManager) {
+        invalidManagers = true;
+        break;
+      }
+    }
+    if (invalidManagers) {
+      return next(new Error("Invalid Inside Manager"));
+    }
+  }
+
+  // Check Time Exitsss
+  const baseTime = new Date(`${req.body.date}T${req.body.time}`);
+  const timePlus30 = new Date(baseTime.getTime() + 30 * 60 * 1000);
+  const timeMinus30 = new Date(baseTime.getTime() - 30 * 60 * 1000);
+  const timePLus = timePlus30.toTimeString().slice(0, 8);
+  const timeMinus = timeMinus30.toTimeString().slice(0, 8);
+  let dateAndTimeExites = await sequelize.query(
+    `
+  SELECT date,time FROM Meetings
+  JOIN meeting_Manager ON Meetings.meeting_id = meeting_Manager.meeting_id
+  WHERE meeting_Manager.manager_id in (${isMeeting.meetingOwner}${
+      req.body.insidePersons
+        ? "," + req.body.insidePersons.map((e) => e).join(",")
+        : ""
+    }) and
+  date='${req.body.date}' and  time != '${isMeeting.dataValues.time}' and 
+  time between '${timeMinus}' and '${timePLus}';
+  `,
+    { model: Meetings }
+  );
+
+  if (dateAndTimeExites.length > 0)
+    return next(new Error("Time In This Date Already Exits"));
+
+  let upload;
+  if (req.file) {
+    upload = await cloudinary.uploader.upload(req.file.path, {
+      public_id: isMeeting.attachmentId,
+    });
+  }
+
+  isMeeting.update({
+    ...req.body,
+    attachmentLink: upload ? upload.secure_url : null,
+    attachmentId: upload ? upload.public_id : null,
+    attachmentName: req.file ? req.file.originalname : null,
+  });
+
+  if (req.body.insidePersons) {
+    for (let i = 0; i < req.body.insidePersons.length; i++) {
+      let isManager = await Manager.findByPk(req.body.insidePersons[i]);
+      if (isManager) {
+        let isInMeetingManager = await meeting_Manager.findOne({
+          where: {
+            manager_id: isManager.manager_id,
+            meeting_id: req.params.meetingId,
+          },
+        });
+        if (!isInMeetingManager) {
+          await meeting_Manager.create({
+            manager_id: isManager.manager_id,
+            meeting_id: req.params.meetingId,
+          });
+        }
+      }
+    }
+  }
+
+  await meeting_Manager.destroy({
+    where: {
+      meeting_id: req.params.meetingId,
+      manager_id: {
+        [Op.and]: [
+          { [Op.notIn]: req.body.insidePersons || [] },
+          { [Op.ne]: isMeeting.dataValues.meetingOwner },
+        ],
+      },
+    },
+  });
+
+  return res.json({ success: true, message: "Meeting Updated Successfully" });
+};
+
 export const getSecMeetings = async (req, res, next) => {
   let meetings = await sequelize.query(
-    `select Meetings.meeting_id,time,date,about,in_or_out,address, notes,person,statues,addedBy,Meetings.createdAt,Meetings.updatedAt,
-     attachmentId,attachmentLink,attachmentName,
-     Manager.manager_id,CONCAT(first_name, ' ', last_name)  as 'Manager_Name',E_mail as 'Manager_Email',UserName as 'Manager_UserName' from Meetings
+    `select Meetings.meeting_id,time,date,about,in_or_out,address, notes,person,statues,addedBy,
+     Secretary.first_name as 'Secertary_Name',Secretary.last_name as 'Secertary_LastName',
+     Secretary.E_mail as 'Secertary_Email',
+     Meetings.createdAt,Meetings.updatedAt,attachmentId,attachmentLink,attachmentName,
+     Manager.manager_id,CONCAT(Manager.first_name, ' ', Manager.last_name)  as 'Manager_Name',
+     Manager.E_mail as 'Manager_Email',
+     Manager.UserName as 'Manager_UserName' from Meetings
      join meeting_Manager on Meetings.meeting_id = meeting_Manager.meeting_id 
-     join Manager on meeting_Manager.manager_id = Manager.manager_id  
-     where addedBy = ${req.payload.id} and Meetings.isDeleted = 0  GROUP BY Meetings.meeting_id`,
+     join Manager on Meetings.meetingOwner = Manager.manager_id  
+     join Manager_Secretaries on meeting_Manager.manager_id = Manager_Secretaries.manager_id
+     join Secretary on addedBy = Secretary.secretary_id
+     where Manager_Secretaries.secretary_id = ${req.payload.id} and 
+     Manager_Secretaries.isAccepted = 1 and Meetings.isDeleted = 0 
+      GROUP BY Meetings.meeting_id`,
     {
       model: Meetings,
     }
@@ -174,19 +303,17 @@ export const getSecMeetingsDetails = async (req, res, next) => {
 };
 
 export const getSecManagers = async (req, res, next) => {
-  let managers = await Manager.findAll({
-    attributes: ["manager_id", "first_name", "last_name", "UserName", "E_mail"],
-    include: [
-      {
-        model: Secertary,
-        attributes: [],
-        where: {
-          secretary_id: req.payload.id,
-        },
-      },
-    ],
-  });
-  return res.json({ success: true, managers });
+  let managers = await sequelize.query(
+    `select Manager.manager_id,Manager.first_name,Manager.last_name,E_mail,UserName from Manager 
+    join Manager_Secretaries on Manager.manager_id = Manager_Secretaries.manager_id
+    where Manager_Secretaries.secretary_id = ${req.payload.id} and Manager_Secretaries.isAccepted = 1 and Manager.isDeleted = 0
+    `,
+    {
+      model: Manager,
+    }
+  );
+
+  return res.json({ success: true, count: managers.length, managers });
 };
 
 export const getSecDetails = async (req, res, next) => {
@@ -200,35 +327,10 @@ export const getSecDetails = async (req, res, next) => {
 
 export const getAllManagers = async (req, res, next) => {
   let managers = await Manager.findAll({
-    attributes: ["manager_id", "first_name", "last_name"],
+    attributes: ["manager_id", "first_name", "last_name", "UserName"],
+    where: { isDeleted: 0 },
   });
   return res.json({ success: true, managers });
-};
-
-export const updateMeeting = async (req, res, next) => {
-  let isMeeting = await Meetings.findOne({
-    where: { meeting_id: req.params.meetingId },
-  });
-  if (!isMeeting) return next(new Error("Meeting Not Found"));
-
-  if (isMeeting.dataValues.addedBy != req.payload.id)
-    return next(new Error("You Don't have permissions"));
-
-  let upload;
-  if (req.file) {
-    upload = await cloudinary.uploader.upload(req.file.path, {
-      public_id: isMeeting.attachmentId,
-    });
-  }
-
-  isMeeting.update({
-    ...req.body,
-    attachmentLink: upload?.secure_url,
-    attachmentId: upload?.public_id,
-    attachmentName: req.file?.originalname,
-  });
-
-  return res.json({ success: true, message: "Meeting Updated Successfully" });
 };
 
 export const changeStatus = async (req, res, next) => {

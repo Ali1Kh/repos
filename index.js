@@ -12,8 +12,6 @@ import cors from "cors";
 import { Manager } from "./DB/models/manager.model.js";
 import { Secertary } from "./DB/models/secertary.model.js";
 import { createServer } from "node:http";
-import { Token } from "./DB/models/token.model.js";
-import jwt from "jsonwebtoken";
 import { Notifications } from "./DB/models/notifications.model.js";
 import { verifyToken } from "./src/utils/verifyToken.js";
 
@@ -28,26 +26,38 @@ export const io = new Server(server, {
   },
 });
 
-io.on("connection", async (socket) => {
-  socket.on("updateSocketId", async (data) => {
-    let payload = await verifyToken(data.token);
-    await Manager.update(
-      { socketId: socket.id },
-      { where: { manager_id: payload.id } }
-    );
-  });
+try {
+  io.on("connection", async (socket) => {
+    socket.on("updateSocketId", async (data) => {
+      if (!data.token) {
+        return new Error("Token Is Required");
+      }
+      verifyToken(data.token).then(async (payload) => {
+        if (!payload) return;
 
-  socket.on("getNotifications", async (data) => {
-    let payload = await verifyToken(data.token);
-
-    let notifications = await Notifications.findAll({
-      where: { manager_id: payload.id },
+        await Manager.update(
+          { socketId: socket.id },
+          { where: { manager_id: payload.id } }
+        );
+      });
     });
 
-    socket.emit("notifications", notifications);
+    socket.on("getNotifications", async (data) => {
+      verifyToken(data.token).then(async (payload) => {
+        if (!payload) {
+          return;
+        }
+        let notifications = await Notifications.findAll({
+          where: { manager_id: payload?.id },
+          order: [["createdAt", "DESC"]],
+        });
+        socket.emit("notifications", notifications);
+      });
+    });
   });
-});
-
+} catch (error) {
+  console.log(error);
+}
 app.use(cors());
 app.use(express.json());
 

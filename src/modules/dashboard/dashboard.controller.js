@@ -1,6 +1,7 @@
 import { sequelize } from "../../../DB/connection.js";
 import { Admin } from "../../../DB/models/admin.model.js";
 import { Manager } from "../../../DB/models/manager.model.js";
+import { Manager_Secretary } from "../../../DB/models/Manager_Secretary.model.js";
 import { Meetings } from "../../../DB/models/meeting.model.js";
 import { Secertary } from "../../../DB/models/secertary.model.js";
 import { Token } from "../../../DB/models/token.model.js";
@@ -8,11 +9,14 @@ import { asyncHandler } from "../../utils/asyncHandler.js";
 
 export const getAllMeetings = asyncHandler(async (req, res, next) => {
   let meetings = await sequelize.query(
-    `select Meetings.meeting_id,time,date,about,in_or_out,address, notes,person,statues,addedBy,Meetings.createdAt,Meetings.updatedAt,
+    `select Meetings.meeting_id,time,date,about,in_or_out,address, notes,person,statues,addedBy,
+    Secretary.first_name as 'Secertary_Name',Secretary.last_name as 'Secertary_LastName',
+    Secretary.E_mail as 'Secertary_Email',Meetings.createdAt,Meetings.updatedAt,
      attachmentId,attachmentLink,attachmentName,
-     Manager.manager_id,CONCAT(first_name, ' ', last_name)  as 'Manager_Name',E_mail as 'Manager_Email',UserName as 'Manager_UserName' from Meetings
+     Manager.manager_id,CONCAT(Manager.first_name, ' ', Manager.last_name)  as 'Manager_Name',Manager.E_mail as 'Manager_Email',Manager.UserName as 'Manager_UserName' from Meetings
      join meeting_Manager on Meetings.meeting_id = meeting_Manager.meeting_id 
      join Manager on meeting_Manager.manager_id = Manager.manager_id  
+     join Secretary on addedBy = Secretary.secretary_id
      where Meetings.isDeleted = 0 
       GROUP BY Meetings.meeting_id`,
     {
@@ -175,6 +179,76 @@ export const rejectManagerAcc = asyncHandler(async (req, res, next) => {
     message: "Account Rejected Successfully",
   });
 });
+
+export const acceptSecToManager = asyncHandler(async (req, res, next) => {
+  let isAccount = await Manager_Secretary.findOne({
+    where: { id: req.params.secManagerId },
+  });
+  if (!isAccount) return next(new Error("Secretary Manager Not Found"));
+  if (isAccount.isAccepted == true)
+    return next(new Error("Secretary Manager Already Accepted"));
+  isAccount.isAccepted = true;
+  await isAccount.save();
+  return res.json({
+    success: true,
+    message: "Secretary Manager Request Accepted Successfully",
+  });
+});
+
+export const rejectSecToManager = asyncHandler(async (req, res, next) => {
+  let isAccount = await Manager_Secretary.findOne({
+    where: { id: req.params.secManagerId },
+  });
+  if (!isAccount) return next(new Error("Secretary Manager Not Found"));
+  if (isAccount.isAccepted == true)
+    return next(new Error("Secretary Manager Already Accepted"));
+
+  isAccount.destroy();
+  return res.json({
+    success: true,
+    message: "Secretary Manager Request Rejected Successfully",
+  });
+});
+
+export const getNotAcceptesSecToManager = asyncHandler(
+  async (req, res, next) => {
+    let secertary_managers = await Manager_Secretary.findAll({
+      where: { isAccepted: 0 },
+      attributes: {
+        include: ["id"],
+      },
+      include: [
+        {
+          model: Secertary,
+          attributes: {
+            exclude: [
+              "PassWord",
+              "resetCode",
+              "resetCodeVerified",
+              "Accepted_Acc",
+            ],
+          },
+        },
+        {
+          model: Manager,
+          attributes: {
+            exclude: [
+              "PassWord",
+              "resetCode",
+              "resetCodeVerified",
+              "Accepted_Acc",
+            ],
+          },
+        },
+      ],
+    });
+    return res.json({
+      success: true,
+      count: secertary_managers.length,
+      secertary_managers,
+    });
+  }
+);
 
 export const getAllSecretaries = asyncHandler(async (req, res, next) => {
   let secertaries = await Secertary.findAll({

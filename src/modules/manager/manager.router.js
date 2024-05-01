@@ -13,4 +13,11 @@ router.get(
   asyncHandler(managersController.getManagerDetails)
 );
 
+router.post(
+  "/markNotificationAsRead/:id",
+  isAuthenticated,
+  isAuthorized("Manager"),
+  asyncHandler(managersController.markNotificationAsRead)
+);
+
 export default router;
