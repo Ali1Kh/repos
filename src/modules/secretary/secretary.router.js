@@ -97,4 +97,6 @@ router.delete(
   asyncHandler(secretaryController.deleteMeeting)
 );
 
+
+
 export default router;

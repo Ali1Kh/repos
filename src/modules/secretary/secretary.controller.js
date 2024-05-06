@@ -116,9 +116,10 @@ export const createMeeting = async (req, res, next) => {
     return next(new Error("Time In This Date Already Exits"));
   let upload;
   if (req.file) {
-    upload = await cloudinary.uploader.upload(req.file.path, {
-      folder: `meetingsApp/attachments/${req.params.manager_id}/`,
-    });
+    upload = {
+      public_id: req.file?.filename,
+      secure_url: req.file?.path,
+    };
   }
 
   if (req.body.insidePersons) {
@@ -221,9 +222,10 @@ export const updateMeeting = async (req, res, next) => {
 
   let upload;
   if (req.file) {
-    upload = await cloudinary.uploader.upload(req.file.path, {
-      public_id: isMeeting.attachmentId,
-    });
+    upload = {
+      public_id: req.file?.filename,
+      secure_url: req.file?.path,
+    };
   }
 
   isMeeting.update({

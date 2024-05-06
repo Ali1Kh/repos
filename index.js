@@ -60,6 +60,7 @@ try {
 }
 app.use(cors());
 app.use(express.json());
+app.use("/attachments", express.static("attachments"));
 
 try {
   await sequelize.authenticate();
