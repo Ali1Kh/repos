@@ -89,7 +89,7 @@ export default function Navbar() {
           >
             <img className="nav-logo" src={logo}></img>
             {location.pathname.split("/")[1] === "login" ||
-              location.pathname.split("/")[1] === "signup" ? (
+            location.pathname.split("/")[1] === "signup" ? (
               <h5 className="text-white mb-0">Meeting Managment</h5>
             ) : (
               ""
@@ -341,14 +341,18 @@ export default function Navbar() {
                       id="switch"
                       className="input"
                       type="checkbox"
-                      onClick={(e)=>{
-                          if (e.target.checked) {
-                            localStorage.setItem("theme", "light");
-                          }else{
-                            localStorage.setItem("theme", "dark");
-                          }
+                      onClick={(e) => {
+                        if (e.target.checked) {
+                          localStorage.setItem("theme", "dark");
+                        } else {
+                          localStorage.setItem("theme", "light");
+                        }
                       }}
-                      defaultChecked={localStorage.getItem("theme") === "light"}
+                      defaultChecked={
+                        localStorage.getItem("theme")
+                          ? localStorage.getItem("theme") === "dark"
+                          : true
+                      }
                     />
                     <div className="switchIcon icon--moon">
                       <svg
