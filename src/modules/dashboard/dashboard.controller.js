@@ -319,12 +319,10 @@ export const deleteSecretary = asyncHandler(async (req, res, next) => {
 });
 
 export const getAdminDetails = async (req, res, next) => {
-  console.log(req.payload);
   let admin = await Admin.findByPk(req.payload.id, {
     attributes: {
       exclude: ["Password", "resetCodeVerified", "resetCode"],
     },
   });
-  console.log(admin);
   return res.json({ success: true, admin });
 };
