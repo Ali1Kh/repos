@@ -99,29 +99,51 @@ export default function MeetingDetails({ meetingsDetails }) {
                       <span className="text-black">
                         {t("meetings.guestName")}:
                       </span>
-                      <h5 className="mb-3 fw-light mt-1 ps-1">{meetingsDetails.person}</h5>
+                      <h5 className="mb-3 fw-light mt-1 ps-1">
+                        {meetingsDetails.person}
+                      </h5>
                       <span className="fw-normal text-black">
                         {t("meetings.topic")}:
                       </span>
-                      <h5 className="mb-3 fw-light mt-1 ps-1">{meetingsDetails.about}</h5>
-                      <span className="text-black">{t("meetings.status")}:</span>
-                      <h5 className="mb-3 fw-light mt-1 ps-1">{meetingsDetails.statues}</h5>
+                      <h5 className="mb-3 fw-light mt-1 ps-1">
+                        {meetingsDetails.about}
+                      </h5>
+                      <span className="text-black">
+                        {t("meetings.status")}:
+                      </span>
+                      <h5 className="mb-3 fw-light mt-1 ps-1">
+                        {meetingsDetails.statues}
+                      </h5>
                       <span className="text-black">
                         {t("meetings.Comments")}:
                       </span>
-                      <h5 className="mb-3 fw-light mt-1 ps-1">{meetingsDetails.notes}</h5>
+                      <h5 className="mb-3 fw-light mt-1 ps-1">
+                        {meetingsDetails.notes}
+                      </h5>
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="col-ineer">
-                      <span className="text-black">{t("meetings.address")}:</span>
-                      <h5 className="mb-3 fw-light mt-1 ps-1">{meetingsDetails.address}</h5>
-                      <span className="text-black">{t("meetings.inOrOut")}:</span>
-                      <h5 className="mb-3 fw-light mt-1 ps-1">{meetingsDetails.in_or_out}</h5>
+                      <span className="text-black">
+                        {t("meetings.address")}:
+                      </span>
+                      <h5 className="mb-3 fw-light mt-1 ps-1">
+                        {meetingsDetails.address}
+                      </h5>
+                      <span className="text-black">
+                        {t("meetings.inOrOut")}:
+                      </span>
+                      <h5 className="mb-3 fw-light mt-1 ps-1">
+                        {meetingsDetails.in_or_out}
+                      </h5>
                       <span className="text-black">{t("meetings.date")}:</span>
-                      <h5 className="mb-3 fw-light mt-1 ps-1">{meetingsDetails.date}</h5>
+                      <h5 className="mb-3 fw-light mt-1 ps-1">
+                        {meetingsDetails.date}
+                      </h5>
                       <span className="text-black">{t("meetings.time")}:</span>
-                      <h5 className="mb-3 fw-light mt-1 ps-1">{meetingsDetails.time}</h5>
+                      <h5 className="mb-3 fw-light mt-1 ps-1">
+                        {meetingsDetails.time}
+                      </h5>
                       <div className="d-flex justify-content-center">
                         {meetingsDetails.attachmentLink ? (
                           <button
@@ -181,7 +203,9 @@ export default function MeetingDetails({ meetingsDetails }) {
             <div className="h-100">
               <iframe
                 className="rounded-3"
-                src={meetingsDetails.attachmentLink}
+                src={
+                  process.env.REACT_APP_APIHOST + "/" + meetingsDetails.attachmentLink
+                }
                 width="100%"
                 height="100%"
               />

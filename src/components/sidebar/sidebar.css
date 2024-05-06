@@ -23,7 +23,8 @@
 }
 
 .sideBarInner .side-logo {
-  width: 45px;
+  width: 55px;
+  scale: 1;
   margin: 20px 30px;
 }
 
